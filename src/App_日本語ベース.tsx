@@ -624,6 +624,8 @@ function App() {
   // 事前生成のステータス管理
   const [prefetchStatus, setPrefetchStatus] = useState<'idle' | 'loading' | 'done'>('idle')
   const prefetchAbortRef = useRef<AbortController | null>(null)
+  // フォアグラウンド事前生成用（handleToneSelectの選択トーン生成）
+  const foregroundAbortRef = useRef<AbortController | null>(null)
   // バックグラウンド事前生成用（handleToneSelectの他トーン生成）
   const backgroundAbortRef = useRef<AbortController | null>(null)
   const selectedToneRef = useRef<string | null>(null)
@@ -1392,7 +1394,7 @@ function App() {
       return 0
     }
 
-    const ui50Internal = pickInternal(base0, [25, 75, 100])
+    const ui50Internal = pickInternal(base0, [50, 75, 100])
     const ui50Res = internal[ui50Internal] ?? base0
 
     const ui100Candidates = [50, 75, 100].filter((l) => l > ui50Internal)
@@ -1503,7 +1505,11 @@ function App() {
       setActiveToneBucket(0)
       currentBucketRef.current = 0
       setShowCustomInput(false)
-      // バックグラウンド処理もキャンセル
+      // フォアグラウンド・バックグラウンド処理をキャンセル
+      if (foregroundAbortRef.current) {
+        foregroundAbortRef.current.abort()
+        foregroundAbortRef.current = null
+      }
       if (backgroundAbortRef.current) {
         backgroundAbortRef.current.abort()
         backgroundAbortRef.current = null
@@ -1514,12 +1520,17 @@ function App() {
       setSelectedTone(toneId)
       selectedToneRef.current = toneId
 
-      // 前回のバックグラウンド処理をキャンセル
+      // 前回のフォアグラウンド・バックグラウンド処理をキャンセル
+      if (foregroundAbortRef.current) {
+        foregroundAbortRef.current.abort()
+      }
       if (backgroundAbortRef.current) {
         backgroundAbortRef.current.abort()
       }
+      foregroundAbortRef.current = new AbortController()
       backgroundAbortRef.current = new AbortController()
-      const currentAbortController = backgroundAbortRef.current
+      const foregroundController = foregroundAbortRef.current
+      const backgroundController = backgroundAbortRef.current
 
       // カスタムは100%固定、他は0%から
       const initialLevel = toneId === 'custom' ? 100 : 0
@@ -1535,20 +1546,28 @@ function App() {
         // ChatScreenの場合はundefinedを渡す（内部でcurrentPartner.languageが使われる）
         const targetLang = currentScreen === 'translate' ? translateSelfTargetLang : undefined
         const sourceLang = currentScreen === 'translate' ? (detectedSelfLang || '日本語') : undefined
-        fetchAllBucketsForTone(toneId, isNative, undefined, targetLang, sourceLang)
+
+        // ★ フォアグラウンド（選択トーン）も100ms遅延で競合防止
+        setTimeout(async () => {
+          if (foregroundController.signal.aborted || selectedToneRef.current !== toneId) {
+            console.log('[handleToneSelect] Foreground fetch cancelled')
+            return
+          }
+          await fetchAllBucketsForTone(toneId, isNative, undefined, targetLang, sourceLang).catch(console.error)
+        }, 100)
 
         // ★ 他のトーンは直列で事前生成（API詰まり防止）- キャンセル対応版
         const otherTones = ['casual', 'business', 'formal'].filter(t => t !== toneId)
         setTimeout(async () => {
           for (const tone of otherTones) {
             // キャンセルされた or 選択中トーンが変わったら中止
-            if (currentAbortController.signal.aborted || selectedToneRef.current !== toneId) {
+            if (backgroundController.signal.aborted || selectedToneRef.current !== toneId) {
               console.log('[handleToneSelect] Background fetch cancelled')
               return
             }
             await fetchAllBucketsForTone(tone, isNative, undefined, targetLang, sourceLang).catch(console.error)
           }
-        }, 100)
+        }, 200)
       }
     }
   }

@@ -479,6 +479,12 @@ function shouldFallbackToFull(
     }
   }
 
+  // 8. originalTextとresult.translationのmodality_class一貫性チェック
+  const originalModalityCheck = checkModalityConsistency(originalText, result.translation);
+  if (!originalModalityCheck.passed) {
+    return { shouldFallback: true, reason: `original_${originalModalityCheck.reason}` };
+  }
+
   return { shouldFallback: false, reason: null };
 }
 
@@ -493,14 +499,18 @@ ABSOLUTE RULE: Do not re-translate. Edit current_translation only.
 2. polarity - positive/negative must not flip
 3. locked_terms - glossary terms must be used as-is
 4. modality_class - request/obligation/suggestion class must not change
-   ★ CRITICAL: This is the MOST IMPORTANT rule for tone editing.
+   ★★★ CRITICAL: This is the MOST IMPORTANT rule for tone editing. ★★★
+   ★ The modality_class of the ORIGINAL text must be preserved in the output.
    - "request" (asking someone to do something): "Could you...?", "Please...", "Would you mind...?"
    - "confirmation" (checking/confirming facts): "Is it...?", "Are you...?", "Did you...?"
    - "suggestion" (proposing an idea): "How about...?", "Why don't we...?", "Let's..."
    - "obligation" (expressing necessity): "You must...", "You need to...", "You have to..."
    ★ NEVER change a request into a confirmation or vice versa.
+   ★ NEVER change the original modality_class even when editing for tone.
    ★ Example: "Can you come at 3?" (request) → "Will you come at 3?" (request) ✓
    ★ Example: "Can you come at 3?" (request) → "Are you coming at 3?" (confirmation) ✗ FORBIDDEN
+   ★ Example: "それできる？" (request) → "それできますか？" (request) ✓
+   ★ Example: "それできる？" (request) → "それしますか？" (confirmation) ✗ FORBIDDEN
 5. question/statement - question vs statement must not change
 6. condition markers - if/unless/when must be preserved
 7. commitment - do not add promises that weren't there
