@@ -11,6 +11,21 @@ export interface TranslationResult {
   translation: string;
   reverse_translation: string;
   risk: 'low' | 'med' | 'high';
+  // BUG-001対応: 日英乖離検出用の分析フィールド
+  analysis?: {
+    alignmentScore: number;  // 0-1: 1が完全一致
+    hasAlignmentIssue: boolean;
+    details?: string;
+  };
+}
+
+// BUG-001対応: PARTIAL編集用の型定義
+export interface PartialTranslationResult {
+  new_translation: string;
+  reverse_translation: string;
+  risk: 'low' | 'med' | 'high';
+  // 元のソーステキストとの整合性スコア
+  sourceAlignmentScore?: number;
 }
 
 export interface GuardedTranslationResult {
@@ -323,6 +338,132 @@ function extractModalityClass(text: string): ModalityClass {
   return 'statement';
 }
 
+// ============================================
+// BUG-001対応: 日英乖離検出（checkAlignmentScore）
+// ============================================
+
+/**
+ * 原文と逆翻訳の意味的な整合性をスコア化する
+ * @param originalText 原文（日本語）
+ * @param reverseTranslation 逆翻訳（日本語）
+ * @returns alignmentScore: 0-1（1が完全一致）、閾値0.2以下でNG
+ */
+export function checkAlignmentScore(
+  originalText: string,
+  reverseTranslation: string
+): { score: number; hasIssue: boolean; details: string } {
+  const THRESHOLD = 0.2;  // 閾値: これ以下なら乖離あり
+
+  // 1. 空チェック
+  if (!originalText.trim() || !reverseTranslation.trim()) {
+    return { score: 0, hasIssue: true, details: 'empty_text' };
+  }
+
+  // 2. 正規化
+  const normalizeJapanese = (text: string): string => {
+    return text
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, '')
+      .replace(/[。、！？!?]/g, '')
+      .replace(/[ー〜]/g, '')
+      .replace(/[「」『』（）()]/g, '');
+  };
+
+  const normalizedOriginal = normalizeJapanese(originalText);
+  const normalizedReverse = normalizeJapanese(reverseTranslation);
+
+  // 3. 完全一致チェック
+  if (normalizedOriginal === normalizedReverse) {
+    return { score: 1.0, hasIssue: false, details: 'exact_match' };
+  }
+
+  // 4. キーワード抽出（名詞・動詞の語幹を抽出）
+  const extractKeywords = (text: string): Set<string> => {
+    const keywords = new Set<string>();
+
+    // 数字を抽出
+    const numbers = text.match(/\d+/g);
+    if (numbers) numbers.forEach(n => keywords.add(n));
+
+    // 日本語のキーワード（2文字以上の連続したひらがな/カタカナ/漢字）
+    const japaneseWords = text.match(/[ぁ-んァ-ン一-龯]{2,}/g);
+    if (japaneseWords) japaneseWords.forEach(w => keywords.add(w));
+
+    // 英字キーワード
+    const englishWords = text.match(/[a-zA-Z]{2,}/gi);
+    if (englishWords) englishWords.forEach(w => keywords.add(w.toLowerCase()));
+
+    return keywords;
+  };
+
+  const originalKeywords = extractKeywords(normalizedOriginal);
+  const reverseKeywords = extractKeywords(normalizedReverse);
+
+  // 5. キーワードの重複率を計算
+  if (originalKeywords.size === 0) {
+    // キーワードが抽出できない場合は編集距離ベースで判定
+    const distance = calculateEditDistance(normalizedOriginal, normalizedReverse);
+    const maxLen = Math.max(normalizedOriginal.length, normalizedReverse.length);
+    const score = maxLen > 0 ? 1 - (distance / maxLen) : 0;
+    return {
+      score,
+      hasIssue: score < THRESHOLD,
+      details: `edit_distance_based: ${score.toFixed(2)}`
+    };
+  }
+
+  let matchCount = 0;
+  for (const keyword of originalKeywords) {
+    if (reverseKeywords.has(keyword)) {
+      matchCount++;
+    } else {
+      // 部分一致チェック（3文字以上の場合）
+      if (keyword.length >= 3) {
+        for (const reverseKeyword of reverseKeywords) {
+          if (reverseKeyword.includes(keyword) || keyword.includes(reverseKeyword)) {
+            matchCount += 0.5;
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  // 6. スコア計算
+  const score = matchCount / originalKeywords.size;
+
+  // 7. 追加チェック: 否定の反転
+  const hasNegationOriginal = /[ない|なかった|しない|できない|いない]/.test(normalizedOriginal);
+  const hasNegationReverse = /[ない|なかった|しない|できない|いない]/.test(normalizedReverse);
+  const negationFlipped = hasNegationOriginal !== hasNegationReverse;
+
+  // 8. 追加チェック: 疑問文の変化
+  const isQuestionOriginal = /[？?]/.test(originalText) || /[か]$/.test(normalizedOriginal);
+  const isQuestionReverse = /[？?]/.test(reverseTranslation) || /[か]$/.test(normalizedReverse);
+  const questionChanged = isQuestionOriginal !== isQuestionReverse;
+
+  // 9. ペナルティ適用
+  let finalScore = score;
+  let details = `keyword_match: ${score.toFixed(2)}`;
+
+  if (negationFlipped) {
+    finalScore *= 0.3;  // 否定反転は重大
+    details += ', negation_flipped';
+  }
+
+  if (questionChanged) {
+    finalScore *= 0.7;
+    details += ', question_changed';
+  }
+
+  return {
+    score: finalScore,
+    hasIssue: finalScore < THRESHOLD,
+    details
+  };
+}
+
 // modality_classの一貫性チェック
 function checkModalityConsistency(
   originalText: string,
@@ -483,6 +624,15 @@ function shouldFallbackToFull(
   const originalModalityCheck = checkModalityConsistency(originalText, result.translation);
   if (!originalModalityCheck.passed) {
     return { shouldFallback: true, reason: `original_${originalModalityCheck.reason}` };
+  }
+
+  // 9. BUG-001対応: 日英乖離チェック（checkAlignmentScore）
+  if (requireJapaneseReverse && result.reverse_translation) {
+    const alignmentCheck = checkAlignmentScore(originalText, result.reverse_translation);
+    if (alignmentCheck.hasIssue) {
+      console.log(`[Guard] Alignment issue detected: score=${alignmentCheck.score.toFixed(2)}, details=${alignmentCheck.details}`);
+      return { shouldFallback: true, reason: `alignment_issue: ${alignmentCheck.details}` };
+    }
   }
 
   return { shouldFallback: false, reason: null };

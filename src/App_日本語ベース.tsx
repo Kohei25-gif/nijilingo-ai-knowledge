@@ -1489,7 +1489,13 @@ function App() {
     }
   }
 
-  const handleToneSelect = (toneId: string) => {
+  // ============================================
+  // BUG-002対応: ボタンごと生成（handleToneSelect）
+  // ============================================
+  // 問題: setTimeoutによる遅延で「操作しないと変わらない」状態だった
+  // 解決: ボタン押下時に即座に該当トーンの3レベルを生成
+  // ============================================
+  const handleToneSelect = async (toneId: string) => {
     // ロック中に別のトーンを選んだ場合はロック解除
     if (lockedTone && lockedTone !== toneId) {
       setLockedTone(null)
@@ -1539,7 +1545,7 @@ function App() {
       setActiveToneBucket(initialLevel)
       currentBucketRef.current = initialLevel
 
-      // 翻訳結果がある場合 → バケット取得（カスタム以外）
+      // ★ BUG-002修正: 翻訳結果がある場合 → 即座に3レベルを生成
       // カスタムはプリセット選択 or 自由入力後に変換する
       if (showPreview && preview.translation && toneId !== 'custom') {
         // TranslateScreenの場合はtranslateSelfTargetLang/detectedSelfLangを使用
@@ -1547,16 +1553,59 @@ function App() {
         const targetLang = currentScreen === 'translate' ? translateSelfTargetLang : undefined
         const sourceLang = currentScreen === 'translate' ? (detectedSelfLang || '日本語') : undefined
 
-        // ★ フォアグラウンド（選択トーン）も100ms遅延で競合防止
-        setTimeout(async () => {
-          if (foregroundController.signal.aborted || selectedToneRef.current !== toneId) {
-            console.log('[handleToneSelect] Foreground fetch cancelled')
-            return
-          }
-          await fetchAllBucketsForTone(toneId, isNative, undefined, targetLang, sourceLang).catch(console.error)
-        }, 100)
+        // ★★★ BUG-002修正: setTimeoutを削除し、即座に生成を開始 ★★★
+        // キャンセルチェック
+        if (foregroundController.signal.aborted || selectedToneRef.current !== toneId) {
+          console.log('[handleToneSelect] Generation cancelled before start')
+          return
+        }
 
-        // ★ 他のトーンは直列で事前生成（API詰まり防止）- キャンセル対応版
+        // 即座に3レベルを生成（待機なし）
+        console.log(`[handleToneSelect] ★ Starting immediate generation for tone: ${toneId}`)
+
+        try {
+          setIsTranslating(true)
+          setTranslationError(null)
+
+          // 選択されたトーンの3レベルを即座に生成
+          await generateAndCacheUiBuckets({
+            tone: toneId,
+            isNative,
+            sourceText: previewSourceText,
+            currentUiBucket: initialLevel,
+            customToneOverride: undefined,
+            targetLang: targetLang || currentPartner?.language,
+            sourceLang: sourceLang || '日本語',
+            signal: foregroundController.signal
+          })
+
+          // 生成完了後、キャッシュからプレビューを更新
+          if (!foregroundController.signal.aborted && selectedToneRef.current === toneId) {
+            const effectiveSourceLang = sourceLang || '日本語'
+            const effectiveTargetLang = targetLang || currentPartner?.language
+            const cacheKey = getCacheKey(toneId, initialLevel, previewSourceText, undefined, effectiveSourceLang, effectiveTargetLang, isNative)
+            const cached = translationCacheRef.current[cacheKey]
+
+            if (cached) {
+              console.log(`[handleToneSelect] ★ Updating preview from cache: ${cacheKey}`)
+              setPreview(prev => ({
+                ...prev,
+                translation: cached.translation,
+                reverseTranslation: cached.reverseTranslation
+              }))
+            }
+          }
+        } catch (error) {
+          if (!foregroundController.signal.aborted) {
+            console.error('[handleToneSelect] Generation error:', error)
+            setTranslationError('翻訳中にエラーが発生しました')
+          }
+        } finally {
+          setIsTranslating(false)
+        }
+
+        // ★ 他のトーンはバックグラウンドで遅延生成（3秒後に開始）
+        // ※ API詰まり防止のため、選択トーンの生成完了後に開始
         const otherTones = ['casual', 'business', 'formal'].filter(t => t !== toneId)
         setTimeout(async () => {
           for (const tone of otherTones) {
@@ -1567,7 +1616,7 @@ function App() {
             }
             await fetchAllBucketsForTone(tone, isNative, undefined, targetLang, sourceLang).catch(console.error)
           }
-        }, 200)
+        }, 3000)  // 3秒後に開始（選択トーンの生成完了を待つ）
       }
     }
   }
