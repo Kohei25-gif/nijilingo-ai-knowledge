@@ -1461,7 +1461,7 @@ function getToneInstruction(options: TranslateOptions): string {
 // ============================================
 // 新しいシンプル版（実験）
 // ============================================
-// 2026-02-02 多言語バグ修正: targetLangを追加
+// 2026-02-02 多言語バグ修正v2: targetLangを追加
 function getReverseTranslationInstruction(
   sourceLang: string,
   targetLang: string,
@@ -1469,13 +1469,13 @@ function getReverseTranslationInstruction(
   tone?: string,
   customTone?: string
 ): string {
-  // 他言語→他言語（日本語以外が原文）の場合：逆翻訳は原文言語で返す
+  // 日本語以外が原文の場合：逆翻訳は原文言語で返す
   if (sourceLang !== '日本語') {
     return `【逆翻訳ルール - 最重要】
 ⚠️ reverse_translation は 100% ${sourceLang}のみ で出力すること ⚠️
 - 翻訳結果（${targetLang}）を元の${sourceLang}に戻した表現にする
 - ${targetLang}は絶対に含めない
-- 例: 入力"Bonjour" → translation:"Hello" → reverse_translation:"Bonjour" (${sourceLang}のみ)
+- 例: 入力"Bonjour"(${sourceLang}) → translation:"Hello"(${targetLang}) → reverse_translation:"Bonjour" (${sourceLang}のみ)
 - ❌ 禁止: reverse_translationに${targetLang}を入れる`;
   }
 

@@ -1476,71 +1476,127 @@ function App() {
   }
 
   // 言語自動認識
-  // 言語検出（スコアリング方式対応版）- 2026-02-02 多言語バグ修正
+  // ============================================
+  // 言語検出 v2（2026-02-02 再設計）
+  // 3段階方式: CJK → 固有文字 → 単語スコアリング
+  // ============================================
   const detectLanguage = (text: string): string => {
     if (!text.trim()) return ''
 
     const textLower = text.toLowerCase()
 
-    // === ステージ1: 固有文字による確実な判定 ===
-
-    // 優先順位1-3: CJK言語（Unicode範囲が完全に独立）
+    // === Stage 1: CJK言語（Unicode範囲で確実判定） ===
     if (/[\u3040-\u309F\u30A0-\u30FF]/.test(text)) return '日本語' // ひらがな・カタカナ
     if (/[\uAC00-\uD7AF\u1100-\u11FF]/.test(text)) return '韓国語' // ハングル
     if (/[\u4E00-\u9FFF]/.test(text)) return '中国語' // 漢字
 
-    // 優先順位4-9: 固有文字が明確な言語
-    if (/[ěščřžůťďňĚŠČŘŽŮŤĎŇ]/.test(text)) return 'チェコ語' // カロン付き文字
-    if (/[ß]/.test(text)) return 'ドイツ語' // エスツェット
-    if (/[¿¡ñÑ]/.test(text)) return 'スペイン語' // 逆疑問符・ñ
-    if (/[ãõÃÕ]/.test(text)) return 'ポルトガル語' // 鼻母音
-    if (/[œæŒÆ]/.test(text)) return 'フランス語' // 連字
+    // === Stage 2: 固有文字（これがあれば確定） ===
+    if (/[ěščřžůťďňĚŠČŘŽŮŤĎŇ]/.test(text)) return 'チェコ語'
+    if (/ß/.test(text)) return 'ドイツ語'
+    if (/[¿¡ñÑ]/.test(text)) return 'スペイン語'
+    if (/[ãõÃÕ]/.test(text)) return 'ポルトガル語'
+    if (/[œæŒÆ]/.test(text)) return 'フランス語'
 
-    // === ステージ2: スコアリングによる判定（固有文字がない場合） ===
+    // === Stage 3: 単語スコアリング ===
+    
+    // 各言語の頻出単語リスト
+    const wordLists: Record<string, string[]> = {
+      'ドイツ語': [
+        'der', 'die', 'das', 'ein', 'eine', 'und', 'ist', 'sind', 'war', 'waren',
+        'ich', 'du', 'er', 'sie', 'es', 'wir', 'ihr', 'nicht', 'mit', 'für', 'auf',
+        'haben', 'werden', 'kann', 'guten', 'tag', 'morgen', 'danke', 'bitte',
+        'wie', 'geht', 'ihnen', 'mir', 'gut', 'ja', 'nein', 'herr', 'frau'
+      ],
+      'イタリア語': [
+        'il', 'la', 'lo', 'gli', 'le', 'un', 'una', 'sono', 'ho', 'hai', 'ha',
+        'non', 'che', 'di', 'in', 'con', 'per', 'come', 'questo', 'quella',
+        'buongiorno', 'buonasera', 'grazie', 'ciao', 'prego', 'scusi', 'bene',
+        'molto', 'tutto', 'quando', 'dove', 'perché', 'anche', 'sempre', 'mai'
+      ],
+      'ポルトガル語': [
+        'o', 'os', 'um', 'uma', 'são', 'tem', 'não', 'que', 'de',
+        'em', 'para', 'com', 'por', 'isso', 'este', 'esta', 'muito', 'bem',
+        'bom', 'dia', 'obrigado', 'obrigada', 'olá', 'oi', 'tudo', 'você',
+        'como', 'está', 'quando', 'onde', 'porque', 'também', 'sempre', 'nunca'
+      ],
+      'フランス語': [
+        'le', 'la', 'les', 'un', 'une', 'et', 'est', 'sont', 'je', 'tu', 'il', 'elle',
+        'nous', 'vous', 'ils', 'elles', 'ne', 'pas', 'que', 'qui', 'de',
+        'pour', 'avec', 'ce', 'cette', 'très', 'bien', 'oui', 'non',
+        'bonjour', 'merci', 'comment', 'allez', 'pourriez', 'pouvez', 'avez'
+      ],
+      'スペイン語': [
+        'el', 'la', 'los', 'las', 'un', 'una', 'es', 'son', 'no', 'que', 'de',
+        'en', 'para', 'por', 'con', 'este', 'esta', 'muy', 'bien',
+        'hola', 'buenos', 'gracias', 'como', 'cuando', 'donde',
+        'también', 'siempre', 'nunca', 'todo', 'nada', 'mucho', 'poco'
+      ],
+      '英語': [
+        'the', 'is', 'are', 'was', 'were', 'be', 'been', 'have', 'has', 'had',
+        'do', 'does', 'did', 'will', 'would', 'can', 'could', 'not', 'and', 'or', 'but',
+        'this', 'that', 'these', 'those', 'you', 'he', 'she', 'we', 'they',
+        'hello', 'hi', 'good', 'morning', 'thank', 'please', 'yes', 'how', 'what'
+      ]
+    }
+
+    // 挨拶フレーズ（高ボーナス）
+    const greetings: Record<string, string[]> = {
+      'ドイツ語': ['guten tag', 'guten morgen', 'guten abend', 'auf wiedersehen', 'wie geht es ihnen'],
+      'イタリア語': ['buongiorno', 'buonasera', 'buonanotte', 'come stai', 'come sta'],
+      'ポルトガル語': ['bom dia', 'boa tarde', 'boa noite', 'como vai', 'tudo bem'],
+      'フランス語': ['bonjour', 'bonsoir', 'bonne nuit', 'comment allez', 'au revoir'],
+      'スペイン語': ['buenos dias', 'buenas tardes', 'buenas noches', 'como estas', 'hasta luego'],
+      '英語': ['good morning', 'good afternoon', 'good evening', 'how are you']
+    }
+
+    // スコア計算
     const scores: Record<string, number> = {
-      'フランス語': 0, 'スペイン語': 0, 'ドイツ語': 0,
-      'イタリア語': 0, 'ポルトガル語': 0, 'チェコ語': 0, '英語': 0,
+      'ドイツ語': 0, 'イタリア語': 0, 'ポルトガル語': 0,
+      'フランス語': 0, 'スペイン語': 0, '英語': 0
     }
 
-    // フランス語パターン（高スコア）
-    if (/ez-vous|ous\s|eur\s|tion\s|ment\s/i.test(textLower)) scores['フランス語'] += 5
-    if (/je\s|tu\s|il\s|elle\s|nous\s|vous\s|ils\s|elles\s/i.test(textLower)) scores['フランス語'] += 3
-    if (/est\s|sont\s|avoir\s|être\s|faire\s/i.test(textLower)) scores['フランス語'] += 2
-
-    // スペイン語パターン
-    if (/ción|sión/i.test(textLower)) scores['スペイン語'] += 4
-    if (/el\s|la\s|los\s|las\s|es\s|son\s/i.test(textLower)) scores['スペイン語'] += 2
-
-    // ポルトガル語パターン
-    if (/ção|são/i.test(textLower)) scores['ポルトガル語'] += 4
-    if (/não|está|você/i.test(textLower)) scores['ポルトガル語'] += 3
-
-    // イタリア語パターン
-    if (/zione|mente\s/i.test(textLower)) scores['イタリア語'] += 4
-    if (/che\s|sono\s|come\s|questo/i.test(textLower)) scores['イタリア語'] += 2
-
-    // ドイツ語パターン
-    if (/sch|ung\s|heit\s|keit\s/i.test(textLower)) scores['ドイツ語'] += 3
-    if (/ich\s|sie\s|ist\s|das\s|und\s/i.test(textLower)) scores['ドイツ語'] += 2
-
-    // チェコ語パターン
-    if (/ství|nost/i.test(textLower)) scores['チェコ語'] += 3
-
-    // 共有アクセント記号（低スコア）
-    if (/[èêâûù]/.test(text)) scores['フランス語'] += 1
-    if (/[áéíóú]/.test(text)) {
-      scores['スペイン語'] += 0.5
-      scores['ポルトガル語'] += 0.5
-      scores['イタリア語'] += 0.3
+    // 挨拶フレーズチェック（+10点）
+    for (const [lang, phrases] of Object.entries(greetings)) {
+      for (const phrase of phrases) {
+        if (textLower.includes(phrase)) {
+          scores[lang] += 10
+        }
+      }
     }
-    if (/[äöü]/.test(text)) scores['ドイツ語'] += 1
-    if (/[ìò]/.test(text)) scores['イタリア語'] += 1
 
-    // 最高スコアの言語を返す（閾値: 2点以上）
-    const maxScore = Math.max(...Object.values(scores))
-    if (maxScore >= 2) {
-      const entry = Object.entries(scores).find(([_, score]) => score === maxScore)
-      if (entry) return entry[0]
+    // 単語マッチチェック
+    for (const [lang, words] of Object.entries(wordLists)) {
+      for (const word of words) {
+        // 単語境界でマッチ（2文字以上の単語のみ境界チェック）
+        if (word.length >= 2) {
+          const regex = new RegExp(`\\b${word}\\b`, 'gi')
+          const matches = textLower.match(regex)
+          if (matches) scores[lang] += matches.length
+        }
+      }
+    }
+
+    // アクセント記号によるボーナス（確定ではないが加点）
+    if (/[äöü]/.test(text)) scores['ドイツ語'] += 3
+    if (/[àèéìòù]/.test(text)) scores['イタリア語'] += 2
+    if (/[áéíóúâêô]/.test(text)) scores['ポルトガル語'] += 2
+    if (/[àâçèéêëîïôùûü]/.test(text)) scores['フランス語'] += 2
+    if (/[áéíóú]/.test(text)) scores['スペイン語'] += 2
+
+    // 最高スコアを取得
+    let maxLang = '英語'
+    let maxScore = scores['英語']
+
+    for (const [lang, score] of Object.entries(scores)) {
+      if (score > maxScore) {
+        maxScore = score
+        maxLang = lang
+      }
+    }
+
+    // 閾値: 2点以上で採用（英語との差も考慮）
+    if (maxScore >= 2 && (maxLang === '英語' || maxScore > scores['英語'] + 1)) {
+      return maxLang
     }
 
     // デフォルトは英語
