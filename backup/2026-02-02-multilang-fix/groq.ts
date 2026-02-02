@@ -882,7 +882,7 @@ export async function translatePartial(options: TranslateOptions): Promise<Trans
     }
   }
 
-  const reverseTranslationInstruction = getReverseTranslationInstruction(sourceLang, targetLang, toneLevel, tone, customTone);
+  const reverseTranslationInstruction = getReverseTranslationInstruction(sourceLang, toneLevel, tone, customTone);
   const userPrompt = `Original (${sourceLang}): ${sourceText}
 Current translation (${targetLang}): ${currentTranslation}
 
@@ -1461,22 +1461,20 @@ function getToneInstruction(options: TranslateOptions): string {
 // ============================================
 // 新しいシンプル版（実験）
 // ============================================
-// 2026-02-02 多言語バグ修正: targetLangを追加
 function getReverseTranslationInstruction(
   sourceLang: string,
-  targetLang: string,
   toneLevel: number,
   tone?: string,
   customTone?: string
 ): string {
-  // 他言語→他言語（日本語以外が原文）の場合：逆翻訳は原文言語で返す
+  // 英語→日本語の場合：逆翻訳は英語で返す
   if (sourceLang !== '日本語') {
     return `【逆翻訳ルール - 最重要】
 ⚠️ reverse_translation は 100% ${sourceLang}のみ で出力すること ⚠️
-- 翻訳結果（${targetLang}）を元の${sourceLang}に戻した表現にする
-- ${targetLang}は絶対に含めない
-- 例: 入力"Bonjour" → translation:"Hello" → reverse_translation:"Bonjour" (${sourceLang}のみ)
-- ❌ 禁止: reverse_translationに${targetLang}を入れる`;
+- 翻訳結果（日本語）を元の${sourceLang}に戻した表現にする
+- 日本語（ひらがな・カタカナ・漢字）は絶対に含めない
+- 例: 入力"very cool" → translation:"とてもかっこいい" → reverse_translation:"Very cool" (英語のみ)
+- ❌ 禁止: reverse_translationに日本語を入れる`;
   }
 
   const toneDescription =
@@ -1670,7 +1668,7 @@ export async function translateFull(options: TranslateOptions): Promise<Translat
   const toneLevel = options.toneLevel ?? 0;
 
   const toneInstruction = getToneInstruction(options);
-  const reverseTranslationInstruction = getReverseTranslationInstruction(sourceLang, targetLang, toneLevel, options.tone, options.customTone);
+  const reverseTranslationInstruction = getReverseTranslationInstruction(sourceLang, toneLevel, options.tone, options.customTone);
   const differenceInstruction = getFullDifferenceInstruction(toneLevel, previousTranslation, previousLevel, options.tone);
   const variationInstruction = options.variationInstruction ? `\n${options.variationInstruction}` : '';
 

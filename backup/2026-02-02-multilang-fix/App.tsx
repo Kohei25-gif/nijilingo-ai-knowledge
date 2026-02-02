@@ -1476,72 +1476,29 @@ function App() {
   }
 
   // 言語自動認識
-  // 言語検出（スコアリング方式対応版）- 2026-02-02 多言語バグ修正
   const detectLanguage = (text: string): string => {
     if (!text.trim()) return ''
 
-    const textLower = text.toLowerCase()
+    // 各言語の文字範囲をチェック
+    const hasJapanese = /[\u3040-\u309F\u30A0-\u30FF]/.test(text) // ひらがな・カタカナ
+    const hasChinese = /[\u4E00-\u9FFF]/.test(text) && !hasJapanese // 漢字のみ（日本語でない）
+    const hasKorean = /[\uAC00-\uD7AF\u1100-\u11FF]/.test(text) // ハングル
+    const hasCzech = /[ěščřžýáíéůúťďňĚŠČŘŽÝÁÍÉŮÚŤĎŇ]/.test(text) // チェコ語特有の文字
+    const hasFrench = /[àâäéèêëïîôùûüÿçœæÀÂÄÉÈÊËÏÎÔÙÛÜŸÇŒÆ]/.test(text) // フランス語
+    const hasSpanish = /[ñáéíóúüÑÁÉÍÓÚÜ¿¡]/.test(text) // スペイン語
+    const hasGerman = /[äöüßÄÖÜ]/.test(text) // ドイツ語
+    const hasItalian = /[àèéìíîòóùúÀÈÉÌÍÎÒÓÙÚ]/.test(text) // イタリア語
+    const hasPortuguese = /[ãõáéíóúâêôàçÃÕÁÉÍÓÚÂÊÔÀÇ]/.test(text) // ポルトガル語
 
-    // === ステージ1: 固有文字による確実な判定 ===
-
-    // 優先順位1-3: CJK言語（Unicode範囲が完全に独立）
-    if (/[\u3040-\u309F\u30A0-\u30FF]/.test(text)) return '日本語' // ひらがな・カタカナ
-    if (/[\uAC00-\uD7AF\u1100-\u11FF]/.test(text)) return '韓国語' // ハングル
-    if (/[\u4E00-\u9FFF]/.test(text)) return '中国語' // 漢字
-
-    // 優先順位4-9: 固有文字が明確な言語
-    if (/[ěščřžůťďňĚŠČŘŽŮŤĎŇ]/.test(text)) return 'チェコ語' // カロン付き文字
-    if (/[ß]/.test(text)) return 'ドイツ語' // エスツェット
-    if (/[¿¡ñÑ]/.test(text)) return 'スペイン語' // 逆疑問符・ñ
-    if (/[ãõÃÕ]/.test(text)) return 'ポルトガル語' // 鼻母音
-    if (/[œæŒÆ]/.test(text)) return 'フランス語' // 連字
-
-    // === ステージ2: スコアリングによる判定（固有文字がない場合） ===
-    const scores: Record<string, number> = {
-      'フランス語': 0, 'スペイン語': 0, 'ドイツ語': 0,
-      'イタリア語': 0, 'ポルトガル語': 0, 'チェコ語': 0, '英語': 0,
-    }
-
-    // フランス語パターン（高スコア）
-    if (/ez-vous|ous\s|eur\s|tion\s|ment\s/i.test(textLower)) scores['フランス語'] += 5
-    if (/je\s|tu\s|il\s|elle\s|nous\s|vous\s|ils\s|elles\s/i.test(textLower)) scores['フランス語'] += 3
-    if (/est\s|sont\s|avoir\s|être\s|faire\s/i.test(textLower)) scores['フランス語'] += 2
-
-    // スペイン語パターン
-    if (/ción|sión/i.test(textLower)) scores['スペイン語'] += 4
-    if (/el\s|la\s|los\s|las\s|es\s|son\s/i.test(textLower)) scores['スペイン語'] += 2
-
-    // ポルトガル語パターン
-    if (/ção|são/i.test(textLower)) scores['ポルトガル語'] += 4
-    if (/não|está|você/i.test(textLower)) scores['ポルトガル語'] += 3
-
-    // イタリア語パターン
-    if (/zione|mente\s/i.test(textLower)) scores['イタリア語'] += 4
-    if (/che\s|sono\s|come\s|questo/i.test(textLower)) scores['イタリア語'] += 2
-
-    // ドイツ語パターン
-    if (/sch|ung\s|heit\s|keit\s/i.test(textLower)) scores['ドイツ語'] += 3
-    if (/ich\s|sie\s|ist\s|das\s|und\s/i.test(textLower)) scores['ドイツ語'] += 2
-
-    // チェコ語パターン
-    if (/ství|nost/i.test(textLower)) scores['チェコ語'] += 3
-
-    // 共有アクセント記号（低スコア）
-    if (/[èêâûù]/.test(text)) scores['フランス語'] += 1
-    if (/[áéíóú]/.test(text)) {
-      scores['スペイン語'] += 0.5
-      scores['ポルトガル語'] += 0.5
-      scores['イタリア語'] += 0.3
-    }
-    if (/[äöü]/.test(text)) scores['ドイツ語'] += 1
-    if (/[ìò]/.test(text)) scores['イタリア語'] += 1
-
-    // 最高スコアの言語を返す（閾値: 2点以上）
-    const maxScore = Math.max(...Object.values(scores))
-    if (maxScore >= 2) {
-      const entry = Object.entries(scores).find(([_, score]) => score === maxScore)
-      if (entry) return entry[0]
-    }
+    if (hasJapanese) return '日本語'
+    if (hasKorean) return '韓国語'
+    if (hasChinese) return '中国語'
+    if (hasCzech) return 'チェコ語'
+    if (hasFrench) return 'フランス語'
+    if (hasSpanish) return 'スペイン語'
+    if (hasGerman) return 'ドイツ語'
+    if (hasItalian) return 'イタリア語'
+    if (hasPortuguese) return 'ポルトガル語'
 
     // デフォルトは英語
     return '英語'
