@@ -848,14 +848,28 @@ LANGUAGE RULE: Output new_translation in the SAME language as current_translatio
 
 ${TONE_AND_EVALUATION_RULES}
 
-[Tone Level Guide - MUST follow strictly]
-- 0-24%: Original as-is - No style change, natural translation
-- 25-49%: Slightly styled - Light application of the selected tone
-- 50-74%: Standard styled - Normal application of the selected tone
-- 75-99%: Strong styled - Heavy application of the selected tone
-- 100%: Maximum styled - Extreme application of the selected tone
+[Tone Level Guide - applies to new_translation ONLY]
+★ This guide is for new_translation only. Do NOT apply these rules to reverse_translation.
+★ Output language must match current_translation.
 
-The style depends on the selected tone type (casual/business/formal).
+■ casual（友達モード）
+【想定場面】友人・親しい同僚とのチャット
+【調整対象】省略形、口語、親密さを示す表現
+【禁止】差別用語
+
+■ business（仕事モード）
+【想定場面】社内メール、取引先、ビジネス文書
+【調整対象】語彙の格式、文構造の丁寧さ
+【禁止】スラング、過度に堅い表現
+
+■ formal（丁寧モード）
+【誰に】仕事以外の目上（親戚、先輩、近所の年配者）
+【どう】
+- 文末を柔らかくする（断定を避ける）
+- 気遣い・配慮の表現を追加OK
+- 距離感を縮めつつ敬意を保つ
+【businessとの違い】簡潔さより温かみ優先
+【禁止】事務的、冷たい、簡潔すぎる
 
 Allowed edits (surface-level only):
 - Tone: politeness level, contractions, punctuation, honorifics, hedging
