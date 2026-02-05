@@ -2,16 +2,56 @@
 
 // モデル定義
 export const MODELS = {
-  FULL: 'meta-llama/llama-4-scout-17b-16e-instruct',    // FULL翻訳・解説用（Groq）
-  PARTIAL: 'meta-llama/llama-4-scout-17b-16e-instruct', // PARTIAL編集用（Groq）
+  FULL: 'llama-3.3-70b-versatile',    // FULL翻訳・解説用（Groq）
+  PARTIAL: 'llama-3.3-70b-versatile', // PARTIAL編集用（Groq）
   JAPANESE_EDIT: 'gpt-4.1-nano',                        // 日本語編集用（OpenAI）
 } as const;
+
+// ============================================
+// 構造化M抽出 v2（拡張ハイブリッド版・7項目）
+// ============================================
+
+// 意図タイプ
+export type IntentType = '依頼' | '確認' | '報告' | '質問' | '感謝' | '謝罪' | '提案' | '命令' | 'その他';
+
+// 確信度
+export type CertaintyLevel = '確定' | '推測' | '可能性' | '希望' | '伝聞';
+
+// 固有名詞タイプ
+export type EntityType = 'person' | 'place' | 'org' | 'product';
+
+// 敬称タイプ
+export type HonorificType = 'なし' | 'さん' | '様' | '君' | 'ちゃん' | 'その他';
+
+// 固有名詞エントリ
+export interface NamedEntity {
+  text: string;
+  type: EntityType;
+  読み?: string;  // ひらがな名詞の場合のローマ字読み
+  敬称: HonorificType;  // 敬称なし=身内→尊敬語不要
+}
+
+// 拡張構造スキーマ（10項目）
+export interface ExpandedStructure {
+  主題: string;           // 何について
+  動作: string;           // 何をする/どうなる
+  意図: IntentType;       // 発話の目的
+  主語: string;           // 誰が（明示されていなければ「省略」）
+  対象: string;           // 誰に/何に（なければ「なし」）
+  目的格: string;         // 「〜を」がついてる単語（動作の対象を明示）
+  願望: string;           // 願望表現（〜したい/want to等）があるか（あり/なし）
+  人称: string;           // 一人称単数/一人称複数/二人称/三人称
+  確信度: CertaintyLevel; // 話者の確信の度合い
+  固有名詞: NamedEntity[];// 誤認識しやすい名詞
+}
 
 // 翻訳結果の型定義
 export interface TranslationResult {
   translation: string;
   reverse_translation: string;
   risk: 'low' | 'med' | 'high';
+  // 2026-02-02: AI言語検出対応
+  detected_language?: string;
   // BUG-001対応: 日英乖離検出用の分析フィールド
   analysis?: {
     alignmentScore: number;  // 0-1: 1が完全一致
@@ -59,6 +99,8 @@ export interface TranslateOptions {
   previousLevel?: number;
   // キャンセル用
   signal?: AbortSignal;
+  // 構造化M抽出 v2（拡張ハイブリッド版）
+  structure?: ExpandedStructure;
 }
 
 // 不変条件（7項目 + stance_strength）のシステムプロンプト
@@ -67,24 +109,164 @@ const INVARIANT_RULES = `
 1. entities - 数字、日付、時刻、金額、固有名詞を変えない
 2. polarity - 肯定/否定を変えない
 3. locked_terms - 用語集の語句をそのまま使う
-4. modality_class - 依頼/義務/提案のクラスを変えない
-5. question/statement - 質問/断定を変えない
-6. condition markers - if/unless/when等を保持
-7. commitment - 約束を勝手に追加しない
-8. stance_strength - 同意や感情の強さを勝手に変えない（例：OKをPerfectに変えない）
+4. subject - 主語は変えない
+   ★ 重要: 主語は絶対に変えない
+   ★ 一人称単数 → 一人称複数への変更は禁止
+   ★ 「私が行く」→「一緒に行こう」のような主語変更は禁止
+5. modality_class - 依頼/義務/提案のクラスを変えない
+6. question/statement - 質問/断定を変えない
+7. condition markers - 条件節を保持
+8. commitment - 約束を勝手に追加しない
+9. stance_strength - 同意や感情の強さを勝手に変えない
 
 【逆翻訳ルール】
 - 値は翻訳結果に従う
-- 時刻表記は原文のスタイルに合わせる（15時→15時、3 PM→15時）
+- 時刻表記は原文のスタイルに合わせる
 `;
 
 const TONE_AND_EVALUATION_RULES = `
 【トーン・評価語ルール】
-1. トーンは口調のみ変更し、評価軸は変えない（例: 素敵/かわいい/きれい/良い は "nice/lovely/cute/beautiful" の同カテゴリで表現する）
-2. cool/sick/dude/huh など評価軸を変える語は禁止
-3. reverse_translation は意味を保持しつつ、トーン差を語尾・強調語で必ず表現する（英語が変わった場合は逆翻訳も必ず変える）
-4. 服の一般語（洋服/服/服装/コーデ/装い）は clothes/outfit を使う。"dress" は「ドレス/ワンピース」が明示された時だけ使用可
+1. トーンは口調のみ変更し、評価軸は変えない
+2. スラングで評価軸を変えない
+3. reverse_translation は意味を保持しつつ、トーン差を語尾・強調語で必ず表現する
 `;
+
+// ============================================
+// 言語固有ルール（10言語対応）
+// ============================================
+
+function getLanguageSpecificRules(targetLang: string): string {
+  switch (targetLang) {
+    case '英語':
+      return `
+【人名の翻訳ルール - 英語】
+- ひらがな/カタカナの人名はローマ字表記する
+- 逆翻訳は元のひらがな/カタカナのまま維持
+- 人名を一般名詞（歌、絵等）と混同しない
+
+【敬称のルール - 英語】
+- 日本語で敬称なし → 英語でも Mr./Ms. をつけない
+- 日本語で敬称あり → 英語で Mr./Ms. をつける
+
+【「君」「あなた」の翻訳ルール - 英語】
+- 「君」「あなた」は単純に "you" と訳す
+- 余計な装飾を追加しない
+
+【服の翻訳ルール - 英語】
+- 服の一般語は clothes/outfit を使う
+- "dress" は「ドレス/ワンピース」が明示された時だけ`;
+
+    case '中国語':
+      return `
+【人名の翻訳ルール - 中国語】
+- ひらがな/カタカナの人名はローマ字表記する
+- 逆翻訳は元のひらがな/カタカナのまま維持
+- 人名を一般名詞と混同しない
+
+【敬称のルール - 中国語】
+- 日本語で敬称なし → 中国語でも敬称をつけない
+- 日本語で敬称あり → 中国語で適切な敬称をつける`;
+
+    case 'チェコ語':
+      return `
+【人名の翻訳ルール - チェコ語】
+- ひらがな/カタカナの人名はローマ字表記する
+- 逆翻訳は元のひらがな/カタカナのまま維持
+- 人名を一般名詞と混同しない
+
+【敬称のルール - チェコ語】
+- 日本語で敬称なし → チェコ語でも敬称をつけない
+- 日本語で敬称あり → チェコ語で適切な敬称をつける`;
+
+    case '韓国語':
+      return `
+【人名の翻訳ルール - 韓国語】
+- ひらがな/カタカナの人名はローマ字または韓国語読みで表記
+- 逆翻訳は元のひらがな/カタカナのまま維持
+- 人名を一般名詞と混同しない
+
+【敬称のルール - 韓国語】
+- 日本語で敬称なし → 韓国語でも敬称をつけない
+- 日本語で敬称あり → 韓国語で適切な敬称（씨等）をつける`;
+
+    case 'フランス語':
+      return `
+【人名の翻訳ルール - フランス語】
+- ひらがな/カタカナの人名はローマ字表記する
+- 逆翻訳は元のひらがな/カタカナのまま維持
+- 人名を一般名詞と混同しない
+
+【敬称のルール - フランス語】
+- 日本語で敬称なし → フランス語でも M./Mme をつけない
+- 日本語で敬称あり → フランス語で M./Mme をつける`;
+
+    case 'スペイン語':
+      return `
+【人名の翻訳ルール - スペイン語】
+- ひらがな/カタカナの人名はローマ字表記する
+- 逆翻訳は元のひらがな/カタカナのまま維持
+- 人名を一般名詞と混同しない
+
+【敬称のルール - スペイン語】
+- 日本語で敬称なし → スペイン語でも Sr./Sra. をつけない
+- 日本語で敬称あり → スペイン語で Sr./Sra. をつける`;
+
+    case 'ドイツ語':
+      return `
+【人名の翻訳ルール - ドイツ語】
+- ひらがな/カタカナの人名はローマ字表記する
+- 逆翻訳は元のひらがな/カタカナのまま維持
+- 人名を一般名詞と混同しない
+
+【敬称のルール - ドイツ語】
+- 日本語で敬称なし → ドイツ語でも Herr/Frau をつけない
+- 日本語で敬称あり → ドイツ語で Herr/Frau をつける`;
+
+    case 'イタリア語':
+      return `
+【人名の翻訳ルール - イタリア語】
+- ひらがな/カタカナの人名はローマ字表記する
+- 逆翻訳は元のひらがな/カタカナのまま維持
+- 人名を一般名詞と混同しない
+
+【敬称のルール - イタリア語】
+- 日本語で敬称なし → イタリア語でも Sig./Sig.ra をつけない
+- 日本語で敬称あり → イタリア語で Sig./Sig.ra をつける`;
+
+    case 'ポルトガル語':
+      return `
+【人名の翻訳ルール - ポルトガル語】
+- ひらがな/カタカナの人名はローマ字表記する
+- 逆翻訳は元のひらがな/カタカナのまま維持
+- 人名を一般名詞と混同しない
+
+【敬称のルール - ポルトガル語】
+- 日本語で敬称なし → ポルトガル語でも Sr./Sra. をつけない
+- 日本語で敬称あり → ポルトガル語で Sr./Sra. をつける`;
+
+    case '日本語':
+      return `
+【人名の翻訳ルール - 日本語】
+- 人名はそのまま維持する
+- 敬称は原文に従う（なければつけない）
+
+【敬称のルール - 日本語】
+- 原文の敬称を維持する
+- 勝手に「様」「さん」を追加しない`;
+
+    default:
+      // 未対応言語は汎用ルール
+      return `
+【人名の翻訳ルール - ${targetLang}】
+- ひらがな/カタカナの人名はローマ字表記する
+- 逆翻訳は元のひらがな/カタカナのまま維持
+- 人名を一般名詞と混同しない
+
+【敬称のルール - ${targetLang}】
+- 日本語で敬称なし → ${targetLang}でも敬称をつけない
+- 日本語で敬称あり → ${targetLang}で適切な敬称をつける`;
+  }
+}
 
 // ============================================
 // サーバー側ガード機能
@@ -628,7 +810,10 @@ function shouldFallbackToFull(
   }
 
   // 9. BUG-001対応: 日英乖離チェック（checkAlignmentScore）
-  if (requireJapaneseReverse && result.reverse_translation) {
+  // ★ 2026-02-03 改革: トーン変更時（toneLevel > 0）はスキップ
+  //    理由: 新方式では逆翻訳は英語からの訳なので、原文との乖離が発生するのは正常
+  //    （例: 英語に "dude" が入ると、逆翻訳に「おい」が入り、原文と乖離する）
+  if (requireJapaneseReverse && result.reverse_translation && toneLevel === 0) {
     const alignmentCheck = checkAlignmentScore(originalText, result.reverse_translation);
     if (alignmentCheck.hasIssue) {
       console.log(`[Guard] Alignment issue detected: score=${alignmentCheck.score.toFixed(2)}, details=${alignmentCheck.details}`);
@@ -644,28 +829,22 @@ const PARTIAL_SYSTEM_PROMPT = `You are NijiLingo in PARTIAL mode.
 Your job is to EDIT the given current_translation to match the requested tone level. Do NOT translate from scratch.
 
 ABSOLUTE RULE: Do not re-translate. Edit current_translation only.
+LANGUAGE RULE: Output new_translation in the SAME language as current_translation.
 
 [Hard invariants - must preserve]
-1. entities - numbers, dates, times, amounts, proper nouns must stay identical
-2. polarity - positive/negative must not flip
-3. locked_terms - glossary terms must be used as-is
-4. modality_class - request/obligation/suggestion class must not change
-   ★★★ CRITICAL: This is the MOST IMPORTANT rule for tone editing. ★★★
-   ★ The modality_class of the ORIGINAL text must be preserved in the output.
-   - "request" (asking someone to do something): "Could you...?", "Please...", "Would you mind...?"
-   - "confirmation" (checking/confirming facts): "Is it...?", "Are you...?", "Did you...?"
-   - "suggestion" (proposing an idea): "How about...?", "Why don't we...?", "Let's..."
-   - "obligation" (expressing necessity): "You must...", "You need to...", "You have to..."
-   ★ NEVER change a request into a confirmation or vice versa.
-   ★ NEVER change the original modality_class even when editing for tone.
-   ★ Example: "Can you come at 3?" (request) → "Will you come at 3?" (request) ✓
-   ★ Example: "Can you come at 3?" (request) → "Are you coming at 3?" (confirmation) ✗ FORBIDDEN
-   ★ Example: "それできる？" (request) → "それできますか？" (request) ✓
-   ★ Example: "それできる？" (request) → "それしますか？" (confirmation) ✗ FORBIDDEN
-5. question/statement - question vs statement must not change
-6. condition markers - if/unless/when must be preserved
-7. commitment - do not add promises that weren't there
-8. stance_strength - do not change intensity of agreement/emotion (e.g., OK → Perfect is forbidden)
+1. entities - 数字、日付、時刻、金額、固有名詞を変えない
+2. polarity - 肯定/否定を変えない
+3. locked_terms - 用語集の語句をそのまま使う
+4. subject - 主語は絶対に変えない
+   ★★★ 重要: 主語は絶対に変えない ★★★
+   ★ 一人称単数 → 一人称複数への変更は禁止
+   ★ トーン調整で主語が変わるような編集は禁止
+5. modality_class - 依頼/義務/提案のクラスを変えない
+   ★ 依頼を確認に変えない、確認を依頼に変えない
+6. question/statement - 質問/断定を変えない
+7. condition markers - 条件節を保持
+8. commitment - 約束を勝手に追加しない
+9. stance_strength - 同意や感情の強さを勝手に変えない
 
 ${TONE_AND_EVALUATION_RULES}
 
@@ -677,6 +856,7 @@ ${TONE_AND_EVALUATION_RULES}
 - 100%: Maximum styled - Extreme application of the selected tone
 
 The style depends on the selected tone type (casual/business/formal).
+【Forbidden】Overly formal honorifics not used in daily conversation (e.g. 幸甚)
 
 Allowed edits (surface-level only):
 - Tone: politeness level, contractions, punctuation, honorifics, hedging
@@ -685,11 +865,15 @@ Forbidden edits:
 - Any change that alters meaning
 - Creative idioms or metaphors not in original
 - If risk=high, output new_translation identical to current_translation
-- reverse_translation must be Japanese, and must show at least one tone-level-specific change (ending/particle/emphasis/punctuation) per tone level
+
+[Reverse translation rule]
+- reverse_translation should naturally express the nuance of the tone-adjusted translation
+- Match the tone in reverse_translation (polite for business/formal, casual for casual)
+- No strict ending rules - just convey the nuance naturally
 
 Return ONLY valid JSON (no markdown, no explanation).
 Use exactly these 3 keys (no extra keys):
-{"new_translation":"...","reverse_translation":"...(Japanese)","risk":"low|med|high"}`;
+{"new_translation":"...","reverse_translation":"...(source language)","risk":"low|med|high"}`;
 
 function applyEvaluationWordGuard(
   sourceText: string,
@@ -768,12 +952,21 @@ function applyReverseTranslationGuard(
 ): TranslationResult {
   let reverseText = result.reverse_translation?.trim() ?? '';
 
-  // 英語→日本語の場合：逆翻訳は英語であるべき
+  // 日本語以外が原文の場合
   if (sourceLang !== '日本語') {
-    // 日本語が含まれていたら除去してrisk=high
+    // 中国語・韓国語の場合：漢字・ハングルは正常なのでひらがな・カタカナのみチェック
+    if (sourceLang === '中国語' || sourceLang === '韓国語') {
+      // ひらがな・カタカナが含まれていたら除去
+      if (/[ぁ-んァ-ン]/.test(reverseText)) {
+        console.warn('[applyReverseTranslationGuard] Japanese kana found in reverse_translation for CJK source:', reverseText);
+        const cleanedReverse = reverseText.replace(/[ぁ-んァ-ン]+/g, '').trim();
+        return { ...result, reverse_translation: cleanedReverse, risk: 'high' };
+      }
+      return result;
+    }
+    // 他の言語（英語、フランス語など）の場合：日本語文字が含まれていたら除去
     if (hasJapaneseCharacters(reverseText)) {
       console.warn('[applyReverseTranslationGuard] Japanese found in reverse_translation for non-Japanese source:', reverseText);
-      // 日本語部分を除去（全て日本語の場合は空文字列になる）
       const cleanedReverse = reverseText.replace(/[ぁ-んァ-ン一-龯！？。、「」『』（）]+/g, '').trim();
       return { ...result, reverse_translation: cleanedReverse, risk: 'high' };
     }
@@ -822,12 +1015,22 @@ interface PartialTranslationResponse {
 
 // PARTIAL編集を実行（8Bモデル）
 export async function translatePartial(options: TranslateOptions): Promise<TranslationResult> {
-  const { sourceText, currentTranslation, sourceLang, targetLang, tone, customTone } = options;
+  const { sourceText, currentTranslation, sourceLang, targetLang, tone, customTone, structure } = options;
   const toneLevel = options.toneLevel ?? 0;
 
   if (!currentTranslation) {
     throw new Error('currentTranslation is required for PARTIAL mode');
   }
+
+  // 構造情報をプロンプトに追加（固有名詞の読み保持のため + 言語情報）
+  const structureInfo = structure ? `\n${structureToPromptText(structure, targetLang, sourceLang)}\n` : '';
+  
+  // structureがなくても言語情報は必ず追加
+  const langInfoOnly = !structure ? `
+【出力言語 - 絶対遵守】
+・翻訳の出力言語: ${targetLang}（new_translationフィールドは必ずこの言語で出力）
+・逆翻訳の出力言語: ${sourceLang}（reverse_translationフィールドは必ずこの言語で出力）
+` : '';
 
   // トーンスタイル×レベルに応じた説明（25%と50%で明確な差を出す）
   let toneStyle = '';
@@ -883,19 +1086,69 @@ export async function translatePartial(options: TranslateOptions): Promise<Trans
   }
 
   const reverseTranslationInstruction = getReverseTranslationInstruction(sourceLang, targetLang, toneLevel, tone, customTone);
-  const userPrompt = `Original (${sourceLang}): ${sourceText}
-Current translation (${targetLang}): ${currentTranslation}
+  
+  // ★ 2026-02-03 改革: 翻訳をトーン調整 → その翻訳を逆翻訳
+  // Original（原文）は削除し、current_translation（翻訳）をベースにトーン調整
+  
+  // 前レベルの翻訳があれば差分反映指示を追加（多言語対応）
+  const previousTranslation = options.previousTranslation;
+  const previousLevel = options.previousLevel;
+  const diffInstruction = previousTranslation ? `
+【重要: 逆翻訳で差分を表現（意味構造は保持）】
+前レベル(${previousLevel ?? 0}%)の翻訳: "${previousTranslation}"
+→ トーン調整で追加された表現の差分を必ず反映すること
+→ 各パーセンテージ間（0→25→50→75→100）の逆翻訳が同じトーンにならないように
 
+【絶対守ること - 意味構造の保持】
+- 主語・対象を変えない（「君」を「お客様」に変えない、「you」を「valued customer」に変えない）
+- 確信度を変えない（確定→推測にしない）
+- 数字・固有名詞を変えない
+- 肯定/否定を変えない
+
+【変えていいこと - トーンの差分のみ】
+- 語尾の変化（です→ございます、だよ→じゃん等）
+- 強調語の追加（とても→めっちゃ、very→totally等）
+- カジュアル/丁寧表現の追加
+- 前レベルと同じ逆翻訳は禁止
+` : '';
+  
+  // 言語置き換え指示（targetLangが英語以外の場合）
+  const partialLanguageRule = targetLang !== '英語' ? `
+★★★ 最重要: new_translation は必ず「${targetLang}」で出力すること ★★★
+- システムプロンプトの例は英語だが、すべて${targetLang}に置き換えて適用すること
+- 英語で出力してはいけない
+` : '';
+
+  const userPrompt = `Current translation (${targetLang}): ${currentTranslation}
+${partialLanguageRule}
 REQUIRED TONE: ${tone || 'none'} at ${toneLevel}%
 Target style: ${toneStyle}
+${structureInfo}
+${langInfoOnly}
+【重要: トーン調整の方向】
+- current_translation（${targetLang}）をトーン調整すること
+- 意味・構造は保持（構造情報の確信度・固有名詞ルールを守る）
 
-【重要: 差分必須ルール】
-- current_translation と同一の文章を返すのは禁止（translation / reverse_translation ともに）
-- toneLevel が上がるほど、口調の変化（丁寧さ/カジュアルさ/強調/句読点/語尾/縮約）を段階的に強めること
+【重要: 出力言語】
+- new_translation は必ず ${targetLang} で出力すること
+- 英語で出力してはいけない（${targetLang}が英語の場合を除く）
+
+【重要: 固有名詞】
+- 構造情報に記載された固有名詞の読みを必ず使用すること
+- 勝手に別の読みに変えない（例: Gonta → Yuta は禁止）
+
+【重要: 差分ルール】
+- current_translation と同一の文章を返すのは禁止
+- toneLevel が上がるほど、トーンの変化を段階的に強めること
+- 意味を保持しつつ、最低1語は表現を変更または追加すること
 - 意味・主語/目的語・否定・条件・数値・時制は絶対に変えない
-- translation を変えたら reverse_translation も必ず変える（同一禁止）
-
+${diffInstruction}
 ${options.variationInstruction ? '【追加の差分指示】\n' + options.variationInstruction + '\n' : ''}${reverseTranslationInstruction}
+
+【出力前チェック - 必須】
+JSONを出力する前に以下を確認し、違っていれば修正してから出力:
+- new_translation が ${targetLang} で書かれているか？英語になっていないか？
+- reverse_translation が ${sourceLang} で書かれているか？
 
 Edit the current_translation to match the tone level ${toneLevel}%. Return JSON only.`;
 
@@ -1137,6 +1390,280 @@ function parseJsonResponse<T>(text: string): T {
   return JSON.parse(cleaned);
 }
 
+// ============================================
+// 構造化M抽出 v2（拡張ハイブリッド版）- 関数
+// ============================================
+
+const structureCache = new Map<string, ExpandedStructure>();
+
+const EXPANDED_STRUCTURE_PROMPT = `あなたは多言語対応の構造分析アシスタントです。
+入力された文章から、以下の10項目を抽出してください。
+
+【抽出項目】
+1. 主題: 何について話しているか
+2. 動作: 何をするか/どうなるか
+3. 意図: 依頼/確認/報告/質問/感謝/謝罪/提案/命令/その他
+4. 主語: 誰が（明示されている場合のみ記載。省略されていれば「省略」と記載。推測で補填しない）
+5. 対象: 誰に/何に（なければ「なし」）
+6. 目的格: 「〜を」がついている単語（動作の直接の対象。なければ「なし」）
+   ★ 重要: 目的格は翻訳時に必ず目的語(object)として扱う
+   ★ 例: 「君を抱く」→ 目的格は「君」→ 翻訳で「君」は目的語（hold you）
+7. 願望: 願望表現があるか（あり/なし）
+   - あり: 〜したい、〜てほしい、〜たい、want to、hope to 等
+   - なし: 願望表現がない
+   ★ 重要: 願望は翻訳・逆翻訳で必ず保持する
+   ★ 例: 「抱きたい」→ 願望: あり → "want to hold" / 「抱きたい」
+   ★ ❌ 願望を消さない（「抱きたい」→「抱いてる」は禁止）
+8. 人称: 動作の主体の人称（一人称単数/一人称複数/二人称/三人称）
+   - 一人称単数: 私/僕/俺 → I
+   - 一人称複数: 私たち/僕ら → We
+   - 二人称: あなた/君 → You
+   - 三人称: 彼/彼女/それ/彼ら → He/She/It/They
+   ★ 重要: 主語が省略されていても、文脈から人称を判断する
+   ★ 例: 「向かいます」（主語省略）→ 人称: 一人称単数（話者が向かう）
+   ★ ❌ 人称を勝手に変えない（一人称単数 → 一人称複数は禁止）
+9. 確信度: 確定/推測/可能性/伝聞
+   - 確定: 〜だ、〜です（事実として述べる）
+   - 推測: 〜と思う、〜だろう（自分の考え）
+   - 可能性: 〜かも、〜かもしれない（確信が低い/不確か）
+   - 伝聞: 〜らしい、〜そうだ、〜って、〜だって、〜んだって（誰かから聞いた情報）
+10. 固有名詞: 人名/地名/組織名/製品名のリスト
+   - text: 名前
+   - type: person/place/org/product
+   - 読み: ひらがな名詞の場合のローマ字読み（任意）
+   - 敬称: なし/さん/様/君/ちゃん/その他
+     ※ 敬称なし（呼び捨て）= 身内・親しい人 → 翻訳で尊敬語不要
+
+【出力形式】
+JSONのみ（説明不要）
+
+【例1】
+入力: 「ごんたが寝てから向かいます」
+{"主題":"移動","動作":"向かう","意図":"報告","主語":"省略","対象":"なし","目的格":"なし","願望":"なし","人称":"一人称単数","確信度":"確定","固有名詞":[{"text":"ごんた","type":"person","読み":"Gonta","敬称":"なし"}]}
+※ 主語省略 + 意図「報告」+ 人称「一人称単数」→ 翻訳時にIを使う
+※ 敬称なし → 身内（子ども等）→ 尊敬語不要
+※ ❌ 人称を変えない（I → We は禁止）
+
+【例2】
+入力: 「田中さんが来ます」
+{"主題":"来訪","動作":"来る","意図":"報告","主語":"田中さん","対象":"なし","目的格":"なし","願望":"なし","人称":"三人称","確信度":"確定","固有名詞":[{"text":"田中","type":"person","敬称":"さん"}]}
+※ 敬称あり → 他人 → 適切な敬意を払う
+
+【例3】
+入力: 「電車止まってるかも」
+{"主題":"電車","動作":"止まっている","意図":"報告","主語":"電車","対象":"なし","目的格":"なし","願望":"なし","人称":"三人称","確信度":"可能性","固有名詞":[]}
+
+【例4】
+入力: 「雄太が会社くびになったらしいよ」
+{"主題":"雄太の解雇","動作":"くびになった","意図":"報告","主語":"雄太","対象":"なし","目的格":"なし","願望":"なし","人称":"三人称","確信度":"伝聞","固有名詞":[{"text":"雄太","type":"person","敬称":"なし"}]}
+※ 「らしい」= 伝聞 → "I heard" / "apparently" で翻訳
+
+【例5】
+入力: 「君を抱いていたい」
+{"主題":"抱擁","動作":"抱く","意図":"報告","主語":"省略","対象":"なし","目的格":"君","願望":"あり","人称":"一人称単数","確信度":"確定","固有名詞":[]}
+※ 目的格「君」→ 翻訳時に「君」は目的語
+※ 願望「あり」→ "want to" を入れる（I want to hold you）
+※ 人称「一人称単数」→ I を使う（We に変えない）
+※ ❌ 主語と目的語を入れ替えない（you wanna hold me は禁止）
+※ ❌ 願望を消さない（「抱きたい」→「抱いてる」は禁止）
+※ ❌ 人称を変えない（I → We は禁止）`;
+
+/**
+ * 日本語テキストから構造を抽出（拡張ハイブリッド版・7項目）
+ */
+export async function extractStructure(
+  text: string,
+  signal?: AbortSignal
+): Promise<ExpandedStructure> {
+  const cached = structureCache.get(text);
+  if (cached) {
+    console.log('[extractStructure] cache hit');
+    return cached;
+  }
+
+  const defaultStructure: ExpandedStructure = { 
+    主題: 'なし', 
+    動作: 'なし', 
+    意図: 'その他',
+    主語: '省略',
+    対象: 'なし',
+    目的格: 'なし',
+    願望: 'なし',
+    人称: '一人称単数',
+    確信度: '確定',
+    固有名詞: []
+  };
+
+  try {
+    const response = await callGeminiAPI(
+      MODELS.JAPANESE_EDIT,  // nanoの方が精度高い
+      EXPANDED_STRUCTURE_PROMPT,
+      text,
+      0.1,
+      signal
+    );
+
+    console.log('[extractStructure] raw response:', response);
+
+    let parsed: Partial<ExpandedStructure>;
+    try {
+      parsed = parseJsonResponse<ExpandedStructure>(response);
+    } catch (parseError) {
+      console.error('[extractStructure] JSON parse failed, using default:', parseError);
+      return defaultStructure;
+    }
+
+    // 固有名詞の敬称をバリデート
+    const validatedEntities: NamedEntity[] = Array.isArray(parsed.固有名詞) 
+      ? parsed.固有名詞.map(e => ({
+          text: e.text || '',
+          type: e.type || 'person',
+          読み: e.読み,
+          敬称: e.敬称 || 'なし'
+        }))
+      : [];
+
+    const validated: ExpandedStructure = {
+      主題: parsed.主題 || 'なし',
+      動作: parsed.動作 || 'なし',
+      意図: parsed.意図 || 'その他',
+      主語: parsed.主語 || '省略',
+      対象: parsed.対象 || 'なし',
+      目的格: parsed.目的格 || 'なし',
+      願望: parsed.願望 || 'なし',
+      人称: parsed.人称 || '一人称単数',
+      確信度: parsed.確信度 || '確定',
+      固有名詞: validatedEntities
+    };
+
+    // キャッシュサイズ制限（500件）
+    if (structureCache.size >= 500) {
+      const firstKey = structureCache.keys().next().value;
+      if (firstKey) structureCache.delete(firstKey);
+    }
+    structureCache.set(text, validated);
+
+    console.log('[extractStructure] extracted:', validated);
+    return validated;
+
+  } catch (error) {
+    console.error('[extractStructure] error:', error);
+    return defaultStructure;
+  }
+}
+
+/**
+ * 構造情報をプロンプト用テキストに変換
+ */
+export function structureToPromptText(structure: ExpandedStructure, targetLang?: string, sourceLang?: string): string {
+  const entityTypeMap: Record<EntityType, string> = {
+    person: '人名',
+    place: '地名',
+    org: '組織名',
+    product: '製品名'
+  };
+
+  const entities = structure.固有名詞.length > 0
+    ? structure.固有名詞.map(e => {
+        const typeStr = entityTypeMap[e.type];
+        const readingStr = e.読み ? `、読み: ${e.読み}` : '';
+        const honorificStr = e.敬称 === 'なし' 
+          ? '、敬称なし（身内・親しい人→尊敬語不要）' 
+          : e.敬称 ? `、敬称: ${e.敬称}` : '';
+        return `「${e.text}」は${typeStr}${readingStr}${honorificStr}`;
+      }).join('、')
+    : 'なし';
+
+  // 言語情報（渡された場合のみ追加）
+  const langInfo = targetLang ? `
+・翻訳の出力言語: ${targetLang}（translationフィールドは必ずこの言語で出力）
+・逆翻訳の出力言語: ${sourceLang || '日本語'}（reverse_translationフィールドは必ずこの言語で出力）` : '';
+
+  return `【構造情報】
+・主語: ${structure.主語}
+・動作: ${structure.動作}
+・対象: ${structure.対象}
+・目的格: ${structure.目的格 || 'なし'}
+・願望: ${structure.願望 || 'なし'}
+・人称: ${structure.人称 || '一人称単数'}
+・意図: ${structure.意図}
+・確信度: ${structure.確信度}
+・固有名詞: ${entities}${langInfo}
+
+【翻訳ルール】
+- 「意図」「確信度」「願望」「人称」を翻訳で必ず保持すること
+- 敬称なしの人名は身内・親しい人なので、尊敬語を使わない（例: 寝る→sleeps、NOT: お休みになる）
+- 固有名詞の読みがある場合はその読みで翻訳する
+- 一般名詞（電車、車、家など）はローマ字にせず普通に翻訳する（電車→train、NOT: densha）
+
+【目的格ルール - 重要】
+目的格（「〜を」がついている単語）は必ず目的語(object)として翻訳する:
+- 例: 目的格「君」→ 翻訳で「君」は目的語 (hold you, love you, etc.)
+- ❌ 主語と目的語を入れ替えない
+- ❌ 「君を抱きたい」→ "you wanna hold me" は禁止（主語と目的語が逆）
+- ✓ 「君を抱きたい」→ "I want to hold you"
+
+【願望ルール - 重要】
+願望が「あり」の場合、翻訳・逆翻訳で必ず願望表現を保持する:
+- 翻訳: "want to" / "hope to" / "wish to" 等を入れる
+- 逆翻訳: 「〜したい」「〜たい」「〜てほしい」等を保持する
+- ❌ 願望を消さない
+- ❌ 「抱きたい」→「抱いてる」は禁止（願望が消えてる）
+- ✓ 「抱きたい」→ "want to hold" → 「抱きたい」
+
+【人称ルール - 絶対遵守】
+人称は翻訳で必ず保持する。勝手に変更しない:
+- 一人称単数 → I を使う（絶対に We に変えない）
+- 一人称複数 → We を使う
+- 二人称 → You を使う
+- 三人称 → He/She/It/They を使う
+- ❌ 人称を変えない
+- ❌ 「向かいます」(一人称単数) → "We're heading" は禁止
+- ✓ 「向かいます」(一人称単数) → "I'm heading"
+- ❌ カジュアルトーンでも人称を変えない
+
+【主語省略ルール - 重要】
+主語が「省略」の場合、意図で判断して主語を決定:
+- 意図「報告」（自分の行動）・「謝罪」→ I（一人称）
+  例: 「財布忘れた」→ "I forgot my wallet"
+  例: 「遅れてごめん」→ "Sorry I'm late"
+- 意図「質問」・「依頼」・「命令」→ You（相手）
+  例: 「怒ってる？」→ "Are you angry?"
+  例: 「窓開けて」→ "Can you open the window?"
+- 状況・天候の報告 → It / The + 名詞
+  例: 「雨降ってる」→ "It's raining"
+  例: 「電車止まってる」→ "The train stopped"
+
+【確信度ルール - 絶対遵守】
+※このルールはトーン設定に関係なく最優先で適用される
+- 確信度「確定」→ 推測語・伝聞語を絶対に入れない
+  ✗ 禁止: I think / I guess / maybe / probably / perhaps / or something / I suppose / it seems / apparently / I heard
+  ✓ 正しい: 「遅れてごめん、電車が止まってた」→ "Sorry I'm late, the train stopped"
+  ✓ 正しい: 「雨が降ってる」→ "It's raining" (NOT: "I think it's raining")
+- 確信度「推測」→ I think / probably / I guess を使う（自分の考え）
+  例: 「雨が降ると思う」→ "I think it's raining" / "It's probably raining"
+- 確信度「可能性」→ might / maybe / could / perhaps を使う
+  例: 「雨が降るかも」→ "It might rain" / "Maybe it's raining"
+- 確信度「希望」→ I hope / I wish を使う
+  例: 「雨が降ってほしい」→ "I hope it rains"
+- 確信度「伝聞」→ 以下のどれか1つだけを使う（複数使わない！）
+  - "I heard ..." または "Apparently, ..." または "They say ..."
+  ✗ 禁止: "I heard that ... apparently ..."（二重は禁止）
+  ✗ 禁止: I think（これは推測であり伝聞ではない）
+  例: 「雄太がクビになったらしい」→ "I heard Yuta got fired" または "Apparently Yuta got fired"
+
+【重要】確信度「確定」の場合、以下の表現は一切使用禁止:
+- I think / I guess / I suppose
+- maybe / probably / perhaps / possibly
+- or something / or whatever / or anything
+- it seems / apparently / I heard / they say
+- kinda / sorta + 推測的な表現
+
+【重要】確信度「伝聞」と「推測」の違い:
+- 伝聞（らしい/そうだ/って）= 誰かから聞いた → I heard / apparently
+- 推測（と思う/だろう）= 自分の考え → I think / probably`;
+}
+
 // トーンスタイル×レベルに応じた指示を生成
 function getToneStyleInstruction(tone: string | undefined, toneLevel: number, customTone?: string): string {
   // カスタムトーンは段階無視で常にLv5全力 → 最初に処理
@@ -1279,7 +1806,17 @@ function getToneStyleInstruction(tone: string | undefined, toneLevel: number, cu
 - 友達同士の超くだけた会話
 - 翻訳先の言語に合わせたカジュアル表現を使う
 - 英語なら省略形（gonna, wanna, gotta）
-- 文法より勢い重視`;
+- 文法より勢い重視
+
+【カジュアル表現の例（確信度「確定」の場合）】
+✓ "Sorry I'm late, the train stopped"（遅れてごめん、電車が止まってた）
+✓ "My bad, train was down"（超カジュアル版）
+✓ "Ugh, train died on me"（勢い重視版）
+
+【重要】確信度ルールは絶対変更しない:
+- 確信度「確定」→ 推測語一切なし（I think禁止）
+- カジュアルでも「確定」は「確定」のまま
+- 勢い重視 ≠ 曖昧さを追加`;
       }
       return `【トーンレベル: ${toneLevel}% - ${intensityLabel}カジュアル】
 - ${intensityDesc}くだけた表現に
@@ -1465,47 +2002,30 @@ function getToneInstruction(options: TranslateOptions): string {
 function getReverseTranslationInstruction(
   sourceLang: string,
   targetLang: string,
-  toneLevel: number,
+  _toneLevel: number,  // 新方式では未使用（英語側でトーン調整するため）
   tone?: string,
-  customTone?: string
+  _customTone?: string  // 新方式では未使用
 ): string {
-  // 日本語以外が原文の場合：逆翻訳は原文言語で返す
+  // 日本語以外が原文の場合
   if (sourceLang !== '日本語') {
-    return `【逆翻訳ルール - 最重要】
-⚠️ reverse_translation は 100% ${sourceLang}のみ で出力すること ⚠️
-- 翻訳結果（${targetLang}）を元の${sourceLang}に戻した表現にする
-- ${targetLang}は絶対に含めない
-- 例: 入力"Bonjour"(${sourceLang}) → translation:"Hello"(${targetLang}) → reverse_translation:"Bonjour" (${sourceLang}のみ)
-- ❌ 禁止: reverse_translationに${targetLang}を入れる`;
+    return `【逆翻訳 - 絶対ルール】
+- reverse_translation は必ず ${sourceLang} で出力すること
+- ${sourceLang}以外の言語は絶対に使わない
+- トーン調整後の${targetLang}を${sourceLang}に訳す
+- 翻訳先言語（${targetLang}）を逆翻訳に混ぜない`;
   }
 
-  const toneDescription =
-    tone === 'casual' ? '友達に話すようなカジュアルな口調' :
-    tone === 'business' ? 'ビジネスシーンで使う敬語' :
-    tone === 'formal' ? '最上級の丁寧な敬語（ございます等）' :
-    tone === 'custom' ? `「${customTone}」のスタイル全開（オジサン構文なら絵文字・カタカナ混ぜ、限界オタクなら感情爆発、ギャルならギャル語、赤ちゃん言葉なら幼児語）` :
-    '自然な口調';
-
-  const levelInstruction = tone === 'custom'
-    ? '段階は無視して常に全力で表現すること'
-    : `レベル${toneLevel}%: 0%が最も控えめ、100%が最も強い表現`;
-
-  return `【逆翻訳ルール】
-- ${toneDescription}で表現すること
-- ${levelInstruction}
-
-【最重要：全レベル異なる表現にすること】
-全5レベル（0%, 25%, 50%, 75%, 100%）は必ず全て異なる表現にすること。
-1つでも同じ表現があってはならない。
-- 英語（translation）も各レベルで必ず変える
-- 逆翻訳（reverse_translation）も各レベルで必ず変える
-- 差のつけ方：語彙、強調語、感嘆符、口調の強さ
-
-【基本ルール】
-- 疑問文は疑問文のまま（？で終わる）
-- 平叙文は平叙文のまま
-- 自然な日本語であること
-- 意味は原文と同じに保つ`;
+  // 日本語が原文の場合：敬語かどうかだけ指定
+  // ※英語翻訳でトーン調整済みなので、そのニュアンスを日本語に反映する
+  const usePolite = tone === 'business' || tone === 'formal';
+  
+  return `【逆翻訳】
+- reverse_translation は日本語で出力
+- トーン調整後の翻訳を${usePolite ? '敬語で' : '敬語を使わず'}日本語に訳す
+- トーン調整で追加された表現の差分を必ず反映すること（各パーセンテージ間の逆翻訳が同じトーンにならないように）
+- 二重敬語は禁止（例: ×おっしゃられる ×ご覧になられる ×お召し上がりになられる）
+- 人名に敬称を勝手に追加しない（原文で敬称なし→逆翻訳でも敬称なし。例:「ごんた」→「ごんた様」❌）
+${usePolite ? '- 原文が敬語でなくても、必ず敬語（です/ます/ございます）で出力すること' : ''}`;
 }
 
 // ============================================
@@ -1666,17 +2186,44 @@ ${toneHints}`;
 
 // FULL翻訳を実行
 export async function translateFull(options: TranslateOptions): Promise<TranslationResult> {
-  const { sourceText, sourceLang, targetLang, isNative, previousTranslation, previousLevel } = options;
+  const { sourceText, sourceLang, targetLang, isNative, previousTranslation, previousLevel, structure } = options;
   const toneLevel = options.toneLevel ?? 0;
 
   const toneInstruction = getToneInstruction(options);
   const reverseTranslationInstruction = getReverseTranslationInstruction(sourceLang, targetLang, toneLevel, options.tone, options.customTone);
   const differenceInstruction = getFullDifferenceInstruction(toneLevel, previousTranslation, previousLevel, options.tone);
   const variationInstruction = options.variationInstruction ? `\n${options.variationInstruction}` : '';
+  const structureInfo = structure ? `\n${structureToPromptText(structure, targetLang, sourceLang)}\n` : '';
+  
+  // structureがなくても言語情報は必ず追加
+  const langInfoOnly = !structure ? `
+【出力言語 - 絶対遵守】
+・翻訳の出力言語: ${targetLang}（translationフィールドは必ずこの言語で出力）
+・逆翻訳の出力言語: ${sourceLang}（reverse_translationフィールドは必ずこの言語で出力）
+` : '';
+  
+  // 翻訳先または逆翻訳が日本語の場合、敬語ルールを追加
+  const isBusinessOrFormal = options.tone === 'business' || options.tone === 'formal';
+  const japaneseRule = (targetLang === '日本語' || sourceLang === '日本語') ? `
+【日本語の敬語ルール】
+- 二重敬語は禁止（例: ×おっしゃられる ×ご覧になられる ×お召し上がりになられる）
+- 正しい敬語を使う（例: ○おっしゃる ○ご覧になる ○召し上がる）
+${isBusinessOrFormal ? `- ビジネス/丁寧トーンでは、原文が敬語でなくても必ず敬語（です/ます/ございます）で出力すること
+- 原文「行く」→ 翻訳/逆翻訳「行きます」「参ります」等` : ''}
+` : '';
+
+  // 言語固有ルールを取得
+  const languageSpecificRules = getLanguageSpecificRules(targetLang);
 
   const systemPrompt = `あなたは${sourceLang}から${targetLang}への翻訳の専門家です。
+
+★★★ 最重要: translation フィールドは必ず「${targetLang}」で出力すること ★★★
+
+${structureInfo}
+${langInfoOnly}
 ${INVARIANT_RULES}
 ${TONE_AND_EVALUATION_RULES}
+${japaneseRule}
 
 【絶対ルール - translation フィールド】
 - "translation" は ${targetLang} のみで出力すること
@@ -1684,30 +2231,11 @@ ${TONE_AND_EVALUATION_RULES}
 - 語尾の「だね」「じゃん」「ですね」「ございます」等は translation には絶対に入れない
 - これらの語尾ルールは reverse_translation にのみ適用する
 
-【人名の翻訳ルール】
-- ひらがな/カタカナの人名は英語翻訳（translationフィールド）でのみローマ字表記する
-- 逆翻訳（reverse_translationフィールド）は元のひらがな/カタカナのまま維持する
-- 人名の判断: 後ろに人間の動作（寝る、来る、食べる等）が続くか
-  - 例: 「おうたが寝てから」
-    → translation: "After Outa goes to sleep"
-    → reverse_translation: 「おうたが寝てから」（ひらがなのまま）
-- 一般名詞と混同しない
-  - 「おうた」は「お歌(song)」ではなく人名「Outa」
+${languageSpecificRules}
 
-【敬称のルール - 重要】
-- 日本語で敬称なし（「田中が」「山田は」）→ 英語でも Mr./Ms. をつけない
-  - 例: 「田中が責任を負います」→ "Tanaka will take responsibility"
-  - 理由: 日本語のビジネスで身内に敬称をつけないのは「身内扱い」の意味
-- 日本語で敬称あり（「田中さん」「山田様」）→ 英語で Mr./Ms. をつける
-  - 例: 「田中さんが来ます」→ "Mr. Tanaka will come"
-
-【「君」「あなた」の翻訳ルール - 重要】
-- 「君」「あなた」は単純に "you" と訳す
-- 絶対に余計な装飾を追加しない
-  - ❌ "you, as our valued customer"
-  - ❌ "you, dear sir"
-  - ✅ "you"
-- ビジネストーンでも "you" のまま、装飾は不要
+【固有名詞の読み - 絶対遵守】
+- 構造情報に記載された固有名詞の「読み」を必ずそのまま使用すること
+- トーンに関係なく、読みを勝手に変更してはいけない
 
 ${isNative ? '【ネイティブモード】自然でネイティブらしい表現を使ってください。' : ''}
 
@@ -1717,11 +2245,25 @@ ${reverseTranslationInstruction}
 ${differenceInstruction}
 ${variationInstruction}
 
+【言語検出】
+原文の言語を正確に判定し、detected_language に出力すること。
+選択肢: 日本語, 英語, フランス語, スペイン語, ドイツ語, イタリア語, ポルトガル語, 韓国語, 中国語, チェコ語
+
+【最終確認 - 出力前に必ず実行】
+JSONを出力する直前に、以下の手順で見直しを行うこと:
+1. 生成したtranslationを読み返す
+2. それが本当に「${targetLang}」で書かれているか確認する
+3. もし英語や別の言語になっていたら、${targetLang}で書き直す
+4. 書き直した後にJSONを出力する
+
+※ targetLangが「${targetLang}」なのに英語で出力するのは絶対禁止
+
 必ず以下のJSON形式で出力してください：
 {
   "translation": "${targetLang}のみの翻訳（${sourceLang}の文字は絶対に含めない）",
   "reverse_translation": "${sourceLang}のみの逆翻訳（語尾ルールはここにのみ適用）",
-  "risk": "low|med|high"
+  "risk": "low|med|high",
+  "detected_language": "原文の言語（上記選択肢から1つ）"
 }
 
 riskの判定基準：
@@ -1768,45 +2310,277 @@ function sanitizeExplanation(explanation: ExplanationResult): ExplanationResult 
 }
 
 // 解説を生成
+// outputLangCode: 解説の出力言語コード（ja, en等）
 export async function generateExplanation(
   translatedText: string,
   _sourceLang: string,
-  targetLang: string
+  targetLang: string,
+  outputLangCode: string = 'ja'
 ): Promise<ExplanationResult> {
-  const systemPrompt = `あなたは${targetLang}の表現の専門家です。
+  // 言語コードから言語名を取得（プロンプト用）
+  const outputLangName = getLangNameFromCode(outputLangCode)
+  // targetLangも言語コードの可能性があるので変換を試みる
+  const targetLangName = getLangNameFromCode(targetLang) || targetLang
+
+  // 日本語出力の場合は日本語プロンプトを使う（モデルの日本語出力精度向上のため）
+  let systemPrompt: string
+  let userPrompt: string
+
+  if (outputLangCode === 'ja') {
+    systemPrompt = `あなたは${targetLangName}表現の専門家です。
 翻訳結果について解説してください。
 
 【出力ルール】
-1. point: この表現の核となる単語やフレーズを「${targetLang}表現 = 日本語の意味」形式で1つ書く
+1. point: 核となる単語やフレーズを「${targetLangName}表現 = 日本語の意味」形式で1つ書く
 2. explanation: どんなニュアンスか、どんな場面で使えるかを自然な文章で2〜3文書く。項目分けしない。
+3. 文体: 必ず「です・ます調」で統一すること（「〜だ」「〜である」は使わない）
 
 必ず以下のJSON形式で出力：
 {
-  "point": "${targetLang}表現 = 意味",
-  "explanation": "自然な文章で2〜3文の解説"
-}
+  "point": "${targetLangName}表現 = 意味",
+  "explanation": "です・ます調で2〜3文の解説"
+}`
+    userPrompt = `${targetLangName}翻訳: ${translatedText}
 
-【出力例】英語「What time works for you?」の場合：
+この${targetLangName}表現について日本語（です・ます調）で解説して。`
+  } else {
+    systemPrompt = `You are an expert in ${targetLangName} expressions.
+Explain the translation result.
+
+【Output Rules - Write everything in ${outputLangName}】
+1. point: Write the key word/phrase in "${targetLangName} expression = meaning in ${outputLangName}" format
+2. explanation: Write 2-3 sentences about the nuance and usage scenarios. No bullet points.
+
+Output ONLY valid JSON:
 {
-  "point": "works for you = あなたの都合に合う",
-  "explanation": "相手の都合を尋ねるカジュアルな表現です。友達との予定調整や、同僚とのミーティング設定など幅広く使えます。"
-}
+  "point": "${targetLangName} expression = meaning",
+  "explanation": "2-3 sentences explanation in ${outputLangName}"
+}`
+    userPrompt = `${targetLangName} translation: ${translatedText}
 
-【出力例】韓国語「네 기억력이 어디로 갔어?」の場合：
-{
-  "point": "기억력이 어디로 갔어 = 記憶力はどこに行ったの",
-  "explanation": "相手が忘れっぽい時に軽くからかう表現です。友達同士の会話でユーモアを交えて使えます。"
-}`;
-
-  const userPrompt = `${targetLang}翻訳: ${translatedText}
-
-この${targetLang}表現について解説して。`;
+Explain this ${targetLangName} expression in ${outputLangName}.`
+  }
 
   const response = await callGeminiAPI(MODELS.FULL, systemPrompt, userPrompt);
   const parsed = parseJsonResponse<ExplanationResult>(response);
 
   // 英語混入チェックを追加
   return sanitizeExplanation(parsed);
+}
+
+/**
+ * 「〜との違い」を各言語で返す（ISO 639-1 言語コード）
+ */
+export function getDifferenceFromText(langCode: string, level: number): string {
+  switch (langCode) {
+    case 'ja': return `${level}%との違い`
+    case 'en': return `Difference from ${level}%`
+    case 'es': return `Diferencia del ${level}%`
+    case 'fr': return `Différence par rapport à ${level}%`
+    case 'zh': return `与${level}%的差异`
+    case 'ko': return `${level}%와의 차이`
+    case 'de': return `Unterschied zu ${level}%`
+    case 'it': return `Differenza dal ${level}%`
+    case 'pt': return `Diferença de ${level}%`
+    case 'cs': return `Rozdíl od ${level}%`
+    default: return `Difference from ${level}%`
+  }
+}
+
+/**
+ * 「まだ生成されていません」を各言語で返す（ISO 639-1 言語コード）
+ */
+export function getNotYetGeneratedText(langCode: string): string {
+  switch (langCode) {
+    case 'ja': return '前のレベルの翻訳がまだ生成されていません。'
+    case 'en': return 'Previous level translation not yet generated.'
+    case 'es': return 'La traducción del nivel anterior aún no se ha generado.'
+    case 'fr': return 'La traduction du niveau précédent n\'a pas encore été générée.'
+    case 'zh': return '上一级别的翻译尚未生成。'
+    case 'ko': return '이전 레벨의 번역이 아직 생성되지 않았습니다.'
+    case 'de': return 'Die Übersetzung der vorherigen Stufe wurde noch nicht generiert.'
+    case 'it': return 'La traduzione del livello precedente non è stata ancora generata.'
+    case 'pt': return 'A tradução do nível anterior ainda não foi gerada.'
+    case 'cs': return 'Překlad předchozí úrovně ještě nebyl vygenerován.'
+    default: return 'Previous level translation not yet generated.'
+  }
+}
+
+/**
+ * 「生成に失敗しました」を各言語で返す（ISO 639-1 言語コード）
+ */
+export function getFailedToGenerateText(langCode: string): string {
+  switch (langCode) {
+    case 'ja': return '解説の生成に失敗しました。'
+    case 'en': return 'Failed to generate explanation.'
+    case 'es': return 'Error al generar la explicación.'
+    case 'fr': return 'Échec de la génération de l\'explication.'
+    case 'zh': return '生成解释失败。'
+    case 'ko': return '설명 생성에 실패했습니다.'
+    case 'de': return 'Erklärung konnte nicht generiert werden.'
+    case 'it': return 'Impossibile generare la spiegazione.'
+    case 'pt': return 'Falha ao gerar a explicação.'
+    case 'cs': return 'Generování vysvětlení se nezdařilo.'
+    default: return 'Failed to generate explanation.'
+  }
+}
+
+/**
+ * 「変化なし」を各言語で返す（ISO 639-1 言語コード）
+ */
+export function getNoChangeText(langCode: string): string {
+  switch (langCode) {
+    case 'ja': return 'このレベルでは前のレベルと同じ表現になりました。'
+    case 'en': return 'No change from the previous level.'
+    case 'es': return 'Sin cambios respecto al nivel anterior.'
+    case 'fr': return 'Pas de changement par rapport au niveau précédent.'
+    case 'zh': return '与上一级别相同，没有变化。'
+    case 'ko': return '이전 레벨과 동일하여 변화가 없습니다.'
+    case 'de': return 'Keine Änderung gegenüber der vorherigen Stufe.'
+    case 'it': return 'Nessun cambiamento rispetto al livello precedente.'
+    case 'pt': return 'Sem alteração em relação ao nível anterior.'
+    case 'cs': return 'Žádná změna oproti předchozí úrovni.'
+    default: return 'No change from the previous level.'
+  }
+}
+
+/**
+ * 言語名からISOコードを取得
+ */
+export function getLangCodeFromName(langName: string): string {
+  const map: Record<string, string> = {
+    '日本語': 'ja', 'Japanese': 'ja',
+    '英語': 'en', 'English': 'en',
+    'スペイン語': 'es', 'Spanish': 'es',
+    'フランス語': 'fr', 'French': 'fr',
+    '中国語': 'zh', 'Chinese': 'zh',
+    '韓国語': 'ko', 'Korean': 'ko',
+    'ドイツ語': 'de', 'German': 'de',
+    'イタリア語': 'it', 'Italian': 'it',
+    'ポルトガル語': 'pt', 'Portuguese': 'pt',
+    'チェコ語': 'cs', 'Czech': 'cs',
+  }
+  const result = map[langName]
+  if (!result) {
+    console.warn(`[getLangCodeFromName] Unknown langName: "${langName}", defaulting to 'en'`)
+  }
+  return result || 'en'
+}
+
+/**
+ * ISOコードから英語言語名を取得（AIプロンプト用）
+ */
+export function getLangNameFromCode(langCode: string): string {
+  const map: Record<string, string> = {
+    'ja': 'Japanese',
+    'en': 'English',
+    'es': 'Spanish',
+    'fr': 'French',
+    'zh': 'Chinese',
+    'ko': 'Korean',
+    'de': 'German',
+    'it': 'Italian',
+    'pt': 'Portuguese',
+    'cs': 'Czech',
+  }
+  return map[langCode] || 'English'
+}
+
+/**
+ * トーンレベル間の違いを解説
+ * @param previousTranslation 前のレベルの翻訳
+ * @param currentTranslation 現在のレベルの翻訳
+ * @param previousLevel 前のレベル（0, 50）
+ * @param currentLevel 現在のレベル（50, 100）
+ * @param tone トーン種類（casual, business, formal）
+ * @param sourceLang 入力言語（解説をこの言語で出力）
+ */
+export async function generateToneDifferenceExplanation(
+  previousTranslation: string,
+  currentTranslation: string,
+  previousLevel: number,
+  currentLevel: number,
+  tone: string,
+  sourceLang: string
+): Promise<ExplanationResult> {
+  // sourceLangは言語コード（ja, en等）を想定
+  const langName = getLangNameFromCode(sourceLang)
+
+  // 同じ翻訳なら変化なし
+  if (previousTranslation === currentTranslation) {
+    return {
+      point: getDifferenceFromText(sourceLang, previousLevel),
+      explanation: getNoChangeText(sourceLang)
+    };
+  }
+
+  void tone; // パラメータは将来の拡張用に保持
+
+  const prevLabel = `${previousLevel}%`;
+  const currLabel = `${currentLevel}%`;
+
+  // 日本語の場合は日本語プロンプト、それ以外は英語プロンプト
+  let systemPrompt: string;
+  let userPrompt: string;
+
+  if (sourceLang === 'ja') {
+    systemPrompt = `あなたは翻訳のニュアンス解説の専門家です。
+
+【出力形式】
+1文目: ${currLabel}では${prevLabel}に比べて〜という表現に変化しました。（変化を簡潔に、全文引用しない）
+2文目: 相手には〜のように伝わります。（具体的に: 相手がどう感じるか、どんな関係性の相手に適切か、相手にどういう印象を与えるか）
+
+【ルール】
+- 上記の形式で2文出力
+- 「1文目」「2文目」のラベルは付けない
+- 必ず「です・ます調」で統一すること
+- JSON不要、テキストのみ
+
+【禁止】
+- 「丁寧」「フォーマル」「カジュアル」だけで終わらせない
+- 抽象的な形容詞だけの説明は禁止`;
+    userPrompt = `${prevLabel}: "${previousTranslation}"
+${currLabel}: "${currentTranslation}"
+
+${prevLabel}から${currLabel}への変化を解説してください。`;
+  } else {
+    systemPrompt = `You are an expert in translation nuance explanation.
+
+【Output Format - Write everything in ${langName}】
+Sentence 1: At ${currLabel}, compared to ${prevLabel}, the expression changed to... (briefly describe the change, do not quote the entire sentence)
+Sentence 2: The recipient will perceive this as... (be specific: how will they feel, what relationship is this appropriate for, what impression does it give)
+
+【Rules】
+- Output exactly 2 sentences in the format above
+- Do not add labels like "Sentence 1" or "Sentence 2"
+- Keep the description of changes brief (do not quote the full text)
+- No JSON, plain text only
+- MUST write in ${langName}
+
+【Forbidden】
+- Do not end with just "polite", "formal", or "casual"
+- Abstract adjectives alone are not allowed`;
+    userPrompt = `${prevLabel}: "${previousTranslation}"
+${currLabel}: "${currentTranslation}"
+
+Explain the change from ${prevLabel} to ${currLabel} in ${langName}.`;
+  }
+
+  const pointText = getDifferenceFromText(sourceLang, previousLevel);
+
+  try {
+    const response = await callGeminiAPI(MODELS.FULL, systemPrompt, userPrompt);
+    return {
+      point: pointText,
+      explanation: response.trim()
+    };
+  } catch (error) {
+    console.error('[generateToneDifferenceExplanation] error:', error);
+    return {
+      point: pointText,
+      explanation: getFailedToGenerateText(sourceLang)
+    };
+  }
 }
 
 // 相手のメッセージを翻訳（外国語→日本語）
@@ -1930,7 +2704,8 @@ export async function editJapaneseForTone(
   tone: string,
   toneLevel: number,
   customTone?: string,
-  signal?: AbortSignal
+  signal?: AbortSignal,
+  structure?: ExpandedStructure
 ): Promise<string> {
   // レベル0はそのまま返す
   if (toneLevel === 0) {
@@ -1938,14 +2713,16 @@ export async function editJapaneseForTone(
   }
 
   const toneStyle = getToneStyleForJapanese(tone, toneLevel, customTone);
+  const structureInfo = structure ? `\n${structureToPromptText(structure)}\n` : '';
 
   const userPrompt = `元の日本語: ${sourceText}
-
+${structureInfo}
 トーン: ${tone}
 トーンレベル: ${toneLevel}%
 目標スタイル: ${toneStyle}
 
-この日本語を${toneLevel}%の${tone}トーンに編集してください。JSONのみ返してください。`;
+この日本語を${toneLevel}%の${tone}トーンに編集してください。JSONのみ返してください。
+※ 構造情報がある場合、「意図」「確信度」「固有名詞」は必ず保持すること。`;
 
   const response = await callGeminiAPI(MODELS.JAPANESE_EDIT, JAPANESE_EDIT_SYSTEM_PROMPT, userPrompt, 0.7, signal);
   const parsed = parseJsonResponse<{ edited_japanese: string }>(response);
