@@ -1,0 +1,212 @@
+========================================
+ガード関数一覧（名前・入力・出力・判定ロジックの概要）
+バックアップ日時: 2026-02-06
+ソース: src/services/groq.ts
+========================================
+
+1. calculateEditDistance(str1: string, str2: string): number
+   行: 277-298
+   概要: レーベンシュタイン距離を計算
+   入力: 2つの文字列
+   出力: 編集距離（整数）
+   ロジック: 動的計画法による標準的なレーベンシュタイン距離
+
+2. normalizeForCompare(text: string): string
+   行: 301-303
+   概要: 比較用にテキストを正規化
+   入力: テキスト
+   出力: 小文字化・空白統一・引用符統一されたテキスト
+   ロジック: trim → toLowerCase → 空白統一 → 引用符統一
+
+3. isTooSimilarText(a: string, b: string): boolean
+   行: 305-318
+   概要: 2つのテキストが類似しすぎているか判定
+   入力: 2つのテキスト
+   出力: true=類似しすぎ
+   ロジック:
+   - 正規化後に完全一致 → true
+   - 編集距離が閾値以下 → true
+   - 短いテキスト（<20文字）: 距離2以下
+   - 長いテキスト: 距離が長さの10%以下
+   - distanceRatio <= 0.12 かつ lengthRatio <= 0.1 → true
+
+4. extractEntities(text: string): string[]
+   行: 325-345
+   概要: 数字・日付・時刻・金額を抽出
+   入力: テキスト
+   出力: マッチした文字列の配列
+   パターン:
+   - \d+ (数字)
+   - \d{1,2}[:/-]\d{1,2} (時刻/日付)
+   - $金額、¥金額、€金額
+   - \d+時、\d+分、\d+日、\d+月、\d+年
+
+5. extractPolarityMarkers(text: string): { positive: boolean; negative: boolean }
+   行: 348-363
+   概要: 肯定/否定マーカーを検出
+   入力: テキスト
+   出力: positive/negativeのboolean
+   否定パターン: not, no, never, don't, doesn't, won't, can't, wouldn't, shouldn't,
+                 ない, しない, できない, いない, なかった
+   肯定パターン: yes, sure, of course, definitely, はい, もちろん, できる, ある, いる
+
+6. isQuestion(text: string): boolean
+   行: 366-370
+   概要: 疑問文かどうかを判定
+   入力: テキスト
+   出力: true=疑問文
+   ロジック:
+   - 末尾が ? または ？
+   - 先頭が do/does/did/is/are/was/were/will/would/can/could/should/may/might/have/has/had
+   - 末尾が か[？?]?
+
+7. extractConditionMarkers(text: string): string[]
+   行: 373-386
+   概要: 条件マーカーを抽出
+   入力: テキスト
+   出力: マッチした条件語の配列
+   パターン: if, unless, when, while, provided, assuming, in case,
+            もし, ならば, なら, 場合, とき, たら
+
+8. hasJapaneseCharacters(text: string): boolean
+   行: 388-390
+   概要: 日本語文字が含まれるか判定
+   入力: テキスト
+   出力: true=日本語文字あり
+   ロジック: /[ぁ-んァ-ン一-龯]/ にマッチするか
+
+9. checkInvariantConditions(originalText, translatedText, reverseTranslation): InvariantCheckResult
+   行: 399-449
+   概要: 不変条件（数字保持・否定保持・疑問文保持・条件節保持）をチェック
+   入力: 原文、翻訳、逆翻訳
+   出力: { passed: boolean, violations: string[] }
+   チェック項目:
+   - entities: 原文の数字が翻訳・逆翻訳に含まれるか
+   - polarity: 否定の出現/消失
+   - question/statement: 疑問文/平叙文の変化
+   - condition_markers: 条件表現の消失
+
+10. extractModalityClass(text: string): ModalityClass
+    行: 454-523
+    概要: modality_classを抽出（request/confirmation/suggestion/obligation/statement）
+    入力: テキスト
+    出力: ModalityClass
+    パターン（優先度順）:
+    - request: can you, could you, would you, してくれ, してもらえ, お願い 等
+    - confirmation: are you...?, did you...?, するの？, ですか 等
+    - suggestion: how about, let's, shall we, しよう, どう？ 等
+    - obligation: must, have to, need to, should, しなければ, べき 等
+    - statement: 上記に該当しない
+
+11. checkAlignmentScore(originalText, reverseTranslation): { score, hasIssue, details }
+    行: 535-649
+    概要: 原文と逆翻訳の意味的整合性をスコア化
+    入力: 原文、逆翻訳
+    出力: スコア(0-1)、問題有無、詳細
+    ロジック:
+    - 空チェック → 0点
+    - 正規化後の完全一致 → 1.0点
+    - キーワード抽出（数字、日本語2文字以上、英字2文字以上）
+    - キーワード一致率 + 部分一致（3文字以上）
+    - ペナルティ: 否定反転 ×0.3、疑問文変化 ×0.7
+    - 閾値: 0.2以下でNG
+    export: あり（public）
+
+12. checkModalityConsistency(originalText, translatedText): { passed, reason }
+    行: 652-684
+    概要: modality_classの一貫性チェック
+    入力: 原文、翻訳
+    出力: { passed: boolean, reason: string | null }
+    ロジック:
+    - statementは緩い判定（パス）
+    - request⇔confirmationの混同は特に危険（NG）
+    - その他のmodality変更もNG
+
+13. checkPolitenessGuard(tone, reverseTranslation): { passed, reason }
+    行: 693-740
+    概要: ビジネス/超丁寧の敬語チェック
+    入力: トーン名、逆翻訳テキスト
+    出力: { passed: boolean, reason: string | null }
+    ロジック:
+    - business/formal以外 → 常にパス
+    - 禁止パターン検出（だね、じゃん、だよ、めっちゃ、超、ヤバ、マジ、ガチ、!!）→ NG
+    - 敬語パターン（です$、ます$、ございます、いただ、くださ）が1つもない → NG
+    export: あり（public）
+
+14. shouldFallbackToFull(originalText, result, parseError, currentTranslation, requireJapaneseReverse, toneLevel, tone): FallbackDecision
+    行: 743-826
+    概要: PARTIALからFULLへのフォールバック判定
+    入力: 原文、翻訳結果、パースエラーフラグ等
+    出力: { shouldFallback: boolean, reason: string | null }
+    チェック項目（順番に実行、最初にヒットしたら即フォールバック）:
+    1. JSONパース失敗
+    2. 逆翻訳が日本語でない/空/原文と類似しすぎ
+    3. 編集距離が大きすぎ（95%以上変更は疑わしい）
+    4. 不変条件NG（checkInvariantConditions）
+    5. risk=high
+    6. 敬語チェックNG（checkPolitenessGuard）
+    7. modality_class一貫性NG（currentTranslation vs result.translation）
+    8. modality_class一貫性NG（originalText vs result.translation）
+    9. 日英乖離チェックNG（checkAlignmentScore）※toneLevel=0のみ
+
+15. applyEvaluationWordGuard(sourceText, result): TranslationResult
+    行: 880-895
+    概要: 評価語のガード
+    入力: 原文、翻訳結果
+    出力: ガード適用済みTranslationResult
+    ロジック:
+    - 「素敵」が原文にあるのに逆翻訳にない → risk=high
+    - 一般的な服の語（洋服、服装等）で "dress" が使われた → risk=high
+
+16. fixDoubleEnding(text: string): string
+    行: 898-949
+    概要: 二重語尾を修正する後処理
+    入力: テキスト
+    出力: 修正済みテキスト
+    修正パターン（全30+パターン）:
+    - カジュアル系: ですねね→ですね、ますねね→ますね、だよね+じゃん→じゃん 等
+    - ビジネス系: ですねでございます→でございます、ますでございます→でございます 等
+    - 汎用パターン: です。です。→です。、ます。ます。→ます。 等
+
+17. applyReverseTranslationGuard(sourceLang, result): TranslationResult
+    行: 951-986
+    概要: 逆翻訳の言語チェック・修正
+    入力: 原文の言語、翻訳結果
+    出力: ガード適用済みTranslationResult
+    ロジック:
+    - 日本語以外が原文の場合:
+      - 中国語/韓国語: ひらがな・カタカナが混入していたら除去 → risk=high
+      - その他: 日本語文字が含まれていたら除去 → risk=high
+    - 日本語が原文の場合:
+      - fixDoubleEnding適用
+      - 日本語文字がない → risk=high
+
+18. applyTranslationLanguageGuard(targetLang, result): TranslationResult
+    行: 989-1010
+    概要: translationフィールドに日本語が混入していないかチェック
+    入力: ターゲット言語、翻訳結果
+    出力: ガード適用済みTranslationResult
+    ロジック:
+    - ターゲットが日本語 → チェック不要
+    - translationに日本語文字 → 除去してrisk=high
+
+========================================
+
+■ _internal エクスポート（テスト用）行1303-1312:
+  - calculateEditDistance
+  - extractEntities
+  - extractPolarityMarkers
+  - isQuestion
+  - extractConditionMarkers
+  - checkInvariantConditions
+  - shouldFallbackToFull
+
+■ publicエクスポート:
+  - checkAlignmentScore
+  - checkPolitenessGuard
+
+========================================
+
+■ 定数:
+  - EDIT_DISTANCE_THRESHOLD = 0.95（行322）
+  - checkAlignmentScore内のTHRESHOLD = 0.2（行539）
