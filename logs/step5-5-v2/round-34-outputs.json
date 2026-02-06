@@ -1,0 +1,777 @@
+{
+  "generated_at": "2026-02-06T15:37:08.923Z",
+  "round": 34,
+  "id_range": "146-150",
+  "total_cases": 5,
+  "generation_summary": {
+    "partial_count": 59,
+    "fallback_full_count": 1
+  },
+  "case_results": [
+    {
+      "id": 146,
+      "round": 34,
+      "input": "正直、その言い方はきつい。",
+      "source_lang": "ja",
+      "target_lang": "en",
+      "structure": {
+        "主題": "言い方",
+        "動作": "きついと言う",
+        "動作の意味": "なし",
+        "意図": "確認",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "seeds": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "seed_translation": "Honestly, that's a harsh way to put it.",
+          "seed_reverse_translation": "正直に言って、その言い方はきついよね。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "seed_translation": "Honestly, that's a harsh way to put it.",
+          "seed_reverse_translation": "正直、あの言い方はきつい。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "seed_translation": "Honestly, that's a harsh way to put it.",
+          "seed_reverse_translation": "正直に言って、その言い方はきついです。",
+          "seed_risk": "low"
+        }
+      ],
+      "outputs": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 25,
+          "translation": "To be honest, that's a pretty harsh way to put it.",
+          "reverse_translation": "正直に言って、それはちょっと厳しい言い方だね。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 50,
+          "translation": "Honestly, that's kinda harsh.",
+          "reverse_translation": "正直、それはちょっと厳しい言い方だね。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 75,
+          "translation": "Seriously, that's really harsh, lol.",
+          "reverse_translation": "正直、めっちゃ厳しいよね。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 100,
+          "translation": "Dude, that's super harsh, haha!",
+          "reverse_translation": "マジで、それはかなりきついよね、笑",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 25,
+          "translation": "Indeed, that's a rather harsh way to put it.",
+          "reverse_translation": "確かに、ちょっと厳しい言い方ですね。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 50,
+          "translation": "Indeed, I would say that's a rather severe way to phrase it.",
+          "reverse_translation": "確かに、そう言い切るのはかなりきつい言い方だと思います。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 75,
+          "translation": "I would be inclined to say that that is a rather severe way to phrase it.",
+          "reverse_translation": "そのような言い方はかなり厳しいのではないかと思います",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 100,
+          "translation": "I would be most inclined to say that that is a rather severe way to phrase it.",
+          "reverse_translation": "そのような表現方法はかなり厳しいと言わざるを得ない。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 25,
+          "translation": "To be honest, that's a bit of a harsh way to put it.",
+          "reverse_translation": "正直、言い方がきついね.",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 50,
+          "translation": "I would suggest that might be a bit too harsh.",
+          "reverse_translation": "少し言いすぎな気がしますね。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 75,
+          "translation": "I would appreciate it if you could reconsider, as that might be a bit too harsh.",
+          "reverse_translation": "もう少し穏やかに対応してもらえないかしら。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 100,
+          "translation": "I would be most grateful if you would consider reconsidering, as that may be perceived as being somewhat overly severe.",
+          "reverse_translation": "ご検討いただければ幸いです。というのも、その対応は少し厳しいのではないかと存じます。",
+          "risk": "low",
+          "generator": "translatePartial"
+        }
+      ]
+    },
+    {
+      "id": 147,
+      "round": 34,
+      "input": "今日の作業、予定より遅れてる。",
+      "source_lang": "ja",
+      "target_lang": "en",
+      "structure": {
+        "主題": "作業の進行状況",
+        "動作": "遅れる",
+        "動作の意味": "なし",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "seeds": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "seed_translation": "Today's work is behind schedule.",
+          "seed_reverse_translation": "今日の作業、予定より遅れてる。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "seed_translation": "Today's work is behind schedule.",
+          "seed_reverse_translation": "今日の作業、予定より遅れてる。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "seed_translation": "Today's work is behind schedule.",
+          "seed_reverse_translation": "今日の作業、予定より遅れてる。",
+          "seed_risk": "low"
+        }
+      ],
+      "outputs": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 25,
+          "translation": "Today's work is running a bit behind schedule.",
+          "reverse_translation": "今日の仕事がちょっと遅れてる。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 50,
+          "translation": "Today's work is running a bit behind schedule, yeah.",
+          "reverse_translation": "今日の仕事、ちょっと遅れてるよね。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 75,
+          "translation": "Today's work is really running kinda behind schedule, yeah.",
+          "reverse_translation": "今日の仕事は本当にちょっと遅れてるよね。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 100,
+          "translation": "Today's work is totally running super behind schedule, dude.",
+          "reverse_translation": "今日の仕事は完全にかなり遅れてる、友よ。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 25,
+          "translation": "Indeed, today's work is behind schedule.",
+          "reverse_translation": "確かに、今日の仕事は遅れています",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 50,
+          "translation": "It is with great pleasure that I report today's work is behind schedule.",
+          "reverse_translation": "本日は予定より遅れております。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 75,
+          "translation": "It is with great pleasure that I am compelled to report that today's work is unfortunately behind schedule.",
+          "reverse_translation": "本日は大変残念ながら、予定より遅れておりますことをご報告申し上げます。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 100,
+          "translation": "It is with utmost delight and profound humility that I am honored to submit a report, regrettably indicating that today's work has fallen behind schedule.",
+          "reverse_translation": "本日は誠に残念ながら、作業が遅れておりますことを謙虚に報告させていただきます。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 25,
+          "translation": "I'm a bit behind schedule with today's work.",
+          "reverse_translation": "今日の仕事が少し遅れています",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 50,
+          "translation": "Please note that I am slightly behind schedule with today's work.",
+          "reverse_translation": "今日の仕事が少し遅れていますのでご了承ください。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 75,
+          "translation": "I would like to bring to your attention that I am running slightly behind schedule with today's work.",
+          "reverse_translation": "本日の作業が少し遅れていることをご報告申し上げます。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 100,
+          "translation": "I would like to formally bring to your attention that, regrettably, I am currently experiencing a slight delay in completing today's work.",
+          "reverse_translation": "本日の作業が少し遅れていますことを、どうかご了承いただけますでしょうか。誠に申し訳ございません。",
+          "risk": "low",
+          "generator": "translatePartial"
+        }
+      ]
+    },
+    {
+      "id": 148,
+      "round": 34,
+      "input": "ありがとう、確認助かります。",
+      "source_lang": "ja",
+      "target_lang": "en",
+      "structure": {
+        "主題": "確認の感謝",
+        "動作": "助かる",
+        "動作の意味": "なし",
+        "意図": "感謝",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "seeds": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "seed_translation": "Thanks, I appreciate the confirmation.",
+          "seed_reverse_translation": "ありがとう、確認助かります。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "seed_translation": "Thank you, I appreciate your confirmation.",
+          "seed_reverse_translation": "ありがとう、確認助かります。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "seed_translation": "Thank you, I appreciate your confirmation.",
+          "seed_reverse_translation": "ありがとう、確認助かります。",
+          "seed_risk": "low"
+        }
+      ],
+      "outputs": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 25,
+          "translation": "Thanks, that's reassuring.",
+          "reverse_translation": "ありがと、安心できた。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 50,
+          "translation": "Thanks, that really helps to know.",
+          "reverse_translation": "助かるわ。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 75,
+          "translation": "Thanks so much, that really helps to know, lol.",
+          "reverse_translation": "ありがとう、そりゃ助かるね",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 100,
+          "translation": "Thanks, appreciate the confirmation!",
+          "reverse_translation": "ありがとう、確認助かります。",
+          "risk": "low",
+          "generator": "translateFull_fallback"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 25,
+          "translation": "Thank you indeed, I certainly appreciate your confirmation.",
+          "reverse_translation": "ご確認いただき、誠にありがとうございます。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 50,
+          "translation": "I would be most grateful if you could confirm that.",
+          "reverse_translation": "ご確認いただければ幸いです。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 75,
+          "translation": "I would be most pleased if you could kindly confirm that.",
+          "reverse_translation": "ご確認いただけますと大変嬉しいです。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 100,
+          "translation": "I would be extremely grateful if you would be so kind as to confirm that.",
+          "reverse_translation": "ご確認いただけますと、非常に感謝いたします",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 25,
+          "translation": "Thank you for confirming.",
+          "reverse_translation": "ご確認いただきありがとうございます",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 50,
+          "translation": "I appreciate your confirmation.",
+          "reverse_translation": "ご確認いただきありがとうございます。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 75,
+          "translation": "I would greatly appreciate your confirmation.",
+          "reverse_translation": "ご確認いただけますと幸いです。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 100,
+          "translation": "I would be most grateful if you could kindly confirm.",
+          "reverse_translation": "ご確認いただけますと幸いです。",
+          "risk": "low",
+          "generator": "translatePartial"
+        }
+      ]
+    },
+    {
+      "id": 149,
+      "round": 34,
+      "input": "それ、もしかしたら変更入るかも。",
+      "source_lang": "ja",
+      "target_lang": "en",
+      "structure": {
+        "主題": "変更の可能性",
+        "動作": "入る",
+        "動作の意味": "なし",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "可能性",
+        "固有名詞": []
+      },
+      "seeds": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "seed_translation": "Maybe there's a chance it will change.",
+          "seed_reverse_translation": "それ、もしかしたら変更入るかも。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "seed_translation": "That might be subject to change.",
+          "seed_reverse_translation": "それ、もしかしたら変更が入るかもしれません。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "seed_translation": "That might be subject to change.",
+          "seed_reverse_translation": "それ、もしかしたら変更入るかも。",
+          "seed_risk": "low"
+        }
+      ],
+      "outputs": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 25,
+          "translation": "It might change.",
+          "reverse_translation": "変わるかも",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 50,
+          "translation": "It could change.",
+          "reverse_translation": "変わるかもしれない",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 75,
+          "translation": "It could really change, lol.",
+          "reverse_translation": "本当に変わるかもよ",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 100,
+          "translation": "It could totally change, lol.",
+          "reverse_translation": "本当に変わるかもよ、笑",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 25,
+          "translation": "That could indeed be subject to change.",
+          "reverse_translation": "その状況は変わるかもしれませんね",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 50,
+          "translation": "It is indeed possible that this may be subject to change.",
+          "reverse_translation": "そのような変更が加えられる可能性はある",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 75,
+          "translation": "It is highly likely that this may be subject to change.",
+          "reverse_translation": "確かに変更される可能性があります",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 100,
+          "translation": "It is extremely likely that this may be subject to change.",
+          "reverse_translation": "この内容は変更される可能性が非常に高いと思われます。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 25,
+          "translation": "That could be subject to change.",
+          "reverse_translation": "その状況は変わるかもしれません",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 50,
+          "translation": "Please note that this may be subject to change.",
+          "reverse_translation": "その点は変更になる可能性がありますので、ご了承ください。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 75,
+          "translation": "We would appreciate it if you could kindly note that this may be subject to change.",
+          "reverse_translation": "この件は変更される可能性がありますので、ご了承いただければ幸いです。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 100,
+          "translation": "We would be most grateful if you could be so kind as to note that this information may be subject to change.",
+          "reverse_translation": "この情報は変更される可能性がありますので、ご了承いただければ幸いです。",
+          "risk": "low",
+          "generator": "translatePartial"
+        }
+      ]
+    },
+    {
+      "id": 150,
+      "round": 34,
+      "input": "今日はもう限界かもしれない。",
+      "source_lang": "ja",
+      "target_lang": "en",
+      "structure": {
+        "主題": "限界",
+        "動作": "かもしれない",
+        "動作の意味": "なし",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "可能性",
+        "固有名詞": []
+      },
+      "seeds": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "seed_translation": "I might be at my limit today.",
+          "seed_reverse_translation": "今日はもう限界かもしれない。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "seed_translation": "I think I've reached my limit for today.",
+          "seed_reverse_translation": "今日はもう限界かもしれません。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "seed_translation": "I think I've reached my limit for today.",
+          "seed_reverse_translation": "今日はもう限界かもしれません。",
+          "seed_risk": "low"
+        }
+      ],
+      "outputs": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 25,
+          "translation": "I'm kinda hitting my limit today.",
+          "reverse_translation": "今日はちょっと限界かもしれない",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 50,
+          "translation": "I'm hitting my limit today.",
+          "reverse_translation": "今日は限界かもしれない",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 75,
+          "translation": "I'm really hitting my limit today, lol.",
+          "reverse_translation": "今日は本当に限界みたい。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 100,
+          "translation": "I'm totally tapped out today, lol.",
+          "reverse_translation": "今日は完全に限界だよ、笑。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 25,
+          "translation": "Indeed, I think I've reached my limit for today.",
+          "reverse_translation": "確かに、今日はもう限界かもしれない。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 50,
+          "translation": "I would be most pleased to admit that I believe I've reached my limit for today.",
+          "reverse_translation": "確かに、私は今日の限界に達したのではないかと思います",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 75,
+          "translation": "It would be my utmost pleasure to acknowledge that I have likely reached my limit for today.",
+          "reverse_translation": "今日の私の限界に達したのではないかと認めることは、私にとって最大の喜びでございます。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 100,
+          "translation": "It would be my utmost pleasure to humbly acknowledge that I have possibly reached my limit for today.",
+          "reverse_translation": "今日は私の限界に達したかもしれないことを謙虚に認めることは、私にとって最大の喜びです。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 25,
+          "translation": "I think I've hit my limit for today.",
+          "reverse_translation": "今日はもう限界に達したと思います",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 50,
+          "translation": "I would suggest that I have reached my limit for today.",
+          "reverse_translation": "今日はもう限界に達したのではないかと思います.",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 75,
+          "translation": "I would be grateful if you could consider that I may have reached my limit for today.",
+          "reverse_translation": "今日の私の限界に達したかもしれないと考えていただければ幸いです。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 100,
+          "translation": "I would be most grateful if you would consider the possibility that I may have attained my daily limit.",
+          "reverse_translation": "本日は私の限界に達したかもしれませんので、ご考慮いただければ幸いです。",
+          "risk": "low",
+          "generator": "translatePartial"
+        }
+      ]
+    }
+  ]
+}
