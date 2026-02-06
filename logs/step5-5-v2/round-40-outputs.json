@@ -1,0 +1,787 @@
+{
+  "generated_at": "2026-02-06T17:26:20.124Z",
+  "round": 40,
+  "id_range": "161-165",
+  "total_cases": 5,
+  "generation_summary": {
+    "partial_count": 57,
+    "fallback_full_count": 3
+  },
+  "case_results": [
+    {
+      "id": 161,
+      "round": 40,
+      "input": "その件、結論だけ先に教えて。",
+      "source_lang": "ja",
+      "target_lang": "en",
+      "structure": {
+        "主題": "件について",
+        "動作": "教える",
+        "動作の意味": "なし",
+        "意図": "報告",
+        "感情極性": "neutral",
+        "モダリティ": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "seeds": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "seed_translation": "Just tell me the conclusion first.",
+          "seed_reverse_translation": "その件、結論だけ先に教えて。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "seed_translation": "Just tell me the conclusion of that matter first.",
+          "seed_reverse_translation": "その件、結論だけ先に教えて。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "seed_translation": "Just give me the conclusion on that matter.",
+          "seed_reverse_translation": "その件、結論だけ先に教えて。",
+          "seed_risk": "low"
+        }
+      ],
+      "outputs": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 25,
+          "translation": "Tell me the bottom line right off the bat.",
+          "reverse_translation": "とりあえず結論を教えて",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 50,
+          "translation": "Give me the straight answer right away.",
+          "reverse_translation": "最初に結論を教えて",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 75,
+          "translation": "Hit me with the straight answer now.",
+          "reverse_translation": "今すぐ本当のことを教えてよ",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 100,
+          "translation": "Give me the lowdown straight up.",
+          "reverse_translation": "はっきり言ってよ",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 25,
+          "translation": "Could you please tell me the conclusion of that matter first.",
+          "reverse_translation": "まずその件の結論を教えてください",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 50,
+          "translation": "Would you mind telling me the conclusion of that matter first.",
+          "reverse_translation": "その件の結論を先に教えていただけませんか。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 75,
+          "translation": "Could you kindly share the conclusion of that matter with me first.",
+          "reverse_translation": "ご教授いただけますでしょうか、まずその件の結論を教えてください。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 100,
+          "translation": "Would you be so kind as to inform me of the conclusion of that matter beforehand.",
+          "reverse_translation": "どうかその件の結論を先にお教えいただけますでしょうか。",
+          "risk": "med",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 25,
+          "translation": "Just give me the conclusion on that matter.",
+          "reverse_translation": "その件、結論だけ先に教えて。",
+          "risk": "low",
+          "generator": "translateFull_fallback"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 50,
+          "translation": "Please provide the conclusion on that matter.",
+          "reverse_translation": "その件についての結論を教えてください。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 75,
+          "translation": "Kindly provide the conclusion on that matter.",
+          "reverse_translation": "その件についての結論を教えてください",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 100,
+          "translation": "Please provide the conclusion on that matter.",
+          "reverse_translation": "その件についての結論を教えてください。",
+          "risk": "low",
+          "generator": "translatePartial"
+        }
+      ]
+    },
+    {
+      "id": 162,
+      "round": 40,
+      "input": "それって誰向けの話？",
+      "source_lang": "ja",
+      "target_lang": "en",
+      "structure": {
+        "主題": "話の対象",
+        "動作": "向ける",
+        "動作の意味": "なし",
+        "意図": "質問",
+        "感情極性": "neutral",
+        "モダリティ": "質問",
+        "主語": "省略",
+        "対象": "誰",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "seeds": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "seed_translation": "Who is that for?",
+          "seed_reverse_translation": "それって誰向けの話？",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "seed_translation": "Who is that for?",
+          "seed_reverse_translation": "それって誰向けの話？",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "seed_translation": "Who is that for?",
+          "seed_reverse_translation": "それって誰向けの話？",
+          "seed_risk": "low"
+        }
+      ],
+      "outputs": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 25,
+          "translation": "Who's that for, anyway?",
+          "reverse_translation": "誰のためなんですか",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 50,
+          "translation": "Who's that for, huh?",
+          "reverse_translation": "誰宛てなん",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 75,
+          "translation": "Who's that for, okay?",
+          "reverse_translation": "誰のためなの？",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 100,
+          "translation": "Who's that for, huh?",
+          "reverse_translation": "誰宛てなん？",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 25,
+          "translation": "For whom might that be?",
+          "reverse_translation": "誰のためでしょうか",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 50,
+          "translation": "For whom could that possibly be intended?",
+          "reverse_translation": "誰のためかもしれませんか？",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 75,
+          "translation": "For whom might that be intended?",
+          "reverse_translation": "誰のためにそれは向けるのかもしれません",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 100,
+          "translation": "For whom could that conceivably be intended?",
+          "reverse_translation": "誰のために作られたのでしょうか",
+          "risk": "med",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 25,
+          "translation": "Who could that be for?",
+          "reverse_translation": "誰のためですか?",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 50,
+          "translation": "Who might that be for?",
+          "reverse_translation": "誰のためだろうか",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 75,
+          "translation": "For whom might that be intended?",
+          "reverse_translation": "誰に向けてのものかもしれませんか",
+          "risk": "med",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 100,
+          "translation": "For whom could that conceivably be intended?",
+          "reverse_translation": "誰に向けてのものかもしれませんか",
+          "risk": "med",
+          "generator": "translatePartial"
+        }
+      ]
+    },
+    {
+      "id": 163,
+      "round": 40,
+      "input": "ごめん、今は対応できない。",
+      "source_lang": "ja",
+      "target_lang": "en",
+      "structure": {
+        "主題": "対応できないこと",
+        "動作": "できない",
+        "動作の意味": "be unable to do",
+        "意図": "報告",
+        "感情極性": "negative",
+        "モダリティ": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "seeds": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "seed_translation": "Sorry, I can't help you right now.",
+          "seed_reverse_translation": "ごめん、今は対応できない。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "seed_translation": "I'm sorry, I am unable to respond at the moment.",
+          "seed_reverse_translation": "ごめん、今は対応できない。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "seed_translation": "I'm sorry, I am unable to respond at the moment.",
+          "seed_reverse_translation": "ごめん、今は対応できない。",
+          "seed_risk": "low"
+        }
+      ],
+      "outputs": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 25,
+          "translation": "I'm not in a position to help you at the moment.",
+          "reverse_translation": "今はあなたを助けることができない。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 50,
+          "translation": "I'm not in a position to help out right now.",
+          "reverse_translation": "今は助けることができないんだ",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 75,
+          "translation": "I'm totally tapped out right now, can't lend a hand.",
+          "reverse_translation": "今全然助けることができない",
+          "risk": "med",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 100,
+          "translation": "I'm completely maxed out at the moment, no way to help.",
+          "reverse_translation": "今全然余裕がない、助けることができない",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 25,
+          "translation": "I'm sorry, I am unable to respond at the moment.",
+          "reverse_translation": "ごめん、今は対応できない。",
+          "risk": "low",
+          "generator": "translateFull_fallback"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 50,
+          "translation": "I apologize, but I'm currently unable to respond.",
+          "reverse_translation": "申し訳ございませんが、現在返信することができません。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 75,
+          "translation": "I regret to inform you that I am presently incapable of responding.",
+          "reverse_translation": "申し訳ございませんが、現在お返事することができません。",
+          "risk": "med",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 100,
+          "translation": "It is with profound sadness that I must inform you of my current inability to respond.",
+          "reverse_translation": "誠に残念ながら、私は現在返信することができません。",
+          "risk": "med",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 25,
+          "translation": "I apologize, but I'm currently unable to respond.",
+          "reverse_translation": "申し訳ございませんが、現在対応できません。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 50,
+          "translation": "I apologize for not being able to respond at this time.",
+          "reverse_translation": "現在対応できませんことをお詫び申し上げます。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 75,
+          "translation": "I am deeply sorry for my current inability to respond.",
+          "reverse_translation": "誠に申し訳ございませんが、現在返信することができておりません。",
+          "risk": "med",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 100,
+          "translation": "I am profoundly sorry for my present inability to respond.",
+          "reverse_translation": "誠に申し訳ございませんが、私は現在返答することができておりません。",
+          "risk": "med",
+          "generator": "translatePartial"
+        }
+      ]
+    },
+    {
+      "id": 164,
+      "round": 40,
+      "input": "今日は割と集中できた。",
+      "source_lang": "ja",
+      "target_lang": "en",
+      "structure": {
+        "主題": "集中",
+        "動作": "できた",
+        "動作の意味": "be able to do",
+        "意図": "報告",
+        "感情極性": "positive",
+        "モダリティ": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "seeds": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "seed_translation": "I was pretty focused today.",
+          "seed_reverse_translation": "今日は割と集中できた。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "seed_translation": "I was able to focus fairly well today.",
+          "seed_reverse_translation": "今日は割と集中できた。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "seed_translation": "I was able to focus fairly well today.",
+          "seed_reverse_translation": "今日は割と集中できた。",
+          "seed_risk": "low"
+        }
+      ],
+      "outputs": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 25,
+          "translation": "I was totally in the zone today.",
+          "reverse_translation": "今日は完全に集中していた",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 50,
+          "translation": "I was completely in my element today.",
+          "reverse_translation": "今日は完全に集中できていた",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 75,
+          "translation": "I totally crushed it today.",
+          "reverse_translation": "今日は完全に自分のペースでできた",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 100,
+          "translation": "I'm totally on fire today!!!",
+          "reverse_translation": "今日は完全に調子がいい！！！",
+          "risk": "med",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 25,
+          "translation": "I managed to focus quite well today.",
+          "reverse_translation": "今日はかなり集中することができました。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 50,
+          "translation": "I was able to maintain a high level of focus today.",
+          "reverse_translation": "今日はかなり集中力を保つことができました。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 75,
+          "translation": "I successfully sustained a high level of focus throughout the day.",
+          "reverse_translation": "今日は高い集中力を維持することができました。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 100,
+          "translation": "I had the great fortune of maintaining an exceptionally high level of focus throughout the entire day.",
+          "reverse_translation": "私はなんとかして非常に高い集中力を一日中維持することができました",
+          "risk": "med",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 25,
+          "translation": "I was able to focus fairly well today.",
+          "reverse_translation": "今日は割と集中できた。",
+          "risk": "low",
+          "generator": "translateFull_fallback"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 50,
+          "translation": "Today, I managed to focus fairly well.",
+          "reverse_translation": "今日は、かなり集中することができました。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 75,
+          "translation": "I was able to focus fairly effectively today.",
+          "reverse_translation": "今日はかなりうまく集中することができました.",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 100,
+          "translation": "I was able to focus with considerable effectiveness today.",
+          "reverse_translation": "今日はかなり効果的に集中することができました。",
+          "risk": "low",
+          "generator": "translatePartial"
+        }
+      ]
+    },
+    {
+      "id": 165,
+      "round": 40,
+      "input": "もし必要なら、私が対応する。",
+      "source_lang": "ja",
+      "target_lang": "en",
+      "structure": {
+        "主題": "対応の必要性",
+        "動作": "対応する",
+        "動作の意味": "なし",
+        "意図": "提案",
+        "感情極性": "neutral",
+        "モダリティ": "提案",
+        "主語": "私",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "seeds": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "seed_translation": "I'll handle it if needed.",
+          "seed_reverse_translation": "もし必要なら、私が対応する。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "seed_translation": "I'll handle it if necessary.",
+          "seed_reverse_translation": "もし必要なら、私が対応する。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "seed_translation": "I'll take care of it if necessary.",
+          "seed_reverse_translation": "もし必要なら、私が対応します。",
+          "seed_risk": "low"
+        }
+      ],
+      "outputs": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 25,
+          "translation": "I'll take care of it if necessary.",
+          "reverse_translation": "必要なら対応する",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 50,
+          "translation": "I'll handle it if necessary.",
+          "reverse_translation": "必要なら対応する",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 75,
+          "translation": "I'll take care of it if necessary.",
+          "reverse_translation": "必要なら対応する",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 100,
+          "translation": "I'll be on it if need be.",
+          "reverse_translation": "必要ならやるよ",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 25,
+          "translation": "I will take care of it if needed.",
+          "reverse_translation": "必要であれば対応します",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 50,
+          "translation": "I shall attend to it if required.",
+          "reverse_translation": "必要であれば対応いたします",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 75,
+          "translation": "I will attend to it if necessary.",
+          "reverse_translation": "必要であれば対応いたします。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 100,
+          "translation": "I shall attend to it if deemed necessary.",
+          "reverse_translation": "必要に応じて対応させていただきます。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 25,
+          "translation": "I will address it if needed.",
+          "reverse_translation": "必要であれば対応します",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 50,
+          "translation": "I will attend to it if required.",
+          "reverse_translation": "必要であれば対応いたします",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 75,
+          "translation": "I shall attend to it if required.",
+          "reverse_translation": "必要であれば対応させていただきます。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 100,
+          "translation": "I will attend to it if required.",
+          "reverse_translation": "必要であれば対応いたします。",
+          "risk": "low",
+          "generator": "translatePartial"
+        }
+      ]
+    }
+  ]
+}
