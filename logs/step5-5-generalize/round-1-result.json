@@ -1,0 +1,2424 @@
+{
+  "timestamp": "2026-02-06T13:31:38.419Z",
+  "total": 100,
+  "pass": 63,
+  "fail": 37,
+  "error": 0,
+  "pass_rate": 63,
+  "by_category": {
+    "QUESTION": {
+      "total": 17,
+      "pass": 13,
+      "fail": 4,
+      "error": 0
+    },
+    "NEGATION": {
+      "total": 31,
+      "pass": 15,
+      "fail": 16,
+      "error": 0
+    },
+    "CONDITIONAL": {
+      "total": 13,
+      "pass": 0,
+      "fail": 13,
+      "error": 0
+    },
+    "CERTAINTY": {
+      "total": 17,
+      "pass": 15,
+      "fail": 2,
+      "error": 0
+    },
+    "GENERAL": {
+      "total": 22,
+      "pass": 20,
+      "fail": 2,
+      "error": 0
+    }
+  },
+  "by_failure_type": {
+    "STRUCTURE": 15,
+    "TRANSLATION": 17,
+    "REVERSE_TRANSLATION": 8,
+    "UNKNOWN": 0
+  },
+  "results": [
+    {
+      "id": "G001",
+      "category": "QUESTION",
+      "input": "今日めちゃくちゃ暑くなかった？",
+      "status": "FAIL",
+      "failures": [
+        "reverse_translation: 意味保持 mismatch (expected >= 1/1 tokens from [今日めちゃくちゃ暑くなかった], actual hit=0, reverse=\"今日すごく暑くなかった？\")"
+      ],
+      "failure_types": [
+        "REVERSE_TRANSLATION"
+      ],
+      "structure": {
+        "主題": "天気",
+        "動作": "暑くなる",
+        "意図": "確認",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Wasn't it really hot today?",
+      "reverse_translation": "今日すごく暑くなかった？"
+    },
+    {
+      "id": "G002",
+      "category": "NEGATION",
+      "input": "さっき駅で高校の同級生にばったり会ったんだよね。",
+      "status": "FAIL",
+      "failures": [
+        "translation: must_contain_any mismatch (expected one of: not, n't, can't, cannot, don't, didn't, isn't, won't, couldn't, wouldn't, actual: \"I just ran into a high school classmate at the station.\")"
+      ],
+      "failure_types": [
+        "TRANSLATION"
+      ],
+      "structure": {
+        "主題": "再会",
+        "動作": "会った",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": [
+          {
+            "text": "駅",
+            "type": "place"
+          },
+          {
+            "text": "高校の同級生",
+            "type": "person"
+          }
+        ]
+      },
+      "translation": "I just ran into a high school classmate at the station.",
+      "reverse_translation": "さっき駅で高校の同級生にばったり会ったんだよね。"
+    },
+    {
+      "id": "G003",
+      "category": "QUESTION",
+      "input": "それ、もう提出したほうがよくない？",
+      "status": "FAIL",
+      "failures": [
+        "structure: 意図 mismatch (expected one of: 質問, 確認, 依頼, actual: 提案)"
+      ],
+      "failure_types": [
+        "STRUCTURE"
+      ],
+      "structure": {
+        "主題": "提出の提案",
+        "動作": "提出する",
+        "意図": "提案",
+        "主語": "省略",
+        "対象": "それ",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Shouldn't you submit that already?",
+      "reverse_translation": "それ、もう提出した方がよくない？"
+    },
+    {
+      "id": "G004",
+      "category": "NEGATION",
+      "input": "ごめん、返信遅くなった。",
+      "status": "FAIL",
+      "failures": [
+        "translation: must_contain_any mismatch (expected one of: not, n't, can't, cannot, don't, didn't, isn't, won't, couldn't, wouldn't, actual: \"Sorry, I'm late to respond.\")"
+      ],
+      "failure_types": [
+        "TRANSLATION"
+      ],
+      "structure": {
+        "主題": "謝罪と返信遅延",
+        "動作": "遅れる",
+        "意図": "謝罪",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Sorry, I'm late to respond.",
+      "reverse_translation": "ごめん、返信遅くなった。"
+    },
+    {
+      "id": "G005",
+      "category": "CONDITIONAL",
+      "input": "もし雨降ったら、タクシーで行こうか。",
+      "status": "FAIL",
+      "failures": [
+        "structure: 条件文パターン mismatch (expected: conditional marker, actual: not detected)"
+      ],
+      "failure_types": [
+        "STRUCTURE"
+      ],
+      "structure": {
+        "主題": "移動",
+        "動作": "行く",
+        "意図": "提案",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "If it rains, shall we take a taxi?",
+      "reverse_translation": "もし雨が降ったら、タクシーで行こうか。"
+    },
+    {
+      "id": "G006",
+      "category": "CERTAINTY",
+      "input": "正直、そのやり方はあんまり効率よくないと思う。",
+      "status": "FAIL",
+      "failures": [
+        "reverse_translation: 意味保持 mismatch (expected >= 1/2 tokens from [やり方はあんまり効率, くない], actual hit=0, reverse=\"正直、その方法はあまり効率的ではないと思う。\")"
+      ],
+      "failure_types": [
+        "REVERSE_TRANSLATION"
+      ],
+      "structure": {
+        "主題": "やり方の効率性",
+        "動作": "思う",
+        "動作の意味": "think",
+        "意図": "意見表明",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Honestly, I think that way isn't very efficient.",
+      "reverse_translation": "正直、その方法はあまり効率的ではないと思う。"
+    },
+    {
+      "id": "G007",
+      "category": "GENERAL",
+      "input": "今日の会議、思ったより長引いたな。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "会議",
+        "動作": "長引く",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I guess today's meeting lasted longer than I thought.",
+      "reverse_translation": "今日の会議、思ったより長引いたな。"
+    },
+    {
+      "id": "G008",
+      "category": "QUESTION",
+      "input": "それって本当？どこ情報？",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "情報の真偽",
+        "動作": "尋ねる",
+        "意図": "質問",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Is that true? Where did you hear that?",
+      "reverse_translation": "それって本当？どこ情報？"
+    },
+    {
+      "id": "G009",
+      "category": "QUESTION",
+      "input": "悪いけど、これ明日までに見てもらえる？",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "依頼",
+        "動作": "見てもらう",
+        "意図": "依頼",
+        "主語": "省略",
+        "対象": "これ",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Can you take a look at this by tomorrow?",
+      "reverse_translation": "悪いけど、これ明日までに見てもらえる？"
+    },
+    {
+      "id": "G010",
+      "category": "NEGATION",
+      "input": "なんか最近、ずっと眠いんだけど。",
+      "status": "FAIL",
+      "failures": [
+        "translation: must_contain_any mismatch (expected one of: not, n't, can't, cannot, don't, didn't, isn't, won't, couldn't, wouldn't, actual: \"I've been feeling sleepy lately.\")"
+      ],
+      "failure_types": [
+        "TRANSLATION"
+      ],
+      "structure": {
+        "主題": "体調/眠気",
+        "動作": "眠い",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I've been feeling sleepy lately.",
+      "reverse_translation": "最近、ずっと眠いんだ。"
+    },
+    {
+      "id": "G011",
+      "category": "GENERAL",
+      "input": "ありがとう、助かった！",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "感謝と助け",
+        "動作": "助かる",
+        "意図": "感謝",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Thanks, I was saved!",
+      "reverse_translation": "ありがとう、助かった！"
+    },
+    {
+      "id": "G012",
+      "category": "CERTAINTY",
+      "input": "その話、前にも聞いた気がする。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "話の内容",
+        "動作": "聞く",
+        "意図": "確認",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I think I've heard that story before.",
+      "reverse_translation": "その話、前にも聞いた気がする。"
+    },
+    {
+      "id": "G013",
+      "category": "CERTAINTY",
+      "input": "まだ決まってないけど、多分来週になると思う。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "予定の決定",
+        "動作": "なる",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "It hasn't been decided yet, but I think it will probably be next week.",
+      "reverse_translation": "まだ決まってないけど、多分来週になると思う。"
+    },
+    {
+      "id": "G014",
+      "category": "NEGATION",
+      "input": "今日は外食する気分じゃないな。",
+      "status": "FAIL",
+      "failures": [
+        "reverse_translation: 意味保持 mismatch (expected >= 1/1 tokens from [今日は外食する気分じゃないな], actual hit=0, reverse=\"今日は外で食事をする気分じゃないな。\")"
+      ],
+      "failure_types": [
+        "REVERSE_TRANSLATION"
+      ],
+      "structure": {
+        "主題": "気分",
+        "動作": "じゃない",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "I'm not in the mood for eating out today.",
+      "reverse_translation": "今日は外で食事をする気分じゃないな。"
+    },
+    {
+      "id": "G015",
+      "category": "QUESTION",
+      "input": "ちょっと相談してもいい？",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "相談",
+        "動作": "相談する",
+        "意図": "確認",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Can I ask you something?",
+      "reverse_translation": "ちょっと相談してもいい？"
+    },
+    {
+      "id": "G016",
+      "category": "QUESTION",
+      "input": "それ、やらなくても大丈夫じゃない？",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "提案または疑問",
+        "動作": "大丈夫じゃない",
+        "意図": "質問",
+        "主語": "省略",
+        "対象": "それ",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Don't you think it's okay if you don't do it?",
+      "reverse_translation": "それ、やらなくても大丈夫じゃない？"
+    },
+    {
+      "id": "G017",
+      "category": "NEGATION",
+      "input": "電車遅れてて、今かなり混んでる。",
+      "status": "FAIL",
+      "failures": [
+        "translation: must_contain_any mismatch (expected one of: not, n't, can't, cannot, don't, didn't, isn't, won't, couldn't, wouldn't, actual: \"The train is delayed and it's really crowded right now.\")"
+      ],
+      "failure_types": [
+        "TRANSLATION"
+      ],
+      "structure": {
+        "主題": "電車の遅延と混雑",
+        "動作": "遅れている、混んでいる",
+        "意図": "報告",
+        "主語": "電車",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "The train is delayed and it's really crowded right now.",
+      "reverse_translation": "電車遅れてて、今かなり混んでる。"
+    },
+    {
+      "id": "G018",
+      "category": "NEGATION",
+      "input": "ごめん、その日はどうしても都合つかない。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "都合",
+        "動作": "つかない",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Sorry, I just can't make it that day.",
+      "reverse_translation": "ごめん、その日はどうしても都合がつかない。"
+    },
+    {
+      "id": "G019",
+      "category": "CONDITIONAL",
+      "input": "もし時間あったら、あとで電話しよ。",
+      "status": "FAIL",
+      "failures": [
+        "structure: 条件文パターン mismatch (expected: conditional marker, actual: not detected)"
+      ],
+      "failure_types": [
+        "STRUCTURE"
+      ],
+      "structure": {
+        "主題": "電話",
+        "動作": "しよう",
+        "意図": "提案",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "If you have time, call me later.",
+      "reverse_translation": "もし時間があったら、あとで電話しよ。"
+    },
+    {
+      "id": "G020",
+      "category": "QUESTION",
+      "input": "そのメール、もう一回送り直してもらえる？",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "メールの再送",
+        "動作": "送り直す",
+        "意図": "依頼",
+        "主語": "省略",
+        "対象": "メール",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Could you resend that email?",
+      "reverse_translation": "そのメール、もう１度送り直してもらえる？"
+    },
+    {
+      "id": "G021",
+      "category": "NEGATION",
+      "input": "まじでそれは知らなかった。",
+      "status": "FAIL",
+      "failures": [
+        "reverse_translation: 意味保持 mismatch (expected >= 1/1 tokens from [まじでそれは知らなかった], actual hit=0, reverse=\"本当にそれは知らなかった。\")"
+      ],
+      "failure_types": [
+        "REVERSE_TRANSLATION"
+      ],
+      "structure": {
+        "主題": "知らなかったこと",
+        "動作": "知らなかった",
+        "動作の意味": "not know",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "I really didn't know that.",
+      "reverse_translation": "本当にそれは知らなかった。"
+    },
+    {
+      "id": "G022",
+      "category": "GENERAL",
+      "input": "今日のランチ、当たりだったわ。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "ランチの結果",
+        "動作": "当たる",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Today's lunch was a hit.",
+      "reverse_translation": "今日のランチ、当たりだったわ。"
+    },
+    {
+      "id": "G023",
+      "category": "NEGATION",
+      "input": "正直言うと、あんまり乗り気じゃない。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "気持ち",
+        "動作": "乗り気じゃない",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "To be honest, I'm not really into it.",
+      "reverse_translation": "正直に言うと、あまり乗り気じゃない。"
+    },
+    {
+      "id": "G024",
+      "category": "QUESTION",
+      "input": "それ、昨日聞いた話と違くない？",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "話の内容の違い",
+        "動作": "違う",
+        "意図": "質問",
+        "主語": "省略",
+        "対象": "それ",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Isn't that different from what I heard yesterday?",
+      "reverse_translation": "それ、昨日聞いた話と違わない？"
+    },
+    {
+      "id": "G025",
+      "category": "GENERAL",
+      "input": "ちょっと疲れてるから、今日は早めに帰るね。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "帰宅",
+        "動作": "帰る",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "I'm a bit tired, so I'll head home early today.",
+      "reverse_translation": "ちょっと疲れてるから、今日は早めに帰るね。"
+    },
+    {
+      "id": "G026",
+      "category": "GENERAL",
+      "input": "その件、上司にも一応共有しておいた。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "情報共有",
+        "動作": "共有する",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "上司",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "I shared that information with my boss.",
+      "reverse_translation": "その件、上司にも一応共有しておいた。"
+    },
+    {
+      "id": "G027",
+      "category": "CERTAINTY",
+      "input": "ありがとうってちゃんと言えてなかったかも。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "感謝の表現",
+        "動作": "言う",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "ありがとう",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I might not have properly said thank you.",
+      "reverse_translation": "ありがとうってちゃんと言えてなかったかも。"
+    },
+    {
+      "id": "G028",
+      "category": "CONDITIONAL",
+      "input": "もし問題あったら、すぐ教えて。",
+      "status": "FAIL",
+      "failures": [
+        "structure: 条件文パターン mismatch (expected: conditional marker, actual: not detected)"
+      ],
+      "failure_types": [
+        "STRUCTURE"
+      ],
+      "structure": {
+        "主題": "問題の有無の確認",
+        "動作": "教える",
+        "意図": "確認",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "If there's a problem, let me know right away.",
+      "reverse_translation": "もし問題があったら、すぐ教えて。"
+    },
+    {
+      "id": "G029",
+      "category": "CERTAINTY",
+      "input": "それは多分、勘違いだと思う。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "誤解",
+        "動作": "思う",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I think that's probably a misunderstanding.",
+      "reverse_translation": "それは多分、勘違いだと思う。"
+    },
+    {
+      "id": "G030",
+      "category": "QUESTION",
+      "input": "なんか空気重くない？",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "空気の状態",
+        "動作": "重くなる",
+        "意図": "確認",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Don't you feel the air is thick?",
+      "reverse_translation": "なんか空気重くない？"
+    },
+    {
+      "id": "G031",
+      "category": "NEGATION",
+      "input": "今日中に終わらせる予定だったんだけど、間に合わなそう。",
+      "status": "FAIL",
+      "failures": [
+        "reverse_translation: 意味保持 mismatch (expected >= 1/2 tokens from [中に終わらせる予定だった, 間に合わなそう], actual hit=0, reverse=\"今日中に終わらせるつもりだったけど、無理そう。\")"
+      ],
+      "failure_types": [
+        "REVERSE_TRANSLATION"
+      ],
+      "structure": {
+        "主題": "予定と進行状況",
+        "動作": "終わらせる",
+        "動作の意味": "finish",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I was planning to finish it today, but I don't think I'll make it.",
+      "reverse_translation": "今日中に終わらせるつもりだったけど、無理そう。"
+    },
+    {
+      "id": "G032",
+      "category": "QUESTION",
+      "input": "それ、誰から聞いたの？",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "情報の出所",
+        "動作": "聞く",
+        "意図": "質問",
+        "主語": "省略",
+        "対象": "それ",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Who did you hear that from?",
+      "reverse_translation": "それ、誰から聞いたの？"
+    },
+    {
+      "id": "G033",
+      "category": "NEGATION",
+      "input": "ごめん、今ちょっと手が離せない。",
+      "status": "FAIL",
+      "failures": [
+        "translation: must_contain_any mismatch (expected one of: not, n't, can't, cannot, don't, didn't, isn't, won't, couldn't, wouldn't, actual: \"Sorry, I'm busy right now.\")"
+      ],
+      "failure_types": [
+        "TRANSLATION"
+      ],
+      "structure": {
+        "主題": "謝罪と状況報告",
+        "動作": "謝る、離す",
+        "動作の意味": "apologize, be unavailable",
+        "意図": "謝罪",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Sorry, I'm busy right now.",
+      "reverse_translation": "ごめん、今ちょっと忙しい。"
+    },
+    {
+      "id": "G034",
+      "category": "GENERAL",
+      "input": "その考え方、結構好きだな。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "考え方",
+        "動作": "好きだ",
+        "意図": "感情表現",
+        "主語": "省略",
+        "対象": "その考え方",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I kind of like that way of thinking.",
+      "reverse_translation": "その考え方、結構好きだな。"
+    },
+    {
+      "id": "G035",
+      "category": "GENERAL",
+      "input": "雨降りそうだし、洗濯やめとくか。",
+      "status": "FAIL",
+      "failures": [
+        "reverse_translation: 意味保持 mismatch (expected >= 1/2 tokens from [雨降りそうだし, 洗濯やめとくか], actual hit=0, reverse=\"雨が降りそうだし、洗濯をやめようか。\")"
+      ],
+      "failure_types": [
+        "REVERSE_TRANSLATION"
+      ],
+      "structure": {
+        "主題": "天気と洗濯",
+        "動作": "やめる",
+        "動作の意味": "stop",
+        "意図": "提案",
+        "主語": "省略",
+        "対象": "洗濯",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I think it's going to rain, so let's stop doing laundry.",
+      "reverse_translation": "雨が降りそうだし、洗濯をやめようか。"
+    },
+    {
+      "id": "G036",
+      "category": "CONDITIONAL",
+      "input": "その資料、最新版じゃないかもしれない。",
+      "status": "FAIL",
+      "failures": [
+        "structure: 確信度 mismatch (expected one of: 推測, 伝聞, actual: 可能性)"
+      ],
+      "failure_types": [
+        "STRUCTURE"
+      ],
+      "structure": {
+        "主題": "資料の状態",
+        "動作": "かもしれない",
+        "意図": "確認",
+        "主語": "省略",
+        "対象": "その資料",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "省略",
+        "確信度": "可能性",
+        "固有名詞": []
+      },
+      "translation": "That document might not be the latest version.",
+      "reverse_translation": "その資料、最新版じゃないかもしれない。"
+    },
+    {
+      "id": "G037",
+      "category": "GENERAL",
+      "input": "正直、もう少し余裕ほしい。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "余裕",
+        "動作": "ほしい",
+        "意図": "願望",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "あり",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Honestly, I want a bit more time.",
+      "reverse_translation": "正直、もう少し時間ほしい。"
+    },
+    {
+      "id": "G038",
+      "category": "CONDITIONAL",
+      "input": "さっきの言い方、きつかったらごめん。",
+      "status": "FAIL",
+      "failures": [
+        "structure: 条件文パターン mismatch (expected: conditional marker, actual: not detected)"
+      ],
+      "failure_types": [
+        "STRUCTURE"
+      ],
+      "structure": {
+        "主題": "謝罪と配慮",
+        "動作": "謝る",
+        "意図": "謝罪",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Sorry if I was too harsh just now.",
+      "reverse_translation": "さっきの言い方、きつかったらごめん。"
+    },
+    {
+      "id": "G039",
+      "category": "QUESTION",
+      "input": "それ、あとででも大丈夫？",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "確認",
+        "動作": "大丈夫",
+        "意図": "確認",
+        "主語": "省略",
+        "対象": "それ",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Is that okay for later?",
+      "reverse_translation": "それ、あとででも大丈夫？"
+    },
+    {
+      "id": "G040",
+      "category": "GENERAL",
+      "input": "今日の進捗、ざっくりでいいから教えて。",
+      "status": "FAIL",
+      "failures": [
+        "structure: 主語判定 mismatch (expected: You, actual: 主語=省略, 人称=一人称単数)"
+      ],
+      "failure_types": [
+        "STRUCTURE"
+      ],
+      "structure": {
+        "主題": "進捗報告",
+        "動作": "教える",
+        "意図": "確認",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Tell me the progress for today, roughly.",
+      "reverse_translation": "今日の進捗、ざっくりでいいから教えて。"
+    },
+    {
+      "id": "G041",
+      "category": "QUESTION",
+      "input": "なんでそんなに詳しいの？",
+      "status": "FAIL",
+      "failures": [
+        "translation: must_contain_any mismatch (expected one of: not, n't, can't, cannot, don't, didn't, isn't, won't, couldn't, wouldn't, actual: \"How do you know so much about it?\")",
+        "reverse_translation: 意味保持 mismatch (expected >= 1/1 tokens from [なんでそんなに詳しいの], actual hit=0, reverse=\"どうしてそんなに詳しいの？\")"
+      ],
+      "failure_types": [
+        "TRANSLATION",
+        "REVERSE_TRANSLATION"
+      ],
+      "structure": {
+        "主題": "詳しさの理由",
+        "動作": "なぜそうなるか",
+        "意図": "質問",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "How do you know so much about it?",
+      "reverse_translation": "どうしてそんなに詳しいの？"
+    },
+    {
+      "id": "G042",
+      "category": "CONDITIONAL",
+      "input": "今日は特に何もしてない一日だった。",
+      "status": "FAIL",
+      "failures": [
+        "structure: 条件文パターン mismatch (expected: conditional marker, actual: not detected)"
+      ],
+      "failure_types": [
+        "STRUCTURE"
+      ],
+      "structure": {
+        "主題": "一日の過ごし方",
+        "動作": "していない",
+        "動作の意味": "not do",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Today was a day when I didn't do anything in particular.",
+      "reverse_translation": "今日は特に何もしてない一日だった。"
+    },
+    {
+      "id": "G043",
+      "category": "CERTAINTY",
+      "input": "その方法だと、逆に時間かかる気がする。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "方法の効率性",
+        "動作": "かかる",
+        "意図": "意見",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "省略",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I think that method would actually take more time.",
+      "reverse_translation": "その方法だと、逆に時間かかる気がする。"
+    },
+    {
+      "id": "G044",
+      "category": "NEGATION",
+      "input": "ごめん、完全に忘れてた。",
+      "status": "FAIL",
+      "failures": [
+        "translation: must_contain_any mismatch (expected one of: not, n't, can't, cannot, don't, didn't, isn't, won't, couldn't, wouldn't, actual: \"Sorry, I completely forgot.\")"
+      ],
+      "failure_types": [
+        "TRANSLATION"
+      ],
+      "structure": {
+        "主題": "謝罪と忘却",
+        "動作": "忘れる",
+        "意図": "謝罪",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Sorry, I completely forgot.",
+      "reverse_translation": "ごめん、完全に忘れてた。"
+    },
+    {
+      "id": "G045",
+      "category": "CONDITIONAL",
+      "input": "もし可能なら、明日に回したい。",
+      "status": "FAIL",
+      "failures": [
+        "structure: 条件文パターン mismatch (expected: conditional marker, actual: not detected)"
+      ],
+      "failure_types": [
+        "STRUCTURE"
+      ],
+      "structure": {
+        "主題": "予定の変更",
+        "動作": "回す",
+        "意図": "提案",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "あり",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "If possible, I want to put it off till tomorrow.",
+      "reverse_translation": "もし可能なら、明日まで延期したい。"
+    },
+    {
+      "id": "G046",
+      "category": "QUESTION",
+      "input": "それはさすがに無理じゃない？",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "提案または意見",
+        "動作": "無理じゃない",
+        "動作の意味": "be impossible",
+        "意図": "質問",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Isn't that really impossible?",
+      "reverse_translation": "それはさすがに無理じゃない？"
+    },
+    {
+      "id": "G047",
+      "category": "GENERAL",
+      "input": "今日の打ち合わせ、オンラインに変更になったよ。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "打ち合わせの変更",
+        "動作": "変更になる",
+        "動作の意味": "change",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "今日の打ち合わせ",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "The meeting for today has been changed to online.",
+      "reverse_translation": "今日の打ち合わせ、オンラインに変更になったよ。"
+    },
+    {
+      "id": "G048",
+      "category": "GENERAL",
+      "input": "ありがとう、気にしてくれて。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "感謝と気遣い",
+        "動作": "気にする",
+        "意図": "感謝",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Thanks for caring.",
+      "reverse_translation": "気にしてくれてありがとう。"
+    },
+    {
+      "id": "G049",
+      "category": "CERTAINTY",
+      "input": "それ、噂では聞いたことある。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "噂",
+        "動作": "聞く",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "それ",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "伝聞",
+        "固有名詞": []
+      },
+      "translation": "I've heard rumors about that.",
+      "reverse_translation": "それ、噂では聞いたことある。"
+    },
+    {
+      "id": "G050",
+      "category": "NEGATION",
+      "input": "なんか納得いかないんだよね。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "納得できないこと",
+        "動作": "いかない",
+        "動作の意味": "not understand / not agree",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I just can't seem to agree with it.",
+      "reverse_translation": "なんか納得いかないんだよね。"
+    },
+    {
+      "id": "G051",
+      "category": "NEGATION",
+      "input": "その件、まだ返信きてない。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "返信",
+        "動作": "来る",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "省略",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I haven't received a response to that matter yet.",
+      "reverse_translation": "その件、まだ返信きてない。"
+    },
+    {
+      "id": "G052",
+      "category": "NEGATION",
+      "input": "今日めっちゃツイてない。",
+      "status": "FAIL",
+      "failures": [
+        "translation: must_contain_any mismatch (expected one of: not, n't, can't, cannot, don't, didn't, isn't, won't, couldn't, wouldn't, actual: \"I'm having a really bad day.\")",
+        "reverse_translation: 意味保持 mismatch (expected >= 1/1 tokens from [今日めっちゃツイてない], actual hit=0, reverse=\"今日は本当に運が悪い。\")"
+      ],
+      "failure_types": [
+        "TRANSLATION",
+        "REVERSE_TRANSLATION"
+      ],
+      "structure": {
+        "主題": "運勢/気分",
+        "動作": "ない",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "I'm having a really bad day.",
+      "reverse_translation": "今日は本当に運が悪い。"
+    },
+    {
+      "id": "G053",
+      "category": "CERTAINTY",
+      "input": "それ、前向きに検討したほうがいいと思う。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "検討",
+        "動作": "検討する",
+        "意図": "提案",
+        "主語": "省略",
+        "対象": "それ",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I think you should consider it positively.",
+      "reverse_translation": "それ、前向きに検討したほうがいいと思う。"
+    },
+    {
+      "id": "G054",
+      "category": "NEGATION",
+      "input": "ごめん、ちょっと聞き取れなかった。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "謝罪と聞き取りの失敗",
+        "動作": "ごめん、聞き取れなかった",
+        "意図": "謝罪・報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Sorry, I didn't quite catch that.",
+      "reverse_translation": "ごめん、ちょっと聞き取れなかった。"
+    },
+    {
+      "id": "G055",
+      "category": "CONDITIONAL",
+      "input": "もし急ぎじゃなければ、来週でもいいよ。",
+      "status": "FAIL",
+      "failures": [
+        "structure: 条件文パターン mismatch (expected: conditional marker, actual: not detected)"
+      ],
+      "failure_types": [
+        "STRUCTURE"
+      ],
+      "structure": {
+        "主題": "予定の調整",
+        "動作": "いい",
+        "意図": "提案",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "If it's not urgent, next week would be fine.",
+      "reverse_translation": "もし急ぎでなければ、来週でもいいよ。"
+    },
+    {
+      "id": "G056",
+      "category": "CERTAINTY",
+      "input": "正直、それは期待しすぎかも。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "期待",
+        "動作": "期待する",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Honestly, that might be expecting too much.",
+      "reverse_translation": "正直、それは期待しすぎかも。"
+    },
+    {
+      "id": "G057",
+      "category": "GENERAL",
+      "input": "今日の会議資料、後で共有するね。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "会議資料の共有",
+        "動作": "共有する",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "今日の会議資料",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "I'll share the meeting materials from today later.",
+      "reverse_translation": "今日の会議資料、後で共有するね。"
+    },
+    {
+      "id": "G058",
+      "category": "NEGATION",
+      "input": "ありがとう、ほんと助かる。",
+      "status": "FAIL",
+      "failures": [
+        "translation: must_contain_any mismatch (expected one of: not, n't, can't, cannot, don't, didn't, isn't, won't, couldn't, wouldn't, actual: \"Thanks, I really appreciate it.\")"
+      ],
+      "failure_types": [
+        "TRANSLATION"
+      ],
+      "structure": {
+        "主題": "感謝と助け",
+        "動作": "助かる",
+        "意図": "感謝",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Thanks, I really appreciate it.",
+      "reverse_translation": "ありがとう、本当に助かる。"
+    },
+    {
+      "id": "G059",
+      "category": "CONDITIONAL",
+      "input": "それ、もしかしたら勘違いかもしれない。",
+      "status": "FAIL",
+      "failures": [
+        "structure: 確信度 mismatch (expected one of: 推測, 伝聞, actual: 可能性)",
+        "translation: must_contain_any mismatch (expected one of: not, n't, can't, cannot, don't, didn't, isn't, won't, couldn't, wouldn't, if, when, in case, actual: \"Maybe I misunderstood that.\")"
+      ],
+      "failure_types": [
+        "STRUCTURE",
+        "TRANSLATION"
+      ],
+      "structure": {
+        "主題": "勘違いの可能性",
+        "動作": "かもしれない",
+        "意図": "確認",
+        "主語": "省略",
+        "対象": "それ",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "可能性",
+        "固有名詞": []
+      },
+      "translation": "Maybe I misunderstood that.",
+      "reverse_translation": "それ、もしかしたら勘違いかもしれない。"
+    },
+    {
+      "id": "G060",
+      "category": "NEGATION",
+      "input": "今日はもう何も考えたくない。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "感情",
+        "動作": "考えたくない",
+        "意図": "感情表現",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "I don't want to think about anything today.",
+      "reverse_translation": "今日はもう何も考えたくない。"
+    },
+    {
+      "id": "G061",
+      "category": "GENERAL",
+      "input": "その件、先方に確認中です。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "件について",
+        "動作": "確認する",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "先方",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I'm checking with them about that matter.",
+      "reverse_translation": "その件、先方に確認中です。"
+    },
+    {
+      "id": "G062",
+      "category": "QUESTION",
+      "input": "なんでそんなに急いでるの？",
+      "status": "FAIL",
+      "failures": [
+        "translation: must_contain_any mismatch (expected one of: not, n't, can't, cannot, don't, didn't, isn't, won't, couldn't, wouldn't, actual: \"Why are you in such a hurry?\")"
+      ],
+      "failure_types": [
+        "TRANSLATION"
+      ],
+      "structure": {
+        "主題": "急ぎ",
+        "動作": "急ぐ",
+        "意図": "質問",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Why are you in such a hurry?",
+      "reverse_translation": "なんでそんなに急いでるの？"
+    },
+    {
+      "id": "G063",
+      "category": "GENERAL",
+      "input": "今日、上司めっちゃ機嫌よかった。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "上司の機嫌",
+        "動作": "よかった",
+        "動作の意味": "be in a good mood",
+        "意図": "報告",
+        "主語": "上司",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "My boss was in a really good mood today.",
+      "reverse_translation": "今日、上司がとても機嫌が良かった。"
+    },
+    {
+      "id": "G064",
+      "category": "NEGATION",
+      "input": "ごめん、今日は参加できない。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "参加できないことの謝罪",
+        "動作": "謝る",
+        "意図": "謝罪",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Sorry, I won't be able to participate today.",
+      "reverse_translation": "ごめん、今日は参加できない。"
+    },
+    {
+      "id": "G065",
+      "category": "CERTAINTY",
+      "input": "それ、やってみる価値はあると思う。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "価値の有無",
+        "動作": "思う",
+        "意図": "意見表明",
+        "主語": "省略",
+        "対象": "それ",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I think it's worth a try.",
+      "reverse_translation": "それ、やってみる価値はあると思う。"
+    },
+    {
+      "id": "G066",
+      "category": "CONDITIONAL",
+      "input": "もし不明点あれば、遠慮なく聞いて。",
+      "status": "FAIL",
+      "failures": [
+        "structure: 条件文パターン mismatch (expected: conditional marker, actual: not detected)"
+      ],
+      "failure_types": [
+        "STRUCTURE"
+      ],
+      "structure": {
+        "主題": "不明点についての対応",
+        "動作": "聞く",
+        "意図": "確認",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "If you have any questions, feel free to ask.",
+      "reverse_translation": "もし不明点があれば、遠慮なく聞いて。"
+    },
+    {
+      "id": "G067",
+      "category": "NEGATION",
+      "input": "それ以上はちょっと言えない。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "制限",
+        "動作": "言えない",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "I can't say any more than that.",
+      "reverse_translation": "それ以上はちょっと言えない。"
+    },
+    {
+      "id": "G068",
+      "category": "NEGATION",
+      "input": "ありがとう、ちゃんと確認する。",
+      "status": "FAIL",
+      "failures": [
+        "translation: must_contain_any mismatch (expected one of: not, n't, can't, cannot, don't, didn't, isn't, won't, couldn't, wouldn't, actual: \"Thanks, I'll make sure to check.\")"
+      ],
+      "failure_types": [
+        "TRANSLATION"
+      ],
+      "structure": {
+        "主題": "確認",
+        "動作": "確認する",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Thanks, I'll make sure to check.",
+      "reverse_translation": "ありがとう、ちゃんと確認する。"
+    },
+    {
+      "id": "G069",
+      "category": "CERTAINTY",
+      "input": "多分だけど、明日は混むと思う。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "明日の混雑",
+        "動作": "思う",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I think it's probably going to be crowded tomorrow.",
+      "reverse_translation": "多分、明日は混むと思う。"
+    },
+    {
+      "id": "G070",
+      "category": "QUESTION",
+      "input": "正直、その判断は微妙じゃない？",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "判断の妥当性",
+        "動作": "じゃない",
+        "動作の意味": "be not",
+        "意図": "確認",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Honestly, isn't that judgment subtle?",
+      "reverse_translation": "正直、その判断は微妙じゃない？"
+    },
+    {
+      "id": "G071",
+      "category": "QUESTION",
+      "input": "今日のメール、確認してもらえた？",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "メールの確認",
+        "動作": "確認する",
+        "意図": "確認",
+        "主語": "省略",
+        "対象": "メール",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Did you check today's email?",
+      "reverse_translation": "今日のメール、確認してもらえた？"
+    },
+    {
+      "id": "G072",
+      "category": "NEGATION",
+      "input": "さっきから頭が回らない。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "頭の働き",
+        "動作": "回らない",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "My mind isn't working properly.",
+      "reverse_translation": "さっきから頭が回らない。"
+    },
+    {
+      "id": "G073",
+      "category": "GENERAL",
+      "input": "その件、もう一回整理しよう。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "整理事項",
+        "動作": "整理",
+        "意図": "提案",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Let's sort that out again.",
+      "reverse_translation": "その件、もう１度整理しよう。"
+    },
+    {
+      "id": "G074",
+      "category": "NEGATION",
+      "input": "ごめん、今は答えられない。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "謝罪と回答不能",
+        "動作": "答える",
+        "意図": "謝罪",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Sorry, I can't answer that right now.",
+      "reverse_translation": "ごめん、今は答えられない。"
+    },
+    {
+      "id": "G075",
+      "category": "CONDITIONAL",
+      "input": "もし余裕あったら、手伝ってほしい。",
+      "status": "FAIL",
+      "failures": [
+        "structure: 主語判定 mismatch (expected: You, actual: 主語=省略, 人称=一人称単数)",
+        "structure: 条件文パターン mismatch (expected: conditional marker, actual: not detected)"
+      ],
+      "failure_types": [
+        "STRUCTURE"
+      ],
+      "structure": {
+        "主題": "手伝い",
+        "動作": "ほしい",
+        "意図": "依頼",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "あり",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "If you have time, I would appreciate your help.",
+      "reverse_translation": "もし時間があったら、手伝ってほしい。"
+    },
+    {
+      "id": "G076",
+      "category": "CERTAINTY",
+      "input": "それ、前例ないらしいよ。",
+      "status": "FAIL",
+      "failures": [
+        "translation: must_contain_any mismatch (expected one of: not, n't, can't, cannot, don't, didn't, isn't, won't, couldn't, wouldn't, actual: \"I heard there's no precedent for that.\")"
+      ],
+      "failure_types": [
+        "TRANSLATION"
+      ],
+      "structure": {
+        "主題": "前例の有無",
+        "動作": "ない",
+        "動作の意味": "not have",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "伝聞",
+        "固有名詞": []
+      },
+      "translation": "I heard there's no precedent for that.",
+      "reverse_translation": "それ、前例ないらしいよ。"
+    },
+    {
+      "id": "G077",
+      "category": "GENERAL",
+      "input": "今日中に返事もらえると助かる。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "返事",
+        "動作": "もらえる",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "可能性",
+        "固有名詞": []
+      },
+      "translation": "It would be great if I could get a reply today.",
+      "reverse_translation": "今日中に返事もらえると助かる。"
+    },
+    {
+      "id": "G078",
+      "category": "NEGATION",
+      "input": "ありがとう、気づかなかった。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "感謝と気づき",
+        "動作": "気づく",
+        "意図": "感謝/確認",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "省略",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Thanks, I didn't notice.",
+      "reverse_translation": "ありがとう、気づかなかった。"
+    },
+    {
+      "id": "G079",
+      "category": "NEGATION",
+      "input": "正直、そこまで気にしてない。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "気にすること",
+        "動作": "気にしていない",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Honestly, I don't really care that much.",
+      "reverse_translation": "正直、そこまで気にしてない。"
+    },
+    {
+      "id": "G080",
+      "category": "NEGATION",
+      "input": "なんか嫌な予感がする。",
+      "status": "FAIL",
+      "failures": [
+        "translation: must_contain_any mismatch (expected one of: not, n't, can't, cannot, don't, didn't, isn't, won't, couldn't, wouldn't, actual: \"I have a bad feeling about this.\")"
+      ],
+      "failure_types": [
+        "TRANSLATION"
+      ],
+      "structure": {
+        "主題": "予感",
+        "動作": "する",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I have a bad feeling about this.",
+      "reverse_translation": "なんか嫌な予感がする。"
+    },
+    {
+      "id": "G081",
+      "category": "GENERAL",
+      "input": "その話、あとで詳しく聞かせて。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "話の詳細について",
+        "動作": "聞かせる",
+        "意図": "依頼",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Tell me more about that later.",
+      "reverse_translation": "その話、あとで詳しく聞かせて。"
+    },
+    {
+      "id": "G082",
+      "category": "GENERAL",
+      "input": "今日の作業、想定より早く終わった。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "作業の進行状況",
+        "動作": "終わる",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Today's work finished earlier than expected.",
+      "reverse_translation": "今日の作業、想定より早く終わった。"
+    },
+    {
+      "id": "G083",
+      "category": "CERTAINTY",
+      "input": "それ、別の方法もあると思う。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "方法の提案",
+        "動作": "ある",
+        "意図": "提案",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I think there might be another way.",
+      "reverse_translation": "それ、別の方法もあると思う。"
+    },
+    {
+      "id": "G084",
+      "category": "NEGATION",
+      "input": "ごめん、今ちょっとバタバタしてる。",
+      "status": "FAIL",
+      "failures": [
+        "translation: must_contain_any mismatch (expected one of: not, n't, can't, cannot, don't, didn't, isn't, won't, couldn't, wouldn't, actual: \"Sorry, I'm a bit busy right now.\")"
+      ],
+      "failure_types": [
+        "TRANSLATION"
+      ],
+      "structure": {
+        "主題": "謝罪と状況報告",
+        "動作": "謝る、バタバタしている",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Sorry, I'm a bit busy right now.",
+      "reverse_translation": "ごめん、今ちょっと忙しい。"
+    },
+    {
+      "id": "G085",
+      "category": "CONDITIONAL",
+      "input": "もし間に合わなかったら、連絡するね。",
+      "status": "FAIL",
+      "failures": [
+        "structure: 条件文パターン mismatch (expected: conditional marker, actual: not detected)"
+      ],
+      "failure_types": [
+        "STRUCTURE"
+      ],
+      "structure": {
+        "主題": "連絡",
+        "動作": "する",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I'll contact you if I don't make it.",
+      "reverse_translation": "もし間に合わなかったら、連絡するね。"
+    },
+    {
+      "id": "G086",
+      "category": "NEGATION",
+      "input": "正直、それはおすすめしない。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "意見",
+        "動作": "おすすめしない",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Honestly, I don't recommend it.",
+      "reverse_translation": "正直、それはおすすめしない。"
+    },
+    {
+      "id": "G087",
+      "category": "GENERAL",
+      "input": "今日の締切、明日に延びたよ。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "締切の延期",
+        "動作": "延びる",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "The deadline for today has been extended to tomorrow.",
+      "reverse_translation": "今日の締切、明日に延びたよ。"
+    },
+    {
+      "id": "G088",
+      "category": "GENERAL",
+      "input": "ありがとう、フォロー助かります。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "感謝とフォローの助け",
+        "動作": "助かる",
+        "意図": "感謝",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Thanks, I appreciate the follow.",
+      "reverse_translation": "ありがとう、フォロー助かります。"
+    },
+    {
+      "id": "G089",
+      "category": "CERTAINTY",
+      "input": "多分だけど、来月には落ち着くはず。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "状況の見通し",
+        "動作": "落ち着く",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I think I'll probably settle down next month.",
+      "reverse_translation": "多分だけど、来月には落ち着くはず。"
+    },
+    {
+      "id": "G090",
+      "category": "NEGATION",
+      "input": "今日はもう無理、限界。",
+      "status": "FAIL",
+      "failures": [
+        "translation: must_contain_any mismatch (expected one of: not, n't, can't, cannot, don't, didn't, isn't, won't, couldn't, wouldn't, actual: \"I'm done for today, I've reached my limit.\")"
+      ],
+      "failure_types": [
+        "TRANSLATION"
+      ],
+      "structure": {
+        "主題": "今日の状況",
+        "動作": "無理になる",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "I'm done for today, I've reached my limit.",
+      "reverse_translation": "今日はもう無理、限界。"
+    },
+    {
+      "id": "G091",
+      "category": "QUESTION",
+      "input": "その件、再確認してもらえる？",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "件について",
+        "動作": "再確認する",
+        "意図": "依頼",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Could you double-check that matter?",
+      "reverse_translation": "その件、再確認してもらえる？"
+    },
+    {
+      "id": "G092",
+      "category": "GENERAL",
+      "input": "今日、ちょっといいことあった。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "良いこと",
+        "動作": "あった",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Something good happened today.",
+      "reverse_translation": "今日、ちょっといいことあった。"
+    },
+    {
+      "id": "G093",
+      "category": "CERTAINTY",
+      "input": "それ、考え直したほうがいいかも。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "提案の見直し",
+        "動作": "考え直す",
+        "意図": "提案",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "You might want to think that one over.",
+      "reverse_translation": "それ、考え直したほうがいいかも。"
+    },
+    {
+      "id": "G094",
+      "category": "NEGATION",
+      "input": "ごめん、言い方が悪かった。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "謝罪と訂正",
+        "動作": "謝る/言い方を変える",
+        "意図": "謝罪/確認",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Sorry, I didn't mean it like that.",
+      "reverse_translation": "ごめん、言い方が悪かった。"
+    },
+    {
+      "id": "G095",
+      "category": "CONDITIONAL",
+      "input": "もし必要なら、資料作るよ。",
+      "status": "FAIL",
+      "failures": [
+        "structure: 条件文パターン mismatch (expected: conditional marker, actual: not detected)"
+      ],
+      "failure_types": [
+        "STRUCTURE"
+      ],
+      "structure": {
+        "主題": "資料作成の提案",
+        "動作": "作る",
+        "意図": "提案",
+        "主語": "省略",
+        "対象": "資料",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I'll make the materials if you need them.",
+      "reverse_translation": "もし必要なら、資料作るよ。"
+    },
+    {
+      "id": "G096",
+      "category": "NEGATION",
+      "input": "正直、その説明だと分かりにくい。",
+      "status": "FAIL",
+      "failures": [
+        "translation: must_contain_any mismatch (expected one of: not, n't, can't, cannot, don't, didn't, isn't, won't, couldn't, wouldn't, actual: \"Honestly, that explanation is hard to understand.\")"
+      ],
+      "failure_types": [
+        "TRANSLATION"
+      ],
+      "structure": {
+        "主題": "説明の理解",
+        "動作": "分かりにくい",
+        "意図": "質問",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Honestly, that explanation is hard to understand.",
+      "reverse_translation": "正直、その説明だと分かりにくい。"
+    },
+    {
+      "id": "G097",
+      "category": "NEGATION",
+      "input": "今日の会議、結論出なかったね。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "会議の結果",
+        "動作": "出る",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "We didn't reach a conclusion at today's meeting.",
+      "reverse_translation": "今日の会議、結論出なかったね。"
+    },
+    {
+      "id": "G098",
+      "category": "CERTAINTY",
+      "input": "ありがとう、またお願いするかも。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "感謝と依頼の可能性",
+        "動作": "お願いする",
+        "意図": "感謝・依頼の可能性",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Thanks, I might ask you again.",
+      "reverse_translation": "ありがとう、またお願いするかも。"
+    },
+    {
+      "id": "G099",
+      "category": "CERTAINTY",
+      "input": "それ、噂止まりだと思う。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "噂",
+        "動作": "止まる",
+        "意図": "推測",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I think that's just a rumor.",
+      "reverse_translation": "それ、噂までだと思う。"
+    },
+    {
+      "id": "G100",
+      "category": "GENERAL",
+      "input": "今日はもう帰って寝たい。",
+      "status": "PASS",
+      "failures": [],
+      "failure_types": [],
+      "structure": {
+        "主題": "帰宅と睡眠",
+        "動作": "寝る",
+        "意図": "願望",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "あり",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "I want to go home and sleep now.",
+      "reverse_translation": "今日はもう帰って寝たい。"
+    }
+  ]
+}
