@@ -1,4 +1,20 @@
-# NijiLingo改善ガイド
+# NijiLingo改善ガイド - クロちゃん用
+
+**このドキュメントの目的:**
+君（クロちゃん）が「くろみちゃん（Claude Code）」への作業指示プロンプトを作るための背景情報。
+
+---
+
+## 君の役割
+
+君はロードマップに沿って「くろみちゃんへの指示プロンプト」を作成する。
+ベニーがそのプロンプトをくろみちゃんにコピペして実行させる。
+
+```
+ベン（情報収集）→ 君（プロンプト作成）→ ベニー（コピペ）→ くろみちゃん（実行）
+```
+
+---
 
 ## プロジェクト概要
 
@@ -18,13 +34,41 @@
 |----------|------|------|------------------|
 | **ベニー** | 人間（オーナー） | 方針決定、フィードバック | ✅ |
 | **ベン** | Clawdbot（Mac mini） | 情報収集・背景共有・ログ管理 | ✅ |
-| **クロちゃん** | Claude（claude.ai） | ロードマップ作成・相談・分析 | ❌ |
+| **君（クロちゃん）** | Claude（claude.ai） | ロードマップ管理・くろみ用プロンプト作成 | ❌ |
 | **くろみちゃん** | Claude Code（Air） | テスト実行・コード修正 | ✅ |
 
-### ポイント
-- **クロちゃん**はNijiChatリポジトリ見れない → nijilingo-ai-knowledge（public）経由で情報共有
-- **くろみちゃん**はAirでローカル作業 → NijiChatのコード直接触れる
-- くろみちゃんがどんどんテストしていくスタイル
+### 重要ポイント
+- **君はNijiChatリポジトリを直接見れない**（プライベートだから）
+- **くろみちゃんはローカルで作業するからNijiChatのコード見れる**
+- 君が必要な情報は nijilingo-ai-knowledge（public）経由でベンが共有する
+
+---
+
+## くろみちゃんへの指示に必ず含めること
+
+くろみちゃん用プロンプトを作るときは、以下を毎回含めて：
+
+### 1. ログ保存ルール
+```
+作業ログは必ず nijilingo-ai-knowledge に保存すること：
+- 分析結果: nijilingo-ai-knowledge/analysis/
+- 設計ドキュメント: nijilingo-ai-knowledge/reference/
+- 検証ログ: nijilingo-ai-knowledge/logs/
+```
+
+### 2. Git pushルール
+```
+作業が終わったら必ず：
+1. nijilingo-ai-knowledge に変更をcommit & push
+2. NijiChat に変更があればそちらもcommit & push
+これでベン（Mac mini）と情報共有できる。
+```
+
+### 3. リポジトリ情報
+```
+- アプリ本体: ~/NijiChat （ローカル）
+- ログ・設計: ~/nijilingo-ai-knowledge または ~/clawd/nijilingo-ai-knowledge
+```
 
 ---
 
@@ -33,27 +77,25 @@
 ### マシン構成
 | マシン | 役割 |
 |--------|------|
-| **MacBook Air** | くろみちゃんの作業場所、開発用 |
-| **Mac mini** | ベン（Clawdbot）本体、24時間稼働 |
+| **MacBook Air** | くろみちゃんの作業場所 |
+| **Mac mini** | ベン本体、24時間稼働 |
 
-### Git運用ルール
-1. **Airで修正 → git push**
-2. **miniで git pull → ベンが最新を確認**
-3. **同時編集しない**（コンフリクト防止）
-4. pushしたらベンにも見える
+### Git運用
+- Airで修正 → git push → miniでベンがpullして確認
+- 同時編集しない（コンフリクト防止）
 
 ### リポジトリ
-| リポジトリ | 公開 | 用途 | 誰が見れる |
-|-----------|------|------|-----------|
-| **NijiChat** | ❌ Private | アプリ本体 | ベニー、ベン、くろみちゃん |
-| **nijilingo-ai-knowledge** | ✅ Public | ログ・分析・設計ガイド | 全員（クロちゃん含む） |
+| リポジトリ | 公開 | URL |
+|-----------|------|-----|
+| **NijiChat** | ❌ Private | https://github.com/Kohei25-gif/NijiChat |
+| **nijilingo-ai-knowledge** | ✅ Public | https://github.com/Kohei25-gif/nijilingo-ai-knowledge |
 
 ---
 
 ## 改善ロードマップ
 
 ```
-Step 0: 情報収集 ← ✅完了（ベンが実施済）
+Step 0: 情報収集 ← ✅完了
   ↓
 Step 1: 合格基準の作成（35〜50件）← 次ここ
   ↓
@@ -117,21 +159,9 @@ JAPANESE_EDIT: 'gpt-4.1-nano'
 
 ---
 
-## 作業ログ保存先
-
-作業したら記録を残す：
-- **分析結果**: `nijilingo-ai-knowledge/analysis/`
-- **設計ドキュメント**: `nijilingo-ai-knowledge/reference/`
-- **検証ログ**: `nijilingo-ai-knowledge/logs/`
-
-作業後は **必ず git push** してベンと共有すること。
-
----
-
 ## 次のアクション
 
 **Step 1: 合格基準の作成**
 - 35〜50件のテストケースを作成
 - 入力文 + 期待する出力 + 判定基準
-- クロちゃん（Claude.ai）と相談しながら進める
-- 完成したらくろみちゃんがテストスイート化
+- 君がテストケースを設計 → くろみちゃん用プロンプトにまとめる
