@@ -1,0 +1,777 @@
+{
+  "generated_at": "2026-02-06T15:12:51.360Z",
+  "round": 32,
+  "id_range": "141-145",
+  "total_cases": 5,
+  "generation_summary": {
+    "partial_count": 60,
+    "fallback_full_count": 0
+  },
+  "case_results": [
+    {
+      "id": 141,
+      "round": 32,
+      "input": "その件、先方からまだ返事ない。",
+      "source_lang": "ja",
+      "target_lang": "en",
+      "structure": {
+        "主題": "その件",
+        "動作": "返事ない",
+        "動作の意味": "未回答・未返信",
+        "意図": "報告",
+        "主語": "先方",
+        "対象": "その件",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "伝聞",
+        "固有名詞": []
+      },
+      "seeds": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "seed_translation": "I haven't heard back from them about that yet.",
+          "seed_reverse_translation": "その件について、まだ先方から返事がない。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "seed_translation": "I heard that we haven't received a response from the other party regarding that matter yet.",
+          "seed_reverse_translation": "その件、先方からまだ返事ない。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "seed_translation": "I haven't received a response from them regarding that matter yet.",
+          "seed_reverse_translation": "その件、先方からまだ返事ない。",
+          "seed_risk": "low"
+        }
+      ],
+      "outputs": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 25,
+          "translation": "I haven't heard back from them about it yet.",
+          "reverse_translation": "まだ返事が来てない",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 50,
+          "translation": "I still haven't heard back from them about it.",
+          "reverse_translation": "まだ返事をもらってない",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 75,
+          "translation": "I still really haven't heard back from them about it, lol.",
+          "reverse_translation": "まだ全然返事が来てない",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 100,
+          "translation": "I still haven't heard back from them about it, lol, like not even a peep, right?",
+          "reverse_translation": "まだその件について彼らから全然返事がなくて、笑、なんにも音沙汰ないよね",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 25,
+          "translation": "Indeed, I heard that we haven't received a response from the other party regarding that matter yet.",
+          "reverse_translation": "確かに、その件に関しては先方から返事がまだ来ていないと聞きました。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 50,
+          "translation": "It is with great pleasure that I report that, apparently, we have yet to receive a response from the other party regarding that matter.",
+          "reverse_translation": "確かに、私は、相手方からその件についての返事がまだ届いていないと聞いた。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 75,
+          "translation": "I am delighted to inform you that, reportedly, we have yet to receive a response from the other party regarding that matter.",
+          "reverse_translation": "どうやら、相手方からはその件についての返事はまだ頂戴していないとのことです。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 100,
+          "translation": "It is with utmost pleasure that I have the honor of informing you that, purportedly, we have yet to receive a response from the other party concerning that matter.",
+          "reverse_translation": "先方よりその件に関しての返事をいたただいておらず、とのことですが、ご報告申し上げます。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 25,
+          "translation": "I have not yet received a response from them regarding that matter.",
+          "reverse_translation": "その件に関して彼らからの返事はまだもらっていない。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 50,
+          "translation": "Please note that I have not yet received a response from them regarding that matter.",
+          "reverse_translation": "",
+          "risk": "high",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 75,
+          "translation": "I would like to bring to your attention that I have yet to receive a response from them regarding that matter.",
+          "reverse_translation": "その件につきまして、相手方から返事をいただいておりませんので、ご承知おきください。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 100,
+          "translation": "I wish to inform you that, as of yet, I have not received a response from them pertaining to that particular matter.",
+          "reverse_translation": "",
+          "risk": "high",
+          "generator": "translatePartial"
+        }
+      ]
+    },
+    {
+      "id": 142,
+      "round": 32,
+      "input": "それって前提が違くない？",
+      "source_lang": "ja",
+      "target_lang": "en",
+      "structure": {
+        "主題": "それ",
+        "動作": "違う",
+        "動作の意味": "前提が正しくないことを指摘",
+        "意図": "確認",
+        "主語": "あなた（推定）",
+        "対象": "前提",
+        "目的格": "が",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "seeds": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "seed_translation": "Don't you think the premise is different?",
+          "seed_reverse_translation": "それって前提が違わない？",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "seed_translation": "Don't you think the premise is different?",
+          "seed_reverse_translation": "それって前提が違わない？",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "seed_translation": "Don't you think the premise is different?",
+          "seed_reverse_translation": "それって前提が違わない？",
+          "seed_risk": "low"
+        }
+      ],
+      "outputs": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 25,
+          "translation": "Don't you think the premise is a bit different?",
+          "reverse_translation": "前提が少し違うと思わない？",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 50,
+          "translation": "Don't you think the premise is kinda different?",
+          "reverse_translation": "前提はちょっと違うと思わない？",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 75,
+          "translation": "Don't you really think the premise is kinda different?",
+          "reverse_translation": "前提はかなり違うと思わない？",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 100,
+          "translation": "Don't you totally think the premise is way different?",
+          "reverse_translation": "前提が全く違うと思わない？",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 25,
+          "translation": "Don't you think, indeed, that the premise is different?",
+          "reverse_translation": "前提が違うのではないですか。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 50,
+          "translation": "Don't you think, indeed, that the premise might be different?",
+          "reverse_translation": "前提が異なるのではないかと思いませんか",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 75,
+          "translation": "Wouldn't you consider, indeed, that the premise could be different?",
+          "reverse_translation": "前提が異なるのかもしれないと思いませんか",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 100,
+          "translation": "Wouldn't you be so kind as to consider, indeed, that the premise might possibly be different?",
+          "reverse_translation": "前提が異なる可能性があるのではないでしょうか",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 25,
+          "translation": "Don't you think the premise might be different?",
+          "reverse_translation": "前提が異なるのではないですか？",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 50,
+          "translation": "I would suggest that the premise might be different.",
+          "reverse_translation": "前提が異なるかもしれないと思いませんか。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 75,
+          "translation": "I would be grateful if you could consider that the premise might be different.",
+          "reverse_translation": "前提が異なる可能性があるかもしれないとご検討いただければ幸いです。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 100,
+          "translation": "I would be most appreciative if you would consider the possibility that the premise may not be accurate.",
+          "reverse_translation": "前提が正しくないかもしれないという可能性を考慮していただければ幸いです。",
+          "risk": "low",
+          "generator": "translatePartial"
+        }
+      ]
+    },
+    {
+      "id": 143,
+      "round": 32,
+      "input": "悪いけど、もう一回説明して。",
+      "source_lang": "ja",
+      "target_lang": "en",
+      "structure": {
+        "主題": "説明",
+        "動作": "して",
+        "動作の意味": "再度説明する",
+        "意図": "依頼",
+        "主語": "あなた",
+        "対象": "私",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "seeds": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "seed_translation": "Sorry, can you explain it again?",
+          "seed_reverse_translation": "悪いけど、もう一回説明して。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "seed_translation": "I'm sorry, could you explain it again?",
+          "seed_reverse_translation": "すみません、もう一回説明してください。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "seed_translation": "Sorry, could you explain that again?",
+          "seed_reverse_translation": "悪いけど、もう一回説明して。",
+          "seed_risk": "low"
+        }
+      ],
+      "outputs": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 25,
+          "translation": "Sorry, can you explain that again?",
+          "reverse_translation": "すみません、もう一度説明してくれますか",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 50,
+          "translation": "Sorry, can you explain that again, please?",
+          "reverse_translation": "すみません、もう一度説明してくれますか",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 75,
+          "translation": "So, can you explain that again, really?",
+          "reverse_translation": "すみません、もう１度説明してくれますか？",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 100,
+          "translation": "So, can you explain that again, for real?",
+          "reverse_translation": "そう、で、あなたはそれをもう１度説明してくれる？",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 25,
+          "translation": "Indeed, I'm sorry, could you explain it again, please?",
+          "reverse_translation": "すみません、もう一度説明していただけますか？",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 50,
+          "translation": "I would be most pleased if you could explain it again.",
+          "reverse_translation": "再度説明していただけますか。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 75,
+          "translation": "It would be my great pleasure if you could explain it again.",
+          "reverse_translation": "再度説明していただければ大変嬉しいです。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 100,
+          "translation": "I would be deeply grateful if it would be at all possible for you to kindly provide a further explanation.",
+          "reverse_translation": "ご説明いただけますれば幸いです。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 25,
+          "translation": "Sorry, would you mind explaining that again?",
+          "reverse_translation": "すみません、もう一度説明していただけますか？",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 50,
+          "translation": "I would suggest explaining that again, please.",
+          "reverse_translation": "もう一度説明していただけますか",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 75,
+          "translation": "Could you kindly explain that again?",
+          "reverse_translation": "もう一度説明していただけますか",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 100,
+          "translation": "Would you be so kind as to provide a further explanation of that matter?",
+          "reverse_translation": "もう一度説明していただけますか",
+          "risk": "low",
+          "generator": "translatePartial"
+        }
+      ]
+    },
+    {
+      "id": 144,
+      "round": 32,
+      "input": "今日ちょっとテンション低め。",
+      "source_lang": "ja",
+      "target_lang": "en",
+      "structure": {
+        "主題": "私",
+        "動作": "感じる",
+        "動作の意味": "テンションが低いと感じている",
+        "意図": "報告",
+        "主語": "私",
+        "対象": "テンション",
+        "目的格": "低め",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "seeds": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "seed_translation": "I'm feeling a bit down today.",
+          "seed_reverse_translation": "今日ちょっと気分が落ちてる。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "seed_translation": "I'm feeling a bit down today.",
+          "seed_reverse_translation": "今日ちょっと気分が落ちてる。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "seed_translation": "I'm feeling a bit down today.",
+          "seed_reverse_translation": "今日ちょっと気分が落ちてる。",
+          "seed_risk": "low"
+        }
+      ],
+      "outputs": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 25,
+          "translation": "I'm feeling kinda down today.",
+          "reverse_translation": "今日はちょっと気分が落ちてる。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 50,
+          "translation": "I'm feeling pretty down today.",
+          "reverse_translation": "今日は気分が落ちている",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 75,
+          "translation": "I'm feeling really down today, lol.",
+          "reverse_translation": "今日はかなり落ち込んでる、ハハ。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 100,
+          "translation": "I'm super down today, lol.",
+          "reverse_translation": "今日はかなりテンション低いわ。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 25,
+          "translation": "I'm feeling rather down indeed today.",
+          "reverse_translation": "今日は確かに気分が落ちています",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 50,
+          "translation": "I would be rather down today, indeed.",
+          "reverse_translation": "今日は本当に気分が落ちている",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 75,
+          "translation": "I must admit that I am feeling rather down today.",
+          "reverse_translation": "今日はかなり気分が落ちているようだ。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 100,
+          "translation": "I must humbly confess that, regrettably, I am feeling rather down today.",
+          "reverse_translation": "残念ながら、私は今日かなり気分が落ち込んでおります。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 25,
+          "translation": "I'm feeling a bit down today.",
+          "reverse_translation": "今日は少し気分が落ちています。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 50,
+          "translation": "Please note that I am feeling a bit down today.",
+          "reverse_translation": "今日は少し気分が落ちています。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 75,
+          "translation": "I would appreciate it if you could note that I'm feeling somewhat down today.",
+          "reverse_translation": "今日は少し気分が落ちているので、ご了承いただければと思います。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 100,
+          "translation": "I would be most grateful if you would kindly take note of the fact that I am currently experiencing a somewhat subdued emotional state.",
+          "reverse_translation": "今日は少し気分が落ちているので、覚えていてくれると嬉しいです。",
+          "risk": "low",
+          "generator": "translatePartial"
+        }
+      ]
+    },
+    {
+      "id": 145,
+      "round": 32,
+      "input": "もし可能なら、別案も考えたい。",
+      "source_lang": "ja",
+      "target_lang": "en",
+      "structure": {
+        "主題": "別案",
+        "動作": "考えたい",
+        "動作の意味": "提案・希望",
+        "意図": "提案",
+        "主語": "私（話し手）",
+        "対象": "別案",
+        "目的格": "も",
+        "願望": "あり",
+        "人称": "一人称単数",
+        "確信度": "希望",
+        "固有名詞": []
+      },
+      "seeds": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "seed_translation": "If possible, I want to consider alternative plans.",
+          "seed_reverse_translation": "もし可能なら、別案も考えたい。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "seed_translation": "If possible, I would like to consider alternative plans as well.",
+          "seed_reverse_translation": "もし可能なら、別案も考えたい。",
+          "seed_risk": "low"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "seed_translation": "If possible, I would like to consider alternative plans.",
+          "seed_reverse_translation": "もし可能なら、別案も考えたい。",
+          "seed_risk": "low"
+        }
+      ],
+      "outputs": [
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 25,
+          "translation": "If possible, I'd like to consider some alternative plans.",
+          "reverse_translation": "もし可能なら、別の計画をいくつか検討したい.",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 50,
+          "translation": "If it's possible, I'd love to explore some other options.",
+          "reverse_translation": "もし可能なら、他の選択肢も考えたい。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 75,
+          "translation": "If it's possible, I'd really love to check out some other options, too.",
+          "reverse_translation": "もし可能なら、他の選択肢も実際に見てみたい",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "casual",
+          "tone_key": "casual",
+          "tone_percent": 100,
+          "translation": "If it's possible, I'd totally wanna check out some other options too, yeah?",
+          "reverse_translation": "もし可能なら、他の選択肢もちょっと見てみたいな、って思ってる",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 25,
+          "translation": "Indeed, if possible, I would certainly like to consider alternative plans as well.",
+          "reverse_translation": "もし可能であれば、ぜひとも代替案を検討したいと思います。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 50,
+          "translation": "I would be most pleased to consider alternative plans as well, if feasible.",
+          "reverse_translation": "可能であれば、別案もぜひ検討したいと思います。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 75,
+          "translation": "It would be my great pleasure to consider alternative plans as well, should they prove feasible.",
+          "reverse_translation": "実現可能であれば、別案も検討させていただきたいと思います。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "polite",
+          "tone_key": "formal",
+          "tone_percent": 100,
+          "translation": "It would be my utmost delight and honor to consider alternative plans as well, should they prove feasible and meet with approval.",
+          "reverse_translation": "また、実行可能であることが証明されれば、別案を検討することも私にとっては大変な喜びであり、光栄なことと存じます。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 25,
+          "translation": "If possible, I'd like to explore alternative plans.",
+          "reverse_translation": "可能であれば、別案を検討したいと思います。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 50,
+          "translation": "I would suggest exploring alternative plans, if feasible.",
+          "reverse_translation": "可能であれば、別案を検討したいと思います。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 75,
+          "translation": "I would be grateful if you could consider exploring alternative plans, if feasible.",
+          "reverse_translation": "実行可能な場合、代替計画の検討をお願いできないでしょうか。",
+          "risk": "low",
+          "generator": "translatePartial"
+        },
+        {
+          "tone_category": "business",
+          "tone_key": "business",
+          "tone_percent": 100,
+          "translation": "I would be most grateful if you would consider it beneficial to explore alternative plans, should they prove feasible.",
+          "reverse_translation": "実行可能な場合に限り、代替計画の検討をご検討いただければ幸いです。",
+          "risk": "low",
+          "generator": "translatePartial"
+        }
+      ]
+    }
+  ]
+}
