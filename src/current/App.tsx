@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Settings, Mic, ArrowLeft, Search, Camera, Check, Plus, X, Clipboard, Pin, Tag, Trash2, Volume2, Loader2, Home, ChevronDown } from 'lucide-react'
+import { Settings, Mic, ArrowLeft, Search, Camera, Check, Plus, X, Clipboard, Pin, Tag, Trash2, Volume2, Loader2, Home } from 'lucide-react'
 import './App.css'
-import { translateFull, translateWithGuard, translatePartnerMessage, generateExplanation, editJapaneseForTone, type TranslationResult } from './services/groq'
+import { translateFull, translateWithGuard, translatePartnerMessage, generateExplanation, generateToneDifferenceExplanation, editJapaneseForTone, extractStructure, getDifferenceFromText, getNotYetGeneratedText, getFailedToGenerateText, getLangCodeFromName, type TranslationResult, type ExpandedStructure } from './services/groq'
 import nijii1 from './assets/nijii-1.png'
 import nijii2 from './assets/nijii-2.png'
 import nijii3 from './assets/nijii-3.png'
@@ -258,6 +258,7 @@ const ToneSlider = React.memo(({
 interface LanguageOption {
   label: string
   flag: string
+  code: string  // ISO 639-1 言語コード
 }
 
 function App() {
@@ -274,6 +275,7 @@ function App() {
   const [translatePartnerText, setTranslatePartnerText] = useState('')
   const [translateSelfText, setTranslateSelfText] = useState('')
   const [hidePartnerSection, setHidePartnerSection] = useState(false)
+  const [hideSelfSection, setHideSelfSection] = useState(false)
 
   // TranslateScreen用の言語選択
   const [translatePartnerSourceLang, setTranslatePartnerSourceLang] = useState('自動認識')
@@ -295,6 +297,10 @@ function App() {
   // フォアグラウンド事前生成用（handleToneSelectの選択トーン生成）
   const foregroundAbortRef = useRef<AbortController | null>(null)
   const selectedToneRef = useRef<string | null>(null)
+  
+  // 構造化M抽出の結果を保持（トーン切り替え時も使い回す）
+  const extractedStructureRef = useRef<ExpandedStructure | undefined>(undefined)
+  const structureSourceTextRef = useRef<string>('')  // どの原文の構造情報か
 
   // 対面モード関連
   const [faceToFaceMode, setFaceToFaceMode] = useState<'idle' | 'self' | 'partner'>('idle')
@@ -371,6 +377,10 @@ function App() {
       explanation: ''
     }
   })
+  // トーンレベル間の違い解説用state
+  const [toneDiffExplanation, setToneDiffExplanation] = useState<{ point: string; explanation: string } | null>(null)
+  const [toneDiffLoading, setToneDiffLoading] = useState(false)
+  const [toneDiffExpanded, setToneDiffExpanded] = useState(false)
   const [isTranslating, setIsTranslating] = useState(false)
   const [showSplash, setShowSplash] = useState(true)
   const [splashIndex] = useState(() => Math.floor(Math.random() * splashData.length))
@@ -420,6 +430,12 @@ function App() {
     }
   }, [expandedExplanation])
 
+  // トーンレベル変更時・入力テキスト変更時に解説をリセット
+  useEffect(() => {
+    setToneDiffExplanation(null)
+    setToneDiffExpanded(false)
+  }, [activeToneBucket, selectedTone, previewSourceText])
+
   // localStorage への自動保存
   useEffect(() => {
     saveToStorage(STORAGE_KEYS.PARTNERS, partners);
@@ -445,16 +461,16 @@ function App() {
   ]
 
   const languageOptions: LanguageOption[] = [
-    { label: '日本語', flag: '🇯🇵' },
-    { label: '英語', flag: '🇺🇸' },
-    { label: 'スペイン語', flag: '🇪🇸' },
-    { label: 'フランス語', flag: '🇫🇷' },
-    { label: '中国語', flag: '🇨🇳' },
-    { label: '韓国語', flag: '🇰🇷' },
-    { label: 'ドイツ語', flag: '🇩🇪' },
-    { label: 'イタリア語', flag: '🇮🇹' },
-    { label: 'ポルトガル語', flag: '🇧🇷' },
-    { label: 'チェコ語', flag: '🇨🇿' },
+    { label: '日本語', flag: '🇯🇵', code: 'ja' },
+    { label: '英語', flag: '🇺🇸', code: 'en' },
+    { label: 'スペイン語', flag: '🇪🇸', code: 'es' },
+    { label: 'フランス語', flag: '🇫🇷', code: 'fr' },
+    { label: '中国語', flag: '🇨🇳', code: 'zh' },
+    { label: '韓国語', flag: '🇰🇷', code: 'ko' },
+    { label: 'ドイツ語', flag: '🇩🇪', code: 'de' },
+    { label: 'イタリア語', flag: '🇮🇹', code: 'it' },
+    { label: 'ポルトガル語', flag: '🇧🇷', code: 'pt' },
+    { label: 'チェコ語', flag: '🇨🇿', code: 'cs' },
   ]
 
   const avatarOptions = ['👨', '👩', '👨‍💼', '👩‍💼', '🧑', '👴', '👵', '🧔', '👱‍♀️', '👱‍♂️']
@@ -498,10 +514,12 @@ function App() {
     targetLang?: string,
     isNativeFlag?: boolean
   ): string => {
+    // 0%時はtoneを'none'に統一してキャッシュを共有（トーン変更時の再生成を防ぐ）
+    const normalizedTone = toneBucket === 0 ? 'none' : (tone || 'none')
     const customPart = tone === 'custom' && customToneText ? `_${customToneText}` : ''
     const langPart = `${sourceLang || 'auto'}->${targetLang || 'unknown'}`
     const nativePart = isNativeFlag ? '_native' : ''
-    return `${PROMPT_VERSION}|${langPart}|${sourceText}|${tone || 'none'}_${toneBucket}${customPart}${nativePart}`
+    return `${PROMPT_VERSION}|${langPart}|${sourceText}|${normalizedTone}_${toneBucket}${customPart}${nativePart}`
   }
 
   // キャッシュを更新（ref + state両方を更新して再レンダリングをトリガー）
@@ -529,47 +547,27 @@ function App() {
     setPreview(prev => ({ ...prev, translation: cached.translation, reverseTranslation: cached.reverseTranslation, noChange: cached.noChange }))
   }, [selectedTone, activeToneBucket, previewSourceText, translationCache, currentScreen, detectedSelfLang, translateSelfTargetLang, currentPartner, isNative])
 
-  // TranslateScreen: 「あなたが送りたい文章」の入力中に言語を自動認識（debounce 300ms）
+  // TranslateScreen: 「あなたが送りたい文章」- 入力欄が空の時だけリセット
+  // v3.5: debounce検出を削除、翻訳ボタン押した時だけ検出する
   useEffect(() => {
     if (currentScreen !== 'translate') return
-
+    // 入力欄が空になったらリセット
     if (!translateSelfText.trim()) {
       setDetectedSelfLang('')
-      return
     }
+    // 入力中は検出しない（翻訳ボタン押した時に検出）
+  }, [translateSelfText, currentScreen])
 
-    if (translateSelfSourceLang !== '自動認識') return
-
-    const timer = setTimeout(() => {
-      const detected = detectLanguage(translateSelfText.trim())
-      setDetectedSelfLang(detected)
-    }, 300)
-
-    return () => clearTimeout(timer)
-  }, [translateSelfText, translateSelfSourceLang, currentScreen])
-
-  // TranslateScreen: 「翻訳したい文章」の入力中に言語を自動認識（debounce 300ms）
+  // TranslateScreen: 「翻訳したい文章」- 入力欄が空の時だけリセット
+  // v3.5: debounce検出を削除、翻訳ボタン押した時だけ検出する
   useEffect(() => {
     if (currentScreen !== 'translate') return
-
+    // 入力欄が空になったらリセット
     if (!translatePartnerText.trim()) {
       setDetectedPartnerLang('')
-      return
     }
-
-    if (translatePartnerSourceLang !== '自動認識') return
-
-    const timer = setTimeout(() => {
-      const detected = detectLanguage(translatePartnerText.trim())
-      setDetectedPartnerLang(detected)
-      // 言語連動: 相手言語 → 自分のターゲット言語（手動設定されていない場合のみ）
-      if (!selfTargetLangManuallySet && detected) {
-        setTranslateSelfTargetLang(detected)
-      }
-    }, 300)
-
-    return () => clearTimeout(timer)
-  }, [translatePartnerText, translatePartnerSourceLang, currentScreen, selfTargetLangManuallySet])
+    // 入力中は検出しない（翻訳ボタン押した時に検出）
+  }, [translatePartnerText, currentScreen])
 
   // 音声認識クリーンアップ
   useEffect(() => {
@@ -664,8 +662,10 @@ function App() {
     targetLang?: string
     sourceLang?: string
     signal?: AbortSignal
+    structurePromise?: Promise<ExpandedStructure | undefined>  // 構造化M抽出のPromise（0%と並列実行）
+    cachedStructure?: ExpandedStructure  // 既にrefに保存済みの構造情報
   }) => {
-    const { tone, isNative, sourceText, currentUiBucket, customToneOverride, targetLang, sourceLang, signal } = params
+    const { tone, isNative, sourceText, currentUiBucket, customToneOverride, targetLang, sourceLang, signal, structurePromise, cachedStructure } = params
 
     // targetLang/sourceLangが渡されたらそれを使う、なければcurrentPartner依存
     const effectiveTargetLang = targetLang || currentPartner?.language
@@ -701,7 +701,7 @@ function App() {
       })
     }
 
-    const buildOptions = (toneLevel: number, srcText?: string, current?: TranslationResult) => ({
+    const buildOptions = (toneLevel: number, srcText?: string, current?: TranslationResult, prevLevel?: number) => ({
       sourceText: srcText || sourceText,
       sourceLang: effectiveSourceLang,
       targetLang: effectiveTargetLang,
@@ -711,6 +711,9 @@ function App() {
       customTone: customToneValue,
       currentTranslation: current?.translation,
       currentReverseTranslation: current?.reverse_translation,
+      // 2026-02-03: 逆翻訳で差分を表現するための前レベル情報
+      previousTranslation: current?.translation,
+      previousLevel: prevLevel,
       signal
     })
 
@@ -732,6 +735,9 @@ function App() {
     // 日本語ベース方式（日本語→外国語の場合）- 日本語先確定版
     // ========================================
     if (effectiveSourceLang === '日本語') {
+      // ★ 構造化M抽出は0%翻訳と並列で実行中
+      // 50%/100%の処理前にawaitする
+
       // ★ Step 1: 日本語を3パターン先に確定
       const confirmedJa: Record<number, string> = { 0: sourceText }
 
@@ -838,38 +844,44 @@ function App() {
         return true
       }
 
+      // ★ 構造化M抽出の完了を先に待つ（0%にも構造情報を渡すため）
+      // structurePromiseがあればawait、なければcachedStructureを使う
+      let extractedStructure: ExpandedStructure | undefined
+      if (structurePromise) {
+        extractedStructure = await structurePromise
+        console.log('[JaBase] Structure extraction completed:', extractedStructure)
+      } else if (cachedStructure) {
+        extractedStructure = cachedStructure
+        console.log('[JaBase] Using cached structure:', extractedStructure)
+      } else {
+        // refから取得を試みる（フォールバック）
+        extractedStructure = extractedStructureRef.current
+        console.log('[JaBase] Using structure from ref:', extractedStructure)
+      }
+
       // ★ パイプライン処理: 日本語ができたら即座に英語翻訳を開始（待たない）
       const translatePromises: Promise<{ uiLevel: number; translation: string; ja: string; risk: 'low' | 'med' | 'high' }>[] = []
 
-      // 0%: 原文そのまま → 即座に英語翻訳開始
+      // 0%: 原文そのまま → 構造情報ありで翻訳開始
       const ja0 = confirmedJa[0]
-      const options0 = { ...buildOptions(0, ja0), tone: undefined }
+      const options0 = { ...buildOptions(0, ja0), tone: undefined, structure: extractedStructure }
       translatePromises.push(
         translateFull(options0).then(result => ({ uiLevel: 0, translation: result.translation, ja: ja0, risk: result.risk }))
       )
-      console.log('[Pipeline] 0%英語翻訳開始')
+      console.log('[Pipeline] 0%英語翻訳開始（構造情報あり）')
 
-      // 50%用の日本語を探す（最大2回までリトライ）
-      let adopted50Level = 0
-      let retryCount50 = 0
-      const MAX_RETRY = 2
-      for (const level of [25, 50, 75, 100]) {
-        if (retryCount50 >= MAX_RETRY) {
-          console.log(`[JaBase] 50%枠: リトライ上限(${MAX_RETRY}回)に達したためフォールバック`)
-          break
-        }
-        retryCount50++
-        const editedJa = await editJapaneseForTone(sourceText, tone, level, customToneValue, signal)
+      // 50%用の日本語を探す（0%を基準に25, 50から選ぶ）
+      for (const level of [25, 50]) {
+        const editedJa = await editJapaneseForTone(sourceText, tone, level, customToneValue, signal, extractedStructure)
 
         // 品質チェック
         if (!isJapaneseValid(sourceText, editedJa, tone)) continue
-        // 元と違うかチェック
+        // 0%（原文）と違うかチェック
         if (isTooSimilar(editedJa, sourceText)) continue
         // 敬語レベル一貫性チェック
         if (!checkIsMorePolite(sourceText, editedJa, tone)) continue
 
         confirmedJa[50] = editedJa
-        adopted50Level = level
         console.log(`[JaBase] 50%枠: ${level}%を採用`)
         break
       }
@@ -878,50 +890,36 @@ function App() {
 
       // 50%: 日本語確定 → 即座に英語翻訳開始
       const ja50 = confirmedJa[50]
-      const options50 = buildOptions(50, ja50)
+      const options50 = { ...buildOptions(50, ja50), structure: extractedStructure }
       translatePromises.push(
         translateFull(options50).then(result => ({ uiLevel: 50, translation: result.translation, ja: ja50, risk: result.risk }))
       )
       console.log('[Pipeline] 50%英語翻訳開始')
 
-      // 100%用の日本語を探す（50%で採用したレベルの次から試す）
-      if (adopted50Level >= 100) {
-        // 50%枠が100%を採用した場合は、100%枠は変化なしで採用
+      // 100%用の日本語を探す（50%を基準に75, 100から選ぶ）
+      for (const level of [75, 100]) {
+        const editedJa = await editJapaneseForTone(sourceText, tone, level, customToneValue, signal, extractedStructure)
+
+        // 品質チェック
+        if (!isJapaneseValid(sourceText, editedJa, tone)) continue
+        // 50%と違うかチェック
+        if (isTooSimilar(editedJa, confirmedJa[50])) continue
+        // 敬語レベル一貫性チェック（50%より敬語が弱くなっていないか）
+        if (!checkIsMorePolite(confirmedJa[50], editedJa, tone)) continue
+
+        confirmedJa[100] = editedJa
+        console.log(`[JaBase] 100%枠: ${level}%を採用`)
+        break
+      }
+      // フォールバック（全て変化なしの場合）
+      if (!confirmedJa[100]) {
         confirmedJa[100] = confirmedJa[50]
-        console.log('[JaBase] 100%枠: 50%枠が100%を採用したため変化なし')
-      } else {
-        // 50%で採用したレベルの次から試す（最大2回までリトライ）
-        const startLevels = [25, 50, 75, 100].filter(l => l > adopted50Level)
-        let retryCount100 = 0
-        for (const level of startLevels) {
-          if (retryCount100 >= MAX_RETRY) {
-            console.log(`[JaBase] 100%枠: リトライ上限(${MAX_RETRY}回)に達したためフォールバック`)
-            break
-          }
-          retryCount100++
-          const editedJa = await editJapaneseForTone(sourceText, tone, level, customToneValue, signal)
-
-          // 品質チェック
-          if (!isJapaneseValid(sourceText, editedJa, tone)) continue
-          // 50%と違うかチェック
-          if (isTooSimilar(editedJa, confirmedJa[50])) continue
-          // 敬語レベル一貫性チェック（50%より敬語が弱くなっていないか）
-          if (!checkIsMorePolite(confirmedJa[50], editedJa, tone)) continue
-
-          confirmedJa[100] = editedJa
-          console.log(`[JaBase] 100%枠: ${level}%を採用`)
-          break
-        }
-        // フォールバック（全て変化なしの場合）
-        if (!confirmedJa[100]) {
-          confirmedJa[100] = confirmedJa[50]
-          console.log('[JaBase] 100%枠: 変化なしで採用')
-        }
+        console.log('[JaBase] 100%枠: 変化なしで採用')
       }
 
       // 100%: 日本語確定 → 即座に英語翻訳開始
       const ja100 = confirmedJa[100]
-      const options100 = buildOptions(100, ja100)
+      const options100 = { ...buildOptions(100, ja100), structure: extractedStructure }
       translatePromises.push(
         translateFull(options100).then(result => ({ uiLevel: 100, translation: result.translation, ja: ja100, risk: result.risk }))
       )
@@ -978,13 +976,16 @@ function App() {
     const internal: Record<number, TranslationResult> = {}
 
     const base0 = await translateFull(buildOptions(0))
+    // 0%の逆翻訳は原文そのまま（翻訳の逆翻訳ではない）
+    base0.reverse_translation = sourceText
     internal[0] = base0
 
     // 25→50→75→100 を「直前の翻訳」をアンカーにしてPARTIAL編集
     // フォールバックしても止めずに全部生成する
     let prev = base0
+    let prevLevel = 0  // 2026-02-03: 逆翻訳で差分を表現するための前レベル
     for (const level of [25, 50, 75, 100]) {
-      const guarded = await translateWithGuard(buildOptions(level, undefined, prev))
+      const guarded = await translateWithGuard(buildOptions(level, undefined, prev, prevLevel))
 
       // 結果を保存（フォールバックしたかどうかに関わらず）
       internal[level] = guarded.result
@@ -993,6 +994,7 @@ function App() {
       const translationChanged = !isTooSimilar(guarded.result.translation, prev.translation)
       if (translationChanged) {
         prev = guarded.result
+        prevLevel = level  // 2026-02-03: 前レベルも更新
       }
     }
 
@@ -1013,12 +1015,12 @@ function App() {
       return 0
     }
 
-    const ui50Internal = pickInternal(base0, [50, 75, 100])
+    // 50%枠: 0%を基準に25, 50から選ぶ
+    const ui50Internal = pickInternal(base0, [25, 50])
     const ui50Res = internal[ui50Internal] ?? base0
 
-    const ui100Candidates = [50, 75, 100].filter((l) => l > ui50Internal)
-    const ui100Internal =
-      ui100Candidates.length > 0 ? pickInternal(ui50Res, ui100Candidates) : 100
+    // 100%枠: 50%を基準に75, 100から選ぶ
+    const ui100Internal = pickInternal(ui50Res, [75, 100])
     const ui100Res = internal[ui100Internal] ?? ui50Res
 
     cacheBucket(0, base0)
@@ -1085,7 +1087,8 @@ function App() {
           currentUiBucket: currentToneBucket,
           customToneOverride,
           targetLang: effectiveTargetLang,
-          sourceLang: effectiveSourceLang
+          sourceLang: effectiveSourceLang,
+          cachedStructure: extractedStructureRef.current  // refから構造情報を使う
         })
 
         // 生成完了後に表示更新
@@ -1105,6 +1108,111 @@ function App() {
       } finally {
         setIsTranslating(false)
       }
+    }
+  }
+
+  // ============================================
+  // トーンレベル間の違い解説を取得
+  // ============================================
+  const handleToneDiffExplanation = async () => {
+    // 既に展開中なら閉じる
+    if (toneDiffExpanded) {
+      setToneDiffExpanded(false)
+      return
+    }
+
+    const currentBucket = activeToneBucket
+    
+    // キャッシュから翻訳を取得
+    const effectiveSourceLang = translateSelfSourceLang === '自動認識'
+      ? (detectedSelfLang || '日本語')
+      : translateSelfSourceLang
+    const effectiveTargetLang = translateSelfTargetLang
+
+    // 0%の場合（またはトーン未選択時）は「この文の伝わり方」を解説
+    if (currentBucket === 0 || !selectedTone) {
+      // プレビューから直接翻訳を取得
+      if (!preview.translation) {
+        setToneDiffExplanation({
+          point: 'この文の伝わり方',
+          explanation: '翻訳がまだ生成されていません。'
+        })
+        setToneDiffExpanded(true)
+        return
+      }
+
+      setToneDiffLoading(true)
+      setToneDiffExpanded(true)
+
+      const sourceLangCode0 = getLangCodeFromName(effectiveSourceLang)
+      const targetLangCode0 = getLangCodeFromName(effectiveTargetLang)
+      try {
+        const explanation = await generateExplanation(
+          preview.translation,
+          sourceLangCode0,
+          targetLangCode0,
+          sourceLangCode0  // 解説は原文の言語で出力
+        )
+        setToneDiffExplanation({
+          point: explanation.point || getDifferenceFromText(sourceLangCode0, 0),
+          explanation: explanation.explanation
+        })
+      } catch (error) {
+        console.error('[handleToneDiffExplanation] 0% error:', error)
+        setToneDiffExplanation({
+          point: getDifferenceFromText(sourceLangCode0, 0),
+          explanation: getFailedToGenerateText(sourceLangCode0)
+        })
+      } finally {
+        setToneDiffLoading(false)
+      }
+      return
+    }
+
+    // 50%/100%の場合は前のレベルとの違いを解説
+    const levels = [0, 50, 100]
+    const idx = levels.indexOf(currentBucket)
+    if (idx <= 0) return
+    const prevBucket = levels[idx - 1]
+
+    const prevKey = getCacheKey(selectedTone, prevBucket, previewSourceText, customTone, effectiveSourceLang, effectiveTargetLang, isNative)
+    const currKey = getCacheKey(selectedTone, currentBucket, previewSourceText, customTone, effectiveSourceLang, effectiveTargetLang, isNative)
+
+    const prevCached = translationCacheRef.current[prevKey]
+    const currCached = translationCacheRef.current[currKey]
+
+    const sourceLangCode = getLangCodeFromName(effectiveSourceLang)
+
+    if (!prevCached || !currCached) {
+      setToneDiffExplanation({
+        point: getDifferenceFromText(sourceLangCode, prevBucket),
+        explanation: getNotYetGeneratedText(sourceLangCode)
+      })
+      setToneDiffExpanded(true)
+      return
+    }
+
+    setToneDiffLoading(true)
+    setToneDiffExpanded(true)
+
+    try {
+      const explanation = await generateToneDifferenceExplanation(
+        prevCached.translation,
+        currCached.translation,
+        prevBucket,
+        currentBucket,
+        selectedTone,
+        sourceLangCode
+      )
+      setToneDiffExplanation(explanation)
+    } catch (error) {
+      console.error('[handleToneDiffExplanation] error:', error)
+      setToneDiffExplanation({
+        point: getDifferenceFromText(sourceLangCode, prevBucket),
+        explanation: getFailedToGenerateText(sourceLangCode)
+      })
+    } finally {
+      setToneDiffLoading(false)
     }
   }
 
@@ -1186,7 +1294,8 @@ function App() {
             customToneOverride: undefined,
             targetLang: targetLang || currentPartner?.language,
             sourceLang: sourceLang || '日本語',
-            signal: foregroundController.signal
+            signal: foregroundController.signal,
+            cachedStructure: extractedStructureRef.current  // refから構造情報を使う
           })
 
           // 生成完了後、キャッシュからプレビューを更新
@@ -1306,7 +1415,8 @@ function App() {
         isNative,
         sourceText,
         currentUiBucket: currentToneBucket,
-        customToneOverride: customToneValue
+        customToneOverride: customToneValue,
+        cachedStructure: extractedStructureRef.current  // refから構造情報を使う
       })
 
       const newCacheKey = getCacheKey(effectiveTone, currentToneBucket, sourceText, customToneValue, sourceLang, targetLang, isNative)
@@ -1386,7 +1496,9 @@ function App() {
     // ※ lockedTone/lockedLevelはリセットしない（次回変換用に保持）
 
     // ③ バックグラウンドで解説取得（awaitしない）
-    generateExplanation(translationText, '日本語', partnerLang)
+    // TODO: チャット画面でも入力言語を動的に取得する場合は修正が必要
+    const partnerLangCode = getLangCodeFromName(partnerLang)
+    generateExplanation(translationText, 'ja', partnerLangCode, 'ja')
       .then(explanation => {
         setPartners(prev => prev.map(p =>
           p.id === partnerId
@@ -1475,128 +1587,161 @@ function App() {
     }
   }
 
-  // 言語自動認識
   // ============================================
-  // 言語検出 v2（2026-02-02 再設計）
-  // 3段階方式: CJK → 固有文字 → 単語スコアリング
+  // 言語検出 v3（2026-02-02 シュワちゃん版統合）
+  // 4段階方式: CJK → 拡張特徴文字 → 単語リスト → n-gram統計
+  // Based on: language-detector.js by シュワちゃん
   // ============================================
+
+  // n-gramプロファイル（シュワちゃん事前計算）
+  const LANGUAGE_PROFILES: Record<string, string[]> = {
+    '日本語': ['は', 'す', 'い', 'す_', 'です', 'ます', '日本', '本語', '日本語', 'こん', 'にち', 'ちは', 'あり', 'がと', 'とう'],
+    '英語': ['the', 'is', 'are', 'you', 'to', 'and', 'in', 'it', 'of', 'that', 'have', 'for', 'not', 'with', 'this'],
+    'フランス語': ['le', 'la', 'les', 'de', 'est', 'et', 'en', 'un', 'une', 'je', 'vous', 'que', 'ne', 'pas', 'pour'],
+    'スペイン語': ['el', 'la', 'de', 'que', 'es', 'en', 'un', 'una', 'los', 'las', 'no', 'por', 'con', 'para', 'se'],
+    'ドイツ語': ['der', 'die', 'und', 'in', 'ist', 'das', 'den', 'ich', 'sie', 'es', 'nicht', 'mit', 'ein', 'eine', 'auf'],
+    'イタリア語': ['il', 'la', 'di', 'che', 'e', 'un', 'una', 'in', 'per', 'non', 'sono', 'con', 'lo', 'gli', 'le'],
+    'ポルトガル語': ['de', 'a', 'o', 'que', 'e', 'do', 'da', 'em', 'um', 'para', 'com', 'não', 'uma', 'os', 'se'],
+    '韓国語': ['요', '니다', '안녕', '하세요', '감사', '합니다', '는', '이', '가', '을', '를', '에', '에서', '와', '과'],
+    '中国語': ['的', '是', '了', '在', '有', '我', '他', '她', '你', '们', '这', '那', '好', '中', '文'],
+    'チェコ語': ['je', 'se', 'na', 'v', 'a', 'že', 'do', 'pro', 'to', 'ne', 'si', 'tak', 'jak', 'ale', 'co']
+  }
+
+  // ラテン系言語の拡張特徴
+  const LATIN_FEATURES: Record<string, { unique: string; chars: string; bigrams: string[] }> = {
+    'フランス語': { unique: 'çœ', chars: 'çéèêëàâîïôùûüœ', bigrams: ['ai', 'au', 'ou', 'eu', 'oi', 'on', 'an', 'en'] },
+    'スペイン語': { unique: 'ñ¿¡', chars: 'áéíóúüñ', bigrams: ['ue', 'ie', 'io', 'ia', 'ei'] },
+    'ドイツ語': { unique: 'ß', chars: 'äöüß', bigrams: ['ch', 'sch', 'ei', 'ie', 'au', 'eu'] },
+    'イタリア語': { unique: 'ìò', chars: 'àèéìòù', bigrams: ['ch', 'gh', 'sc', 'gn', 'gl'] },
+    'ポルトガル語': { unique: 'ãõ', chars: 'áàâãçéêíóôõú', bigrams: ['ão', 'õe', 'ai', 'ei', 'ou'] },
+    'チェコ語': { unique: 'řů', chars: 'áčďéěíňóřšťúůýž', bigrams: ['ch', 'st', 'ní', 'tí'] },
+    '英語': { unique: '', chars: '', bigrams: [] }
+  }
+
+  // 一般的な単語リスト（v3.2: merci, beaucoup, stai追加）
+  const COMMON_WORDS: Record<string, string[]> = {
+    '英語': ['the', 'a', 'an', 'is', 'are', 'was', 'were', 'be', 'have', 'has', 'this', 'that', 'i', 'you', 'he', 'she', 'it', 'we', 'they', 'my', 'your', 'do', 'does', 'not', 'can', 'will', 'would', 'could', 'should', 'what', 'how', 'why', 'when', 'where', 'who', 'come', 'here', 'there', 'go', 'get', 'make', 'know', 'think', 'take', 'see', 'want', 'just', 'now', 'only', 'very', 'also', 'back', 'after', 'use', 'our', 'out', 'up', 'other', 'into', 'more', 'some', 'time', 'so', 'if', 'no', 'than', 'them', 'then', 'way', 'look', 'first', 'new', 'because', 'day', 'people', 'over', 'such', 'through', 'long', 'little', 'own', 'good', 'man', 'too', 'any', 'same', 'tell', 'work', 'last', 'most', 'need', 'feel', 'high', 'much', 'off', 'old', 'right', 'still', 'mean', 'keep', 'let', 'put', 'did', 'had', 'got'],
+    'フランス語': ['le', 'la', 'les', 'un', 'une', 'est', 'sont', 'ai', 'je', 'tu', 'il', 'elle', 'nous', 'vous', 'de', 'et', 'en', 'ce', 'cette', 'mon', 'ton', 'son', 'ne', 'pas', 'que', 'qui', 'mais', 'ou', 'donc', 'car', 'comprends', 'comprend', 'suis', 'es', 'fait', 'faire', 'avoir', 'pour', 'avec', 'sur', 'dans', 'par', 'merci', 'beaucoup', 'bonjour', 'bonsoir', 'comment', 'allez', 'bien', 'très', 'oui', 'non'],
+    'スペイン語': ['el', 'la', 'los', 'las', 'un', 'una', 'es', 'son', 'yo', 'tu', 'él', 'ella', 'mi', 'su', 'de', 'y', 'en', 'que', 'no', 'tengo', 'tiene', 'pero', 'como', 'para', 'por', 'con', 'entiendo', 'entiende', 'hablo', 'habla', 'puedo', 'puede', 'quiero', 'quiere', 'gracias', 'hola', 'buenos', 'buenas', 'muy', 'bien'],
+    'ドイツ語': ['der', 'die', 'das', 'ein', 'eine', 'ist', 'sind', 'war', 'ich', 'du', 'er', 'sie', 'es', 'wir', 'mein', 'dein', 'sein', 'und', 'mit', 'für', 'auf', 'nicht', 'aber', 'oder', 'wenn', 'wie', 'geht', 'ihnen', 'haben', 'werden', 'kann', 'guten', 'tag', 'morgen', 'danke', 'bitte', 'gut', 'sehr'],
+    'イタリア語': ['il', 'lo', 'la', 'i', 'gli', 'le', 'un', 'una', 'e', 'sono', 'ho', 'hai', 'ha', 'io', 'tu', 'lui', 'lei', 'noi', 'di', 'che', 'non', 'ma', 'come', 'per', 'con', 'capisco', 'capisce', 'parlo', 'parla', 'posso', 'voglio', 'bene', 'molto', 'questo', 'quello', 'stai', 'sta', 'sto', 'grazie', 'ciao', 'buongiorno', 'buonasera'],
+    'ポルトガル語': ['o', 'a', 'os', 'as', 'um', 'uma', 'são', 'tenho', 'tem', 'eu', 'tu', 'ele', 'ela', 'nós', 'de', 'em', 'que', 'não', 'com', 'para', 'por', 'mas', 'entendo', 'entende', 'falo', 'fala', 'posso', 'pode', 'quero', 'quer', 'muito', 'bem', 'obrigado', 'obrigada', 'bom', 'dia', 'tudo'],
+    'チェコ語': ['ten', 'ta', 'to', 'je', 'jsou', 'byl', 'já', 'ty', 'on', 'ona', 'my', 'vy', 'z', 'na', 'v', 'a', 'že', 'do', 'pro', 'ale', 'jak', 'máte', 'mám', 'rozumím', 'mluvím', 'dobrý', 'den', 'děkuji']
+  }
+
   const detectLanguage = (text: string): string => {
     if (!text.trim()) return ''
 
     const textLower = text.toLowerCase()
 
-    // === Stage 1: CJK言語（Unicode範囲で確実判定） ===
+    // ===== Stage 1: 固有スクリプト検出（CJK言語） =====
     if (/[\u3040-\u309F\u30A0-\u30FF]/.test(text)) return '日本語' // ひらがな・カタカナ
     if (/[\uAC00-\uD7AF\u1100-\u11FF]/.test(text)) return '韓国語' // ハングル
     if (/[\u4E00-\u9FFF]/.test(text)) return '中国語' // 漢字
 
-    // === Stage 2: 固有文字（これがあれば確定） ===
-    if (/[ěščřžůťďňĚŠČŘŽŮŤĎŇ]/.test(text)) return 'チェコ語'
-    if (/ß/.test(text)) return 'ドイツ語'
-    if (/[¿¡ñÑ]/.test(text)) return 'スペイン語'
-    if (/[ãõÃÕ]/.test(text)) return 'ポルトガル語'
-    if (/[œæŒÆ]/.test(text)) return 'フランス語'
+    // ===== Stage 2: 拡張特徴文字検出（ラテン系言語） =====
+    const latinScores: Record<string, number> = {}
+    for (const [lang, features] of Object.entries(LATIN_FEATURES)) {
+      latinScores[lang] = 0
+      // 固有文字（高い重み）
+      for (const char of features.unique) {
+        if (textLower.includes(char)) latinScores[lang] += 5
+      }
+      // 特徴文字
+      for (const char of features.chars) {
+        if (textLower.includes(char)) latinScores[lang] += 1
+      }
+      // バイグラム
+      for (const bigram of features.bigrams) {
+        if (textLower.includes(bigram)) latinScores[lang] += 0.5
+      }
+    }
 
-    // === Stage 3: 単語スコアリング ===
+    // 固有文字で確定できる場合
+    const maxLatinScore = Math.max(0, ...Object.values(latinScores))
+    if (maxLatinScore >= 5) {
+      const bestLang = Object.entries(latinScores).sort((a, b) => b[1] - a[1])[0][0]
+      return bestLang
+    }
+
+    // ===== Stage 3: 単語リスト検出 =====
+    const wordScores: Record<string, number> = {}
+    const words = textLower.match(/\b\w+\b/g) || []
     
-    // 各言語の頻出単語リスト
-    const wordLists: Record<string, string[]> = {
-      'ドイツ語': [
-        'der', 'die', 'das', 'ein', 'eine', 'und', 'ist', 'sind', 'war', 'waren',
-        'ich', 'du', 'er', 'sie', 'es', 'wir', 'ihr', 'nicht', 'mit', 'für', 'auf',
-        'haben', 'werden', 'kann', 'guten', 'tag', 'morgen', 'danke', 'bitte',
-        'wie', 'geht', 'ihnen', 'mir', 'gut', 'ja', 'nein', 'herr', 'frau'
-      ],
-      'イタリア語': [
-        'il', 'la', 'lo', 'gli', 'le', 'un', 'una', 'sono', 'ho', 'hai', 'ha',
-        'non', 'che', 'di', 'in', 'con', 'per', 'come', 'questo', 'quella',
-        'buongiorno', 'buonasera', 'grazie', 'ciao', 'prego', 'scusi', 'bene',
-        'molto', 'tutto', 'quando', 'dove', 'perché', 'anche', 'sempre', 'mai'
-      ],
-      'ポルトガル語': [
-        'o', 'os', 'um', 'uma', 'são', 'tem', 'não', 'que', 'de',
-        'em', 'para', 'com', 'por', 'isso', 'este', 'esta', 'muito', 'bem',
-        'bom', 'dia', 'obrigado', 'obrigada', 'olá', 'oi', 'tudo', 'você',
-        'como', 'está', 'quando', 'onde', 'porque', 'também', 'sempre', 'nunca'
-      ],
-      'フランス語': [
-        'le', 'la', 'les', 'un', 'une', 'et', 'est', 'sont', 'je', 'tu', 'il', 'elle',
-        'nous', 'vous', 'ils', 'elles', 'ne', 'pas', 'que', 'qui', 'de',
-        'pour', 'avec', 'ce', 'cette', 'très', 'bien', 'oui', 'non',
-        'bonjour', 'merci', 'comment', 'allez', 'pourriez', 'pouvez', 'avez'
-      ],
-      'スペイン語': [
-        'el', 'la', 'los', 'las', 'un', 'una', 'es', 'son', 'no', 'que', 'de',
-        'en', 'para', 'por', 'con', 'este', 'esta', 'muy', 'bien',
-        'hola', 'buenos', 'gracias', 'como', 'cuando', 'donde',
-        'también', 'siempre', 'nunca', 'todo', 'nada', 'mucho', 'poco'
-      ],
-      '英語': [
-        'the', 'is', 'are', 'was', 'were', 'be', 'been', 'have', 'has', 'had',
-        'do', 'does', 'did', 'will', 'would', 'can', 'could', 'not', 'and', 'or', 'but',
-        'this', 'that', 'these', 'those', 'you', 'he', 'she', 'we', 'they',
-        'hello', 'hi', 'good', 'morning', 'thank', 'please', 'yes', 'how', 'what'
-      ]
-    }
-
-    // 挨拶フレーズ（高ボーナス）
-    const greetings: Record<string, string[]> = {
-      'ドイツ語': ['guten tag', 'guten morgen', 'guten abend', 'auf wiedersehen', 'wie geht es ihnen'],
-      'イタリア語': ['buongiorno', 'buonasera', 'buonanotte', 'come stai', 'come sta'],
-      'ポルトガル語': ['bom dia', 'boa tarde', 'boa noite', 'como vai', 'tudo bem'],
-      'フランス語': ['bonjour', 'bonsoir', 'bonne nuit', 'comment allez', 'au revoir'],
-      'スペイン語': ['buenos dias', 'buenas tardes', 'buenas noches', 'como estas', 'hasta luego'],
-      '英語': ['good morning', 'good afternoon', 'good evening', 'how are you']
-    }
-
-    // スコア計算
-    const scores: Record<string, number> = {
-      'ドイツ語': 0, 'イタリア語': 0, 'ポルトガル語': 0,
-      'フランス語': 0, 'スペイン語': 0, '英語': 0
-    }
-
-    // 挨拶フレーズチェック（+10点）
-    for (const [lang, phrases] of Object.entries(greetings)) {
-      for (const phrase of phrases) {
-        if (textLower.includes(phrase)) {
-          scores[lang] += 10
-        }
-      }
-    }
-
-    // 単語マッチチェック
-    for (const [lang, words] of Object.entries(wordLists)) {
+    for (const [lang, commonWords] of Object.entries(COMMON_WORDS)) {
+      wordScores[lang] = 0
       for (const word of words) {
-        // 単語境界でマッチ（2文字以上の単語のみ境界チェック）
-        if (word.length >= 2) {
-          const regex = new RegExp(`\\b${word}\\b`, 'gi')
-          const matches = textLower.match(regex)
-          if (matches) scores[lang] += matches.length
+        if (commonWords.includes(word)) wordScores[lang] += 1
+      }
+    }
+
+    // ラテン特徴スコアを加算
+    for (const lang of Object.keys(wordScores)) {
+      if (latinScores[lang]) {
+        wordScores[lang] += latinScores[lang]
+      }
+    }
+
+    // 最高スコアの言語を返す
+    const maxWordScore = Math.max(0, ...Object.values(wordScores))
+    if (maxWordScore >= 2) {
+      const sortedScores = Object.entries(wordScores).sort((a, b) => b[1] - a[1])
+      const [bestLang, bestScore] = sortedScores[0]
+      const englishScore = wordScores['英語'] || 0
+      // 英語との差が1点以上あれば他言語を返す（v3.3: 条件緩和）
+      if (bestLang !== '英語' && bestScore > englishScore) {
+        return bestLang
+      } else if (bestLang === '英語') {
+        return '英語'
+      }
+      // 同点の場合は最高スコアの言語を返す
+      if (bestScore >= 2) {
+        return bestLang
+      }
+    }
+
+    // ===== Stage 4: n-gram統計的検出 =====
+    const extractNgrams = (t: string): string[] => {
+      const ngrams: Record<string, number> = {}
+      const normalized = t.toLowerCase().trim().replace(/\s+/g, ' ')
+      for (const n of [1, 2, 3]) {
+        const padded = '_'.repeat(n - 1) + normalized + '_'.repeat(n - 1)
+        for (let i = 0; i <= padded.length - n; i++) {
+          const ngram = padded.slice(i, i + n)
+          ngrams[ngram] = (ngrams[ngram] || 0) + 1
         }
       }
+      return Object.entries(ngrams).sort((a, b) => b[1] - a[1]).map(([ng]) => ng)
     }
 
-    // アクセント記号によるボーナス（確定ではないが加点）
-    if (/[äöü]/.test(text)) scores['ドイツ語'] += 3
-    if (/[àèéìòù]/.test(text)) scores['イタリア語'] += 2
-    if (/[áéíóúâêô]/.test(text)) scores['ポルトガル語'] += 2
-    if (/[àâçèéêëîïôùûü]/.test(text)) scores['フランス語'] += 2
-    if (/[áéíóú]/.test(text)) scores['スペイン語'] += 2
+    const textNgrams = extractNgrams(text)
+    const ngramScores: Record<string, number> = {}
 
-    // 最高スコアを取得
-    let maxLang = '英語'
-    let maxScore = scores['英語']
+    // ラテン文字のみの場合はCJK言語を除外
+    const isLatinOnly = text.split('').every(c => (c.codePointAt(0) || 0) < 0x3000)
+    const candidateLangs = isLatinOnly 
+      ? ['英語', 'フランス語', 'スペイン語', 'ドイツ語', 'イタリア語', 'ポルトガル語', 'チェコ語']
+      : Object.keys(LANGUAGE_PROFILES)
 
-    for (const [lang, score] of Object.entries(scores)) {
-      if (score > maxScore) {
-        maxScore = score
-        maxLang = lang
+    for (const lang of candidateLangs) {
+      const profile = LANGUAGE_PROFILES[lang]
+      if (!profile) continue
+      let score = 0
+      const profileSet = new Set(profile)
+      for (let i = 0; i < Math.min(textNgrams.length, 30); i++) {
+        if (profileSet.has(textNgrams[i])) {
+          score += Math.max(0, profile.length - profile.indexOf(textNgrams[i]))
+        }
       }
+      // ラテン特徴スコアを加味
+      if (latinScores[lang]) score *= (1 + latinScores[lang] * 0.1)
+      ngramScores[lang] = score
     }
 
-    // 閾値: 2点以上で採用（英語との差も考慮）
-    if (maxScore >= 2 && (maxLang === '英語' || maxScore > scores['英語'] + 1)) {
-      return maxLang
+    const totalScore = Object.values(ngramScores).reduce((a, b) => a + b, 0)
+    if (totalScore > 0) {
+      const sortedNgram = Object.entries(ngramScores).sort((a, b) => b[1] - a[1])
+      return sortedNgram[0][0]
     }
 
     // デフォルトは英語
@@ -1628,6 +1773,7 @@ function App() {
 
     setTranslateMessages(prev => [...prev, newMessage])
     setTranslatePartnerText('')
+    setHideSelfSection(false)
 
     // 非同期処理用に値を保持
     const sourceLangAtRequest = detected
@@ -1643,6 +1789,15 @@ function App() {
         toneLevel: 50
       })
 
+      // AI検出の言語があれば更新（より正確）
+      if (result.detected_language && translatePartnerSourceLang === '自動認識') {
+        setDetectedPartnerLang(result.detected_language)
+        // 言語連動: 相手言語 → 自分のターゲット言語（手動設定されていない場合のみ）
+        if (!selfTargetLangManuallySet) {
+          setTranslateSelfTargetLang(result.detected_language)
+        }
+      }
+
       setTranslateMessages(prev => prev.map(m =>
         m.id === messageId
           ? { ...m, translation: result.translation }
@@ -1652,7 +1807,10 @@ function App() {
       // バックグラウンドで解説取得（相手の言語について解説）
       // 第1引数: 元のテキスト（相手の言語）
       // 第3引数: 相手の言語（この言語について解説）
-      generateExplanation(sourceText, targetLangAtRequest, sourceLangAtRequest)
+      // 第4引数: 解説の出力言語（ユーザーの言語 = 翻訳先）
+      const targetLangCode = getLangCodeFromName(targetLangAtRequest)
+      const sourceLangCode = getLangCodeFromName(sourceLangAtRequest)
+      generateExplanation(sourceText, targetLangCode, sourceLangCode, targetLangCode)
         .then(explanation => {
           setTranslateMessages(prev => prev.map(m =>
             m.id === messageId ? { ...m, explanation } : m
@@ -1676,17 +1834,25 @@ function App() {
     if (!translateSelfText.trim()) return
 
     const sourceText = translateSelfText.trim()
-    // 既にuseEffectで検出されているはずだが、念のため再検出
+    // 翻訳ボタン押下時は常に最新のテキストで言語検出（前の検出結果を使わない）
     const detected = translateSelfSourceLang === '自動認識'
-      ? (detectedSelfLang || detectLanguage(sourceText))
+      ? detectLanguage(sourceText)
       : translateSelfSourceLang
     setDetectedSelfLang(detected)
     setPreviewSourceText(sourceText)
 
+    // ★ 新しい翻訳時は0%から表示（ロックされてる場合はそのレベル）
+    if (!lockedTone && selectedTone) {
+      setToneLevel(0)
+      setToneUiValue(0)
+      setActiveToneBucket(0)
+      currentBucketRef.current = 0
+    }
+
     // ★ トーン未選択の場合は0%のみ、選択済みなら全バケット生成
     const isToneSelected = !!(lockedTone || selectedTone)
     const effectiveTone = lockedTone || selectedTone || 'casual'
-    const effectiveLevel = lockedTone ? lockedLevel ?? 0 : (isToneSelected ? toneLevel : 0)
+    const effectiveLevel = lockedTone ? lockedLevel ?? 0 : 0  // 常に0%から開始
 
     if (lockedTone && !selectedTone) {
       setSelectedTone(lockedTone)
@@ -1731,6 +1897,29 @@ function App() {
     setTranslationError(null)
     setShowPreview(false)
 
+    // ★ 構造化M抽出 v2（日本語の場合のみ）
+    // 結果はrefに保存して、トーン切り替え時も使い回す
+    let structurePromise: Promise<ExpandedStructure | undefined> | undefined
+    if (sourceLang === '日本語') {
+      // 同じ原文なら再抽出しない
+      if (structureSourceTextRef.current !== sourceText) {
+        structurePromise = extractStructure(sourceText).then(structure => {
+          extractedStructureRef.current = structure
+          structureSourceTextRef.current = sourceText
+          console.log('[handleTranslateConvert] Structure extracted and saved to ref:', structure)
+          return structure
+        }).catch(err => {
+          console.error('[handleTranslateConvert] Structure extraction failed:', err)
+          return undefined
+        })
+        console.log('[handleTranslateConvert] Structure extraction started (parallel with 0% translation)')
+      } else {
+        // 既に抽出済みならそれを使う
+        console.log('[handleTranslateConvert] Using cached structure from ref:', extractedStructureRef.current)
+        structurePromise = Promise.resolve(extractedStructureRef.current)
+      }
+    }
+
     try {
       if (isToneSelected) {
         // ★ トーン選択済み → 全バケット生成（従来通り）
@@ -1741,10 +1930,16 @@ function App() {
           currentUiBucket: currentToneBucket,
           customToneOverride: customToneValue,
           targetLang,
-          sourceLang
+          sourceLang,
+          structurePromise  // Promiseを渡す（0%と並列実行）
         })
       } else {
         // ★ トーン未選択 → 0%だけ生成（基本翻訳のみ）
+        // 構造抽出の完了を待ってから翻訳（構造情報も使う）
+        let structureForTranslate: ExpandedStructure | undefined
+        if (structurePromise) {
+          structureForTranslate = await structurePromise
+        }
         const result = await translateFull({
           sourceText,
           sourceLang,
@@ -1752,8 +1947,13 @@ function App() {
           isNative,
           tone: 'casual',
           toneLevel: 0,
-          customTone: undefined
+          customTone: undefined,
+          structure: structureForTranslate
         })
+        // AI検出の言語があれば更新（より正確）
+        if (result.detected_language && translateSelfSourceLang === '自動認識') {
+          setDetectedSelfLang(result.detected_language)
+        }
         // 0%のキャッシュに保存
         const cacheKey0 = getCacheKey('casual', 0, sourceText, undefined, sourceLang, targetLang, isNative)
         updateTranslationCache({
@@ -1806,8 +2006,10 @@ function App() {
     setSelectedTone(null)
     setShowCustomInput(false)
 
-    // バックグラウンドで解説取得
-    generateExplanation(preview.translation, effectiveSourceLang, translateSelfTargetLang)
+    // バックグラウンドで解説取得（原文の言語で解説）
+    const srcLangCode = getLangCodeFromName(effectiveSourceLang)
+    const tgtLangCode = getLangCodeFromName(translateSelfTargetLang)
+    generateExplanation(preview.translation, srcLangCode, tgtLangCode, srcLangCode)
       .then(explanation => {
         setTranslateMessages(prev => prev.map(m =>
           m.id === messageId ? { ...m, explanation } : m
@@ -2529,7 +2731,7 @@ function App() {
           className="translate-action-btn"
           disabled={translateMessages.length === 0}
         >
-          ➕ 保存
+          トーク保存
         </button>
         <button
           onClick={() => setCurrentScreen('list')}
@@ -2600,11 +2802,31 @@ function App() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* 翻訳したい文章入力欄（空で自分側にフォーカスがある時は隠す） */}
-      {!(hidePartnerSection && !translatePartnerText.trim()) && (
-        <div className="translate-input-section partner-section">
+      {/* 翻訳したい文章入力欄（自分側を操作中は隠す） */}
+      <div 
+        className="translate-input-section partner-section" 
+        style={{
+          ...(hideSelfSection ? { order: 10 } : {}),
+          visibility: ((hidePartnerSection || showPreview || selectedTone || isTranslating) && !translatePartnerText.trim()) ? 'hidden' : 'visible'
+        }}
+      >
           <div className="translate-section-header">
-            <span className="section-label">翻訳したい文章</span>
+            {hideSelfSection && (
+              <button
+                onClick={() => {
+                  setHideSelfSection(false)
+                  if (document.activeElement instanceof HTMLElement) {
+                    document.activeElement.blur()
+                  }
+                }}
+                className="collapse-btn-mini"
+              >
+                <X size={18} strokeWidth={2.5} />
+              </button>
+            )}
+            {!hideSelfSection && (
+              <span className="section-label">翻訳したい文章</span>
+            )}
             <div className="translate-lang-selectors">
               <select
                 value={translatePartnerSourceLang}
@@ -2635,11 +2857,26 @@ function App() {
           <div className="translate-input-row">
             <textarea
               value={translatePartnerText}
-              onChange={(e) => setTranslatePartnerText(e.target.value)}
-              onFocus={() => setHidePartnerSection(false)}
+              onChange={(e) => {
+                setTranslatePartnerText(e.target.value)
+                // 自動リサイズ
+                e.target.style.height = 'auto'
+                e.target.style.height = e.target.scrollHeight + 'px'
+              }}
+              onFocus={() => {
+                setHidePartnerSection(false)
+                setHideSelfSection(true)
+              }}
+              onBlur={() => {
+                // 入力が空なら元に戻す
+                if (!translatePartnerText.trim()) {
+                  setHideSelfSection(false)
+                }
+              }}
               placeholder="相手のメッセージを貼り付け..."
               className="translate-textarea"
-              rows={2}
+              style={{ minHeight: '40px', maxHeight: '200px', overflowY: 'auto', resize: 'none' }}
+              rows={1}
             />
             <button
               onClick={handleTranslatePartnerMessage}
@@ -2653,7 +2890,6 @@ function App() {
             <p className="detected-lang-label">検出: {detectedPartnerLang}</p>
           )}
         </div>
-      )}
 
       {/* プレビュー表示 */}
       {translationError && (
@@ -2667,29 +2903,60 @@ function App() {
           <p className="preview-label">翻訳プレビュー{preview.noChange && <span style={{ color: '#888', fontSize: '0.85em', marginLeft: '8px' }}>（変化なし）</span>}</p>
           <p className="preview-translation">{preview.translation}</p>
           <p className="preview-reverse">逆翻訳：{preview.reverseTranslation}</p>
+          {/* トーンレベル間の違い解説（0%以外で表示） */}
+          {(selectedTone === null || (selectedTone && selectedTone !== 'custom')) && (
+            <div className="tone-diff-section">
+              <button
+                onClick={handleToneDiffExplanation}
+                className="explanation-toggle self"
+              >
+                {toneDiffExpanded ? '▲ 解説を閉じる' : '▼ 解説'}
+              </button>
+              {toneDiffExpanded && (
+                <div className="explanation-box self">
+                  {toneDiffLoading ? (
+                    <div className="explanation-loading">
+                      <span>解説を読み込み中...</span>
+                    </div>
+                  ) : toneDiffExplanation ? (
+                    <>
+                      <div className="explanation-point-box">
+                        <span className="point-icon">💡</span>
+                        <span className="point-text">{toneDiffExplanation.point}</span>
+                      </div>
+                      <p className="explanation-text">{toneDiffExplanation.explanation}</p>
+                    </>
+                  ) : null}
+                </div>
+              )}
+            </div>
+          )}
         </div>
       )}
 
       {/* 送りたい文章入力欄 */}
-      <div className="translate-input-section self-section">
+      <div className="translate-input-section self-section" style={{ visibility: hideSelfSection ? 'hidden' : 'visible' }}>
         <div className="translate-section-header">
           {(hidePartnerSection || showPreview) && (
             <button
               onClick={() => {
                 setShowPreview(false)
                 setHidePartnerSection(false)
+                setSelectedTone(null)
                 if (document.activeElement instanceof HTMLElement) {
                   document.activeElement.blur()
                 }
               }}
               className="collapse-btn-mini"
             >
-              <ChevronDown size={14} strokeWidth={2.5} />
+              <X size={18} strokeWidth={2.5} />
             </button>
           )}
-          <span className={`section-label ${(hidePartnerSection || showPreview) ? 'section-label-compact' : ''}`}>
-            {(hidePartnerSection || showPreview) ? <>あなたが<br/>送りたい文章</> : 'あなたが送りたい文章'}
-          </span>
+          {!(hidePartnerSection || showPreview) && (
+            <span className="section-label">
+              あなたが送りたい文章
+            </span>
+          )}
           <div className="translate-lang-selectors">
             <select
               value={translateSelfSourceLang}
@@ -2721,20 +2988,30 @@ function App() {
           </div>
         </div>
         <div className="translate-input-row">
-          <input
-            type="text"
+          <textarea
             value={translateSelfText}
             onChange={(e) => {
               setTranslateSelfText(e.target.value)
               setShowPreview(false)
+              // 自動リサイズ
+              e.target.style.height = 'auto'
+              e.target.style.height = e.target.scrollHeight + 'px'
             }}
             onFocus={() => setHidePartnerSection(true)}
-            onBlur={() => setHidePartnerSection(false)}
+            onBlur={() => {
+              // プレビュー表示中やトーン選択中は隠したままにする
+              if (!showPreview && !selectedTone) {
+                setHidePartnerSection(false)
+              }
+            }}
             placeholder="メッセージを入力..."
             className="translate-input"
+            style={{ minHeight: '40px', maxHeight: '200px', overflowY: 'auto', resize: 'none' }}
+            rows={1}
             disabled={isTranslating}
           />
           <button
+            onMouseDown={(e) => e.preventDefault()}
             onClick={handleTranslateConvert}
             className="convert-btn"
             disabled={isTranslating || !translateSelfText.trim()}
@@ -2774,37 +3051,39 @@ function App() {
           />
         )}
 
-        <div className="tone-buttons-row">
-          {tones.map(tone => (
-            <button
-              key={tone.id}
-              onClick={() => handleToneSelect(tone.id)}
-              className={`tone-btn ${selectedTone === tone.id ? 'active' : ''} ${lockedTone && lockedTone !== tone.id ? 'dimmed' : ''}`}
-              data-tone={tone.id}
-              disabled={!hasTranslationResult || isTranslating}
-            >
-              {tone.label}
-              {lockedTone === tone.id && <span className="lock-indicator">🔒</span>}
-            </button>
-          ))}
+        {(hidePartnerSection || showPreview) && (
+          <div className="tone-buttons-row">
+            {tones.map(tone => (
+              <button
+                key={tone.id}
+                onClick={() => handleToneSelect(tone.id)}
+                className={`tone-btn ${selectedTone === tone.id ? 'active' : ''} ${lockedTone && lockedTone !== tone.id ? 'dimmed' : ''}`}
+                data-tone={tone.id}
+                disabled={!hasTranslationResult || isTranslating}
+              >
+                {tone.label}
+                {lockedTone === tone.id && <span className="lock-indicator">🔒</span>}
+              </button>
+            ))}
 
-          <button
-            onClick={() => {
-              if (lockedTone) {
-                setLockedTone(null)
-                setLockedLevel(0)
-              } else if (selectedTone && selectedTone !== 'custom') {
-                setLockedTone(selectedTone)
-                setLockedLevel(activeToneBucket)
-              }
-            }}
-            className={`lock-btn ${lockedTone ? 'locked' : ''}`}
-            disabled={(!selectedTone || selectedTone === 'custom') && !lockedTone}
-            title={lockedTone ? `${lockedTone} ${lockedLevel}%でロック中` : 'トーンをロック'}
-          >
-            🔒
-          </button>
-        </div>
+            <button
+              onClick={() => {
+                if (lockedTone) {
+                  setLockedTone(null)
+                  setLockedLevel(0)
+                } else if (selectedTone && selectedTone !== 'custom') {
+                  setLockedTone(selectedTone)
+                  setLockedLevel(activeToneBucket)
+                }
+              }}
+              className={`lock-btn ${lockedTone ? 'locked' : ''}`}
+              disabled={(!selectedTone || selectedTone === 'custom') && !lockedTone}
+              title={lockedTone ? `${lockedTone} ${lockedLevel}%でロック中` : 'トーンをロック'}
+            >
+              🔒
+            </button>
+          </div>
+        )}
 
         {showCustomInput && (
           <div className="custom-tone-container">
@@ -2835,6 +3114,7 @@ function App() {
               disabled={isTranslating}
             />
             <button
+              onMouseDown={(e) => e.preventDefault()}
               onClick={handleTranslateConvert}
               className="custom-convert-btn"
               disabled={isTranslating || !customTone.trim()}
@@ -3038,55 +3318,6 @@ function App() {
         </div>
       )}
 
-      {showAddPartner ? (
-        <div className="modal-overlay" onClick={() => setShowAddPartner(false)}>
-          <div className="modal-content add-partner-modal" onClick={(e) => e.stopPropagation()}>
-            <h3 className="modal-title">新しい相手を追加</h3>
-            <div className="form-group">
-              <label>名前</label>
-              <input
-                id="partner-name-input"
-                type="text"
-                value={newPartnerName}
-                onChange={(e) => setNewPartnerName(e.target.value)}
-                placeholder="相手の名前を入力"
-                className="form-input"
-                autoFocus
-              />
-            </div>
-            <div className="form-group">
-              <label>言語</label>
-              <select
-                id="partner-language-select"
-                value={newPartnerLanguage}
-                onChange={(e) => setNewPartnerLanguage(e.target.value)}
-                className="form-select"
-              >
-                {languageOptions.map((lang) => (
-                  <option key={lang.label} value={lang.label}>
-                    {lang.flag} {lang.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="modal-buttons">
-              <button onClick={() => setShowAddPartner(false)} className="btn-cancel">
-                キャンセル
-              </button>
-              <button
-                id="save-partner-btn"
-                onClick={() => {
-                  handleAddPartner();
-                }}
-                className="btn-save"
-              >
-                追加
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : null}
-
       <button
         className="fab-button home-fab"
         onClick={() => setCurrentScreen('translate')}
@@ -3217,23 +3448,55 @@ function App() {
           <p className="preview-label">翻訳プレビュー{preview.noChange && <span style={{ color: '#888', fontSize: '0.85em', marginLeft: '8px' }}>（変化なし）</span>}</p>
           <p className="preview-translation">{preview.translation}</p>
           <p className="preview-reverse">逆翻訳：{preview.reverseTranslation}</p>
+          {/* トーンレベル間の違い解説（0%以外で表示） */}
+          {(selectedTone === null || (selectedTone && selectedTone !== 'custom')) && (
+            <div className="tone-diff-section">
+              <button
+                onClick={handleToneDiffExplanation}
+                className="explanation-toggle self"
+              >
+                {toneDiffExpanded ? '▲ 解説を閉じる' : '▼ 解説'}
+              </button>
+              {toneDiffExpanded && (
+                <div className="explanation-box self">
+                  {toneDiffLoading ? (
+                    <div className="explanation-loading">
+                      <span>解説を読み込み中...</span>
+                    </div>
+                  ) : toneDiffExplanation ? (
+                    <>
+                      <div className="explanation-point-box">
+                        <span className="point-icon">💡</span>
+                        <span className="point-text">{toneDiffExplanation.point}</span>
+                      </div>
+                      <p className="explanation-text">{toneDiffExplanation.explanation}</p>
+                    </>
+                  ) : null}
+                </div>
+              )}
+            </div>
+          )}
         </div>
       )}
 
       <div className="input-area">
         <div className="input-row">
           <div className="input-wrapper">
-            <input
+            <textarea
               id="message-input"
-              type="text"
               value={inputText}
               onChange={(e) => {
                 setInputText(e.target.value)
                 setShowPreview(false)
+                // 高さ自動調整
+                e.target.style.height = 'auto'
+                e.target.style.height = Math.min(e.target.scrollHeight, 120) + 'px'
               }}
               placeholder="メッセージを入力..."
               className="message-input"
               disabled={isTranslating}
+              rows={1}
+              style={{ resize: 'none', overflow: 'auto' }}
             />
             <button
               id="convert-btn"
@@ -3527,6 +3790,54 @@ function App() {
 
       {showSaveModal && <SaveModal />}
       {showSelectPartnerModal && <SelectPartnerModal />}
+      {showAddPartner && (
+        <div className="modal-overlay" onClick={() => setShowAddPartner(false)}>
+          <div className="modal-content add-partner-modal" onClick={(e) => e.stopPropagation()}>
+            <h3 className="modal-title">新しい相手を追加</h3>
+            <div className="form-group">
+              <label>名前</label>
+              <input
+                id="partner-name-input"
+                type="text"
+                value={newPartnerName}
+                onChange={(e) => setNewPartnerName(e.target.value)}
+                placeholder="相手の名前を入力"
+                className="form-input"
+                autoFocus
+              />
+            </div>
+            <div className="form-group">
+              <label>言語</label>
+              <select
+                id="partner-language-select"
+                value={newPartnerLanguage}
+                onChange={(e) => setNewPartnerLanguage(e.target.value)}
+                className="form-select"
+              >
+                {languageOptions.map((lang) => (
+                  <option key={lang.label} value={lang.label}>
+                    {lang.flag} {lang.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="modal-buttons">
+              <button onClick={() => setShowAddPartner(false)} className="btn-cancel">
+                キャンセル
+              </button>
+              <button
+                id="save-partner-btn"
+                onClick={() => {
+                  handleAddPartner();
+                }}
+                className="btn-save"
+              >
+                追加
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
