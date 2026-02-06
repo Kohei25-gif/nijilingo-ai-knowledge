@@ -1,0 +1,824 @@
+{
+  "timestamp": "2026-02-06T12:42:39.114Z",
+  "total": 40,
+  "pass": 40,
+  "fail": 0,
+  "error": 0,
+  "results": [
+    {
+      "id": "A1",
+      "category": "A",
+      "input": "おうたが寝てから向かいます",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "移動",
+        "動作": "向かう",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": [
+          {
+            "text": "おうた",
+            "type": "person",
+            "読み": "Outa",
+            "敬称": "なし"
+          }
+        ]
+      },
+      "translation": "I'm heading after Outa falls asleep",
+      "reverse_translation": "おうたが寝てから向かいます"
+    },
+    {
+      "id": "A2",
+      "category": "A",
+      "input": "ごんたにご飯あげて",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "ご飯をあげる",
+        "動作": "あげる",
+        "意図": "依頼",
+        "主語": "省略",
+        "対象": "ごんた",
+        "目的格": "ご飯",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": [
+          {
+            "text": "ごんた",
+            "type": "person",
+            "敬称": "なし"
+          }
+        ]
+      },
+      "translation": "Give Gonta some rice",
+      "reverse_translation": "ごんたにご飯あげて"
+    },
+    {
+      "id": "A3",
+      "category": "A",
+      "input": "ゆうたと遊んでくる",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "遊びに行く",
+        "動作": "遊ぶ",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "ゆうた",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": [
+          {
+            "text": "ゆうた",
+            "type": "person",
+            "敬称": "なし"
+          }
+        ]
+      },
+      "translation": "I'm going to play with Yuta",
+      "reverse_translation": "ゆうたと遊んでくる"
+    },
+    {
+      "id": "A4",
+      "category": "A",
+      "input": "おうたがごんたを叩いた",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "叩く行為",
+        "動作": "叩く",
+        "意図": "報告",
+        "主語": "おうた",
+        "対象": "ごんた",
+        "目的格": "ごんた",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "確定",
+        "固有名詞": [
+          {
+            "text": "おうた",
+            "type": "person",
+            "敬称": "なし"
+          },
+          {
+            "text": "ごんた",
+            "type": "person",
+            "敬称": "なし"
+          }
+        ]
+      },
+      "translation": "Outa hit Gonta.",
+      "reverse_translation": "おうたがごんたを叩いた"
+    },
+    {
+      "id": "A5",
+      "category": "A",
+      "input": "ゆうたは3歳です",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "ゆうたの年齢",
+        "動作": "です",
+        "意図": "報告",
+        "主語": "ゆうた",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "確定",
+        "固有名詞": [
+          {
+            "text": "ゆうた",
+            "type": "person",
+            "敬称": "なし"
+          }
+        ]
+      },
+      "translation": "Yuta is 3 years old.",
+      "reverse_translation": "ゆうたは3歳です"
+    },
+    {
+      "id": "B1",
+      "category": "B",
+      "input": "財布忘れた",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "財布",
+        "動作": "忘れる",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "省略",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "I forgot my wallet",
+      "reverse_translation": "財布を忘れた"
+    },
+    {
+      "id": "B2",
+      "category": "B",
+      "input": "向かいます",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "移動",
+        "動作": "向かう",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "I'm heading",
+      "reverse_translation": "向かいます"
+    },
+    {
+      "id": "B3",
+      "category": "B",
+      "input": "ご飯食べた？",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "食事",
+        "動作": "食べる",
+        "意図": "質問",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Have you eaten?",
+      "reverse_translation": "ご飯食べた？"
+    },
+    {
+      "id": "B4",
+      "category": "B",
+      "input": "送ってもらえる？",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "送る",
+        "動作": "送る",
+        "意図": "依頼",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "可能性",
+        "固有名詞": []
+      },
+      "translation": "Can you send it to me?",
+      "reverse_translation": "送ってもらえる？"
+    },
+    {
+      "id": "B5",
+      "category": "B",
+      "input": "待ってて",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "待つ",
+        "動作": "待つ",
+        "意図": "その他",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "省略",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Wait for me",
+      "reverse_translation": "待ってて"
+    },
+    {
+      "id": "B6",
+      "category": "B",
+      "input": "もう帰った",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "帰宅",
+        "動作": "帰る",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "I'm heading home now",
+      "reverse_translation": "もう帰った"
+    },
+    {
+      "id": "B7",
+      "category": "B",
+      "input": "遅れてごめん、電車が止まってた",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "遅刻の謝罪",
+        "動作": "遅れる",
+        "動作の意味": "be late",
+        "意図": "謝罪",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Sorry I'm late, the train stopped.",
+      "reverse_translation": "遅れてごめん、電車が止まってた"
+    },
+    {
+      "id": "B8",
+      "category": "B",
+      "input": "明日行く",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "移動",
+        "動作": "行く",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "I'm going tomorrow",
+      "reverse_translation": "明日行く"
+    },
+    {
+      "id": "C1",
+      "category": "C",
+      "input": "電車が止まってた",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "電車",
+        "動作": "止まっていた",
+        "動作の意味": "stop",
+        "意図": "報告",
+        "主語": "電車",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "The train stopped",
+      "reverse_translation": "電車が止まってた"
+    },
+    {
+      "id": "C2",
+      "category": "C",
+      "input": "電車が止まってると思う",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "電車",
+        "動作": "止まっている",
+        "意図": "推測",
+        "主語": "電車",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I think the train stopped",
+      "reverse_translation": "電車が止まってると思う"
+    },
+    {
+      "id": "C3",
+      "category": "C",
+      "input": "電車が止まってるらしい",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "電車",
+        "動作": "止まっている",
+        "意図": "報告",
+        "主語": "電車",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "伝聞",
+        "固有名詞": []
+      },
+      "translation": "I heard the train stopped",
+      "reverse_translation": "電車が止まってるらしい"
+    },
+    {
+      "id": "C4",
+      "category": "C",
+      "input": "財布忘れた",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "財布",
+        "動作": "忘れる",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "省略",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "I forgot my wallet",
+      "reverse_translation": "財布を忘れた"
+    },
+    {
+      "id": "C5",
+      "category": "C",
+      "input": "雨降るかも",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "天気",
+        "動作": "降る",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "可能性",
+        "固有名詞": []
+      },
+      "translation": "It might rain",
+      "reverse_translation": "雨が降るかも"
+    },
+    {
+      "id": "C6",
+      "category": "C",
+      "input": "明日は晴れるって",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "天気",
+        "動作": "晴れる",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "伝聞",
+        "固有名詞": []
+      },
+      "translation": "I heard it's going to be sunny tomorrow.",
+      "reverse_translation": "明日は晴れるらしい"
+    },
+    {
+      "id": "D1",
+      "category": "D",
+      "input": "送ってもらえる？",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "送る",
+        "動作": "送る",
+        "意図": "依頼",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "可能性",
+        "固有名詞": []
+      },
+      "translation": "Can you send it to me?",
+      "reverse_translation": "送ってもらえる？"
+    },
+    {
+      "id": "D2",
+      "category": "D",
+      "input": "送ってる？",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "送る",
+        "動作": "送る",
+        "意図": "確認",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Are you sending it?",
+      "reverse_translation": "送ってる？"
+    },
+    {
+      "id": "D3",
+      "category": "D",
+      "input": "明日の会議の資料を送ってもらえる？",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "会議の資料",
+        "動作": "送る",
+        "意図": "依頼",
+        "主語": "省略",
+        "対象": "明日の会議の資料",
+        "目的格": "資料",
+        "願望": "あり",
+        "人称": "二人称",
+        "確信度": "可能性",
+        "固有名詞": []
+      },
+      "translation": "Could you send me the materials for tomorrow's meeting?",
+      "reverse_translation": "明日の会議の資料を送ってもらえる？"
+    },
+    {
+      "id": "D4",
+      "category": "D",
+      "input": "もう送った？",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "送信状況",
+        "動作": "送る",
+        "意図": "確認",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Have you sent it already?",
+      "reverse_translation": "もう送った？"
+    },
+    {
+      "id": "D5",
+      "category": "D",
+      "input": "送ってください",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "送る",
+        "動作": "送る",
+        "意図": "依頼",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "二人称",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Please send it",
+      "reverse_translation": "送ってください"
+    },
+    {
+      "id": "E1",
+      "category": "E",
+      "input": "君を抱きたい",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "抱擁",
+        "動作": "抱く",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "君",
+        "目的格": "君",
+        "願望": "あり",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "I want to hold you",
+      "reverse_translation": "あなたを抱きたい"
+    },
+    {
+      "id": "E2",
+      "category": "E",
+      "input": "彼女に会いたい",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "会いたい",
+        "動作": "会う",
+        "意図": "願望",
+        "主語": "省略",
+        "対象": "彼女",
+        "目的格": "なし",
+        "願望": "あり",
+        "人称": "一人称単数",
+        "確信度": "なし",
+        "固有名詞": []
+      },
+      "translation": "I want to see her",
+      "reverse_translation": "彼女に会いたい"
+    },
+    {
+      "id": "E3",
+      "category": "E",
+      "input": "君に伝えたいことがある",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "伝えたいこと",
+        "動作": "伝える",
+        "意図": "伝達",
+        "主語": "省略",
+        "対象": "君",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "I want to tell you something",
+      "reverse_translation": "あなたに伝えたいことがある"
+    },
+    {
+      "id": "E4",
+      "category": "E",
+      "input": "子供を起こさないで",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "子供",
+        "動作": "起こす",
+        "意図": "依頼",
+        "主語": "省略",
+        "対象": "子供",
+        "目的格": "子供",
+        "願望": "なし",
+        "人称": "省略",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Don't wake the child up",
+      "reverse_translation": "子供を起こさないで"
+    },
+    {
+      "id": "F1",
+      "category": "F",
+      "input": "行かない",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "省略",
+        "動作": "行く",
+        "意図": "その他",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "省略",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "I'm not going",
+      "reverse_translation": "行かない"
+    },
+    {
+      "id": "F2",
+      "category": "F",
+      "input": "できない",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "できないこと",
+        "動作": "できない",
+        "意図": "その他",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "省略",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "can't do it",
+      "reverse_translation": "できない"
+    },
+    {
+      "id": "F3",
+      "category": "F",
+      "input": "もし明日晴れたら",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "天気",
+        "動作": "晴れる",
+        "意図": "提案",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "あり",
+        "人称": "三人称",
+        "確信度": "可能性",
+        "固有名詞": []
+      },
+      "translation": "If it clears up tomorrow",
+      "reverse_translation": "もし明日晴れたら"
+    },
+    {
+      "id": "F4",
+      "category": "F",
+      "input": "電車が止まってたら",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "電車",
+        "動作": "止まっていた",
+        "動作の意味": "stop",
+        "意図": "報告",
+        "主語": "電車",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "三人称",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "If the train had stopped",
+      "reverse_translation": "電車が止まってたら"
+    },
+    {
+      "id": "H1",
+      "category": "H",
+      "input": "遅れてごめん、電車が止まってた",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "遅刻の謝罪",
+        "動作": "遅れる",
+        "動作の意味": "be late",
+        "意図": "謝罪",
+        "主語": "省略",
+        "対象": "なし",
+        "目的格": "なし",
+        "願望": "なし",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "Sorry I'm late, the train stopped.",
+      "reverse_translation": "遅れてごめん、電車が止まってた"
+    },
+    {
+      "id": "H2",
+      "category": "H",
+      "input": "君を抱きたい",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "抱擁",
+        "動作": "抱く",
+        "意図": "報告",
+        "主語": "省略",
+        "対象": "君",
+        "目的格": "君",
+        "願望": "あり",
+        "人称": "一人称単数",
+        "確信度": "確定",
+        "固有名詞": []
+      },
+      "translation": "I want to hold you",
+      "reverse_translation": "あなたを抱きたい"
+    },
+    {
+      "id": "H3",
+      "category": "H",
+      "input": "明日の会議の資料を送ってもらえる？",
+      "status": "PASS",
+      "failures": [],
+      "structure": {
+        "主題": "会議の資料",
+        "動作": "送る",
+        "意図": "依頼",
+        "主語": "省略",
+        "対象": "明日の会議の資料",
+        "目的格": "資料",
+        "願望": "あり",
+        "人称": "二人称",
+        "確信度": "推測",
+        "固有名詞": []
+      },
+      "translation": "Could you send me the materials for tomorrow's meeting?",
+      "reverse_translation": "明日の会議の資料を送ってもらえる？"
+    },
+    {
+      "id": "G1",
+      "category": "G",
+      "input": "遅れてごめん、電車が止まってた",
+      "status": "PASS",
+      "failures": [],
+      "translation": "{\"25\":\"Sorry I'm late, the train stopped.\",\"50\":\"Sorry I'm late, the train was held up.\",\"75\":\"Sorry I'm late, the train just stopped moving!\",\"100\":\"My bad, train straight up died on me!\"}"
+    },
+    {
+      "id": "G2",
+      "category": "G",
+      "input": "遅れてごめん、電車が止まってた",
+      "status": "PASS",
+      "failures": [],
+      "translation": "{\"25\":\"Sorry I'm late, the train stopped.\",\"50\":\"I apologize for being late. The train had stopped.\",\"75\":\"I apologize for the delay. The train had come to a halt.\",\"100\":\"I sincerely apologize for the delay. The train had come to a complete halt.\"}"
+    },
+    {
+      "id": "G3",
+      "category": "G",
+      "input": "その服素敵だね",
+      "status": "PASS",
+      "failures": [],
+      "translation": "{\"50\":\"That outfit is cool.\",\"100\":\"Wow, that outfit is straight fire!\"}"
+    },
+    {
+      "id": "G4",
+      "category": "G",
+      "input": "その服素敵だね",
+      "status": "PASS",
+      "failures": [],
+      "translation": "{\"50\":\"That outfit looks great.\",\"100\":\"I must say, that outfit is truly exquisite.\"}"
+    },
+    {
+      "id": "H4",
+      "category": "H",
+      "input": "財布忘れた",
+      "status": "PASS",
+      "failures": [],
+      "reverse_translation": "{\"50\":\"財布を忘れた\",\"100\":\"財布完全に忘れてた！\"}"
+    }
+  ]
+}
