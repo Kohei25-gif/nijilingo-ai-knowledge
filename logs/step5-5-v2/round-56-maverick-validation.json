@@ -1,0 +1,498 @@
+[
+  {
+    "id": "文1",
+    "source": "今日ちょっといいニュースあった。",
+    "structure": {
+      "主題": "ニュース",
+      "動作": "あった",
+      "動作の意味": "happen",
+      "意図": "報告",
+      "感情極性": "positive",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "省略",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "Something good happened today.",
+    "results": {
+      "casual_25": {
+        "new_translation": "I got some good news today.",
+        "reverse_translation": "今日、良いニュースをもらった。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_50": {
+        "new_translation": "I've got some good news today.",
+        "reverse_translation": "今日良いことがあった",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_75": {
+        "new_translation": "I've got some awesome news today!",
+        "reverse_translation": "今日すごいことがあった",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_100": {
+        "new_translation": "I've got some totally awesome news today!",
+        "reverse_translation": "今日すごい良いことがあった！",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_25": {
+        "new_translation": "There was some positive news today.",
+        "reverse_translation": "本日は良いニュースがございました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "There was some favourable news today.",
+        "reverse_translation": "本日は好ましいニュースがありました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "There was some positive news today.",
+        "reverse_translation": "本日は良いニュースがあった。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "There was some favourable news today.",
+        "reverse_translation": "本日は好ましいニュースがあった。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "There was some good news today.",
+        "reverse_translation": "今日は良いニュースがあった。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "There was some positive news today.",
+        "reverse_translation": "本日は良いニュースがありました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "There was some favourable news today.",
+        "reverse_translation": "本日は好ましいニュースがあった。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "There was certain favourable news today.",
+        "reverse_translation": "本日は確かな好ましいニュースがあった。",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "文2",
+    "source": "やっと週末だ、楽しみ。",
+    "structure": {
+      "主題": "週末の到来と楽しみ",
+      "動作": "だ",
+      "動作の意味": "be",
+      "意図": "その他",
+      "感情極性": "positive",
+      "モダリティ": "感想",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "省略",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "感想"
+      ],
+      "固有名詞": []
+    },
+    "seed": "It's finally the weekend. I'm looking forward to it.",
+    "results": {
+      "casual_25": {
+        "new_translation": "It's finally the weekend! I'm really looking forward to it.",
+        "reverse_translation": "ついに週末だ。楽しみにしている。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_50": {
+        "new_translation": "It's finally the weekend. I'm looking forward to it.",
+        "reverse_translation": "ついに週末だ。楽しみにしている。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_75": {
+        "new_translation": "It's finally the weekend! Can't wait for it.",
+        "reverse_translation": "ついに週末だ。楽しみにしてる。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_100": {
+        "new_translation": "It's finally the weekend! I'm super stoked for it.",
+        "reverse_translation": "ついに週末だ！楽しみにしてる！",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_25": {
+        "new_translation": "The weekend has finally arrived. I'm eagerly anticipating it.",
+        "reverse_translation": "週末がついにやってまいりました。楽しみにしております。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "The weekend has finally arrived. I am looking forward to it.",
+        "reverse_translation": "週末がついにやってまいりました。楽しみにしております。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "The weekend has finally arrived. I am eagerly anticipating it.",
+        "reverse_translation": "週末がついにやってまいりました。楽しみにしております。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "The weekend has finally arrived. I am delighted to be looking forward to it.",
+        "reverse_translation": "週末がついにやって参りました。楽しみにしております。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "The weekend has finally arrived. I am looking forward to it.",
+        "reverse_translation": "週末がついにやってまいりました。楽しみにしております。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "The weekend has finally arrived. We are looking forward to it.",
+        "reverse_translation": "週末がついにやってまいりました。私たちはそれを楽しみにしております。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "The weekend has finally arrived. We are eagerly anticipating it.",
+        "reverse_translation": "週末がついにやって参りました。私たちはそれを心待ちにしております。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "The weekend has finally arrived. We eagerly anticipate it.",
+        "reverse_translation": "週末がついに到来いたしました。私たちは心待ちにしております。",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "文3",
+    "source": "申し訳ないですが、納期を1週間延ばしてもらえますか。",
+    "structure": {
+      "主題": "納期の延長",
+      "動作": "延ばす",
+      "動作の意味": "extend",
+      "意図": "依頼",
+      "感情極性": "negative",
+      "モダリティ": "依頼",
+      "主語": "省略",
+      "対象": "納期",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "推測",
+      "程度": "none",
+      "発話行為": [
+        "依頼"
+      ],
+      "固有名詞": []
+    },
+    "seed": "Sorry, can you extend the deadline by one week?",
+    "results": {
+      "casual_25": {
+        "new_translation": "Sorry, can you push the deadline back by a week?",
+        "reverse_translation": "すみません、納期を1週間延期してもらえますか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_50": {
+        "new_translation": "Sorry, can you extend the deadline by a week?",
+        "reverse_translation": "すみません、納期を1週間延ばしてもらえますか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_75": {
+        "new_translation": "Sorry, can you bump the deadline back by a week?",
+        "reverse_translation": "すみません、納期を1週間延期してもらえますか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_100": {
+        "new_translation": "Hey, can ya push the deadline back a week?",
+        "reverse_translation": "ねえ、納期を1週間延ばしてくれない？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_25": {
+        "new_translation": "I apologize for the inconvenience, could you possibly extend the deadline by one week?",
+        "reverse_translation": "誠に申し訳ございませんが、納期を1週間延長していただけませんでしょうか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "I regret the inconvenience; would it be possible to extend the deadline by one week?",
+        "reverse_translation": "不便をおかけして申し訳ありませんが、納期を1週間延長することは可能でしょうか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "I apologize for the inconvenience; would it be feasible to extend the deadline by one week?",
+        "reverse_translation": "ご不便をおかけして申し訳ありませんが、納期を1週間延長することは可能でしょうか?",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "I extend my sincerest apologies for the inconvenience; would it be possible to consider extending the deadline by one week?",
+        "reverse_translation": "大変失礼をおかけしていることを心よりお詫び申し上げますが、納期を1週間延長していただけないでしょうか?",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "I apologize, but could you extend the deadline by one week?",
+        "reverse_translation": "申し訳ございませんが、納期を1週間延長していただけますでしょうか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "I apologize, but would you be able to extend the deadline by one week?",
+        "reverse_translation": "申し訳ございませんが、納期を1週間延長していただけますでしょうか。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "I apologize, but would you be able to extend the deadline by one week?",
+        "reverse_translation": "申し訳ございませんが、納期を1週間延長していただけますでしょうか。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "I regret the inconvenience, but would it be feasible to extend the deadline by a period of one week?",
+        "reverse_translation": "申し訳ございませんが、納期を1週間延長することは可能でしょうか?",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "文4",
+    "source": "田中さんが来月異動になるらしい。",
+    "structure": {
+      "主題": "異動",
+      "動作": "なる",
+      "動作の意味": "become",
+      "意図": "報告",
+      "感情極性": "neutral",
+      "モダリティ": "報告",
+      "主語": "田中さん",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "三人称",
+      "確信度": "伝聞",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": [
+        {
+          "text": "田中",
+          "type": "person",
+          "敬称": "さん"
+        }
+      ]
+    },
+    "seed": "I heard Tanaka-san is being transferred next month.",
+    "results": {
+      "casual_25": {
+        "new_translation": "I heard Tanaka-san's transferring next month.",
+        "reverse_translation": "田中さんが来月異動らしい",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_50": {
+        "new_translation": "I heard Tanaka-san is transferring next month.",
+        "reverse_translation": "田中さんが来月異動するって聞いた",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_75": {
+        "new_translation": "I heard Tanaka-san's transferring next month.",
+        "reverse_translation": "田中さんが来月異動らしい",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_100": {
+        "new_translation": "I heard Tanaka-san's gonna be transferring next month.",
+        "reverse_translation": "田中さんが来月異動になるらしい",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_25": {
+        "new_translation": "I've been told that Mr. Tanaka is going to be transferred next month.",
+        "reverse_translation": "田中さんは来月異動になるそうだ。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "It has been reported that Mr. Tanaka will be transferred next month.",
+        "reverse_translation": "田中さんは来月異動になるという報告を受けています。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "It is reported that Mr. Tanaka will be transferred next month.",
+        "reverse_translation": "田中さんが来月異動になることが報告されています。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "It has been announced that Mr. Tanaka will be transferred next month.",
+        "reverse_translation": "田中さんが来月異動になることが発表されました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "I have been informed that Mr. Tanaka will be transferred next month.",
+        "reverse_translation": "田中さんは来月異動になるという情報を得ました",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "It has been communicated to me that Mr. Tanaka will be transferred next month.",
+        "reverse_translation": "田中様は来月異動になる旨が私に伝えられました",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "I have been informed that Mr. Tanaka will be transferred next month.",
+        "reverse_translation": "田中様は来月異動になる旨を伺っております",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "It has been brought to my attention that Mr. Tanaka is slated for transfer next month.",
+        "reverse_translation": "田中様は来月異動になる予定である旨が私の注意に喚起されました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "文5",
+    "source": "もうちょっと安くなりませんか。",
+    "structure": {
+      "主題": "価格交渉",
+      "動作": "安くなる",
+      "動作の意味": "become cheaper",
+      "意図": "依頼",
+      "感情極性": "neutral",
+      "モダリティ": "依頼",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "二人称",
+      "確信度": "可能性",
+      "程度": "none",
+      "発話行為": [
+        "依頼"
+      ],
+      "固有名詞": []
+    },
+    "seed": "Can't you make it a bit cheaper?",
+    "results": {
+      "casual_25": {
+        "new_translation": "Can you make it a bit cheaper?",
+        "reverse_translation": "少し安くしてくれますか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_50": {
+        "new_translation": "Can you make it cheaper?",
+        "reverse_translation": "安くしてくれない？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_75": {
+        "new_translation": "Can you make it a bit cheaper?",
+        "reverse_translation": "少し安くしてくれない？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_100": {
+        "new_translation": "Can ya make it a bit cheaper?",
+        "reverse_translation": "安くしてくれる？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_25": {
+        "new_translation": "Might it be possible to have it at a slightly lower price?",
+        "reverse_translation": "少し安い価格でご提供いただけますでしょうか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "Would it be possible to have it at a slightly lower price?",
+        "reverse_translation": "少し安い価格でご提供いただけますでしょうか",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "Might it be possible to acquire it at a somewhat reduced price?",
+        "reverse_translation": "やや安い価格で入手することは可能でしょうか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "Might it be possible to procure it at a slightly diminished cost?",
+        "reverse_translation": "やや割安な価格で調達することは可能でしょうか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "Could it be slightly cheaper?",
+        "reverse_translation": "もう少し安くなりませんか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "Might it be possible to have a slightly lower price?",
+        "reverse_translation": "少し安い価格にしていただけますでしょうか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "Would it be possible to have a slightly lower price?",
+        "reverse_translation": "少し安い価格にしていただけますでしょうか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "Might it be possible to obtain a marginally lower price?",
+        "reverse_translation": "少しでも安い価格にすることは可能でしょうか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  }
+]
