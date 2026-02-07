@@ -1,0 +1,433 @@
+[
+  {
+    "id": "文196",
+    "source": "それは今の状況だと難しい。",
+    "structure": {
+      "主題": "状況",
+      "動作": "難しい",
+      "動作の意味": "be difficult",
+      "意図": "報告",
+      "感情極性": "negative",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "省略",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "It's difficult in the current situation.",
+    "results": {
+      "casual_25": {
+        "new_translation": "It's tough right now",
+        "reverse_translation": "",
+        "risk": "high"
+      },
+      "casual_50": {
+        "new_translation": "Things are pretty tough right now",
+        "reverse_translation": "今はかなり厳しい",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "Things are super tough right now",
+        "reverse_translation": "今はすごく厳しい",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "Stuff is hella tough rn",
+        "reverse_translation": "今はめちゃくちゃ厳しい",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "The current situation presents challenges.",
+        "reverse_translation": "現在の状況は困難を呈しています。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "The current situation poses significant challenges.",
+        "reverse_translation": "現在の状況は大きな困難を呈しています。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "The current situation presents considerable difficulties.",
+        "reverse_translation": "現在の状況はかなりの困難をはらんでいます。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "The present circumstances are fraught with significant challenges.",
+        "reverse_translation": "現在の状況は大きな困難に満ちています",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "The current situation presents some challenges.",
+        "reverse_translation": "現在の状況は、いくつかの課題を呈しています。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "The current situation poses certain difficulties.",
+        "reverse_translation": "現在の状況は一定の困難を呈している",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "The current situation presents considerable challenges.",
+        "reverse_translation": "現在の状況はかなりの課題を提示しています",
+        "risk": "med"
+      },
+      "business_100": {
+        "new_translation": "The current situation poses significant challenges.",
+        "reverse_translation": "現在の状況は大きな困難をもたらしています。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文197",
+    "source": "今日の資料、最新版に差し替えた。",
+    "structure": {
+      "主題": "資料の更新",
+      "動作": "差し替える",
+      "動作の意味": "replace",
+      "意図": "報告",
+      "感情極性": "neutral",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "資料",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I replaced today's materials with the latest version.",
+    "results": {
+      "casual_25": {
+        "new_translation": "I updated today's materials to the latest version.",
+        "reverse_translation": "今日の資料を最新のものに更新しました。",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "I've updated today's materials to the latest version.",
+        "reverse_translation": "今日の資料を最新のバージョンに差し替えました。",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "I've gone ahead and updated today's materials to the latest version.",
+        "reverse_translation": "今日の資料を最新版に差し替えた",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "I've gone ahead and updated today's materials to the latest version.",
+        "reverse_translation": "今日の資料を最新版に差し替えた。",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I have updated today's materials to the latest version.",
+        "reverse_translation": "今日の資料を最新版に更新しました。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I have updated today's materials to the latest version.",
+        "reverse_translation": "今日の資料を最新版に差し替えました。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I have updated today's materials to the latest version accordingly.",
+        "reverse_translation": "今日の資料を最新のものに差し替えております。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "I have taken the liberty of updating today's materials to the latest version.",
+        "reverse_translation": "今日の資料を最新のバージョンに差し替えております。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "I have updated today's materials to the latest version.",
+        "reverse_translation": "今日の資料を最新版に差し替えました。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I have updated today's materials to the latest version.",
+        "reverse_translation": "今日の資料を最新のものに差し替えました。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "I have updated today's materials to the latest version accordingly.",
+        "reverse_translation": "本日最新の資料に更新いたしました。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "I have formally updated today's materials to the latest version.",
+        "reverse_translation": "今日の資料を最新のものに正式に差し替えました。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文198",
+    "source": "ありがとう、確認ありがとう。",
+    "structure": {
+      "主題": "確認",
+      "動作": "確認する",
+      "動作の意味": "confirm",
+      "意図": "感謝",
+      "感情極性": "positive",
+      "モダリティ": "感想",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "感謝",
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "Thank you, thank you for checking.",
+    "results": {
+      "casual_25": {
+        "new_translation": "Thanks a lot for checking.",
+        "reverse_translation": "チェックしてくれてありがとう",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "Thanks so much for checking.",
+        "reverse_translation": "ありがとうございます、確認していただいて。",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "Thanks a ton for checking in!",
+        "reverse_translation": "ありがと～、チェックしてくれて！",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "Big thanks for lookin' in!",
+        "reverse_translation": "見に来てくれてありがとう",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I appreciate you confirming, thank you.",
+        "reverse_translation": "ご確認いただき、ありがとうございます。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I would like to express my gratitude for confirming.",
+        "reverse_translation": "ご確認いただき、感謝申し上げます。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I am deeply grateful for having confirmed.",
+        "reverse_translation": "確認していただき、深く感謝しております。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "I am most sincerely grateful to have had the opportunity to confirm.",
+        "reverse_translation": "確認できたことに心から感謝しております。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "Thank you very much for confirming.",
+        "reverse_translation": "ご確認いただき、ありがとうございます。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I appreciate your confirmation.",
+        "reverse_translation": "ご確認いただきありがとうございます。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "I am grateful for your confirmation.",
+        "reverse_translation": "ご確認いただき、感謝しております。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "I would like to express my sincere appreciation for your confirmation.",
+        "reverse_translation": "ご確認いただき、誠にありがとうございます。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文199",
+    "source": "それ、たぶん誤解されてる。",
+    "structure": {
+      "主題": "誤解",
+      "動作": "誤解される",
+      "動作の意味": "なし",
+      "意図": "報告",
+      "感情極性": "neutral",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "二人称",
+      "確信度": "推測",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I think that might be a misunderstanding.",
+    "results": {
+      "casual_25": {
+        "new_translation": "It seems like there might be a misunderstanding.",
+        "reverse_translation": "誤解があるみたいですね。",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "Might be a miscommunication.",
+        "reverse_translation": "誤解かもしれない",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "Could be a miscommunication, maybe?",
+        "reverse_translation": "勘違いかもしれないね",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "Might be a miscommunication, idk",
+        "reverse_translation": "誤解かもしれない、知らない",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I believe there may be a misunderstanding.",
+        "reverse_translation": "そのような誤解があるかもしれないと存じます。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "It appears that there could be a misunderstanding.",
+        "reverse_translation": "誤解があるかもしれませんね",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "It seems quite possible that a misunderstanding could occur.",
+        "reverse_translation": "誤解が生じる可能性が高いようです",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "It appears highly plausible that a misapprehension may transpire.",
+        "reverse_translation": "誤解が生じる可能性が高いようです",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "It seems possible that there's been a miscommunication.",
+        "reverse_translation": "誤解が生じた可能性があるようです。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "There appears to be a possibility of miscommunication.",
+        "reverse_translation": "誤解が生じた可能性があるようです",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "It seems there is a potential for miscommunication.",
+        "reverse_translation": "誤解が生じる可能性があるようです。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "It appears that there may be a possibility of miscommunication.",
+        "reverse_translation": "誤解が生じる可能性があるようです。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文200",
+    "source": "今日はもう寝たい。",
+    "structure": {
+      "主題": "睡眠欲求",
+      "動作": "寝たい",
+      "動作の意味": "want to sleep",
+      "意図": "その他",
+      "感情極性": "positive",
+      "モダリティ": "その他",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "あり",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "願望"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I want to sleep now.",
+    "results": {
+      "casual_25": {
+        "new_translation": "I'm gonna take a nap.",
+        "reverse_translation": "昼寝するつもり",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "I'm going to take a nap.",
+        "reverse_translation": "昼寝をする",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "I'm gonna take a snooze.",
+        "reverse_translation": "寝たい",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "I'm about to catch some Z's.",
+        "reverse_translation": "寝る",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I'd like to sleep now, please.",
+        "reverse_translation": "今寝たいのですが",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I would appreciate it if I could sleep now.",
+        "reverse_translation": "今寝させていただければと思います。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I would be grateful if I could retire to my bed now.",
+        "reverse_translation": "今寝ることができたらありがたいです",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "It would be my greatest pleasure if I might retire to my slumber immediately.",
+        "reverse_translation": "すぐに寝ることができたら大変嬉しいです",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "I'd like to take a nap right now.",
+        "reverse_translation": "今すぐに昼寝したいです。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I would appreciate taking a nap at this moment.",
+        "reverse_translation": "今すぐに昼寝をしたいと思います",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "I would be grateful if I could take a nap right now.",
+        "reverse_translation": "今すぐに昼寝をさせていただければ幸いです。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "It would be greatly appreciated if I were afforded the opportunity to take a nap at this moment.",
+        "reverse_translation": "今すぐに昼寝をさせていただければ幸いです。",
+        "risk": "low"
+      }
+    }
+  }
+]

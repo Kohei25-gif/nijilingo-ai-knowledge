@@ -1,0 +1,432 @@
+[
+  {
+    "id": "文191",
+    "source": "その話、また今度にしよう。",
+    "structure": {
+      "主題": "話の内容",
+      "動作": "しよう",
+      "動作の意味": "do",
+      "意図": "提案",
+      "感情極性": "neutral",
+      "モダリティ": "提案",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "提案"
+      ],
+      "固有名詞": []
+    },
+    "seed": "Let's talk about that another time.",
+    "results": {
+      "casual_25": {
+        "new_translation": "How about we discuss it another time?",
+        "reverse_translation": "またの機会に話しましょう",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "How about discussing it some other time?",
+        "reverse_translation": "またの機会に話し合おうか",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "How about we catch up on that later?",
+        "reverse_translation": "後で話し合うのはどう？",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "Let's catch up on that later, sound good?",
+        "reverse_translation": "後でそれについて話そう、どうかな？",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "We can discuss that at a later time.",
+        "reverse_translation": "別の機会に話しましょう",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "We could potentially discuss that at a later juncture.",
+        "reverse_translation": "後で話す機会があればどうですか",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "We might consider discussing that at a later point.",
+        "reverse_translation": "後ほど検討して話す機会を持つかもしれません",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "We would be well-advised to potentially deliberate on that subject at a subsequent juncture.",
+        "reverse_translation": "後ほどその件について検討した方がよろしいかもしれません",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "We can discuss that at a later time.",
+        "reverse_translation": "後で話し合いましょう",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "We can discuss that at a later date.",
+        "reverse_translation": "後日、相談させていただいてもよろしいでしょうか？",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "We shall discuss that at a later date.",
+        "reverse_translation": "後日、ご相談させていただきます",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "We will deliberate on that matter at a future juncture.",
+        "reverse_translation": "後日改めてその件について検討いたしましょう。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文192",
+    "source": "今日、久々に外で食べた。",
+    "structure": {
+      "主題": "外で食事",
+      "動作": "食べる",
+      "動作の意味": "eat",
+      "意図": "報告",
+      "感情極性": "positive",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I ate outside today for the first time in a while.",
+    "results": {
+      "casual_25": {
+        "new_translation": "I've finally eaten out today.",
+        "reverse_translation": "やっと今日外で食べた",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "I finally got to eat out today.",
+        "reverse_translation": "今日、やっと外で食事してきた。",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "I finally got to chow down outside today!",
+        "reverse_translation": "やっと今日外で食事できた！",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "I finally got to devour some grub outside today!!",
+        "reverse_translation": "やっと今日外で飯を食うことができた！",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I dined outdoors today for the first time in quite a while.",
+        "reverse_translation": "今日は久しぶりに外で食事しました。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "It was a pleasure to dine outdoors today for the first time in quite a while.",
+        "reverse_translation": "今日は久しぶりに外で食事をすることができてよかったです。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "It was a genuine pleasure to have dined outdoors today for the first time in quite a while.",
+        "reverse_translation": "今日は久しぶりに外で食事をするのが本当に楽しかったです。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "It was an absolute delight to have had the opportunity to dine al fresco today for the first time in a considerable duration.",
+        "reverse_translation": "今日は久しぶりに外で食事をするという素晴らしい機会を得られて、まことに喜ばしかったです。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "I had the opportunity to eat outside today for the first time in a while.",
+        "reverse_translation": "今日は久しぶりに外で食事をしました。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I have had the chance to dine outside today for the first time in a while.",
+        "reverse_translation": "今日は久しぶりに外で食事をする機会があった。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "It has been a while since I last had the opportunity to dine outside, but I was able to do so today.",
+        "reverse_translation": "しばらく外で食事する機会がありませんでしたが、今日ようやくできました。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "It has been a considerable duration since I last availed myself of the opportunity to dine outside; however, I was fortunate enough to do so today.",
+        "reverse_translation": "外で食事する機会がしばらくなかったが、今日はその機会を得ることができた。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文193",
+    "source": "悪いけど、そこは譲れない。",
+    "structure": {
+      "主題": "譲れない部分",
+      "動作": "譲る",
+      "動作の意味": "yield",
+      "意図": "その他",
+      "感情極性": "negative",
+      "モダリティ": "感想",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "感想"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I'm afraid I have to draw the line there.",
+    "results": {
+      "casual_25": {
+        "new_translation": "No way, I'm not backing down.",
+        "reverse_translation": "いいえ、譲りません",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "No way, I'm totally not backing down.",
+        "reverse_translation": "そんなわけない、絶対に譲らない",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "No way, I'm not backing down, period.",
+        "reverse_translation": "そんなわけない、絶対に譲らない",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "Nah, I'm good, I'm not backing down.",
+        "reverse_translation": "な、いいや、俺は譲らない。",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I regret that I must set a boundary at that point.",
+        "reverse_translation": "その点で線を引かなければならないことを残念に思います",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I must regretfully draw a line at that juncture.",
+        "reverse_translation": "残念ながら、私はそこが限界でございます.",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "Regrettably, I must draw the line at that point.",
+        "reverse_translation": "残念ながら、私はそこが限界です。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "It is with profound regret that I must establish a boundary at that juncture.",
+        "reverse_translation": "残念ながら、私はその時点で限界を設定しなければなりません",
+        "risk": "med"
+      },
+      "business_25": {
+        "new_translation": "I'm sorry, but that's a point we cannot compromise on.",
+        "reverse_translation": "申し訳ありませんが、そこは譲ることができません。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "Regrettably, that is an area where we are unable to yield.",
+        "reverse_translation": "残念ですが、そこは譲ることができません。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "Unfortunately, that is an area where we cannot yield.",
+        "reverse_translation": "残念ながら、そこは譲ることができない部分です。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "Regrettably, that is an area where concession is not feasible.",
+        "reverse_translation": "残念ながら、そこは譲ることができない部分です。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文194",
+    "source": "正直、ちょっと納得いかない。",
+    "structure": {
+      "主題": "納得",
+      "動作": "いかない",
+      "動作の意味": "not agree",
+      "意図": "その他",
+      "感情極性": "negative",
+      "モダリティ": "感想",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "推測",
+      "程度": "none",
+      "発話行為": [
+        "感想"
+      ],
+      "固有名詞": []
+    },
+    "seed": "To be honest, I'm not really convinced.",
+    "results": {
+      "casual_25": {
+        "new_translation": "To be honest, I remain somewhat unconvinced.",
+        "reverse_translation": "正直に言って、僕はまだ少し納得していない。",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "Honestly, I'm still not totally sold on it.",
+        "reverse_translation": "正直、まだ完全に納得してない",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "To be honest, I'm still kinda on the fence about it.",
+        "reverse_translation": "正直、まだ完全に納得していない",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "Honestly, I'm super unsure about it.",
+        "reverse_translation": "正直、めっちゃ不安なんだ。",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "Frankly, I'm somewhat skeptical.",
+        "reverse_translation": "率直に言って、少し懐疑的です。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "To be frank, I have certain reservations.",
+        "reverse_translation": "正直、幾つか懸念がある",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "Frankly speaking, I do have some reservations.",
+        "reverse_translation": "はっきり言わせてもらえば、私にはいくつかの懸念がある。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "I must confess that I harbor certain doubts.",
+        "reverse_translation": "正直に申し上げると、若干の懸念を抱えております.",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "To be frank, I'm not completely persuaded.",
+        "reverse_translation": "率直に言って、完全に納得はしていません。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "Frankly, I'm not entirely convinced.",
+        "reverse_translation": "率直に言って、私は完全に納得していない。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "To be frank, I have certain reservations.",
+        "reverse_translation": "率直に言って、私には確かな懸念がある",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "To be candid, I harbor certain misgivings.",
+        "reverse_translation": "はっきり言わせてもらうと、僕には多少の懸念がある。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文195",
+    "source": "もし急ぎなら、先に対応する。",
+    "structure": {
+      "主題": "対応",
+      "動作": "対応する",
+      "動作の意味": "respond",
+      "意図": "提案",
+      "感情極性": "neutral",
+      "モダリティ": "提案",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "提案"
+      ],
+      "固有名詞": []
+    },
+    "seed": "If it's urgent, I'll respond first.",
+    "results": {
+      "casual_25": {
+        "new_translation": "If you're in a rush, I'll go ahead and respond.",
+        "reverse_translation": "急いでるなら先に返信する",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "If you're in a rush, I'll respond right away.",
+        "reverse_translation": "急いでるなら、先に返事するね。",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "If you're scrambling, I'll shoot you a response ASAP.",
+        "reverse_translation": "急いでるなら、すぐ返事する",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "If you're in a rush, I'll hook you up with a response pronto.",
+        "reverse_translation": "急いでるなら、すぐに返信するよ。",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "If it's urgent, I will prioritize responding.",
+        "reverse_translation": "もし急ぎであれば、私が先に対応します。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "If it's urgent, I shall prioritize responding.",
+        "reverse_translation": "もし急ぎであれば、優先して対応いたします。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "In the event of urgency, I shall accord the utmost priority to responding.",
+        "reverse_translation": "緊急の場合は、対応を最優先いたします。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "In the event of an urgent situation, I shall prioritize responding with the utmost haste.",
+        "reverse_translation": "緊急の場合は、対応を最優先いたします。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "In urgent cases, I will prioritize my response.",
+        "reverse_translation": "緊急の場合、優先して対応いたします。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "In urgent situations, I will give priority to my response.",
+        "reverse_translation": "緊急の場合には、優先して対応いたします。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "In urgent situations, I shall prioritize my response.",
+        "reverse_translation": "緊急の場合は、私が優先して対応いたします。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "In situations requiring immediate attention, I will prioritize my response.",
+        "reverse_translation": "緊急の状況では、私が最初に対応します。",
+        "risk": "low"
+      }
+    }
+  }
+]

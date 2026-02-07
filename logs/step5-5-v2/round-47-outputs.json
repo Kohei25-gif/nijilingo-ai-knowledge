@@ -1,0 +1,433 @@
+[
+  {
+    "id": "文186",
+    "source": "正直、その説明は分かりづらい。",
+    "structure": {
+      "主題": "説明の内容",
+      "動作": "分かりづらい",
+      "動作の意味": "be unclear",
+      "意図": "その他",
+      "感情極性": "negative",
+      "モダリティ": "感想",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "省略",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "感想"
+      ],
+      "固有名詞": []
+    },
+    "seed": "Honestly, that explanation is unclear.",
+    "results": {
+      "casual_25": {
+        "new_translation": "To be honest, that explanation isn't clear.",
+        "reverse_translation": "正直に言って、その説明は分かりづらい。",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "To be honest, that explanation is kinda confusing.",
+        "reverse_translation": "本当に、その説明はちょっと分かりにくい。",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "Honestly, that explanation is super confusing.",
+        "reverse_translation": "正直に言うと、あの説明はすごく分かりづらい。",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "Dude, that explanation is hella confusing.",
+        "reverse_translation": "正直、あの説明はすごく分かりづらい",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "Frankly, I'm having trouble understanding the explanation.",
+        "reverse_translation": "はっきり言って、説明が分かりづらいです。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "To be frank, I'm finding it difficult to grasp the explanation.",
+        "reverse_translation": "正直、説明が分かりづらい",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "To be frank, I am having some trouble understanding the explanation.",
+        "reverse_translation": "はっきり言って、説明がよく分かりません",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "To be frank, I must admit that I find the explanation somewhat perplexing.",
+        "reverse_translation": "正直なところ、説明が少し分かりづらいように思われます",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "The explanation provided appears to be unclear.",
+        "reverse_translation": "説明が不明確なようです。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "The explanation provided seems unclear.",
+        "reverse_translation": "説明が不明瞭なようです。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "The explanation provided appears to be unclear.",
+        "reverse_translation": "ご説明の内容が不明瞭なようです。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "The explanation provided seems unclear.",
+        "reverse_translation": "説明が不明瞭なようです",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文187",
+    "source": "今日の会議、結局結論出なかった。",
+    "structure": {
+      "主題": "会議の結果",
+      "動作": "出る",
+      "動作の意味": "result",
+      "意図": "報告",
+      "感情極性": "neutral",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "The meeting today didn't reach a conclusion after all.",
+    "results": {
+      "casual_25": {
+        "new_translation": "The meeting today didn't quite wrap up.",
+        "reverse_translation": "今日の会議はちょっとまとまらなかった",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "The meeting today didn't get finished up.",
+        "reverse_translation": "今日の会議は終わらなかった",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "The meeting today didn't wrap up.",
+        "reverse_translation": "今日の会議は終わらなかった.",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "The meeting today didn't get wrapped up, dude.",
+        "reverse_translation": "今日の会議、終わらなかったよね。",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "The meeting held today did not reach a conclusion.",
+        "reverse_translation": "今日開催された会議は結論に至りませんでした。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "The meeting that took place today did not reach a conclusive outcome.",
+        "reverse_translation": "本日開催された会議は、結論に至りませんでした。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "The meeting that took place today did not yield a conclusive result.",
+        "reverse_translation": "本日の会議は、結論が出ませんでした。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "The meeting that transpired today did not culminate in a definitive outcome.",
+        "reverse_translation": "本日開催された会議は、最終的な結論には至りませんでした。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "The meeting today unfortunately did not come to a conclusion.",
+        "reverse_translation": "今日の会議は残念ながら結論に至りませんでした。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "The meeting today regrettably failed to reach a conclusion.",
+        "reverse_translation": "今日の会議は残念ながら結論に至りませんでした。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "Regrettably, the meeting today did not reach a conclusive outcome.",
+        "reverse_translation": "残念ながら、今日の会議は結論に至りませんでした。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "It is with considerable regret that the meeting held today did not achieve a conclusive result.",
+        "reverse_translation": "残念ながら、本日の会議は決定的な結果に達しませんでした。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文188",
+    "source": "ありがとう、気にかけてくれて。",
+    "structure": {
+      "主題": "感謝と気遣い",
+      "動作": "気にかける",
+      "動作の意味": "care",
+      "意図": "感謝",
+      "感情極性": "positive",
+      "モダリティ": "感想",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "感謝",
+        "感想"
+      ],
+      "固有名詞": []
+    },
+    "seed": "Thanks for caring.",
+    "results": {
+      "casual_25": {
+        "new_translation": "Thanks for lookin' out",
+        "reverse_translation": "",
+        "risk": "high"
+      },
+      "casual_50": {
+        "new_translation": "Thanks for watching out",
+        "reverse_translation": "見てくれてありがとう",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "Thanks for lookin' out",
+        "reverse_translation": "見てくれてありがとう",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "Thanks for watchin' my back",
+        "reverse_translation": "見てくれてありがとう",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I appreciate your concern.",
+        "reverse_translation": "ご心配いただきありがとうございます。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I am grateful for your concern.",
+        "reverse_translation": "ご心配いただき、感謝しております。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I appreciate your concern.",
+        "reverse_translation": "ご心配いただきありがとうございます。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "I am deeply grateful for your concern.",
+        "reverse_translation": "ご心配いただき、深く感謝しております。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "I appreciate your concern.",
+        "reverse_translation": "ご心配いただきありがとうございます",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I am grateful for your concern.",
+        "reverse_translation": "ご心配いただき、感謝しております。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "I appreciate your concern.",
+        "reverse_translation": "ご心配いただきありがとうございます。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "I am deeply grateful for your concern.",
+        "reverse_translation": "ご心配いただき、深く感謝しております。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文189",
+    "source": "それ、噂だけ先行してる気がする。",
+    "structure": {
+      "主題": "噂の進行状況",
+      "動作": "先行する",
+      "動作の意味": "precede",
+      "意図": "報告",
+      "感情極性": "neutral",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "それ",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "省略",
+      "確信度": "推測",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I think that rumor is getting ahead of itself.",
+    "results": {
+      "casual_25": {
+        "new_translation": "That rumor's getting out of hand, I think.",
+        "reverse_translation": "その噂は手に負えない状態になっていると思う",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "I'm starting to think that rumor's getting out of control.",
+        "reverse_translation": "その噂は制御不能になりつつあると思う",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "I'm starting to think that rumor's totally getting out of control.",
+        "reverse_translation": "その噂は完全に制御不能になっているような気がする。",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "I'm starting to think that rumor's totally spiraling outta control.",
+        "reverse_translation": "その噂は完全に制御不能になっているような気がする。",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "It appears that the rumor is preceding the facts.",
+        "reverse_translation": "どうやらその噂は事実を先行しているようです。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "It would appear that the rumor is preceding the facts.",
+        "reverse_translation": "どうやらその噂の方が事実を先行しているようです。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "It appears that the rumor is preceding the facts.",
+        "reverse_translation": "どうやらその噂は事実を先行しているようです。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "It is evident that the rumor is preceding the facts.",
+        "reverse_translation": "どうやらその噂は事実を先行しているようです",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "I believe that rumor is somewhat premature.",
+        "reverse_translation": "その噂は少し時期尚早だと思われます。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "It appears to me that the rumor may be a bit ahead of its time.",
+        "reverse_translation": "その噂は時期が早過ぎるように思われる.",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "It seems to me that the rumor may be slightly ahead of its time.",
+        "reverse_translation": "そのような噂が少し先走っているように思われます",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "It appears to me that the rumor may potentially be slightly premature.",
+        "reverse_translation": "そのような話は時期尚早かもしれないと思われます",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文190",
+    "source": "今日は早めに切り上げたい。",
+    "structure": {
+      "主題": "早めに切り上げる",
+      "動作": "切り上げる",
+      "動作の意味": "finish early",
+      "意図": "その他",
+      "感情極性": "positive",
+      "モダリティ": "その他",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "あり",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "願望"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I want to finish early today.",
+    "results": {
+      "casual_25": {
+        "new_translation": "I'm looking to finish early today.",
+        "reverse_translation": "今日は早く終わらせたい。",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "I'm hoping to wrap up early today.",
+        "reverse_translation": "今日は早く終わらせたいな",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "I'm really looking to get outta here early today.",
+        "reverse_translation": "今日は早く切り上げたい。",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "I'm dyin' to get outta here early today.",
+        "reverse_translation": "今日は早くここから出たい",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I'd like to finish early today.",
+        "reverse_translation": "今日は早めに終わらせたいです。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I would appreciate finishing early today.",
+        "reverse_translation": "今日は早めに終わらせていただければと思います。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I would be grateful if we could wrap up early today.",
+        "reverse_translation": "今日は早めに終わらせていただければ幸いです。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "It would be most appreciated if we could conclude our proceedings at an earlier hour today.",
+        "reverse_translation": "今日は早めに終わらせていただければ幸いです",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "I'm looking to wrap up early today.",
+        "reverse_translation": "今日は早めに切り上げたいと思います。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I would like to conclude early today.",
+        "reverse_translation": "今日は早めに終わらせたいと思います。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "I wish to bring today's proceedings to a close ahead of schedule.",
+        "reverse_translation": "今日の議事を予定より早く終わらせたいと思います.",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "I wish to terminate today's proceedings prematurely.",
+        "reverse_translation": "本日の議事を予定より早期に終了したいと思います.",
+        "risk": "low"
+      }
+    }
+  }
+]
