@@ -209,7 +209,9 @@ export async function extractStructure(
     確信度: '確定',
     程度: 'none',
     発話行為: ['報告'],
-    固有名詞: []
+    固有名詞: [],
+    保持値: [],
+    条件表現: []
   };
 
   try {
@@ -271,7 +273,13 @@ export async function extractStructure(
       確信度: parsed.確信度 || '確定',
       程度: degree,
       発話行為: speechActs,
-      固有名詞: validatedEntities
+      固有名詞: validatedEntities,
+      保持値: Array.isArray(parsed.保持値)
+        ? parsed.保持値.filter((v): v is string => typeof v === 'string')
+        : [],
+      条件表現: Array.isArray(parsed.条件表現)
+        ? parsed.条件表現.filter((v): v is string => typeof v === 'string')
+        : [],
     };
 
     // キャッシュサイズ制限（500件）
@@ -295,57 +303,135 @@ export async function extractStructure(
  * INVARIANT_RULESの汎用ルールではなく、具体的な指示でモデルを制御する。
  */
 function generateDynamicConstraints(
-  structureData?: {
-    人称?: string;
-    確信度?: string;
-    程度?: string;
-    感情極性?: string;
-  }
+  structureData?: TranslateOptions['structureData']
 ): string {
   if (!structureData) return '';
 
   const constraints: string[] = [];
 
-  // 人称制約
+  // 1. 人称
   if (structureData.人称) {
     const personMap: Record<string, string> = {
-      '一人称単数': 'Use first person singular (I/my) as the subject',
-      '一人称複数': 'Use first person plural (we/our) as the subject',
-      '二人称': 'Use second person (you/your) as the subject',
-      '三人称': 'Use third person as the subject',
+      '一人称単数': 'Subject: first person singular (I/my)',
+      '一人称複数': 'Subject: first person plural (we/our)',
+      '二人称': 'Subject: second person (you/your)',
+      '三人称': 'Subject: third person (he/she/they)',
     };
     const instruction = personMap[structureData.人称];
     if (instruction) constraints.push(instruction);
   }
 
-  // 確信度制約
+  // 2. 確信度（発話行為との衝突解決付き）
   if (structureData.確信度) {
     const certaintyMap: Record<string, string> = {
-      '確定': 'Express with certainty (definite statements, no hedging)',
-      '推測': 'Express with hedging/tentativeness (I think, I feel, it seems)',
-      '可能性': 'Express as possibility (might, could, maybe)',
-      '伝聞': 'Express as hearsay (I heard, apparently, it seems that)',
+      '確定': 'Certainty: definite statements, no hedging',
+      '推測': 'Certainty: use hedging (I think, it seems, perhaps)',
+      '可能性': 'Certainty: express as possibility (might, could, maybe)',
+      '伝聞': 'Certainty: express as hearsay (apparently, I heard that)',
+      '希望': 'Certainty: express as hope/wish',
     };
-    const instruction = certaintyMap[structureData.確信度];
-    if (instruction) constraints.push(instruction);
+    let certaintyText = certaintyMap[structureData.確信度] || '';
+
+    // 衝突解決: 複合発話で direct act がある時、hedging適用範囲を明示
+    if (certaintyText && structureData.発話行為 && structureData.発話行為.length > 1) {
+      const hasDirectAct = structureData.発話行為.some(
+        (a) => ['依頼', '命令', '謝罪'].includes(a)
+      );
+      if (hasDirectAct && structureData.確信度 === '推測') {
+        certaintyText += ' (for question/opinion parts only; advice/request parts stay direct)';
+      }
+    }
+
+    if (certaintyText) constraints.push(certaintyText);
   }
 
-  // 程度制約
+  // 3. 程度
   if (structureData.程度 && structureData.程度 !== 'none') {
     const degreeMap: Record<string, string> = {
-      slight: 'Keep degree expressions slight (slightly, a little, somewhat)',
-      weak: 'Keep degree expressions weak (slightly, barely)',
-      moderate: 'Keep degree expressions moderate (a bit, somewhat, a little)',
-      strong: 'Keep degree expressions strong (very, quite, considerably)',
-      extreme: 'Keep degree expressions extreme (extremely, absolutely)',
+      extreme: 'Degree: keep extreme (absolutely, completely, totally)',
+      strong: 'Degree: keep strong (very, quite, considerably)',
+      moderate: 'Degree: keep moderate (a bit, somewhat, a little)',
+      slight: 'Degree: keep slight (slightly, barely, a touch)',
     };
     const instruction = degreeMap[structureData.程度];
     if (instruction) constraints.push(instruction);
   }
 
-  // 感情極性制約（positive時のみ — pleasure/delighted防止）
-  if (structureData.感情極性 === 'positive') {
-    constraints.push('Keep positive sentiment natural — do not escalate to formal gratitude (avoid: delighted, pleasure, honored)');
+  // 4. 感情極性
+  if (structureData.感情極性) {
+    const polarityMap: Record<string, string> = {
+      positive: 'Polarity: positive - keep natural, no escalation to formal gratitude (avoid: delighted, pleasure, honored)',
+      negative: 'Polarity: negative - maintain throughout, do not soften to neutral',
+      neutral: 'Polarity: neutral - do not add positive or negative sentiment',
+    };
+    const instruction = polarityMap[structureData.感情極性];
+    if (instruction) constraints.push(instruction);
+  }
+
+  // 5. モダリティ
+  if (structureData.モダリティ) {
+    const modalityMap: Record<string, string> = {
+      報告: 'Modality: report/statement - do not convert to request or suggestion',
+      質問: 'Modality: question - maintain question form',
+      依頼: 'Modality: request - maintain as request, do not convert to command',
+      提案: 'Modality: suggestion - maintain suggestive tone',
+      感謝: 'Modality: gratitude - maintain gratitude expression',
+      感想: 'Modality: impression - maintain as personal impression',
+      その他: '',
+    };
+    const instruction = modalityMap[structureData.モダリティ];
+    if (instruction) constraints.push(instruction);
+  }
+
+  // 6. 発話行為（複数値対応）
+  if (structureData.発話行為 && structureData.発話行為.length > 0) {
+    const actMap: Record<string, string> = {
+      質問: 'question',
+      報告: 'report',
+      依頼: 'request/advice',
+      感想: 'impression',
+      提案: 'suggestion',
+      感謝: 'gratitude',
+      謝罪: 'apology',
+      命令: 'command',
+    };
+    if (structureData.発話行為.length === 1) {
+      const mapped = actMap[structureData.発話行為[0]] || structureData.発話行為[0];
+      constraints.push(`Speech act: ${mapped}`);
+    } else {
+      const mapped = structureData.発話行為.map((a) => actMap[a] || a);
+      constraints.push(`Speech acts: ${mapped.join(' + ')} - preserve ALL parts`);
+    }
+  }
+
+  // 7. 動作の意味
+  if (structureData.動作の意味 && structureData.動作の意味 !== 'なし') {
+    constraints.push(`Core action: "${structureData.動作の意味}" - preserve this meaning`);
+  }
+
+  // 8. 願望
+  if (structureData.願望) {
+    if (structureData.願望 === 'なし') {
+      constraints.push('Do not add wishes, hopes, or promises not in original');
+    } else {
+      constraints.push('Preserve the wish/desire expression');
+    }
+  }
+
+  // 9. 保持値（数値・日時・金額等）
+  if (structureData.保持値 && structureData.保持値.length > 0) {
+    constraints.push(`Preserve exactly (values): ${structureData.保持値.join(', ')}`);
+  }
+
+  // 10. 固有名詞（人名・地名等）
+  if (structureData.固有名詞 && structureData.固有名詞.length > 0) {
+    const names = structureData.固有名詞.map((e) => e.text);
+    constraints.push(`Preserve exactly (names): ${names.join(', ')}`);
+  }
+
+  // 11. 条件表現
+  if (structureData.条件表現 && structureData.条件表現.length > 0) {
+    constraints.push(`Condition logic: preserve "${structureData.条件表現.join('", "')}" structure`);
   }
 
   if (constraints.length === 0) return '';
@@ -395,6 +481,13 @@ Seed: "${seedTranslation}"
       確信度: structure.確信度,
       程度: structure.程度,
       感情極性: structure.感情極性,
+      モダリティ: structure.モダリティ,
+      発話行為: structure.発話行為,
+      動作の意味: structure.動作の意味,
+      願望: structure.願望,
+      固有名詞: structure.固有名詞,
+      保持値: structure.保持値,
+      条件表現: structure.条件表現,
     } : undefined)
   );
 
@@ -421,16 +514,16 @@ Seed: "${seedTranslation}"
       case 'business':
         if (toneLevel >= 100) {
           toneStyle =
-            '重要な取引先への丁寧なビジネスメールの文体。最大限の敬意を込めつつ、受け手が自然に読めるビジネス文書の語彙と構造で書く。主語は構造分析の人称フィールドに従う';
+            '重要な取引先への丁寧なビジネスメールの文体。最大限の敬意を込めつつ、受け手が自然に読めるビジネス文書の語彙と構造で書く';
         } else if (toneLevel >= 75) {
           toneStyle =
-            '取引先へのビジネスメールの文体。丁寧な語彙選択、完全文、敬意を込めた表現を使う。主語は構造分析の人称フィールドに従う';
+            '取引先へのビジネスメールの文体。丁寧な語彙選択、完全文、敬意を込めた表現を使う';
         } else if (toneLevel >= 50) {
           toneStyle =
-            '社内の上司へのメール程度の文体。適度な敬意表現を使い、簡潔かつ丁寧に。主語は構造分析の人称フィールドに従う';
+            '社内の上司へのメール程度の文体。適度な敬意表現を使い、簡潔かつ丁寧に';
         } else {
           toneStyle =
-            'やや丁寧な日常会話の文体。短縮形を控え、語彙をやや改まったものにする程度。主語は構造分析の人称フィールドに従う';
+            'やや丁寧な日常会話の文体。短縮形を控え、語彙をやや改まったものにする程度';
         }
         break;
       case 'formal':
@@ -562,6 +655,13 @@ export async function translateWithGuard(
         確信度: options.structure.確信度,
         程度: options.structure.程度,
         感情極性: options.structure.感情極性,
+        モダリティ: options.structure.モダリティ,
+        発話行為: options.structure.発話行為,
+        動作の意味: options.structure.動作の意味,
+        願望: options.structure.願望,
+        固有名詞: options.structure.固有名詞,
+        保持値: options.structure.保持値,
+        条件表現: options.structure.条件表現,
       } : undefined),
     });
   } catch (error) {

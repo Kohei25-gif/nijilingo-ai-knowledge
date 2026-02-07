@@ -5,16 +5,9 @@ import type { ExpandedStructure, EntityType, TranslateOptions } from './types';
 // 不変条件（7項目 + stance_strength）のシステムプロンプト
 export const INVARIANT_RULES = `
 【不変条件】
-1. entities - 数字・日付・時刻・金額・固有名詞を変えない
-2. polarity - 肯定/否定を変えない
-3. locked_terms - 用語集の語句をそのまま使う
-4. modality_class - 依頼/義務/提案のクラスを変えない
-5. question/statement - 質問/断定を変えない
-6. condition markers - if/unless/when等を保持
-7. commitment - 約束を勝手に追加しない
-8. stance_strength - 同意や感情の強さを変えない
-9. subject_person - 構造分析の「人称」フィールドに従い、翻訳でも同じ人称を維持する（一人称単数の発言は一人称単数のまま訳す）
-10. 意図・確信度・感情極性・モダリティは構造情報の値を固定
+1. locked_terms - 用語集の語句をそのまま使う
+
+その他の不変条件（人称・極性・モダリティ・条件・確信度等）は、各リクエストの [Constraints for THIS sentence] セクションで文ごとに具体的に指定される。そちらに厳密に従うこと。
 
 【逆翻訳ルール】
 - 値は翻訳結果に従う
@@ -41,27 +34,16 @@ CORE PRINCIPLE (non-negotiable):
 - Raising tone must NEVER raise semantic intensity, certainty, or commitment strength.
 
 ═══ MEANING LOCK (never change) ═══
-1. Entities: numbers, dates, times, amounts, proper nouns
-2. Polarity: positive ↔ negative never flips
-3. Subject: never change (1st person singular ≠ 1st person plural)
-4. Intent & modality class: request/report/gratitude/suggestion stays the same
-5. Question/statement type preserved
-6. Condition markers (if/unless/when) preserved — never drop them
-7. Commitment lock: do NOT weaken or strengthen commitments/promises/offers. Keep the same commitment class as Seed(0%).
-8. Predicate meaning lock: keep the core action meaning from structure.動作の意味. Do not swap into a different achievement/evaluation verb.
-9. Degree lock: keep intensity at the level specified in structure.程度. Do NOT escalate beyond Seed(0%).
-10. Speech acts lock: ALL acts listed in structure.発話行為 must appear in output.
-11. No extra facts: do not add new reasons, excuses, evaluations, or details not present in Seed(0%).
-12. No ceremonial framing: Do NOT wrap the message in ceremony not present in the source. This includes emotional ceremony ("It is with great pleasure..."), formality ceremony ("It is with utmost formality that I must inform you..."), and any preamble that inflates a simple statement into an announcement. This applies even when sentiment is positive — a positive factual report does NOT license inserting pleasure/delight/honor vocabulary.
+1. No extra facts: do not add new reasons, excuses, evaluations, or details not present in Seed(0%).
+2. No ceremonial framing: Do NOT wrap the message in ceremony not present in the source.
+3. locked_terms: glossary terms must be used as-is.
+
+All other meaning constraints (subject, polarity, modality, conditions, degree, entities, speech acts, etc.) are specified per-sentence in [Constraints for THIS sentence]. Follow those strictly.
 
 ═══ DYNAMIC CONSTRAINTS ═══
-Each request includes immutable values:
-- 意図 (intent): stays fixed
-- 確信度 (certainty): stays fixed
-- 感情極性 (sentiment): stays fixed
-- モダリティ (modality): stays fixed
-- 程度 (degree_level): stays fixed — this is semantic intensity, NOT tone
-- 発話行為 (speech_acts): all must remain in output
+Each request includes a [Constraints for THIS sentence] block with immutable values
+extracted from structural analysis. These constraints override any general rules.
+Follow every constraint in that block strictly.
 
 ═══ TONE = SURFACE STYLE ONLY ═══
 OK to change: vocabulary formality, politeness markers, contractions, discourse markers, sentence structure, word choice within SAME meaning+strength.
@@ -265,7 +247,7 @@ export function getLanguageSpecificRules(targetLang: string): string {
 }
 
 export const EXPANDED_STRUCTURE_PROMPT = `あなたは多言語対応の構造分析アシスタントです。
-入力された文章から、以下の15項目を抽出してください。
+入力された文章から、以下の17項目を抽出してください。
 
 【抽出項目】
 1. 主題: 何について話しているか
@@ -348,12 +330,19 @@ export const EXPANDED_STRUCTURE_PROMPT = `あなたは多言語対応の構造�
    - 例: 「ごめん、今は対応できない」→ ["謝罪", "報告"]（「ごめん」=謝罪 + 「対応できない」=報告）
    - 例: 「悪いけど、これ急ぎでお願い」→ ["謝罪", "依頼"]
    - 例: 「ありがとう、助かった」→ ["感謝", "報告"]
+16. 保持値: 翻訳で変えてはいけない具体値のリスト（固有名詞以外の数値・日時・金額・数量・割合）
+   - 例: ["9時半", "3月15日", "50%", "3つ", "500円"]
+   - 固有名詞（人名・地名・組織名）は15番に入れる。ここには数値系のみ。
+   - 該当がなければ空配列 []
+17. 条件表現: 原文に含まれる条件・理由の構造
+   - 例: ["〜ので", "もし〜なら", "〜の場合", "〜しない限り", "〜たら", "〜れば"]
+   - 該当がなければ空配列 []
 
 【出力形式】
 JSONのみ（説明不要）
-必須キー: 「程度」「発話行為」を必ず含めること
+必須キー: 「程度」「発話行為」「保持値」「条件表現」を必ず含めること
 最小例:
-{"主題":"...","動作":"...","動作の意味":"...","意図":"報告","感情極性":"neutral","モダリティ":"報告","主語":"省略","対象":"なし","目的格":"なし","願望":"なし","人称":"一人称単数","確信度":"確定","程度":"none","発話行為":["報告"],"固有名詞":[]}
+{"主題":"...","動作":"...","動作の意味":"...","意図":"報告","感情極性":"neutral","モダリティ":"報告","主語":"省略","対象":"なし","目的格":"なし","願望":"なし","人称":"一人称単数","確信度":"確定","程度":"none","発話行為":["報告"],"保持値":[],"条件表現":[],"固有名詞":[]}
 
 【例1】
 入力: 「ごんたが寝てから向かいます」

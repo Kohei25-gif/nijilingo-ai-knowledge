@@ -29,7 +29,7 @@ export interface NamedEntity {
   敬称: HonorificType;  // 敬称なし=身内→尊敬語不要
 }
 
-// 拡張構造スキーマ（12項目）
+// 拡張構造スキーマ（17項目）
 export interface ExpandedStructure {
   主題: string;           // 何について
   動作: string;           // 何をする/どうなる
@@ -46,6 +46,8 @@ export interface ExpandedStructure {
   程度: DegreeLevel;      // 程度修飾語のレベル
   発話行為: string[];     // 複合発話を含む発話行為の一覧
   固有名詞: NamedEntity[];// 誤認識しやすい名詞
+  保持値: string[];       // 変えてはいけない具体値（数値・日時・金額など）
+  条件表現: string[];     // 原文の条件・理由構造（〜ので/もし〜なら等）
 }
 
 // 翻訳結果の型定義
@@ -112,6 +114,13 @@ export interface TranslateOptions {
     確信度?: string;
     程度?: string;
     感情極性?: string;
+    モダリティ?: string;
+    発話行為?: string[];
+    動作の意味?: string;
+    願望?: string;
+    固有名詞?: Array<{ text: string }>;
+    保持値?: string[];
+    条件表現?: string[];
   };
 }
 
