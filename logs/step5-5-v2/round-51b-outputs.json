@@ -1,0 +1,432 @@
+[
+  {
+    "id": "文192",
+    "source": "今日、久々に外で食べた。",
+    "structure": {
+      "主題": "外で食事",
+      "動作": "食べる",
+      "動作の意味": "eat",
+      "意図": "報告",
+      "感情極性": "positive",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I ate outside for the first time in a while today.",
+    "results": {
+      "casual_25": {
+        "new_translation": "I had a chance to eat outside today after a bit of a break.",
+        "reverse_translation": "少しぶりに外で食事をしてきた",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "I got to grab a bite outside today after a short hiatus.",
+        "reverse_translation": "今日はしばらくぶりに外で食事することができた。",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "I managed to snag a quick bite outside today after a mini-break.",
+        "reverse_translation": "今日は少しの間を挟んで外で食事することができた。",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "I was able to grab a quick snack outside today after a short break.",
+        "reverse_translation": "今日は短い休憩の後に外で軽く食事することができた。",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "Today, I had the opportunity to eat outside for the first time in a while.",
+        "reverse_translation": "今日は久しぶりに外で食事をしました。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "It was a pleasure to have the chance to dine outside today, for the first time in quite a while.",
+        "reverse_translation": "今日は久しぶりに外で食事ができて、とてもよかったです。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I was delighted to have the opportunity to eat outside today, for the first time in quite a while.",
+        "reverse_translation": "今日は久しぶりに外で食事できてよかったです",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "It was a great pleasure for me to have the opportunity to dine outside today, for the first time in a considerable period.",
+        "reverse_translation": "今日はかなり久しぶりに外で食事をする機会を得て、とても嬉しかったです。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "I had the opportunity to eat outside today for the first time in a while.",
+        "reverse_translation": "最近久しぶりに外で食事をしました",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I was afforded the opportunity to dine outdoors today for the first time in a while.",
+        "reverse_translation": "今日は久しぶりに外で食事する機会があった。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "It was my pleasure to have the opportunity to dine al fresco today for the first time in quite some time.",
+        "reverse_translation": "今日は久しぶりに外で食事をする機会に恵まれました",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "It was my distinct pleasure to have had the opportunity to engage in al fresco dining today, marking the first instance of such an experience in a considerable duration.",
+        "reverse_translation": "今日はかなり久しぶりに屋外で食事をする機会を得ることができて、大変光栄に存じます。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文200",
+    "source": "今日はもう寝たい。",
+    "structure": {
+      "主題": "睡眠欲求",
+      "動作": "寝たい",
+      "動作の意味": "want to sleep",
+      "意図": "依頼",
+      "感情極性": "positive",
+      "モダリティ": "依頼",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "あり",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "願望"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I want to sleep now.",
+    "results": {
+      "casual_25": {
+        "new_translation": "I'm gonna take a nap right now.",
+        "reverse_translation": "ちょっと今寝たい",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "I'm about to take a nap.",
+        "reverse_translation": "今から昼寝しよう",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "I'm fixin' to take a snooze.",
+        "reverse_translation": "寝たい",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "I'm about to catch some Z's.",
+        "reverse_translation": "寝る準備をしている",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I'd like to go to sleep now.",
+        "reverse_translation": "今寝たいと思います。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I would appreciate going to sleep now.",
+        "reverse_translation": "今、寝たいと思います",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I would be most grateful if I could go to sleep now.",
+        "reverse_translation": "今寝ることができたら大変ありがたいのですが",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "It would be an immense favor if I might retire to my slumber at this juncture.",
+        "reverse_translation": "お休みさせていただければ幸いです.",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "I would appreciate some rest at this point.",
+        "reverse_translation": "この辺りで少し休みたいと思います。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "At this juncture, I would be grateful for some rest.",
+        "reverse_translation": "この辺で少し休ませていただければと思います。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "At this point, I would greatly appreciate a brief respite.",
+        "reverse_translation": "この時点で少し休ませていただきたいと思います.",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "I would be most grateful if a brief period of rest could be afforded to me at this juncture.",
+        "reverse_translation": "この時点で少しの休息をいただければ大変ありがたいのですが",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文187",
+    "source": "今日の会議、結局結論出なかった。",
+    "structure": {
+      "主題": "会議の結果",
+      "動作": "出る",
+      "動作の意味": "result",
+      "意図": "報告",
+      "感情極性": "neutral",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "省略",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "The meeting today didn't reach a conclusion after all.",
+    "results": {
+      "casual_25": {
+        "new_translation": "The meeting today didn't wrap up.",
+        "reverse_translation": "今日の会議はまとまらなかった",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "The meeting today didn't get finished.",
+        "reverse_translation": "今日の会議は終わらなかった",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "The meeting today didn't wrap up.",
+        "reverse_translation": "今日の会議は終わらなかった",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "The meetup today didn't go down.",
+        "reverse_translation": "今日のミーティングは進まなかった",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "The meeting today did not come to a conclusion.",
+        "reverse_translation": "今日の会議は結論に達しませんでした。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "The meeting today did not reach a conclusive outcome.",
+        "reverse_translation": "本日の会議は結論に至りませんでした。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "The meeting held today did not yield a conclusive result.",
+        "reverse_translation": "本日の会議は、結論に至りませんでした。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "The meeting convened today did not arrive at a definitive conclusion.",
+        "reverse_translation": "本日開催された会議は、最終的な結論に至りませんでした。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "The meeting today did not come to a conclusion.",
+        "reverse_translation": "今日の会議は結論が出ませんでした。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "The meeting today did not reach a conclusive outcome.",
+        "reverse_translation": "今日の会議は結論に至りませんでした。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "The meeting held today did not yield a definitive conclusion.",
+        "reverse_translation": "本日の会議は、最終的な結論に至りませんでした。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "The meeting convened today did not arrive at a conclusive outcome.",
+        "reverse_translation": "本日開催された会議は、最終的な結論に到達しませんでした。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文189",
+    "source": "それ、噂だけ先行してる気がする。",
+    "structure": {
+      "主題": "噂の進行状況",
+      "動作": "先行している",
+      "動作の意味": "advance",
+      "意図": "報告",
+      "感情極性": "neutral",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "省略",
+      "確信度": "推測",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I think that rumor is getting ahead of itself.",
+    "results": {
+      "casual_25": {
+        "new_translation": "That rumor seems to be getting ahead of itself.",
+        "reverse_translation": "その噂は先行しているように思える。",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "That rumor's getting pretty out of hand.",
+        "reverse_translation": "その噂はどんどん広がってるみたい。",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "That rumor's totally spiraling out of control.",
+        "reverse_translation": "その噂は完全に制御不能になっている",
+        "risk": "med"
+      },
+      "casual_100": {
+        "new_translation": "The rumor's totally blowing up out of control.",
+        "reverse_translation": "その噂は完全に制御不能に膨らんでいる。",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "It appears that rumor is getting ahead of itself.",
+        "reverse_translation": "その噂は少し行き過ぎているようです。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "It seems that the rumor is gaining momentum.",
+        "reverse_translation": "どうやらその噂は広がりつつあるようです",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "It appears that the rumor is gaining traction.",
+        "reverse_translation": "そのような話が広がっているようだ",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "It can be observed that the rumor seems to be gaining momentum.",
+        "reverse_translation": "そのような話が広まりつつあるらしい",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "It appears that rumor is gaining momentum.",
+        "reverse_translation": "その噂は勢いを増しているようです。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "It seems that the rumor is gaining traction.",
+        "reverse_translation": "どうやらその噂は広がりつつあるようです。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "It appears that the rumor is gaining momentum.",
+        "reverse_translation": "そのような話が広がっているようだ",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "It seems that the rumor is acquiring increased traction.",
+        "reverse_translation": "そのような話が広がりつつあるらしい",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文165",
+    "source": "もし必要なら、私が対応する。",
+    "structure": {
+      "主題": "対応",
+      "動作": "対応する",
+      "動作の意味": "respond/handle",
+      "意図": "提案",
+      "感情極性": "neutral",
+      "モダリティ": "提案",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "提案"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I'll handle it if needed.",
+    "results": {
+      "casual_25": {
+        "new_translation": "I can take care of it if necessary.",
+        "reverse_translation": "必要なら対応します",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "I'll take care of it if need be.",
+        "reverse_translation": "必要なら対応する",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "I'll handle it if necessary.",
+        "reverse_translation": "必要なら対応する",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "I'll take care of it if need be.",
+        "reverse_translation": "必要なら対応する",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I will take care of it if needed.",
+        "reverse_translation": "必要に応じて対応します。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I shall attend to it if required.",
+        "reverse_translation": "必要であれば対応いたします",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I will attend to it if necessary.",
+        "reverse_translation": "必要であれば対応いたします。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "I shall attend to it if necessary.",
+        "reverse_translation": "必要に応じて対応させていただきます。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "I will take care of it if necessary.",
+        "reverse_translation": "必要であれば対応します",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I will attend to it if required.",
+        "reverse_translation": "必要であれば対応します",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "I shall attend to it if necessary.",
+        "reverse_translation": "必要に応じて対応させていただきます。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "I shall attend to it if deemed necessary.",
+        "reverse_translation": "必要と判断した場合には対応させていただきます。",
+        "risk": "low"
+      }
+    }
+  }
+]

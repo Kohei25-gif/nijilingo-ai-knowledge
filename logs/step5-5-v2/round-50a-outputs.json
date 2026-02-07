@@ -1,0 +1,432 @@
+[
+  {
+    "id": "文154",
+    "source": "正直、ちょっと不安。",
+    "structure": {
+      "主題": "不安",
+      "動作": "不安を感じる",
+      "動作の意味": "feel anxious",
+      "意図": "その他",
+      "感情極性": "negative",
+      "モダリティ": "感想",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "省略",
+      "確信度": "確定",
+      "程度": "slight",
+      "発話行為": [
+        "感想"
+      ],
+      "固有名詞": []
+    },
+    "seed": "To be honest, I'm a bit anxious.",
+    "results": {
+      "casual_25": {
+        "new_translation": "Honestly, I'm feeling a bit anxious.",
+        "reverse_translation": "正直、不安な気持ちが少しある。",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "Honestly, I'm getting a little anxious.",
+        "reverse_translation": "正直、少し不安になってる。",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "I'm gettin' a little anxious, for real.",
+        "reverse_translation": "本当に少し不安になってきた",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "I'm gettin' super anxious, for real.",
+        "reverse_translation": "めっちゃ不安になってきてる、本当。",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "Frankly speaking, I do feel a bit apprehensive.",
+        "reverse_translation": "率直に言って、少し不安を感じます。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "To be frank, I must admit that I'm somewhat apprehensive.",
+        "reverse_translation": "正直に言わせてもらえば、私は少し不安に思っています。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "Honestly, I have to say that I'm a bit on edge.",
+        "reverse_translation": "正直に言わせてもらうと、少し不安な気持ちです。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "I must confess that I am feeling somewhat apprehensive.",
+        "reverse_translation": "正直に言わなければならないのですが、少し不安を感じています。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "Honestly, I am somewhat concerned.",
+        "reverse_translation": "正直に言うと、少し気になっています。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "Frankly, I have some concerns.",
+        "reverse_translation": "率直に申し上げると、少し懸念しております。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "To be frank, I do have certain reservations.",
+        "reverse_translation": "率直に申し上げると、私にはいくつかの懸念があります。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "Frankly speaking, I harbor some minor concerns.",
+        "reverse_translation": "率直に申し上げると、私は若干の懸念を抱えております。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文164",
+    "source": "今日は割と集中できた。",
+    "structure": {
+      "主題": "集中",
+      "動作": "できる",
+      "動作の意味": "be able to concentrate",
+      "意図": "報告",
+      "感情極性": "positive",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "moderate",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I was able to concentrate pretty well today.",
+    "results": {
+      "casual_25": {
+        "new_translation": "I managed to concentrate fairly well today.",
+        "reverse_translation": "今日はそこそこ集中できた。",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "I did pretty well concentrating today.",
+        "reverse_translation": "今日は集中できた",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "I totally crushed it with concentration today.",
+        "reverse_translation": "今日は集中力がすごくあった",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "I absolutely nailed it with focus today.",
+        "reverse_translation": "今日は集中力を完全に発揮できた",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I managed to concentrate fairly well today.",
+        "reverse_translation": "今日はかなり集中することができました。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I was able to concentrate reasonably well today.",
+        "reverse_translation": "今日はそこそこ集中できました。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I was able to concentrate quite effectively today.",
+        "reverse_translation": "今日はかなり集中できました",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "I had the great fortune of being able to concentrate with considerable effectiveness today.",
+        "reverse_translation": "今日はかなり効果的に集中することができました",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "I managed to concentrate quite well today.",
+        "reverse_translation": "今日はかなり集中することができました。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I was able to concentrate quite well today.",
+        "reverse_translation": "今日はかなり集中することができました。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "I was able to concentrate exceptionally well today.",
+        "reverse_translation": "今日はかなり集中できました",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "I was able to concentrate with exceptional focus today.",
+        "reverse_translation": "今日は非常に集中することができました.",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文176",
+    "source": "それはちょっとリスク高い。",
+    "structure": {
+      "主題": "リスク",
+      "動作": "高い",
+      "動作の意味": "be high",
+      "意図": "報告",
+      "感情極性": "negative",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "省略",
+      "確信度": "確定",
+      "程度": "moderate",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "That's a bit of a high risk.",
+    "results": {
+      "casual_25": {
+        "new_translation": "That poses a somewhat significant risk.",
+        "reverse_translation": "それはある程度重大なリスクをはらんでいる",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "That carries a pretty significant risk.",
+        "reverse_translation": "それはかなり大きなリスクです。",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "That carries a pretty hefty risk.",
+        "reverse_translation": "それはかなり大きなリスクです。",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "That carries a super hefty risk.",
+        "reverse_translation": "それはかなり高いリスクを伴う",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "That's somewhat high-risk.",
+        "reverse_translation": "それは少しリスクが高いですね",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I would say that's somewhat high-risk.",
+        "reverse_translation": "それはややリスクが高いと言えるでしょう。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I would characterize that as moderately high-risk.",
+        "reverse_translation": "それを中程度のハイリスクと評します。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "I would describe that as being at a moderately high level of risk.",
+        "reverse_translation": "それを中程度に高いリスクレベルであると説明いたします。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "There is a certain level of risk involved.",
+        "reverse_translation": "ある程度のリスクが伴います。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "A certain level of risk is inherent in this situation.",
+        "reverse_translation": "一定のリスクが伴います",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "There is an inherent level of risk present in this situation.",
+        "reverse_translation": "この状況にはある程度のリスクが伴います。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "A considerable degree of risk is inherently associated with this situation.",
+        "reverse_translation": "この状況にはある程度のリスクが伴う",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文156",
+    "source": "それはあんまり現実的じゃない。",
+    "structure": {
+      "主題": "現実性",
+      "動作": "ない",
+      "動作の意味": "be not realistic",
+      "意図": "報告",
+      "感情極性": "negative",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "省略",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "That's not very realistic.",
+    "results": {
+      "casual_25": {
+        "new_translation": "That's not super realistic.",
+        "reverse_translation": "それはあまり現実的じゃない",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "That's not really realistic.",
+        "reverse_translation": "それはあまり現実的じゃない。",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "That's not super realistic.",
+        "reverse_translation": "それはあまり現実的ではない",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "That's hella not realistic.",
+        "reverse_translation": "それは全然現実的じゃない",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "That's not particularly realistic.",
+        "reverse_translation": "それは特に現実的ではありません。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "That doesn't seem especially realistic.",
+        "reverse_translation": "それは特に現実的ではないようです",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "It doesn't appear to be particularly realistic.",
+        "reverse_translation": "それは特に現実的ではないようです。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "It does not seem to possess a particularly realistic quality.",
+        "reverse_translation": "現実的であるとは思われません",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "That's not entirely realistic.",
+        "reverse_translation": "それはあまり現実的ではありません",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "That does not seem entirely realistic.",
+        "reverse_translation": "それは完全に現実的ではないようです",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "It does not appear to be entirely realistic.",
+        "reverse_translation": "それは現実的ではないようです",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "It does not seem to be fully realistic.",
+        "reverse_translation": "現実的ではないようです",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文182",
+    "source": "今日ちょっといいニュースあった。",
+    "structure": {
+      "主題": "良いニュース",
+      "動作": "あった",
+      "動作の意味": "happen",
+      "意図": "報告",
+      "感情極性": "positive",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I had some good news today.",
+    "results": {
+      "casual_25": {
+        "new_translation": "I got some good news today.",
+        "reverse_translation": "今日、良いニュースがあった。",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "I've had some great news today.",
+        "reverse_translation": "今日、良いニュースがあった。",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "I've had some awesome news today.",
+        "reverse_translation": "今日はすごくいいニュースがあった。",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "I got some sick news today.",
+        "reverse_translation": "今日すごいニュースがあった",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I had the pleasure of receiving some good news today.",
+        "reverse_translation": "今日は良いニュースを聞くことができました.",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "It was my pleasure to receive some good news today.",
+        "reverse_translation": "今日は良いニュースを受け取ることができてよかったです。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "It was a delight to receive some good news today.",
+        "reverse_translation": "今日は良いニュースをもらって嬉しかったです。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "It is with great pleasure that I received some favorable news today.",
+        "reverse_translation": "今日、良いニュースを頂戴できて大変嬉しく思います。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "I received some favorable news today.",
+        "reverse_translation": "今日、良いニュースがいくつかありました.",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I had the pleasure of receiving some favorable news today.",
+        "reverse_translation": "今日は良いニュースを受け取ることができました.",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "It was my pleasure to receive some favorable news today.",
+        "reverse_translation": "今日はよいニュースを受け取ることができてよかったです。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "I am delighted to have received some favorable news today.",
+        "reverse_translation": "今日、好ましいニュースを受け取ることができて大変嬉しく思います。",
+        "risk": "low"
+      }
+    }
+  }
+]
