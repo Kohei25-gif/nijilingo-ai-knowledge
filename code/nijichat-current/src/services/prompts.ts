@@ -491,8 +491,9 @@ export function structureToPromptText(structure: ExpandedStructure, targetLang?:
 - 感情極性が negative / neutral の場合:
   "pleasure", "delight", "honored", "It is with great" を禁止
 - モダリティが 報告 の場合（感情極性に関係なく）:
-  "pleasure", "delight", "honored", "It is with great" を禁止
-  （報告は事実の伝達。話者の感情儀礼を追加しない）
+  丁寧さは形式（省略形を避ける・語彙の格式）で表現する
+  発表調の前置きや、原文にない感情儀礼を追加しない
+  事実報告は事実のまま簡潔に述べる
 - モダリティが 報告 / 感謝 の場合:
   "I would be grateful if you could..." を禁止
   "I would appreciate it if you could..." を禁止
@@ -742,53 +743,49 @@ export function getToneStyleInstruction(tone: string | undefined, toneLevel: num
 
     case 'business':
       if (toneLevel >= 100) {
-        return `【トーンレベル: ${toneLevel}% - めちゃくちゃビジネス（最大級にフォーマル）】
+        return `〖トーンレベル: ${toneLevel}% - 最高ビジネス〗
 - 最高レベルのビジネス敬語
 - 省略形は一切使わない
-- 例: "I would be most grateful if...", "I wish to inform you that...", "I sincerely appreciate your consideration."
-- 格式高く丁重な表現`;
+- 丁寧さは形式と語彙の格式で表現する（儀礼的な前置きで盛らない）
+- 発表調の前文や、原文にない感情儀礼（喜び・光栄・恐縮等）を追加しない
+- 事実報告は事実のまま簡潔にフォーマルに述べる`;
       } else if (toneLevel >= 75) {
-        return `【トーンレベル: ${toneLevel}% - かなりのビジネス表現】
+        return `〖トーンレベル: ${toneLevel}% - かなりのビジネス表現〗
 - 省略形は使わない
-- 丁寧な依頼・感謝表現を使う
-- 例: "Would you be so kind as to...", "I would greatly appreciate..."
-- フォーマルなトーン`;
+- フォーマルなトーン
+- 儀礼的な前置きは追加しない
+- 事実は事実のまま（感情儀礼で包まない）`;
       } else if (toneLevel >= 50) {
-        return `【トーンレベル: ${toneLevel}% - 標準のビジネス表現】
+        return `〖トーンレベル: ${toneLevel}% - 標準のビジネス表現〗
 - 省略形は避ける
-- 丁寧語を使う
-- 例: "Could you please...", "I would like to..."
-- プロフェッショナルなトーン`;
+- 丁寧でプロフェッショナル
+- 過度に改まった儀礼表現を追加しない
+- 文は事実中心で簡潔に`;
       } else {
-        return `【トーンレベル: ${toneLevel}% - 軽めのビジネス表現】
-- 基本的に省略形は避ける
-- シンプルな丁寧表現
-- 例: "Please...", "Thank you for..."
-- 丁寧だが堅すぎない`;
+        return `〖トーンレベル: ${toneLevel}% - 軽めビジネス〗
+- 丁寧だが堅すぎない
+- 事実中心で簡潔`;
       }
 
     case 'formal':
       if (toneLevel >= 100) {
-        return `【トーンレベル: ${toneLevel}% - めちゃくちゃ丁寧（最大級の敬語・謙譲語）】
-- 最上級の敬意を示す表現
-- 謙譲語・尊敬語を最大限に使用
-- 例: "I would be deeply honored...", "Your esteemed presence...", "I humbly request..."
-- 最高の礼儀と敬意`;
+        return `〖トーンレベル: ${toneLevel}% - 最高丁寧〗
+- 丁寧さは形式で表現（省略形を避ける・語彙の格式を上げる）
+- 感情儀礼や発表調の前置きを追加しない
+- 原文にない主観評価（大げさなポジティブ表現）を追加しない`;
       } else if (toneLevel >= 75) {
-        return `【トーンレベル: ${toneLevel}% - かなりの丁寧表現】
-- 敬意を込めた表現
-- 例: "It would be my pleasure...", "May I kindly ask..."
-- 礼儀正しいフォーマル`;
+        return `〖トーンレベル: ${toneLevel}% - 強め丁寧〗
+- 丁寧で落ち着いた文体
+- 前置きの儀礼は追加しない
+- 内容は事実のまま、簡潔に`;
       } else if (toneLevel >= 50) {
-        return `【トーンレベル: ${toneLevel}% - 標準の丁寧表現】
-- 丁寧な言い回し
-- 例: "Would you mind...", "I appreciate..."
-- 敬意あるトーン`;
+        return `〖トーンレベル: ${toneLevel}% - 標準丁寧〗
+- 丁寧な語彙と語順
+- 過剰な儀礼・発表調は避ける`;
       } else {
-        return `【トーンレベル: ${toneLevel}% - 軽めの丁寧表現】
-- 基本的な丁寧表現
-- 例: "Please...", "Thank you..."
-- シンプルに丁寧`;
+        return `〖トーンレベル: ${toneLevel}% - 軽め丁寧〗
+- シンプルに丁寧
+- 事実中心`;
       }
 
     default:

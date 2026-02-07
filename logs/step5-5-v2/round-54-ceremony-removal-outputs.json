@@ -1,0 +1,348 @@
+[
+  {
+    "id": "文182",
+    "source": "今日ちょっといいニュースあった。",
+    "part": "A",
+    "structure": {
+      "主題": "良いニュース",
+      "動作": "あった",
+      "動作の意味": "happen",
+      "意図": "報告",
+      "感情極性": "positive",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I had some good news today.",
+    "results": {
+      "polite_25": {
+        "new_translation": "I had the pleasure of receiving some good news today.",
+        "reverse_translation": "今日は良いニュースがあった。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "I was fortunate enough to receive some good news today.",
+        "reverse_translation": "今日、幸運にも良いニュースを受け取ることができました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "It was my good fortune to receive some favorable news today.",
+        "reverse_translation": "今日は幸運にも良いニュースを受け取ることができました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "I am deeply grateful to have been blessed with some favorable news today.",
+        "reverse_translation": "今日は私にとって幸運なことに、好ましいニュースをいただくことができました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "I received some positive news today.",
+        "reverse_translation": "今日、良いニュースを受けました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "I had the pleasure of receiving some positive news today.",
+        "reverse_translation": "今日は良いニュースを聞くことができました.",
+        "risk": "med",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "I was pleased to receive some favorable news today.",
+        "reverse_translation": "今日、好ましいニュースを受け取ることができて嬉しかったです。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "It was my pleasure to receive certain favorable news today.",
+        "reverse_translation": "今日、ある良いニュースを頂戴できてよかったです。",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "文192",
+    "source": "今日、久々に外で食べた。",
+    "part": "A",
+    "structure": {
+      "主題": "外で食事",
+      "動作": "食べる",
+      "動作の意味": "eat",
+      "意図": "報告",
+      "感情極性": "positive",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I ate outside today for the first time in a while.",
+    "results": {
+      "polite_25": {
+        "new_translation": "Today, I had the opportunity to eat outside for the first time in a while.",
+        "reverse_translation": "今日、しばらくぶりに外で食事をしました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "It was a pleasure to finally have the chance to eat outside today after quite some time.",
+        "reverse_translation": "今日は久しぶりに外で食事をすることができて、とても嬉しかったです。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "I am delighted to have finally had the opportunity to dine outdoors today after a considerable period of time.",
+        "reverse_translation": "今日はかなり長い間ぶりに外で食事をする機会を得て、嬉しく思いました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "It is my utmost pleasure to have finally had the opportunity to partake in an outdoor meal today, following an extended period of time.",
+        "reverse_translation": "今日は、長い間ぶりに外で食事をする機会を得られて、非常に嬉しく思っております。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "I had the opportunity to eat outside today for the first time in a while.",
+        "reverse_translation": "今日は久しぶりに外で食事をしました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "Today, I had the chance to dine out for the first time in a while.",
+        "reverse_translation": "今日は久しぶりに外で食事をする機会があった。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "Today, I had the opportunity to dine out for the first time in quite some time.",
+        "reverse_translation": "今日は久しぶりに外で食事をする機会がありました",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "Today, I had the privilege of dining out for the first time in a considerable period.",
+        "reverse_translation": "今日はかなり久しぶりに外で食事をする機会を得ました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "R1",
+    "source": "財布忘れた",
+    "part": "B",
+    "structure": {
+      "主題": "財布の忘れ物",
+      "動作": "忘れる",
+      "動作の意味": "forget",
+      "意図": "報告",
+      "感情極性": "neutral",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "財布",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I forgot my wallet",
+    "results": {
+      "polite_100": {
+        "new_translation": "I humbly regret to inform you that I have misplaced my wallet.",
+        "reverse_translation": "財布を忘れました",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "I have inadvertently left my wallet behind.",
+        "reverse_translation": "財布を置いてきてしまいました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "R2",
+    "source": "送ってもらえる？",
+    "part": "B",
+    "structure": {
+      "主題": "送る",
+      "動作": "送る",
+      "動作の意味": "send",
+      "意図": "依頼",
+      "感情極性": "neutral",
+      "モダリティ": "依頼",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "推測",
+      "程度": "none",
+      "発話行為": [
+        "依頼"
+      ],
+      "固有名詞": []
+    },
+    "seed": "Can you send it to me?",
+    "results": {
+      "polite_100": {
+        "new_translation": "Would you be so kind as to send it to me?",
+        "reverse_translation": "お送りいただけますでしょうか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "I would appreciate it if you could send it to me.",
+        "reverse_translation": "送っていただけますでしょうか。",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "R3",
+    "source": "ありがとう、助かった",
+    "part": "B",
+    "structure": {
+      "主題": "感謝と助け",
+      "動作": "助かる",
+      "動作の意味": "help",
+      "意図": "感謝",
+      "感情極性": "positive",
+      "モダリティ": "感想",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "感謝",
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "Thanks, I was helped",
+    "results": {
+      "polite_100": {
+        "new_translation": "I am deeply grateful for the assistance I received.",
+        "reverse_translation": "助けていただき、心から感謝しております。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "I would like to express my sincere gratitude for your assistance.",
+        "reverse_translation": "ご助力を賜り、心より感謝申し上げます。",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "R4",
+    "source": "明日の会議は3時からです",
+    "part": "B",
+    "structure": {
+      "主題": "会議",
+      "動作": "始まる",
+      "動作の意味": "start",
+      "意図": "報告",
+      "感情極性": "neutral",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "三人称",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "The meeting tomorrow is at 3.",
+    "results": {
+      "polite_100": {
+        "new_translation": "The meeting scheduled for tomorrow is set to commence at 3:00 p.m.",
+        "reverse_translation": "明日予定されている会議は午後3時に始まります。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "The meeting scheduled for tomorrow will commence at 3:00 p.m.",
+        "reverse_translation": "明日の会議は午後3時に始まります。",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "R5",
+    "source": "お会いできて嬉しかったです",
+    "part": "B",
+    "structure": {
+      "主題": "会うこと",
+      "動作": "できる",
+      "動作の意味": "be able to meet",
+      "意図": "報告",
+      "感情極性": "positive",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "It was nice meeting you",
+    "results": {
+      "polite_100": {
+        "new_translation": "It was an absolute delight making your acquaintance.",
+        "reverse_translation": "お会いできて大変光栄でした。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "It was an absolute pleasure making your acquaintance.",
+        "reverse_translation": "お会いできて大変光栄でした",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  }
+]
