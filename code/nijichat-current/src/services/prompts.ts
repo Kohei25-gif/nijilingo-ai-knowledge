@@ -822,22 +822,17 @@ export function getToneStyleInstruction(tone: string | undefined, toneLevel: num
     case 'business':
       if (toneLevel >= 100) {
         return `〖トーンレベル: ${toneLevel}% - 最高ビジネス〗
-- Highly professional and formal business tone. Maximum professionalism through structure and precision:
-- "I would like to formally request..." / "Please be advised that..." / "For your consideration..."
-- "At your earliest convenience..." / "I would appreciate your guidance on..."
-- Maintain clarity above all - formality should never obscure meaning
-- Precision and directness are more professional than ornate language
-- Do NOT use: wherein, hereby, hitherto, forthwith, foreseen, convene, requisite
-- Do NOT rephrase the core action/meaning to sound more "business" - keep the original meaning intact
-- Good: "I regret that I must decline." / Bad: "I believe it would be beneficial to establish an alternative arrangement."`;
+- Highly professional and formal business tone.
+- Maximum professionalism through structural precision and layered courtesy, not ornate vocabulary.
+- Clarity and meaning preservation are more professional than complexity.
+- The core action and meaning of the original must remain completely unchanged.
+- Do not rephrase the original action into a different concept to sound more formal.`;
       } else if (toneLevel >= 75) {
         return `〖トーンレベル: ${toneLevel}% - かなりのビジネス表現〗
-- Professional business tone. Clear, efficient, and courteous:
-- "I'd like to suggest..." / "Would it be possible to..." / "I wanted to follow up on..."
-- "Please let me know if..." / "I'd appreciate your input on..."
-- Professional = clear and direct language with appropriate courtesy markers.
-- Do NOT use: wherein, hereby, hitherto, endeavor, forthwith, convene
-- Good: "Could we meet at 9:30?" / Bad: "We propose convening at the designated hour."`;
+- Professional business tone. Clear, efficient, and courteous.
+- Professionalism = clarity and precision, not complexity of vocabulary.
+- Use direct language with appropriate courtesy markers.
+- Do not sacrifice clarity for formality.`;
       } else if (toneLevel >= 50) {
         return `〖トーンレベル: ${toneLevel}% - 標準のビジネス表現〗
 - 省略形は避ける
@@ -853,21 +848,17 @@ export function getToneStyleInstruction(tone: string | undefined, toneLevel: num
     case 'formal':
       if (toneLevel >= 100) {
         return `〖トーンレベル: ${toneLevel}% - 最高丁寧〗
-- Very polite and respectful tone. Maximize courtesy through sentence structure, not vocabulary complexity:
-- "I would be most grateful if..." / "Would it be possible to..." / "I sincerely appreciate..."
-- "If it wouldn't be too much trouble..." / "I hope you don't mind my asking..."
-- Layer polite structures: hedging + gratitude + softening
-- Use warm, clear language - never cold or bureaucratic
-- Do NOT use: wherein, hereby, hitherto, forthwith, convene, requisite, foreseen
-- Good: "I'd be very grateful if you could help." / Bad: "I would be most obliged if you could render assistance."`;
+- Very polite and respectful tone.
+- Maximize courtesy through layered indirectness in sentence structure, not vocabulary complexity.
+- More indirection and softening = more polite.
+- The meaning and core action of the original must remain completely unchanged.
+- Do not replace the original action or concept with a different one to sound more formal.`;
       } else if (toneLevel >= 75) {
         return `〖トーンレベル: ${toneLevel}% - 強め丁寧〗
-- Polite, considerate tone. Use polite sentence patterns rather than formal vocabulary:
-- "I was wondering if..." / "Would you mind..." / "I'd appreciate it if..."
-- "It seems that..." / "I believe..." / "If I may..."
-- Use standard vocabulary with polite framing - avoid archaic or overly formal words
-- Do NOT use: wherein, hereby, hitherto, endeavor, forthwith, convene
-- Good: "Could you send it to me?" / Bad: "Might I be able to receive it?"`;
+- Polite, considerate tone.
+- Politeness = indirectness and softness of sentence structure, not rarity of vocabulary.
+- Use common words with indirect, gentle phrasing to raise politeness.
+- Do not replace common words with rare or archaic synonyms.`;
       } else if (toneLevel >= 50) {
         return `〖トーンレベル: ${toneLevel}% - 標準丁寧〗
 - 丁寧な語彙と語順
