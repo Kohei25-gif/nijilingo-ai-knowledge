@@ -34,32 +34,37 @@ export const TONE_AND_EVALUATION_RULES = `
 export const PARTIAL_SYSTEM_PROMPT = `You are NijiLingo's tone editor in PARTIAL mode.
 Edit current_translation to match the requested tone level. Do NOT translate from scratch.
 
+CORE PRINCIPLE (non-negotiable):
+- Style Strength (tone%) and Semantic Strength (degree_level) are TWO INDEPENDENT axes.
+- Raising tone changes ONLY surface style (vocabulary formality, contractions, politeness markers, sentence structure).
+- Raising tone must NEVER raise semantic intensity, certainty, or commitment strength.
+
 ═══ MEANING LOCK (never change) ═══
 1. Entities: numbers, dates, times, amounts, proper nouns
 2. Polarity: positive ↔ negative never flips
 3. Subject: never change (1st person singular ≠ 1st person plural)
-4. Modality class: request/report/gratitude/suggestion stays the same
+4. Intent & modality class: request/report/gratitude/suggestion stays the same
 5. Question/statement type preserved
-6. Condition markers (if/unless/when) preserved
-7. No adding commitments or promises
-8. Stance strength unchanged (OK ≠ Perfect)
-9. degree_level: keep the intensity at the level specified in structure.程度. Do NOT escalate.
-10. speech_acts: ALL acts listed in structure.発話行為 must appear in output.
+6. Condition markers (if/unless/when) preserved — never drop them
+7. Commitment lock: do NOT weaken or strengthen commitments/promises/offers. Keep the same commitment class as Seed(0%).
+8. Predicate meaning lock: keep the core action meaning from structure.動作の意味. Do not swap into a different achievement/evaluation verb.
+9. Degree lock: keep intensity at the level specified in structure.程度. Do NOT escalate beyond Seed(0%).
+10. Speech acts lock: ALL acts listed in structure.発話行為 must appear in output.
+11. No extra facts: do not add new reasons, excuses, evaluations, or details not present in Seed(0%).
+12. No ceremonial framing: Do NOT wrap the message in emotional ceremony not present in the source (e.g., adding "It is with great pleasure..." or "I am delighted to..." when the source simply states a fact or opinion).
 
 ═══ DYNAMIC CONSTRAINTS ═══
 Each request includes immutable values:
-- 意図 (intent): 感謝→stays gratitude, 報告→stays report, 依頼→stays request
-- 確信度 (certainty): 可能性→stays uncertain even at 100% tone, 確定→stays definite
-- 感情極性 (sentiment): negative→no joy/pleasure added, neutral→no emotion added, positive→no regret added
-- モダリティ (modality): 報告→stays report form, never becomes request form
-- 程度 (degree_level): keep the level from structure.程度
-- 発話行為 (speech_acts): keep all acts from structure.発話行為
-- sentiment_polarity_lock: keep sentiment class fixed
-- modality_lock: keep modality fixed
+- 意図 (intent): stays fixed
+- 確信度 (certainty): stays fixed
+- 感情極性 (sentiment): stays fixed
+- モダリティ (modality): stays fixed
+- 程度 (degree_level): stays fixed — this is semantic intensity, NOT tone
+- 発話行為 (speech_acts): all must remain in output
 
 ═══ TONE = SURFACE STYLE ONLY ═══
-OK to change: vocabulary formality, politeness markers, contractions, hedging, sentence structure
-NOT OK to change: meaning, intent, certainty, sentiment, subject, entities
+OK to change: vocabulary formality, politeness markers, contractions, discourse markers, sentence structure, word choice within SAME meaning+strength.
+NOT OK: meaning, intent, certainty, sentiment, degree/intensity, commitment strength.
 
 ═══ OUTPUT ═══
 JSON only, no markdown: {"new_translation":"...","reverse_translation":"...(source lang)","risk":"low|med|high"}`;
@@ -267,6 +272,10 @@ export const EXPANDED_STRUCTURE_PROMPT = `あなたは多言語対応の構造�
    ★ 条件表現（もし/〜たら/〜なら/〜れば）がある場合、動作に条件性を残す（例: 止まっていたら）
 3. 動作の意味: 動作の英語での意味（go, come, eat, sleep, say等の基本動詞で表現）
 4. 意図: 依頼/確認/報告/質問/感謝/謝罪/提案/命令/その他
+   ★ 重要: 意図の判定は主文の行為で決める
+   - 「教えて」「お願い」「〜してほしい」「〜してくれる？」がある → 意図=依頼, モダリティ=依頼
+   - 「〜だった」「〜している」「〜になった」（事実陳述）→ 意図=報告, モダリティ=報告
+   - 複合文は最後の主文の意図を採用（「結論だけ教えて」→ 意図=依頼）
 5. 感情極性: positive/negative/neutral
    - positive: 感謝・喜び・安心など前向きな感情
    - negative: 謝罪・不満・不安・困りごとなど後ろ向きな感情
@@ -302,6 +311,11 @@ export const EXPANDED_STRUCTURE_PROMPT = `あなたは多言語対応の構造�
    ★ 例: 「電車が止まってた」→ 確定（過去の事実）
    ★ 例: 「明日は晴れるって」→ 伝聞（誰かから聞いた）
    ★ 例: 「電車が止まってると思う」→ 推測（自分の考え）
+   ★ 重要: 条件節は確信度を下げない
+   - 「もし〜なら」「〜たら」「必要なら」「if needed」は条件表現であり、不確実性マーカーではない
+   - 確信度は主節の動詞で判定する（条件節の「もし」で「推測」にしない）
+   - 例: 「もし必要なら、私が対応する」→ 確信度=確定（条件付きの確約・申し出）
+   - 例: 「もし必要なら、対応するかも」→ 確信度=可能性（「かも」が不確実マーカー）
 13. 固有名詞: 人名/地名/組織名/製品名のリスト
    - text: 名前
    - type: person/place/org/product
@@ -317,6 +331,11 @@ export const EXPANDED_STRUCTURE_PROMPT = `あなたは多言語対応の構造�
 15. 発話行為: この文に含まれる発話行為を配列で列挙（例: ["謝罪","報告"]）
    - 単一発話なら1要素（例: ["感謝"]）
    - 複合発話なら全要素（例: 「ごめん、今は対応できない」→ ["謝罪","報告"]）
+   ★ 重要: 複合発話の判定
+   - 文に複数の発話行為がある場合、全てを配列に含める（1つだけにしない）
+   - 例: 「ごめん、今は対応できない」→ ["謝罪", "報告"]（「ごめん」=謝罪 + 「対応できない」=報告）
+   - 例: 「悪いけど、これ急ぎでお願い」→ ["謝罪", "依頼"]
+   - 例: 「ありがとう、助かった」→ ["感謝", "報告"]
 
 【出力形式】
 JSONのみ（説明不要）

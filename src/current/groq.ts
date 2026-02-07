@@ -167,6 +167,16 @@ const inferSpeechActsFromText = (sourceText: string, intent: IntentType, modalit
   if (modality === '感想') acts.push('感想');
   if (intent === '報告' || modality === '報告') acts.push('報告');
 
+  // 謝罪+叙述の複合文を補足（例: 「ごめん、今は対応できない」）
+  const hasApology = apologyMarkers.some(marker => sourceText.includes(marker));
+  if (hasApology) {
+    const segments = sourceText.split(/[、,。]/).map(s => s.trim()).filter(Boolean);
+    const hasNonApologySegment = segments.some(segment =>
+      !apologyMarkers.some(marker => segment.includes(marker))
+    );
+    if (hasNonApologySegment) acts.push('報告');
+  }
+
   if (acts.length === 0) acts.push('報告');
   return Array.from(new Set(acts));
 };
@@ -293,12 +303,30 @@ export async function translatePartial(options: TranslateOptions): Promise<Trans
   }
 
   const structureInfo = structure ? `\n${structureToPromptText(structure, targetLang, sourceLang)}\n` : '';
-  const fixedValueDeclaration = structure ? `固定値: 意図=${structure.意図}, 確信度=${structure.確信度}, 感情極性=${structure.感情極性}, モダリティ=${structure.モダリティ}, 程度=${structure.程度}, 発話行為=${(structure.発話行為 && structure.発話行為.length > 0) ? structure.発話行為.join('+') : 'なし'}` : '';
+const fixedValueDeclaration = structure ? `
+【この翻訳の固定値 - トーン調整で絶対に変えないこと】
+- 意図: ${structure.意図}
+- 確信度: ${structure.確信度}
+- 感情極性: ${structure.感情極性}
+- モダリティ: ${structure.モダリティ}
+- 程度: ${structure.程度 || 'none'}（← semantic intensity。トーンではない。この値を超える強調は禁止）
+- 発話行為: ${(structure.発話行為 && structure.発話行為.length > 0) ? structure.発話行為.join('+') : 'なし'}（← 全て出力に残すこと）
+- 動作の意味: ${structure.動作の意味 || 'なし'}（← 述語の意味カテゴリ。この範囲を逸脱する動詞に変えない）
+トーン調整で変えていいのは「口調・語彙の格式レベル・文体」のみ。
+上記7つの値が変わる翻訳は不合格。
+` : '';
   const seedTranslation = options.seedTranslation
     ?? (options.previousLevel === 0 ? options.previousTranslation : undefined)
     ?? currentTranslation;
-  const driftPrevention = `Seed (0%): "${seedTranslation}"
-Keep this meaning. Change tone only.`;
+  const driftPrevention = `
+【Seed（0%）= 意味・程度・確信度・コミットメントのアンカー】
+Seed: "${seedTranslation}"
+- Seedの意味を維持したまま口調のみ変更すること
+- Seedより程度を強めない（Seedが"pretty"なら"totally"にしない）
+- Seedより確信度を変えない（Seedが"will"なら"might"にしない）
+- Seedより約束/意志を弱めない・強めない
+- 意味・意図・確信度がSeedからズレていたら修正すること
+`;
 
   let toneStyle = '';
   if (toneLevel < 25) {
@@ -306,21 +334,21 @@ Keep this meaning. Change tone only.`;
   } else {
     switch (tone) {
       case 'casual':
-        if (toneLevel >= 100) toneStyle = 'Maximum casual: slang, heavy contractions, very friendly and energetic.';
-        else if (toneLevel >= 75) toneStyle = 'Strong casual: more contractions, playful, mild intensifiers.';
-        else if (toneLevel >= 50) toneStyle = 'Standard casual: contractions, friendly phrasing.';
+        if (toneLevel >= 100) toneStyle = 'Maximum casual (heavy slang, gonna/wanna/gotta, very friendly phrasing. Surface style only - do NOT add stronger degree words.)';
+        else if (toneLevel >= 75) toneStyle = 'Strong casual (more contractions, playful phrasing, relaxed tone. Surface style only - do NOT add stronger degree words.)';
+        else if (toneLevel >= 50) toneStyle = 'Standard casual (contractions, friendly phrasing. Surface style only - do NOT add stronger degree words.)';
         else toneStyle = 'Slightly casual: basic contractions, relaxed but clear.';
         break;
       case 'business':
-        if (toneLevel >= 100) toneStyle = 'Maximum business: highest professional register, no contractions, structured sentences.';
-        else if (toneLevel >= 75) toneStyle = 'Strong business: professional, deferential phrasing, no contractions.';
-        else if (toneLevel >= 50) toneStyle = 'Standard business: professional tone, no contractions, clear and direct.';
-        else toneStyle = 'Slightly business: polite, minimal contractions.';
+        if (toneLevel >= 100) toneStyle = 'Maximum business (highest formality, no contractions, highly professional phrasing. Surface style only - do NOT add stronger degree words.)';
+        else if (toneLevel >= 75) toneStyle = 'Strong business (formal, deferential phrasing, no contractions. Surface style only - do NOT add stronger degree words.)';
+        else if (toneLevel >= 50) toneStyle = 'Standard business (professional phrasing, avoid contractions. Surface style only - do NOT add stronger degree words.)';
+        else toneStyle = 'Slightly business (polite tone, minimal contractions.)';
         break;
       case 'formal':
-        if (toneLevel >= 100) toneStyle = 'Maximum formal: highest politeness, dignified and elaborate phrasing.';
-        else if (toneLevel >= 50) toneStyle = 'Standard formal: polite, respectful, elevated vocabulary.';
-        else toneStyle = 'Slightly formal: polite, refined vocabulary.';
+        if (toneLevel >= 100) toneStyle = 'Maximum formal (highest politeness, honorifics, humble expressions. Surface style only - do NOT add stronger degree words.)';
+        else if (toneLevel >= 50) toneStyle = 'Standard formal (elevated politeness, respectful phrasing. Surface style only - do NOT add stronger degree words.)';
+        else toneStyle = 'Slightly formal (polite and respectful, but not maximally formal.)';
         break;
       case 'custom':
         toneStyle = `"${customTone || ''}" style FULL POWER - 段階は無視して常に全力で表現。オジサン構文なら絵文字・カタカナ混ぜ、限界オタクなら感情爆発、ギャルならギャル語、赤ちゃん言葉なら幼児語`;
@@ -337,6 +365,16 @@ Keep this meaning. Change tone only.`;
   const diffInstruction = previousTranslation ? `Previous (${previousLevel ?? 0}%): "${previousTranslation}"
 → Must differ from above. Change tone expression, not meaning.` : '';
 
+  const finalChecklist = `
+【FINAL CHECK（出力前に必ず確認）】
+□ 程度（degree）: Seedと同じ強さか？強調語を追加していないか？
+□ 確信度: Seedと同じモーダル動詞か？（will→might に変えていないか？）
+□ コミットメント: 約束・意志表明の強さがSeedと同じか？
+□ 発話行為: 構造情報の全発話行為が出力に含まれているか？
+□ 条件節: 原文の条件表現（if/when等）が残っているか？
+□ 追加事実: Seedにない理由・言い訳・評価を追加していないか？
+`;
+
   const userPrompt = [
     `Current translation (${targetLang}): ${currentTranslation}`,
     `Tone: ${tone || 'none'} at ${toneLevel}%`,
@@ -348,6 +386,7 @@ Keep this meaning. Change tone only.`;
     diffInstruction || '',
     options.variationInstruction ? `Additional: ${options.variationInstruction}` : '',
     reverseTranslationInstruction,
+    finalChecklist,
     'Edit to match tone. Return JSON only.'
   ].filter(Boolean).join('\n\n');
 
@@ -472,8 +511,18 @@ export async function translateFull(options: TranslateOptions): Promise<Translat
   const differenceInstruction = getFullDifferenceInstruction(toneLevel, previousTranslation, previousLevel, options.tone);
   const variationInstruction = options.variationInstruction ? `\n${options.variationInstruction}` : '';
   const structureInfo = structure ? `\n${structureToPromptText(structure, targetLang, sourceLang)}\n` : '';
-  const fixedValueDeclaration = structure ? `【Fixed values - do not change with tone】
-意図:${structure.意図} / 確信度:${structure.確信度} / 感情極性:${structure.感情極性} / モダリティ:${structure.モダリティ} / 程度:${structure.程度} / 発話行為:${(structure.発話行為 && structure.発話行為.length > 0) ? structure.発話行為.join('+') : 'なし'}` : '';
+  const fixedValueDeclaration = structure ? `
+【この翻訳の固定値 - トーン調整で絶対に変えないこと】
+- 意図: ${structure.意図}
+- 確信度: ${structure.確信度}
+- 感情極性: ${structure.感情極性}
+- モダリティ: ${structure.モダリティ}
+- 程度: ${structure.程度 || 'none'}（← semantic intensity。トーンではない。この値を超える強調は禁止）
+- 発話行為: ${(structure.発話行為 && structure.発話行為.length > 0) ? structure.発話行為.join('+') : 'なし'}（← 全て出力に残すこと）
+- 動作の意味: ${structure.動作の意味 || 'なし'}（← 述語の意味カテゴリ。この範囲を逸脱する動詞に変えない）
+トーン調整で変えていいのは「口調・語彙の格式レベル・文体」のみ。
+上記7つの値が変わる翻訳は不合格。
+` : '';
 
   const langInfoOnly = !structure ? `
 【出力言語 - 絶対遵守】
