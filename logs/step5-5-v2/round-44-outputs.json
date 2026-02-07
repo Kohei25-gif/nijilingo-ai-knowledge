@@ -1,0 +1,432 @@
+[
+  {
+    "id": "文176",
+    "source": "それはちょっとリスク高い。",
+    "structure": {
+      "主題": "リスク",
+      "動作": "高い",
+      "動作の意味": "be high",
+      "意図": "報告",
+      "感情極性": "negative",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "省略",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "That's a bit of a high risk.",
+    "results": {
+      "casual_25": {
+        "new_translation": "That's a pretty high risk.",
+        "reverse_translation": "",
+        "risk": "high"
+      },
+      "casual_50": {
+        "new_translation": "That's a fairly high risk.",
+        "reverse_translation": "それはかなり高いリスクです。",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "That's a pretty high risk.",
+        "reverse_translation": "かなり高いリスクだ。",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "That's a super high risk.",
+        "reverse_translation": "かなりハイリスクだ",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "That does seem rather high-risk.",
+        "reverse_translation": "それはかなりハイリスクですね。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "It does appear to be quite high-risk.",
+        "reverse_translation": "それはかなりハイリスクのようですね。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "It certainly seems to be quite high-risk.",
+        "reverse_translation": "確かにかなりリスクが高いようです。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "It appears to be extremely high-risk.",
+        "reverse_translation": "確かに非常にリスクが高いようです",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "This presents a considerable risk.",
+        "reverse_translation": "これはかなりのリスクです。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "This poses a significant risk.",
+        "reverse_translation": "かなりのリスクがあります",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "This presents a considerable risk.",
+        "reverse_translation": "こちらはかなりのリスクがあります。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "This poses a significant risk.",
+        "reverse_translation": "これは大きなリスクです",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文177",
+    "source": "今日の納期、明日に延びました。",
+    "structure": {
+      "主題": "納期の延期",
+      "動作": "延びる",
+      "動作の意味": "be extended",
+      "意図": "報告",
+      "感情極性": "neutral",
+      "モダリティ": "報告",
+      "主語": "今日の納期",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "省略",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "The deadline for today has been extended to tomorrow.",
+    "results": {
+      "casual_25": {
+        "new_translation": "Today's deadline has been pushed to tomorrow.",
+        "reverse_translation": "今日の納期が明日まで延びました。",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "The deadline for today got pushed to tomorrow.",
+        "reverse_translation": "今日の納期が明日まで延びた。",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "Today's deadline just got bumped to tomorrow.",
+        "reverse_translation": "今日の納期が明日まで伸びた。",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "Today's deadline just got moved to tomorrow.",
+        "reverse_translation": "今日の納期が明日まで延びた。",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "The deadline for today has been officially extended to tomorrow.",
+        "reverse_translation": "今日の納期は正式に明日まで延長されました。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "The deadline for today has been officially extended to tomorrow as of now.",
+        "reverse_translation": "今日の納期は正式に明日まで延長されました",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "The deadline for today has been officially extended to tomorrow, effective immediately.",
+        "reverse_translation": "今日の納期は、現在より明日まで正式に延長されました。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "It is with utmost formality that I must inform you that the deadline for today has been officially and formally extended to tomorrow, effective immediately.",
+        "reverse_translation": "今日の納期は、至急正式に明日まで延長されました。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "The deadline for today has been officially extended to tomorrow.",
+        "reverse_translation": "今日の納期は正式に明日まで延長されました。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "The deadline for today has been formally extended to tomorrow.",
+        "reverse_translation": "今日の納期は正式に明日に延長されました。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "The deadline for today has been officially extended to tomorrow.",
+        "reverse_translation": "今日の締め切りは正式に明日まで延長されました。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "The deadline for today has been formally extended to tomorrow.",
+        "reverse_translation": "今日の納期は正式に明日まで延長されました。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文178",
+    "source": "ありがとう、対応助かります。",
+    "structure": {
+      "主題": "感謝と報告",
+      "動作": "助かる",
+      "動作の意味": "help",
+      "意図": "感謝",
+      "感情極性": "positive",
+      "モダリティ": "感謝",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "感謝"
+      ],
+      "固有名詞": []
+    },
+    "seed": "Thank you, I appreciate your help.",
+    "results": {
+      "casual_25": {
+        "new_translation": "Thank you, I really appreciate your help.",
+        "reverse_translation": "ありがとう、あなたの助けを本当に感謝している",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "Thanks a ton for your help, I really appreciate it!",
+        "reverse_translation": "すごく助かった、ありがとう",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "Thanks a million for your help, I super appreciate it!",
+        "reverse_translation": "ありがとーん助かった！超感謝してる！",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "Thanks a ton for your help, I totally appreciate it!",
+        "reverse_translation": "ありがとーん助かった！超感謝してる！",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I appreciate your help, thank you.",
+        "reverse_translation": "ご助けいただき、ありがとうございます。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I am grateful for your assistance, thank you.",
+        "reverse_translation": "ご助力を賜り、ありがとうございます。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I would like to express my sincere gratitude for your assistance.",
+        "reverse_translation": "ご助力をいただき、心より感謝申し上げます。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "I am deeply grateful for your support and assistance.",
+        "reverse_translation": "ご支援とご助力に深く感謝しております.",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "Thank you, I appreciate your assistance.",
+        "reverse_translation": "ありがとう、ご対応助かります。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I appreciate your assistance.",
+        "reverse_translation": "ご協力を賜り、感謝しております。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "I would like to extend my sincere gratitude for your assistance.",
+        "reverse_translation": "ご助力を賜り、心より感謝申し上げます",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "I am deeply grateful for your support.",
+        "reverse_translation": "ご協力いただき、心より感謝申し上げます。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文179",
+    "source": "それ、聞いた限りだと怪しい。",
+    "structure": {
+      "主題": "情報の信頼性",
+      "動作": "怪しいとみなす",
+      "動作の意味": "seem suspicious",
+      "意図": "報告",
+      "感情極性": "negative",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "二人称",
+      "確信度": "推測",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "It sounds suspicious to me.",
+    "results": {
+      "casual_25": {
+        "new_translation": "Sounds suspicious, from what I've heard.",
+        "reverse_translation": "聞いた話じゃ怪しい感じがする。",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "Sounds kinda suspicious, from what I've heard.",
+        "reverse_translation": "なんか怪しい気がする",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "Sounds pretty suspicious, from what I've heard.",
+        "reverse_translation": "聞いた話によると結構怪しい感じがする。",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "Sounds super shady, from what I've heard.",
+        "reverse_translation": "聞いた話によるとかなり怪しい感じがする。",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I find it somewhat suspicious",
+        "reverse_translation": "少し怪しいように思います",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I find it rather suspicious",
+        "reverse_translation": "少し怪しいと思う",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I find it somewhat suspicious",
+        "reverse_translation": "ちょっと怪しいと思う",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "I find it somewhat suspicious.",
+        "reverse_translation": "少し怪しいと思うんです。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "It appears suspicious, based on what I've heard.",
+        "reverse_translation": "それ、聞いた限りだと怪しい。",
+        "risk": "med"
+      },
+      "business_50": {
+        "new_translation": "It seems rather suspicious, based on what I've heard.",
+        "reverse_translation": "聞いた話によると、かなり怪しいようです。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "It appears to be somewhat suspicious, based on what I have heard.",
+        "reverse_translation": "聞いた話によると、少し怪しいようです。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "It appears to be somewhat suspicious, based on what I have heard.",
+        "reverse_translation": "少し怪しいようです、聞いた話によると。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文180",
+    "source": "今日はもう何も考えられない。",
+    "structure": {
+      "主題": "思考の困難",
+      "動作": "考えられない",
+      "動作の意味": "be unable to think",
+      "意図": "報告",
+      "感情極性": "negative",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I can't think of anything else today.",
+    "results": {
+      "casual_25": {
+        "new_translation": "I don't have the mental space for anything else today.",
+        "reverse_translation": "今日は他に考えられない",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "I'm all tapped out mentally for today.",
+        "reverse_translation": "今日はもう頭が回らない",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "I'm totally mentally spent for today.",
+        "reverse_translation": "今日は完全に頭が回らない",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "I'm completely brain dead for today.",
+        "reverse_translation": "今日は完全に頭が回らない",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I'm unable to think about anything else today.",
+        "reverse_translation": "今日は他に考えられないんです。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I am presently incapable of focusing on anything else.",
+        "reverse_translation": "現在、他のことを考えることができません。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "At present, I find myself unable to focus on anything else.",
+        "reverse_translation": "現在、私は他のことに集中することができません。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "Currently, I am utterly incapable of concentrating on anything else.",
+        "reverse_translation": "現在、私は全く他のことを考えることができません。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "I'm not thinking about anything else today.",
+        "reverse_translation": "今日はもう何も考えられない。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I am not contemplating any other matters at present.",
+        "reverse_translation": "現在、他のことは考えておりません。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "At this time, I am not considering any additional matters.",
+        "reverse_translation": "現在、他の事項は考えておりません",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "Currently, I am not contemplating any supplementary issues.",
+        "reverse_translation": "現在、追加で検討している事項はございません。",
+        "risk": "low"
+      }
+    }
+  }
+]
