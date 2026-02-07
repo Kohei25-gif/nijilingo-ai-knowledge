@@ -334,21 +334,46 @@ Seed: "${seedTranslation}"
   } else {
     switch (tone) {
       case 'casual':
-        if (toneLevel >= 100) toneStyle = 'Maximum casual (heavy slang, gonna/wanna/gotta, very friendly phrasing. Surface style only - do NOT add stronger degree words.)';
-        else if (toneLevel >= 75) toneStyle = 'Strong casual (more contractions, playful phrasing, relaxed tone. Surface style only - do NOT add stronger degree words.)';
-        else if (toneLevel >= 50) toneStyle = 'Standard casual (contractions, friendly phrasing. Surface style only - do NOT add stronger degree words.)';
-        else toneStyle = 'Slightly casual: basic contractions, relaxed but clear.';
+        if (toneLevel >= 100) {
+          toneStyle =
+            '親しい友人同士の砕けた会話。口語・俗語・砕けた文法を積極的に使う。語彙は最もくだけたものを選ぶ';
+        } else if (toneLevel >= 75) {
+          toneStyle =
+            '友人とのくだけた会話。口語的な省略・短縮を多用し、強い強調表現を使う';
+        } else if (toneLevel >= 50) {
+          toneStyle =
+            '友人との普通の会話。短縮形・軽い強調表現を使い、親しみのある語調にする';
+        } else {
+          toneStyle =
+            '少しくだけた日常会話。基本的な短縮形を使う程度で、語彙は標準的なまま';
+        }
         break;
       case 'business':
-        if (toneLevel >= 100) toneStyle = 'Maximum business (highest formality, no contractions, highly professional phrasing. Surface style only - do NOT add stronger degree words.)';
-        else if (toneLevel >= 75) toneStyle = 'Strong business (formal, deferential phrasing, no contractions. Surface style only - do NOT add stronger degree words.)';
-        else if (toneLevel >= 50) toneStyle = 'Standard business (professional phrasing, avoid contractions. Surface style only - do NOT add stronger degree words.)';
-        else toneStyle = 'Slightly business (polite tone, minimal contractions.)';
+        if (toneLevel >= 100) {
+          toneStyle =
+            '重要な取引先への丁寧なビジネスメールの文体。最大限の敬意を込めつつ、受け手が自然に読めるビジネス文書の語彙と構造で書く。主語は構造分析の人称フィールドに従う';
+        } else if (toneLevel >= 75) {
+          toneStyle =
+            '取引先へのビジネスメールの文体。丁寧な語彙選択、完全文、敬意を込めた表現を使う。主語は構造分析の人称フィールドに従う';
+        } else if (toneLevel >= 50) {
+          toneStyle =
+            '社内の上司へのメール程度の文体。適度な敬意表現を使い、簡潔かつ丁寧に。主語は構造分析の人称フィールドに従う';
+        } else {
+          toneStyle =
+            'やや丁寧な日常会話の文体。短縮形を控え、語彙をやや改まったものにする程度。主語は構造分析の人称フィールドに従う';
+        }
         break;
       case 'formal':
-        if (toneLevel >= 100) toneStyle = 'Maximum formal (highest politeness, honorifics, humble expressions. Surface style only - do NOT add stronger degree words.)';
-        else if (toneLevel >= 50) toneStyle = 'Standard formal (elevated politeness, respectful phrasing. Surface style only - do NOT add stronger degree words.)';
-        else toneStyle = 'Slightly formal (polite and respectful, but not maximally formal.)';
+        if (toneLevel >= 100) {
+          toneStyle =
+            '公式な式辞・丁寧な手紙の文体。最大限の敬意と謙譲を込め、格式ある語彙と文構造を使う';
+        } else if (toneLevel >= 50) {
+          toneStyle =
+            '改まった場面の文体。敬意ある語彙選択と完全文で、品のある表現を使う';
+        } else {
+          toneStyle =
+            'やや改まった場面の文体。基本的な敬意表現を使い、落ち着いた語調にする';
+        }
         break;
       case 'custom':
         toneStyle = `"${customTone || ''}" style FULL POWER - 段階は無視して常に全力で表現。オジサン構文なら絵文字・カタカナ混ぜ、限界オタクなら感情爆発、ギャルならギャル語、赤ちゃん言葉なら幼児語`;

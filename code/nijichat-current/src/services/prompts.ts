@@ -13,7 +13,8 @@ export const INVARIANT_RULES = `
 6. condition markers - if/unless/when等を保持
 7. commitment - 約束を勝手に追加しない
 8. stance_strength - 同意や感情の強さを変えない
-9. 意図・確信度・感情極性・モダリティは構造情報の値を固定
+9. subject_person - 構造分析の「人称」フィールドに従い、翻訳でも同じ人称を維持する（一人称単数の発言は一人称単数のまま訳す）
+10. 意図・確信度・感情極性・モダリティは構造情報の値を固定
 
 【逆翻訳ルール】
 - 値は翻訳結果に従う
