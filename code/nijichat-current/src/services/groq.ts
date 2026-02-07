@@ -37,13 +37,11 @@ import {
   INVARIANT_RULES,
   TONE_AND_EVALUATION_RULES,
   PARTIAL_SYSTEM_PROMPT,
-  JAPANESE_EDIT_SYSTEM_PROMPT,
   EXPANDED_STRUCTURE_PROMPT,
   getLanguageSpecificRules,
   getFullDifferenceInstruction,
   getToneInstruction,
   getReverseTranslationInstruction,
-  getToneStyleForJapanese,
   structureToPromptText,
 } from './prompts';
 
@@ -303,7 +301,19 @@ export async function extractStructure(
  * INVARIANT_RULESの汎用ルールではなく、具体的な指示でモデルを制御する。
  */
 function generateDynamicConstraints(
-  structureData?: TranslateOptions['structureData']
+  structureData?: {
+    人称?: string;
+    確信度?: string;
+    程度?: string;
+    感情極性?: string;
+    モダリティ?: string;
+    発話行為?: string[];
+    動作の意味?: string;
+    願望?: string;
+    固有名詞?: Array<{ text: string }>;
+    保持値?: string[];
+    条件表現?: string[];
+  }
 ): string {
   if (!structureData) return '';
 
@@ -476,7 +486,7 @@ Seed: "${seedTranslation}"
 - 意味・意図・確信度がSeedからズレていたら修正すること
 `;
   const dynamicConstraints = generateDynamicConstraints(
-    options.structureData ?? (structure ? {
+    structure ? {
       人称: structure.人称,
       確信度: structure.確信度,
       程度: structure.程度,
@@ -488,7 +498,7 @@ Seed: "${seedTranslation}"
       固有名詞: structure.固有名詞,
       保持値: structure.保持値,
       条件表現: structure.条件表現,
-    } : undefined)
+    } : undefined
   );
 
   let toneStyle = '';
@@ -650,19 +660,6 @@ export async function translateWithGuard(
   try {
     partialResult = await translatePartial({
       ...options,
-      structureData: options.structureData ?? (options.structure ? {
-        人称: options.structure.人称,
-        確信度: options.structure.確信度,
-        程度: options.structure.程度,
-        感情極性: options.structure.感情極性,
-        モダリティ: options.structure.モダリティ,
-        発話行為: options.structure.発話行為,
-        動作の意味: options.structure.動作の意味,
-        願望: options.structure.願望,
-        固有名詞: options.structure.固有名詞,
-        保持値: options.structure.保持値,
-        条件表現: options.structure.条件表現,
-      } : undefined),
     });
   } catch (error) {
     console.log('[Guard] PARTIAL parse error:', error);
@@ -976,46 +973,4 @@ export async function translatePartnerMessage(
   const explanation = await generateExplanation(text, '日本語', partnerLang);
 
   return { ...translationResult, explanation };
-}
-
-// ============================================
-// 日本語ベース方式用の関数
-// ============================================
-
-export async function editJapaneseForTone(
-  sourceText: string,
-  tone: string,
-  toneLevel: number,
-  customTone?: string,
-  signal?: AbortSignal,
-  structure?: ExpandedStructure
-): Promise<string> {
-  if (toneLevel === 0) {
-    return sourceText;
-  }
-
-  const toneStyle = getToneStyleForJapanese(tone, toneLevel, customTone);
-  const structureInfo = structure ? `\n${structureToPromptText(structure)}\n` : '';
-
-  const userPrompt = `元の日本語: ${sourceText}
-${structureInfo}
-トーン: ${tone}
-トーンレベル: ${toneLevel}%
-目標スタイル: ${toneStyle}
-
-この日本語を${toneLevel}%の${tone}トーンに編集してください。JSONのみ返してください。
-※ 構造情報がある場合、「意図」「確信度」「固有名詞」は必ず保持すること。`;
-
-  const response = await callGeminiAPI(MODELS.JAPANESE_EDIT, JAPANESE_EDIT_SYSTEM_PROMPT, userPrompt, 0.7, signal);
-  const parsed = parseJsonResponse<{ edited_japanese: string }>(response);
-
-  let result = parsed.edited_japanese || sourceText;
-
-  if (tone === 'business' || tone === 'formal') {
-    result = result.replace(/([ぁ-んァ-ン一-龯]+)君/g, '$1さん');
-    result = result.replace(/君/g, 'あなた');
-    console.log(`[editJapaneseForTone] 君→あなた置換適用: ${result}`);
-  }
-
-  return result;
 }

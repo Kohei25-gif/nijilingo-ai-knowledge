@@ -66,66 +66,6 @@ NOT OK: meaning, intent, certainty, sentiment, degree/intensity, commitment stre
 ═══ OUTPUT ═══
 JSON only, no markdown: {"new_translation":"...","reverse_translation":"...(source lang)","risk":"low|med|high"}`;
 
-// 日本語編集用のシステムプロンプト
-export const JAPANESE_EDIT_SYSTEM_PROMPT = `あなたはNijiLingoの日本語編集モードです。
-与えられた日本語文を、指定されたトーンレベルに合わせて編集してください。
-
-【最重要ルール】
-- 0%: 原文をそのまま返す（一切変更しない）
-- 50%: 原文から必ず変更する（語尾・言い回しを変える）
-- 100%: 50%よりさらに強く変える
-- 0%と50%が同じ文章になるのは禁止！
-
-【ルール】
-
-1. 意味を変えない
-   - 数字、名前、肯定/否定、質問/断定はそのまま
-   - 依頼/義務/提案のクラスを変えない
-   - 約束やお願いを追加しない
-   - 感情の強さを変えない（OK→素晴らしい ❌）
-
-2. 敬語の対象を間違えない
-   - 人名の判断: 後ろに人の動作（寝る、来る、食べる等）が続くか
-   - 敬称なし人名（太郎、花子）= 身内 → 敬語化しない
-   - 敬称あり人名（田中様）= 他人 → 敬語化OK
-   - 敬称を勝手に追加しない
-
-3. 自然な日本語にする
-   - 文法が正しいこと
-   - 「じゃん」は確認・評価にのみ使う（未来の行動には使わない）
-
-【トーンレベルガイド - 差を明確に！】
-
-カジュアル:
-- 0%: そのまま（変更なし）
-- 50%: 「〜だね」「〜だよ」「〜してる」「〜かな？」を追加
-- 100%: 「めっちゃ〜」「マジで〜」「〜よ！」「〜じゃん！」
-
-ビジネス:
-- 0%: そのまま（変更なし）
-- 50%: 「〜いたします」「〜でございます」「〜いただけますか」
-- 100%: 「〜申し上げます」「〜賜りますよう」「誠に〜」
-
-フォーマル:
-- 0%: そのまま（変更なし）
-- 50%: 「〜させていただきます」「〜でございます」
-- 100%: 「〜申し上げる所存でございます」「何卒〜」
-
-【良い例・悪い例】
-元: 「太郎が寝てからあなたの家に行く」
-
-✅ カジュアル0%: 太郎が寝てからあなたの家に行く（そのまま）
-✅ カジュアル50%: 太郎が寝てからあなたの家に行くね！（語尾変更）
-✅ カジュアル100%: 太郎が寝てからお前んち行くよ！（強調+くだけた表現）
-
-❌ 太郎様がお休みになられましたら（身内に敬語）
-❌ 何卒よろしくお願いいたします（意味追加）
-❌ 行くじゃん！（「じゃん」の使い方が不自然）
-❌ 微妙させていただきます（文法崩壊）
-
-JSONのみ返してください（説明不要）:
-{"edited_japanese":"..."}`;
-
 // 言語固有ルール（10言語対応）
 export function getLanguageSpecificRules(targetLang: string): string {
   switch (targetLang) {
@@ -581,18 +521,6 @@ export function structureToPromptText(structure: ExpandedStructure, targetLang?:
 
 }
 
-// 互換エクスポート: トーン指示は getToneInstruction に統合
-export function getToneStyleInstruction(tone: string | undefined, toneLevel: number, customTone?: string): string {
-  return getToneInstruction({
-    sourceText: '',
-    sourceLang: '日本語',
-    targetLang: '英語',
-    tone,
-    toneLevel,
-    customTone,
-  } as TranslateOptions);
-}
-
 export function getFullDifferenceInstruction(
   toneLevel: number,
   previousTranslation?: string,
@@ -725,30 +653,4 @@ export function getReverseTranslationInstruction(
 - 二重敬語は禁止（例: ×おっしゃられる ×ご覧になられる ×お召し上がりになられる）
 - 人名に敬称を勝手に追加しない（原文で敬称なし→逆翻訳でも敬称なし。例:「ごんた」→「ごんた様」❌）
 ${usePolite ? '- 原文が敬語でなくても、必ず敬語（です/ます/ございます）で出力すること' : ''}`;
-}
-
-export function getToneStyleForJapanese(tone: string, toneLevel: number, customTone?: string): string {
-  if (tone === 'custom' && customTone) {
-    return `「${customTone}」スタイル`;
-  }
-
-  switch (tone) {
-    case 'casual':
-      if (toneLevel >= 100) return '超カジュアル（めっちゃ、マジ、〜よ！等）';
-      if (toneLevel >= 50) return 'カジュアル（だね、だよ、してる等）';
-      return 'やや砕けた表現';
-
-    case 'business':
-      if (toneLevel >= 100) return '最高ビジネス敬語（申し上げます、賜りますよう等）';
-      if (toneLevel >= 50) return 'ビジネス敬語（いたします、ございます等）';
-      return 'やや丁寧なビジネス表現';
-
-    case 'formal':
-      if (toneLevel >= 100) return '最大敬語（申し上げる所存でございます等）';
-      if (toneLevel >= 50) return '丁寧敬語（させていただきます等）';
-      return 'やや丁寧な表現';
-
-    default:
-      return 'そのまま';
-  }
 }
