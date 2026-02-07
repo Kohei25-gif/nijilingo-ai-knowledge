@@ -1,0 +1,492 @@
+[
+  {
+    "id": "文2",
+    "source": "昨日の飲み会、すごく楽しかった！",
+    "structure": {
+      "主題": "飲み会",
+      "動作": "楽しい",
+      "動作の意味": "be fun/enjoy",
+      "意図": "報告",
+      "感情極性": "positive",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I had a great time at the drinking party yesterday!",
+    "results": {
+      "casual_25": {
+        "new_translation": "I had a blast at the drinking party yesterday!",
+        "reverse_translation": "昨日、飲み会で大盛り上がりだった",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_50": {
+        "new_translation": "I really enjoyed the drinking party yesterday!",
+        "reverse_translation": "昨日の飲み会は本当に楽しかった！",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_75": {
+        "new_translation": "I totally had a blast at that drinking party yesterday!",
+        "reverse_translation": "昨日あの飲み会で完全に盛り上がった！",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_100": {
+        "new_translation": "I had a blast at the drinking party yesterday!",
+        "reverse_translation": "昨日、飲み会でめっちゃ楽しかった！",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_25": {
+        "new_translation": "I enjoyed the drinking party yesterday.",
+        "reverse_translation": "昨日の飲み会は楽しかったです。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "I thoroughly enjoyed the drinking party yesterday.",
+        "reverse_translation": "私は昨日の飲み会を大いに楽しみました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "I greatly enjoyed the gathering yesterday.",
+        "reverse_translation": "昨日の会合を大変楽しみました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "I was delighted to have attended the gathering yesterday.",
+        "reverse_translation": "昨日の会合に出席できたことを嬉しく思います。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "I really enjoyed the drinking party yesterday.",
+        "reverse_translation": "昨日の飲み会はとても楽しかったです。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "I enjoyed the drinking party yesterday.",
+        "reverse_translation": "昨日の飲み会は楽しかったです。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "I thoroughly enjoyed the social gathering yesterday.",
+        "reverse_translation": "昨日の社交的な集まりを心から楽しみました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "I was delighted to have attended the social gathering yesterday.",
+        "reverse_translation": "昨日の社交の集まりに出席したことを嬉しく思っております。",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "文5",
+    "source": "残念ながら、今回は見送らせていただきます。",
+    "structure": {
+      "主題": "断る",
+      "動作": "見送る",
+      "動作の意味": "send off/decline",
+      "意図": "報告",
+      "感情極性": "negative",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "Unfortunately, I'll have to pass this time.",
+    "results": {
+      "casual_25": {
+        "new_translation": "I'll have to pass this time.",
+        "reverse_translation": "今度は見送ります",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_50": {
+        "new_translation": "I'm gonna have to pass this time.",
+        "reverse_translation": "今回は見送ることにするよ",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_75": {
+        "new_translation": "I'm gonna have to pass this time, man.",
+        "reverse_translation": "今回は見送るよ",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_100": {
+        "new_translation": "I'm gonna have to pass on this one, bro.",
+        "reverse_translation": "今回は見送るよ、兄貴",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_25": {
+        "new_translation": "I regret to inform you that I will have to decline this time.",
+        "reverse_translation": "残念ながら今回は見送らせていただくことになります",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "I am afraid I must decline on this occasion.",
+        "reverse_translation": "恐れ入りますが、今回は見送らせていただきます",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "Regrettably, I must decline on this occasion.",
+        "reverse_translation": "残念ながら、この度は見送らせていただきます",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "I regret that I must decline on this occasion.",
+        "reverse_translation": "この度は残念ながら見送らせていただきます。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "We will have to decline this time.",
+        "reverse_translation": "今回は見送ることになります。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "We regret to inform you that we will have to decline this time.",
+        "reverse_translation": "今回は見送らせていただくことになりますことをお詫び申し上げます。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "We regret that we are unable to accommodate your request at this time.",
+        "reverse_translation": "誠に残念ですが、今回はお客様のご要望にお応えできません。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "We regret to inform you that we are unable to accommodate your request at this time.",
+        "reverse_translation": "誠に申し訳ございませんが、今回お客様のご要望にお応えできない状況でございます。",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "文7",
+    "source": "この企画、かなりいい線いってると思うんだけど。",
+    "structure": {
+      "主題": "企画の評価",
+      "動作": "思う",
+      "動作の意味": "think",
+      "意図": "その他",
+      "感情極性": "positive",
+      "モダリティ": "感想",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "推測",
+      "程度": "moderate",
+      "発話行為": [
+        "感想"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I think this project is on the right track.",
+    "results": {
+      "casual_25": {
+        "new_translation": "I think this project is going in the right direction.",
+        "reverse_translation": "このプロジェクトは良い方向に向かっていると思う",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_50": {
+        "new_translation": "I think this project is heading in the right direction.",
+        "reverse_translation": "このプロジェクトは正しい方向に向かっていると思う",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_75": {
+        "new_translation": "I think this project's going in the right direction.",
+        "reverse_translation": "このプロジェクトは正しい方向に向かってると思う",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_100": {
+        "new_translation": "This project is headed the right way, I think.",
+        "reverse_translation": "このプロジェクトは良い方向に向かってると思うよ",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_25": {
+        "new_translation": "It appears that this project is proceeding in the right direction.",
+        "reverse_translation": "このプロジェクトは正しい方向に進んでいるようです",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "I believe this project is moving in the right direction.",
+        "reverse_translation": "このプロジェクトは正しい方向に進んでいると考えています",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "It is my considered opinion that this project is progressing in the appropriate direction.",
+        "reverse_translation": "このプロジェクトは適切な方向に進んでいると考えております",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "It is my considered opinion that the current trajectory of this project is entirely appropriate.",
+        "reverse_translation": "このプロジェクトの現在の進行方向は全く適切であると私には思われます。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "I believe this plan is heading in the right direction.",
+        "reverse_translation": "この計画は正しい方向に向かっていると思います",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "I think this plan is on the right track.",
+        "reverse_translation": "この計画は方向性として正しいと思います",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "I believe this plan is heading in the right direction.",
+        "reverse_translation": "この計画は正しい方向に向かっていると思います。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "I am of the opinion that this plan is proceeding in the appropriate direction.",
+        "reverse_translation": "この計画は適切な方向に進んでいると考えております。",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "文8",
+    "source": "体調よくなった？無理しないでね。",
+    "structure": {
+      "主題": "体調の回復",
+      "動作": "なる",
+      "動作の意味": "become",
+      "意図": "質問",
+      "感情極性": "neutral",
+      "モダリティ": "質問",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "二人称",
+      "確信度": "推測",
+      "程度": "none",
+      "発話行為": [
+        "質問"
+      ],
+      "固有名詞": []
+    },
+    "seed": "Are you feeling better? Don't push yourself too hard.",
+    "results": {
+      "casual_25": {
+        "new_translation": "Feeling better? Don't overexert yourself.",
+        "reverse_translation": "元気になってる？無理しすぎないでね",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_50": {
+        "new_translation": "Feeling a bit better? Don't push yourself too hard.",
+        "reverse_translation": "少し元気になってる？無理しすぎないでよ",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_75": {
+        "new_translation": "Feelin' a bit better? Don't push it too hard, okay?",
+        "reverse_translation": "ちょっと気分良くなってる？無理しすぎんなよ",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_100": {
+        "new_translation": "Feelin' better now? Don't overdo it, okay?",
+        "reverse_translation": "元気になってる？無理しすぎないでね",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_25": {
+        "new_translation": "Are you recovering? Please take it easy.",
+        "reverse_translation": "お元気になりますか？どうぞお大事にしてください。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "Are you recovering well? Please take care of yourself.",
+        "reverse_translation": "お体は順調に回復していますか？お大事にしてください。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "Are you recovering satisfactorily? Please take good care of yourself.",
+        "reverse_translation": "お体は順調に回復していますか？どうかご自愛ください。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "Are you recovering in a satisfactory manner? I do hope you will take appropriate care of yourself.",
+        "reverse_translation": "お体は順調に回復していますでしょうか。どうかご自身の身を大切にしてくださいますようお願い申し上げます。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "Are you recovering? Take it easy.",
+        "reverse_translation": "お元気になりますか？　お大事にしてください",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "Are you recovering well? Please take care of yourself.",
+        "reverse_translation": "お元気になってますか？お体にお気をつけください。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "I hope you're recovering well. Please take good care of yourself.",
+        "reverse_translation": "お元気になっておいでとのことですね。どうぞご自愛くださいませ。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "I trust you are recuperating satisfactorily. Please ensure your well-being.",
+        "reverse_translation": "お元気になられていることを期待しています。ご自身の健康に十分注意してください。",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "文9",
+    "source": "予算がちょっと厳しいので、もう少し削れるところを探してみます。",
+    "structure": {
+      "主題": "予算の調整",
+      "動作": "探す",
+      "動作の意味": "look for",
+      "意図": "提案",
+      "感情極性": "neutral",
+      "モダリティ": "提案",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "moderate",
+      "発話行為": [
+        "提案"
+      ],
+      "固有名詞": []
+    },
+    "seed": "Our budget is a bit tight, so I'll look for places to cut back a bit more.",
+    "results": {
+      "casual_25": {
+        "new_translation": "The budget's pretty tight, so I'm gonna look for ways to cut back a bit more.",
+        "reverse_translation": "予算はかなり厳しいので、もっと節約できる方法を探すつもりです。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_50": {
+        "new_translation": "I'm on a pretty tight budget, so I'm going to look for ways to cut back a bit more.",
+        "reverse_translation": "予算はかなり厳しいので、もっと節約する方法を探すつもりです",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_75": {
+        "new_translation": "I'm super strapped for cash, so I'm gonna look for ways to cut back even more.",
+        "reverse_translation": "現金にかなり困ってるから、もっと節約する方法を探すつもり",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_100": {
+        "new_translation": "I'm totally broke, so I'm gonna look for ways to cut back even more.",
+        "reverse_translation": "完全に金欠だから、もっと節約する方法を探すつもり",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_25": {
+        "new_translation": "Given that the budget is somewhat constrained, I will seek additional areas to reduce expenditures.",
+        "reverse_translation": "予算がやや制約されていることを踏まえ、支出を削減するさらなる領域を探求するつもりです。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "In light of the somewhat constrained budget, I shall endeavor to identify additional areas wherein expenditures can be reduced.",
+        "reverse_translation": "予算がやや制約されていることを考慮して、支出を削減できる追加の領域を特定するよう努めます。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "Given the somewhat limited budget, I will seek out additional areas where we can cut back.",
+        "reverse_translation": "予算がやや制約されていることを踏まえ、さらに削減できる領域を探します。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "In light of the budgetary constraints, I shall endeavor to identify further opportunities for reduction.",
+        "reverse_translation": "予算の制約に鑑み、削減のさらなる機会を特定するよう努めます。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "Let's examine areas where we can make further cuts since the budget is somewhat constrained.",
+        "reverse_translation": "予算はやや制約されているため、さらに削減できる箇所を調べてみましょう。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "Let's look for areas where we can make additional cuts, as our budget is somewhat limited.",
+        "reverse_translation": "予算はやや制約されているため、さらに削減できる領域を探してみましょう。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "We should explore potential areas for further budget reductions, as our current financial resources are somewhat constrained.",
+        "reverse_translation": "現在の財政状況はやや制約されているため、さらなる予算削減の可能性を探るべきです。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "We ought to investigate potential avenues for additional budgetary reductions, as our present financial situation is somewhat limited.",
+        "reverse_translation": "現在の財政状況はやや制約があるため、さらなる予算削減の可能性を探るべきである。",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  }
+]
