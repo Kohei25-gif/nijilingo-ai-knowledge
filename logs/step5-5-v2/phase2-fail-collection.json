@@ -1,0 +1,4250 @@
+{
+  "phase2_fail_collection": {
+    "collected_at": "2026-02-07",
+    "rounds_covered": "R34-R49",
+    "confirmed_fail_count": 63,
+    "fails": [
+      {
+        "round": "R37",
+        "sentence_id": 153,
+        "source_text": "悪いけど、これ急ぎでお願い。",
+        "tone": "business",
+        "level": 100,
+        "translation": "It is imperative that this task be completed with the utmost urgency.",
+        "fail_pattern": "apology_drop",
+        "fail_reason": "apology_drop + modality_shift: 謝罪消失、依頼→命令"
+      },
+      {
+        "round": "R37",
+        "sentence_id": 154,
+        "source_text": "正直、ちょっと不安。",
+        "tone": "business",
+        "level": 100,
+        "translation": "Frankly speaking, I am presently encountering a considerable degree of unease.",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "stance_strength_amplification: \"considerable degree of unease\""
+      },
+      {
+        "round": "R37",
+        "sentence_id": 154,
+        "source_text": "正直、ちょっと不安。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "Honestly, I'm super anxious.",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "stance_strength_amplification: \"super anxious\""
+      },
+      {
+        "round": "R37",
+        "sentence_id": 154,
+        "source_text": "正直、ちょっと不安。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "I'm totally freaking out.",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "stance_strength_amplification + meaning_loss: \"totally freaking out\""
+      },
+      {
+        "round": "R37",
+        "sentence_id": 154,
+        "source_text": "正直、ちょっと不安。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "I'm completely losing it.",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "meaning_change: \"completely losing it\" = 別の意味"
+      },
+      {
+        "round": "R37",
+        "sentence_id": 154,
+        "source_text": "正直、ちょっと不安。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "Frankly speaking, I must admit that I am feeling considerably apprehensive.",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "stance_strength_amplification: \"considerably apprehensive\""
+      },
+      {
+        "round": "R39",
+        "sentence_id": 156,
+        "source_text": "それはあんまり現実的じゃない。",
+        "tone": "business",
+        "level": 100,
+        "translation": "That appears to be highly unrealistic.",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "「あんまり」≠「非常に」"
+      },
+      {
+        "round": "R39",
+        "sentence_id": 156,
+        "source_text": "それはあんまり現実的じゃない。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "That's totally not realistic.",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "「あんまり」≠「全然」"
+      },
+      {
+        "round": "R39",
+        "sentence_id": 156,
+        "source_text": "それはあんまり現実的じゃない。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "That's completely unrealistic.",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "「あんまり」≠「全く」"
+      },
+      {
+        "round": "R39",
+        "sentence_id": 159,
+        "source_text": "それ、聞いた感じだと違和感ある。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "That sounds totally bizarre.",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "「違和感ある」≠「完全に奇妙」"
+      },
+      {
+        "round": "R40",
+        "sentence_id": 163,
+        "source_text": "ごめん、今は対応できない。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "I'm not in a position to help you at the moment.",
+        "fail_pattern": "apology_drop",
+        "fail_reason": "「ごめん」消失"
+      },
+      {
+        "round": "R40",
+        "sentence_id": 163,
+        "source_text": "ごめん、今は対応できない。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "I'm not in a position to help out right now.",
+        "fail_pattern": "apology_drop",
+        "fail_reason": "同上"
+      },
+      {
+        "round": "R40",
+        "sentence_id": 163,
+        "source_text": "ごめん、今は対応できない。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "I'm totally tapped out right now, can't lend a hand.",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "増幅"
+      },
+      {
+        "round": "R40",
+        "sentence_id": 163,
+        "source_text": "ごめん、今は対応できない。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "I'm completely maxed out at the moment, no way to help.",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "増幅"
+      },
+      {
+        "round": "R40",
+        "sentence_id": 163,
+        "source_text": "ごめん、今は対応できない。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "It is with profound sadness that I must inform you of my current inability to respond.",
+        "fail_pattern": "sentiment_amplification",
+        "fail_reason": "「ごめん」≠「深い悲しみ」"
+      },
+      {
+        "round": "R40",
+        "sentence_id": 164,
+        "source_text": "今日は割と集中できた。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "I was totally in the zone today.",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "「割と」≠「完全に」"
+      },
+      {
+        "round": "R40",
+        "sentence_id": 164,
+        "source_text": "今日は割と集中できた。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "I was completely in my element today.",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "同上"
+      },
+      {
+        "round": "R40",
+        "sentence_id": 164,
+        "source_text": "今日は割と集中できた。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "I totally crushed it today.",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "意味変化も"
+      },
+      {
+        "round": "R40",
+        "sentence_id": 164,
+        "source_text": "今日は割と集中できた。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "I'm totally on fire today!!!",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "別物"
+      },
+      {
+        "round": "R40",
+        "sentence_id": 164,
+        "source_text": "今日は割と集中できた。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "I was able to maintain a high level of focus today.",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "「割と」消失"
+      },
+      {
+        "round": "R40",
+        "sentence_id": 164,
+        "source_text": "今日は割と集中できた。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "I successfully sustained a high level of focus throughout the day.",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "同上"
+      },
+      {
+        "round": "R40",
+        "sentence_id": 164,
+        "source_text": "今日は割と集中できた。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "I had the great fortune of maintaining an exceptionally high level of focus throughout the entire day.",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "最大級誇張"
+      },
+      {
+        "round": "R41",
+        "sentence_id": 164,
+        "source_text": "今日は割と集中できた。",
+        "tone": "business",
+        "level": 100,
+        "translation": "I successfully maintained a high level of concentration today.",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "**stance_strength_amplification**: \"high level\" > moderate"
+      },
+      {
+        "round": "R41",
+        "sentence_id": 164,
+        "source_text": "今日は割と集中できた。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "I totally crushed concentrating today!",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "**stance_strength_amplification**: \"totally crushed\" ≠ moderate"
+      },
+      {
+        "round": "R41",
+        "sentence_id": 164,
+        "source_text": "今日は割と集中できた。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "Today was a total breeze to focus!",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "**stance_strength_amplification**: \"total breeze to focus\" ≠ 「割と集中できた」"
+      },
+      {
+        "round": "R41",
+        "sentence_id": 164,
+        "source_text": "今日は割と集中できた。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "Today was a highly productive day for focused work.",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "**stance_strength_amplification**: \"highly productive\" > moderate"
+      },
+      {
+        "round": "R41",
+        "sentence_id": 164,
+        "source_text": "今日は割と集中できた。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "It was an exceptionally productive day for concentrated effort.",
+        "fail_pattern": "stance_strength_amplification",
+        "fail_reason": "**stance_strength_amplification**: \"exceptionally productive\" = extreme"
+      },
+      {
+        "round": "R41",
+        "sentence_id": 165,
+        "source_text": "もし必要なら、私が対応する。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "I might respond if needed.",
+        "fail_pattern": "commitment_weakening",
+        "fail_reason": "**commitment_weakening（新パターン）**: \"I might respond\" ← 「私が対応する」は意志表明。\"might\"で大幅に弱体化"
+      },
+      {
+        "round": "R41",
+        "sentence_id": 165,
+        "source_text": "もし必要なら、私が対応する。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "Might respond if needed, no idea.",
+        "fail_pattern": "commitment_weakening",
+        "fail_reason": "**commitment_weakening**: \"Might respond if needed, no idea\" ← \"no idea\"は原文に無い投げやりさ"
+      },
+      {
+        "round": "R41",
+        "sentence_id": 165,
+        "source_text": "もし必要なら、私が対応する。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "Might hit back if necessary, idk.",
+        "fail_pattern": "commitment_weakening",
+        "fail_reason": "**commitment_weakening**: \"Might hit back if necessary, idk\" ← 同上。\"idk\"で完全に意志が消失"
+      },
+      {
+        "round": "R43",
+        "sentence_id": 172,
+        "source_text": "この映画、思ったより面白かった",
+        "tone": "casual",
+        "level": 50,
+        "translation": "This movie was super interesting.",
+        "fail_pattern": "stance_amplification+comparison_loss",
+        "fail_reason": "**stance_amplification + comparison_loss**: \"super interesting\" + 「思ったより」脱落"
+      },
+      {
+        "round": "R43",
+        "sentence_id": 172,
+        "source_text": "この映画、思ったより面白かった",
+        "tone": "casual",
+        "level": 75,
+        "translation": "This movie was totally mind-blowing!",
+        "fail_pattern": "predicate_meaning_shift",
+        "fail_reason": "**predicate_meaning_shift**: \"mind-blowing\" ≠ 面白い。逆翻訳「衝撃的」が証明"
+      },
+      {
+        "round": "R43",
+        "sentence_id": 172,
+        "source_text": "この映画、思ったより面白かった",
+        "tone": "casual",
+        "level": 100,
+        "translation": "This movie was totally awesome!",
+        "fail_pattern": "stance_amplification",
+        "fail_reason": "**stance_amplification**: \"totally awesome\" + 比較脱落。逆翻訳「全く素晴らしかった」≠ 原文"
+      },
+      {
+        "round": "R44",
+        "sentence_id": 176,
+        "source_text": "それはちょっとリスク高い。",
+        "tone": "business",
+        "level": 25,
+        "translation": "This presents a considerable risk.",
+        "fail_pattern": "stance_amplification",
+        "fail_reason": "**stance_amplification**: \"considerable\" >> \"ちょっと\""
+      },
+      {
+        "round": "R44",
+        "sentence_id": 176,
+        "source_text": "それはちょっとリスク高い。",
+        "tone": "business",
+        "level": 50,
+        "translation": "This poses a significant risk.",
+        "fail_pattern": "stance_amplification",
+        "fail_reason": "**stance_amplification**: \"significant\" >> \"ちょっと\""
+      },
+      {
+        "round": "R44",
+        "sentence_id": 176,
+        "source_text": "それはちょっとリスク高い。",
+        "tone": "business",
+        "level": 75,
+        "translation": "This presents a considerable risk.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "25%と同一。\"considerable\""
+      },
+      {
+        "round": "R44",
+        "sentence_id": 176,
+        "source_text": "それはちょっとリスク高い。",
+        "tone": "business",
+        "level": 100,
+        "translation": "This poses a significant risk.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "50%と同一。\"significant\""
+      },
+      {
+        "round": "R44",
+        "sentence_id": 176,
+        "source_text": "それはちょっとリスク高い。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "That's a super high risk.",
+        "fail_pattern": "stance_amplification",
+        "fail_reason": "**stance_amplification**: \"super high risk\" >> \"ちょっと\""
+      },
+      {
+        "round": "R44",
+        "sentence_id": 176,
+        "source_text": "それはちょっとリスク高い。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "It certainly seems to be quite high-risk.",
+        "fail_pattern": "stance_amplification",
+        "fail_reason": "**stance_amplification**: \"certainly\" + \"quite\" >> \"ちょっと\""
+      },
+      {
+        "round": "R44",
+        "sentence_id": 176,
+        "source_text": "それはちょっとリスク高い。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "It appears to be extremely high-risk.",
+        "fail_pattern": "stance_amplification",
+        "fail_reason": "**stance_amplification**: \"extremely\" >> \"ちょっと\""
+      },
+      {
+        "round": "R44",
+        "sentence_id": 177,
+        "source_text": "今日の納期、明日に延びました。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "It is with utmost formality that I must inform you that the deadline for today has been officially and formally extended to tomorrow, effective immediately.",
+        "fail_pattern": "ceremonial_framing",
+        "fail_reason": "**ceremonial_framing**: \"It is with utmost formality that I must inform you that...\" 簡素な報告が式典的声明に変質"
+      },
+      {
+        "round": "R44",
+        "sentence_id": 180,
+        "source_text": "今日はもう何も考えられない。",
+        "tone": "business",
+        "level": 100,
+        "translation": "Currently, I am not contemplating any supplementary issues.",
+        "fail_pattern": "predicate_meaning_shift",
+        "fail_reason": "**predicate_meaning_shift**: 逆翻訳「追加で検討している事項はございません」≠「もう何も考えられない」。不能→不在に完全変質"
+      },
+      {
+        "round": "R46",
+        "sentence_id": 182,
+        "source_text": "今日ちょっといいニュースあった。",
+        "tone": "business",
+        "level": 100,
+        "translation": "It is my pleasure to inform you that I have received some favorable news today.",
+        "fail_pattern": "pleasure_polarity_flip",
+        "fail_reason": "**pleasure_polarity_flip**: \"It is my pleasure to inform you\""
+      },
+      {
+        "round": "R46",
+        "sentence_id": 182,
+        "source_text": "今日ちょっといいニュースあった。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "What a day, I just got the best news ever!",
+        "fail_pattern": "stance_amplification",
+        "fail_reason": "**stance_amplification**: \"the best news ever!\" >> \"ちょっといい\""
+      },
+      {
+        "round": "R46",
+        "sentence_id": 182,
+        "source_text": "今日ちょっといいニュースあった。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "Man, today is lit! I just got the most epic news ever!",
+        "fail_pattern": "stance_amplification",
+        "fail_reason": "**stance_amplification**: \"lit! most epic news ever!\" >> \"ちょっといい\""
+      },
+      {
+        "round": "R46",
+        "sentence_id": 182,
+        "source_text": "今日ちょっといいニュースあった。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "I had the pleasure of receiving some good news today.",
+        "fail_pattern": "pleasure_polarity_flip",
+        "fail_reason": "**pleasure_polarity_flip**: \"I had the pleasure of receiving\" — 儀式的"
+      },
+      {
+        "round": "R46",
+        "sentence_id": 182,
+        "source_text": "今日ちょっといいニュースあった。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "It was my pleasure to receive some good news today.",
+        "fail_pattern": "pleasure_polarity_flip",
+        "fail_reason": "**pleasure_polarity_flip**: \"It was my pleasure to receive\""
+      },
+      {
+        "round": "R46",
+        "sentence_id": 182,
+        "source_text": "今日ちょっといいニュースあった。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "I was delighted to receive some good news today.",
+        "fail_pattern": "pleasure_polarity_flip",
+        "fail_reason": "**pleasure_polarity_flip**: \"I was delighted to receive\""
+      },
+      {
+        "round": "R46",
+        "sentence_id": 182,
+        "source_text": "今日ちょっといいニュースあった。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "It is with utmost pleasure that I had the honor of receiving some good news today.",
+        "fail_pattern": "pleasure_polarity_flip",
+        "fail_reason": "**pleasure_polarity_flip + ceremonial**: \"It is with utmost pleasure that I had the honor of receiving\" 🚨"
+      },
+      {
+        "round": "R47",
+        "sentence_id": 187,
+        "source_text": "今日の会議、結局結論出なかった。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "The meeting today didn't get finished up.",
+        "fail_pattern": "predicate_meaning_shift",
+        "fail_reason": "**predicate_meaning_shift**: \"didn't get finished up\" — 「結論出なかった」が「終わらなかった」に変化。会議は終わったが結論が出なかったのが原文の意味"
+      },
+      {
+        "round": "R47",
+        "sentence_id": 187,
+        "source_text": "今日の会議、結局結論出なかった。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "The meeting today didn't wrap up.",
+        "fail_pattern": "predicate_meaning_shift",
+        "fail_reason": "**predicate_meaning_shift**: \"didn't wrap up\" — 同上。「結論」が消失し「会議が終わらなかった」に"
+      },
+      {
+        "round": "R47",
+        "sentence_id": 187,
+        "source_text": "今日の会議、結局結論出なかった。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "The meeting today didn't get wrapped up, dude.",
+        "fail_pattern": "predicate_meaning_shift",
+        "fail_reason": "**predicate_meaning_shift**: \"didn't get wrapped up, dude\" — 同上"
+      },
+      {
+        "round": "R47",
+        "sentence_id": 189,
+        "source_text": "それ、噂だけ先行してる気がする。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "I'm starting to think that rumor's getting out of control.",
+        "fail_pattern": "predicate_meaning_shift",
+        "fail_reason": "**predicate_meaning_shift**: \"getting out of control\" — 「噂だけ先行」→「制御不能」。原文は噂が事実に先んじているという観察であり、「暴走している」ではない"
+      },
+      {
+        "round": "R47",
+        "sentence_id": 189,
+        "source_text": "それ、噂だけ先行してる気がする。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "I'm starting to think that rumor's totally getting out of control.",
+        "fail_pattern": "stance_amplification+predicate_meaning_shift",
+        "fail_reason": "**stance_amplification + predicate_meaning_shift**: \"totally getting out of control\" — 同上 + 「totally」で増幅"
+      },
+      {
+        "round": "R47",
+        "sentence_id": 189,
+        "source_text": "それ、噂だけ先行してる気がする。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "I'm starting to think that rumor's totally spiraling outta control.",
+        "fail_pattern": "stance_amplification+predicate_meaning_shift",
+        "fail_reason": "**stance_amplification + predicate_meaning_shift**: \"totally spiraling outta control\" — spiral は暴走・悪化。原文にそのニュアンスなし"
+      },
+      {
+        "round": "R48",
+        "sentence_id": 191,
+        "source_text": "その話、また今度にしよう。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "We would be well-advised to potentially deliberate on that subject at a subsequent juncture.",
+        "fail_pattern": "ceremonial_framing+stance_shift",
+        "fail_reason": "**ceremonial_framing + stance_shift**: \"We would be well-advised to potentially deliberate on that subject at a subsequent juncture\" — 「しよう」という軽い提案が重厚な審議提案に変質"
+      },
+      {
+        "round": "R48",
+        "sentence_id": 192,
+        "source_text": "今日、久々に外で食べた。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "I finally got to chow down outside today!",
+        "fail_pattern": "stance_amplification",
+        "fail_reason": "**stance_amplification**: \"chow down\" + \"!\" — 原文は淡々とした報告。興奮表現は原文にない"
+      },
+      {
+        "round": "R48",
+        "sentence_id": 192,
+        "source_text": "今日、久々に外で食べた。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "I finally got to devour some grub outside today!!",
+        "fail_pattern": "stance_amplification",
+        "fail_reason": "**stance_amplification**: \"devour some grub outside today!!\" — 「食べた」→「貪り食った」＋ダブル感嘆符。激しい増幅"
+      },
+      {
+        "round": "R48",
+        "sentence_id": 192,
+        "source_text": "今日、久々に外で食べた。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "It was a pleasure to dine outdoors today for the first time in quite a while.",
+        "fail_pattern": "pleasure_polarity_flip",
+        "fail_reason": "**pleasure_polarity_flip**: \"It was a pleasure to dine outdoors\" — 報告が喜び表明に"
+      },
+      {
+        "round": "R48",
+        "sentence_id": 192,
+        "source_text": "今日、久々に外で食べた。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "It was a genuine pleasure to have dined outdoors today for the first time in quite a while.",
+        "fail_pattern": "pleasure_polarity_flip",
+        "fail_reason": "**pleasure_polarity_flip**: \"a genuine pleasure to have dined\" — 同上 + 強化"
+      },
+      {
+        "round": "R48",
+        "sentence_id": 192,
+        "source_text": "今日、久々に外で食べた。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "It was an absolute delight to have had the opportunity to dine al fresco today for the first time in a considerable duration.",
+        "fail_pattern": "pleasure_polarity_flip",
+        "fail_reason": "**pleasure_polarity_flip + ceremonial**: \"an absolute delight...dine al fresco...considerable duration\" — 🚨 完全な儀式化"
+      },
+      {
+        "round": "R49",
+        "sentence_id": 196,
+        "source_text": "それは今の状況だと難しい。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "The present circumstances are fraught with significant challenges.",
+        "fail_pattern": "stance_amplification",
+        "fail_reason": "**stance_amplification**: \"fraught with significant challenges\" — 「難しい」→「重大な困難に満ちている」。原文は素朴な「難しい」であり、困難に「満ちている」わけではない"
+      },
+      {
+        "round": "R49",
+        "sentence_id": 200,
+        "source_text": "今日はもう寝たい。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "It would be my greatest pleasure if I might retire to my slumber immediately.",
+        "fail_pattern": "pleasure_polarity_flip",
+        "fail_reason": "**pleasure_polarity_flip + ceremonial**: \"It would be my greatest pleasure if I might retire to my slumber immediately\" — 「寝たい」→「眠りにつくことが至上の喜び」。pleasure flip典型例"
+      }
+    ],
+    "missing_judgment_rounds": [
+      "R34",
+      "R35",
+      "R36",
+      "R38",
+      "R42",
+      "R45"
+    ],
+    "unjudged_output_count": 360,
+    "unjudged_outputs": [
+      {
+        "round": "R34",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "To be honest, that's a pretty harsh way to put it.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "Honestly, that's kinda harsh.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "Seriously, that's really harsh, lol.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "Dude, that's super harsh, haha!",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "Indeed, that's a rather harsh way to put it.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "Indeed, I would say that's a rather severe way to phrase it.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "I would be inclined to say that that is a rather severe way to phrase it.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "I would be most inclined to say that that is a rather severe way to phrase it.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "business",
+        "level": 25,
+        "translation": "To be honest, that's a bit of a harsh way to put it.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "business",
+        "level": 50,
+        "translation": "I would suggest that might be a bit too harsh.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "business",
+        "level": 75,
+        "translation": "I would appreciate it if you could reconsider, as that might be a bit too harsh.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "business",
+        "level": 100,
+        "translation": "I would be most grateful if you would consider reconsidering, as that may be perceived as being somewhat overly severe.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "Today's work is running a bit behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "Today's work is running a bit behind schedule, yeah.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "Today's work is really running kinda behind schedule, yeah.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "Today's work is totally running super behind schedule, dude.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "Indeed, today's work is behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "It is with great pleasure that I report today's work is behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "It is with great pleasure that I am compelled to report that today's work is unfortunately behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "It is with utmost delight and profound humility that I am honored to submit a report, regrettably indicating that today's work has fallen behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "business",
+        "level": 25,
+        "translation": "I'm a bit behind schedule with today's work.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "business",
+        "level": 50,
+        "translation": "Please note that I am slightly behind schedule with today's work.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "business",
+        "level": 75,
+        "translation": "I would like to bring to your attention that I am running slightly behind schedule with today's work.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "business",
+        "level": 100,
+        "translation": "I would like to formally bring to your attention that, regrettably, I am currently experiencing a slight delay in completing today's work.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "Thanks, that's reassuring.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "Thanks, that really helps to know.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "Thanks so much, that really helps to know, lol.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "Thanks, appreciate the confirmation!",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "Thank you indeed, I certainly appreciate your confirmation.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "I would be most grateful if you could confirm that.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "I would be most pleased if you could kindly confirm that.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "I would be extremely grateful if you would be so kind as to confirm that.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "business",
+        "level": 25,
+        "translation": "Thank you for confirming.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "business",
+        "level": 50,
+        "translation": "I appreciate your confirmation.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "business",
+        "level": 75,
+        "translation": "I would greatly appreciate your confirmation.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "business",
+        "level": 100,
+        "translation": "I would be most grateful if you could kindly confirm.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "It might change.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "It could change.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "It could really change, lol.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "It could totally change, lol.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "That could indeed be subject to change.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "It is indeed possible that this may be subject to change.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "It is highly likely that this may be subject to change.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "It is extremely likely that this may be subject to change.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "business",
+        "level": 25,
+        "translation": "That could be subject to change.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "business",
+        "level": 50,
+        "translation": "Please note that this may be subject to change.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "business",
+        "level": 75,
+        "translation": "We would appreciate it if you could kindly note that this may be subject to change.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "business",
+        "level": 100,
+        "translation": "We would be most grateful if you could be so kind as to note that this information may be subject to change.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "I'm kinda hitting my limit today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "I'm hitting my limit today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "I'm really hitting my limit today, lol.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "I'm totally tapped out today, lol.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "Indeed, I think I've reached my limit for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "I would be most pleased to admit that I believe I've reached my limit for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "It would be my utmost pleasure to acknowledge that I have likely reached my limit for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "It would be my utmost pleasure to humbly acknowledge that I have possibly reached my limit for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "business",
+        "level": 25,
+        "translation": "I think I've hit my limit for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "business",
+        "level": 50,
+        "translation": "I would suggest that I have reached my limit for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "business",
+        "level": 75,
+        "translation": "I would be grateful if you could consider that I may have reached my limit for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R34",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "business",
+        "level": 100,
+        "translation": "I would be most grateful if you would consider the possibility that I may have attained my daily limit.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "To be honest, that's kinda harsh.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "Honestly, that's pretty harsh.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "Honestly, that's really harsh, lol.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "Dude, that's super harsh, haha!",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "Indeed, that's a rather harsh way to put it.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "I must say, that does seem a rather severe way to phrase it.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "I must say, that does appear to be a rather severe way to phrase it.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "I must say, it does appear to be an exceedingly severe manner of articulating it.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "business",
+        "level": 25,
+        "translation": "To be honest, that's a bit harsh.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "business",
+        "level": 50,
+        "translation": "I would suggest that is a bit too severe.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "business",
+        "level": 75,
+        "translation": "I would suggest that might be a bit too severe.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "business",
+        "level": 100,
+        "translation": "It would be advisable to consider that the measure in question may be excessively stringent.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "Today's work is a bit behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "Today's work is running a bit behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "Today's work is really running kinda behind schedule, lol.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "Today's work is totes running hella behind schedule, lol.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "Indeed, today's work is behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "I regret to note that today's work is currently lagging behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "It is with considerable regret that I must note today's work is currently falling behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "It is with profound regret and utmost solemnity that I am compelled to acknowledge that today's work is presently lagging behind the scheduled timeline.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "business",
+        "level": 25,
+        "translation": "Today's work is slightly behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "business",
+        "level": 50,
+        "translation": "Please note that today's work is slightly behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "business",
+        "level": 75,
+        "translation": "I would like to bring to your attention that today's work is slightly behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "business",
+        "level": 100,
+        "translation": "I would like to bring to your attention, with utmost respect and formality, that today's work has unfortunately fallen slightly behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "Thanks, I appreciate it.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "Thanks a lot, I really appreciate it.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "Thanks so much, I really appreciate it, lol.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "Thanks soooo much, I super duper appreciate it, lol!!!",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "Thank you indeed, I certainly appreciate the confirmation.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "I would be most grateful for the confirmation.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "It would be a great honor to receive confirmation.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "It would be an immense privilege to receive confirmation, and I would be most grateful.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "business",
+        "level": 25,
+        "translation": "Thank you for confirming.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "business",
+        "level": 50,
+        "translation": "I appreciate your confirmation.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "business",
+        "level": 75,
+        "translation": "I would be grateful if you could confirm.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "business",
+        "level": 100,
+        "translation": "I would be most grateful if you could kindly confirm.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "It might change.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "It could change.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "It could really change.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "It's gonna totally change",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "It may indeed be subject to change.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "It is indeed possible that it may be subject to change.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "It is highly likely that it may be subject to change.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "It is extremely likely that it may be subject to alteration.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "business",
+        "level": 25,
+        "translation": "It may be subject to change.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "business",
+        "level": 50,
+        "translation": "Please note that it may be subject to change.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "business",
+        "level": 75,
+        "translation": "Please be advised that it may be subject to change.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "business",
+        "level": 100,
+        "translation": "You are hereby notified that it may be subject to change.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "I'm probably hitting my limit today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "I'm hitting my limit today, I think.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "I'm really hitting my limit today, I think.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "I'm totally tapped out today, for real.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "Indeed, I think I've reached my limit for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "I would be most pleased to admit that I have likely reached my limit for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "It is with considerable acknowledgment that I must concede I have probably reached my limit for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "I must express my deepest humility in acknowledging that I fear I have likely attained the utmost limit of my capacity for the present day.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "business",
+        "level": 25,
+        "translation": "I think I've hit my limit for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "business",
+        "level": 50,
+        "translation": "I would suggest that I have reached my limit for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "business",
+        "level": 75,
+        "translation": "I would be grateful if you could consider that I may have reached my limit for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R35",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "business",
+        "level": 100,
+        "translation": "I would be most grateful if you would consider the possibility that I may have attained my daily limit.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "To be honest, that's a pretty harsh way to put it.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "Honestly, that's kinda harsh.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "Honestly, that's really kinda harsh, lol.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "Honestly, that's super harsh, lol.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "Indeed, that's a rather harsh way to put it.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "It is indeed a rather severe manner of expression.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "I must say that is indeed a rather severe manner of expression.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "I must humbly acknowledge that the manner of expression in question is indeed exceedingly severe.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "business",
+        "level": 25,
+        "translation": "Frankly, that's a bit of a harsh way to put it.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "business",
+        "level": 50,
+        "translation": "I would suggest that is a rather harsh way to put it.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "business",
+        "level": 75,
+        "translation": "I would suggest that could be considered a rather harsh way to put it.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 146,
+        "source_text": "正直、その言い方はきつい。",
+        "tone": "business",
+        "level": 100,
+        "translation": "It would be advisable to rephrase that statement, as it may be perceived as excessively severe.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "Today's work is running a bit behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "Today's work is running a bit behind schedule, for sure.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "Today's work is really running behind schedule, for sure.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "Today's work is totally behind schedule, no doubt about it.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "Indeed, today's work is indeed behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "It is with great regret that today's work is behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "I regret to inform you that today's work is significantly behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "It is with profound regret that I must inform you that today's work has fallen considerably behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "business",
+        "level": 25,
+        "translation": "Today's work is slightly behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "business",
+        "level": 50,
+        "translation": "Please note that today's work is slightly behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "business",
+        "level": 75,
+        "translation": "I would like to bring to your attention that today's work is unfortunately falling slightly behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 147,
+        "source_text": "今日の作業、予定より遅れてる。",
+        "tone": "business",
+        "level": 100,
+        "translation": "It is with considerable regret that I must inform you that today's work is regrettably falling somewhat behind schedule.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "Thanks, I appreciate the confirmation, that's great.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "Thanks, I really appreciate the confirmation!",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "Thanks so much, I really appreciate the confirmation, that's awesome!",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "Thanks a ton, I super appreciate the confirmation, that's totally awesome!",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "Thank you indeed, I certainly appreciate your confirmation.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "I would be most grateful for your confirmation.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "It would be an honor to receive your confirmation.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "It would be a profound honor to receive your confirmation.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "business",
+        "level": 25,
+        "translation": "Thank you, I truly appreciate the confirmation.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "business",
+        "level": 50,
+        "translation": "I would like to express my sincere gratitude for the confirmation.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "business",
+        "level": 75,
+        "translation": "I would like to express my deepest gratitude for confirming.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 148,
+        "source_text": "ありがとう、確認助かります。",
+        "tone": "business",
+        "level": 100,
+        "translation": "I would like to express my most sincere and profound gratitude for having confirmed.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "It could be changed.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "It might get changed.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "It could totally get changed.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "It could totally get changed.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "Indeed, there might be some changes to that.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "It is possible that certain modifications may be made to that.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "It is highly possible that certain modifications may be made to that.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "It is extremely likely that certain modifications may be made to that.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "business",
+        "level": 25,
+        "translation": "It is possible that some changes may be made.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "business",
+        "level": 50,
+        "translation": "Please note that there is a possibility that some changes may be made.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "business",
+        "level": 75,
+        "translation": "We would like to inform you that there is a possibility that certain modifications could be made.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 149,
+        "source_text": "それ、もしかしたら変更入るかも。",
+        "tone": "business",
+        "level": 100,
+        "translation": "We wish to notify you that it is possible that certain alterations may be implemented.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "I'm kinda hitting my limit today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "I'm pretty much hitting my limit today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "I'm really hitting my limit today, kinda.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "I'm totally tapped out today, for real.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "Indeed, I think I've reached my limit for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "It appears that I have likely reached my limit for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "It is with a certain degree of certainty that I have likely reached my limit for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "It is with utmost certainty that I have presumably attained my limit for the day.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "business",
+        "level": 25,
+        "translation": "It seems I've hit my limit for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "business",
+        "level": 50,
+        "translation": "Please note that it appears I have reached my limit for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "business",
+        "level": 75,
+        "translation": "I would like to bring to your attention that it seems I have reached my limit for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R36",
+        "sentence_id": 150,
+        "source_text": "今日はもう限界かもしれない。",
+        "tone": "business",
+        "level": 100,
+        "translation": "It is necessary to inform you that I appear to have attained my daily limit.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 151,
+        "source_text": "その話、後回しでもいい？",
+        "tone": "casual",
+        "level": 25,
+        "translation": "How about we talk about that later?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 151,
+        "source_text": "その話、後回しでもいい？",
+        "tone": "casual",
+        "level": 50,
+        "translation": "What if we discuss that later?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 151,
+        "source_text": "その話、後回しでもいい？",
+        "tone": "casual",
+        "level": 75,
+        "translation": "How about we chat about that later?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 151,
+        "source_text": "その話、後回しでもいい？",
+        "tone": "casual",
+        "level": 100,
+        "translation": "Want to chat about that later?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 151,
+        "source_text": "その話、後回しでもいい？",
+        "tone": "polite",
+        "level": 25,
+        "translation": "Could we discuss that later?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 151,
+        "source_text": "その話、後回しでもいい？",
+        "tone": "polite",
+        "level": 50,
+        "translation": "Might we discuss that at a later time?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 151,
+        "source_text": "その話、後回しでもいい？",
+        "tone": "polite",
+        "level": 75,
+        "translation": "Could we possibly discuss that at a later juncture?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 151,
+        "source_text": "その話、後回しでもいい？",
+        "tone": "polite",
+        "level": 100,
+        "translation": "Might we potentially broach that subject at a more opportune moment?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 151,
+        "source_text": "その話、後回しでもいい？",
+        "tone": "business",
+        "level": 25,
+        "translation": "Could we possibly discuss that at a later time?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 151,
+        "source_text": "その話、後回しでもいい？",
+        "tone": "business",
+        "level": 50,
+        "translation": "Might we be able to discuss that at a later time?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 151,
+        "source_text": "その話、後回しでもいい？",
+        "tone": "business",
+        "level": 75,
+        "translation": "Would it be possible to discuss that at a later date?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 151,
+        "source_text": "その話、後回しでもいい？",
+        "tone": "business",
+        "level": 100,
+        "translation": "Would it be feasible to engage in a discussion regarding that at a future point in time?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 152,
+        "source_text": "今日、電車めっちゃ混んでた。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "The train was really packed today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 152,
+        "source_text": "今日、電車めっちゃ混んでた。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "The train was totally swamped today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 152,
+        "source_text": "今日、電車めっちゃ混んでた。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "The train was completely packed today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 152,
+        "source_text": "今日、電車めっちゃ混んでた。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "The train was totally slammed today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 152,
+        "source_text": "今日、電車めっちゃ混んでた。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "The train was extremely crowded today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 152,
+        "source_text": "今日、電車めっちゃ混んでた。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "The train was exceedingly crowded today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 152,
+        "source_text": "今日、電車めっちゃ混んでた。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "The train was extremely crowded today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 152,
+        "source_text": "今日、電車めっちゃ混んでた。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "The train was excessively crowded today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 152,
+        "source_text": "今日、電車めっちゃ混んでた。",
+        "tone": "business",
+        "level": 25,
+        "translation": "The train was quite crowded today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 152,
+        "source_text": "今日、電車めっちゃ混んでた。",
+        "tone": "business",
+        "level": 50,
+        "translation": "The train was fairly crowded today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 152,
+        "source_text": "今日、電車めっちゃ混んでた。",
+        "tone": "business",
+        "level": 75,
+        "translation": "The train was considerably crowded today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 152,
+        "source_text": "今日、電車めっちゃ混んでた。",
+        "tone": "business",
+        "level": 100,
+        "translation": "The train was exceedingly crowded today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 153,
+        "source_text": "悪いけど、これ急ぎでお願い。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "I apologize, but could you please do this as soon as possible?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 153,
+        "source_text": "悪いけど、これ急ぎでお願い。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "My apologies, but would you mind doing this ASAP?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 153,
+        "source_text": "悪いけど、これ急ぎでお願い。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "My bad, can you pretty please do this ASAP?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 153,
+        "source_text": "悪いけど、これ急ぎでお願い。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "My apologies, could you super duper please get this done like, right now?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 153,
+        "source_text": "悪いけど、これ急ぎでお願い。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "I apologize, but would you be so kind as to attend to this matter with a sense of urgency?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 153,
+        "source_text": "悪いけど、これ急ぎでお願い。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "I do apologize, but I would be most grateful if you could attend to this matter with a certain degree of urgency.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 153,
+        "source_text": "悪いけど、これ急ぎでお願い。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "I apologize sincerely, but I would be extremely grateful if you could address this matter with a sense of urgency.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 153,
+        "source_text": "悪いけど、これ急ぎでお願い。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "I offer my most sincere apologies, and it would be a tremendous kindness if you could attend to this matter with utmost urgency.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 153,
+        "source_text": "悪いけど、これ急ぎでお願い。",
+        "tone": "business",
+        "level": 25,
+        "translation": "I apologize, but would you be able to attend to this matter with urgency?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 153,
+        "source_text": "悪いけど、これ急ぎでお願い。",
+        "tone": "business",
+        "level": 50,
+        "translation": "I apologize for the inconvenience, but would you be so kind as to attend to this matter with a sense of urgency?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 153,
+        "source_text": "悪いけど、これ急ぎでお願い。",
+        "tone": "business",
+        "level": 75,
+        "translation": "I apologize for any inconvenience this may cause, but I would highly appreciate it if you could attend to this matter with a sense of urgency.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 153,
+        "source_text": "悪いけど、これ急ぎでお願い。",
+        "tone": "business",
+        "level": 100,
+        "translation": "I extend my sincerest apologies for any potential inconvenience this may cause, and I would be most grateful if you could address this matter with utmost urgency.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 154,
+        "source_text": "正直、ちょっと不安。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "To be frank, I am somewhat apprehensive.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 154,
+        "source_text": "正直、ちょっと不安。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "Honestly, I'm pretty uneasy.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 154,
+        "source_text": "正直、ちょっと不安。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "Honestly, I'm super uneasy.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 154,
+        "source_text": "正直、ちょっと不安。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "Frankly, I'm totally on edge.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 154,
+        "source_text": "正直、ちょっと不安。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "Frankly speaking, I am somewhat apprehensive.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 154,
+        "source_text": "正直、ちょっと不安。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "To be frank, I am rather apprehensive.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 154,
+        "source_text": "正直、ちょっと不安。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "To be candid, I am quite apprehensive.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 154,
+        "source_text": "正直、ちょっと不安。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "Frankly speaking, I am exceedingly apprehensive.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 154,
+        "source_text": "正直、ちょっと不安。",
+        "tone": "business",
+        "level": 25,
+        "translation": "Frankly, I'm somewhat apprehensive.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 154,
+        "source_text": "正直、ちょっと不安。",
+        "tone": "business",
+        "level": 50,
+        "translation": "To be frank, I'm quite apprehensive.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 154,
+        "source_text": "正直、ちょっと不安。",
+        "tone": "business",
+        "level": 75,
+        "translation": "Frankly speaking, I am considerably concerned.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 154,
+        "source_text": "正直、ちょっと不安。",
+        "tone": "business",
+        "level": 100,
+        "translation": "To be frank, I am deeply concerned.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 155,
+        "source_text": "もし間違ってたら教えてほしい。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "Please let me know if I'm mistaken.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 155,
+        "source_text": "もし間違ってたら教えてほしい。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "Could you let me know if I'm off base?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 155,
+        "source_text": "もし間違ってたら教えてほしい。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "Am I way off base?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 155,
+        "source_text": "もし間違ってたら教えてほしい。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "Am I totally off the mark?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 155,
+        "source_text": "もし間違ってたら教えてほしい。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "I would appreciate it if you could let me know if I'm incorrect.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 155,
+        "source_text": "もし間違ってたら教えてほしい。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "I would be grateful if you could inform me if I'm mistaken.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 155,
+        "source_text": "もし間違ってたら教えてほしい。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "I would appreciate it if you could tell me if I'm incorrect.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 155,
+        "source_text": "もし間違ってたら教えてほしい。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "It would be most gracious of you should you kindly inform me of any inaccuracies.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 155,
+        "source_text": "もし間違ってたら教えてほしい。",
+        "tone": "business",
+        "level": 25,
+        "translation": "Should I be incorrect, kindly inform me.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 155,
+        "source_text": "もし間違ってたら教えてほしい。",
+        "tone": "business",
+        "level": 50,
+        "translation": "If I happen to be mistaken, would you mind letting me know?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 155,
+        "source_text": "もし間違ってたら教えてほしい。",
+        "tone": "business",
+        "level": 75,
+        "translation": "Should I be incorrect, would you be so kind as to inform me?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R38",
+        "sentence_id": 155,
+        "source_text": "もし間違ってたら教えてほしい。",
+        "tone": "business",
+        "level": 100,
+        "translation": "In the event that I am mistaken, would you kindly bring it to my attention?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 166,
+        "source_text": "ちょっと難しいかもしれないけど、やってみる",
+        "tone": "casual",
+        "level": 25,
+        "translation": "Might be tough, but I'll give it a shot",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 166,
+        "source_text": "ちょっと難しいかもしれないけど、やってみる",
+        "tone": "casual",
+        "level": 50,
+        "translation": "It could be a challenge, but I'll give it a go",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 166,
+        "source_text": "ちょっと難しいかもしれないけど、やってみる",
+        "tone": "casual",
+        "level": 75,
+        "translation": "Might be a tough one, but I'm gonna give it a shot",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 166,
+        "source_text": "ちょっと難しいかもしれないけど、やってみる",
+        "tone": "casual",
+        "level": 100,
+        "translation": "This could be challenging, but I'll give it a try",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 166,
+        "source_text": "ちょっと難しいかもしれないけど、やってみる",
+        "tone": "polite",
+        "level": 25,
+        "translation": "It may be somewhat challenging, but I will attempt to do so.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 166,
+        "source_text": "ちょっと難しいかもしれないけど、やってみる",
+        "tone": "polite",
+        "level": 50,
+        "translation": "I acknowledge that it could be somewhat challenging, but I am willing to give it a try.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 166,
+        "source_text": "ちょっと難しいかもしれないけど、やってみる",
+        "tone": "polite",
+        "level": 75,
+        "translation": "I recognize that it may be somewhat challenging, but I am prepared to give it a try.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 166,
+        "source_text": "ちょっと難しいかもしれないけど、やってみる",
+        "tone": "polite",
+        "level": 100,
+        "translation": "I am cognizant that it may pose a certain degree of difficulty; nonetheless, I am willing to attempt it.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 166,
+        "source_text": "ちょっと難しいかもしれないけど、やってみる",
+        "tone": "business",
+        "level": 25,
+        "translation": "While it may present some challenges, I am willing to give it a try.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 166,
+        "source_text": "ちょっと難しいかもしれないけど、やってみる",
+        "tone": "business",
+        "level": 50,
+        "translation": "Although it may pose certain difficulties, I am prepared to attempt it.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 166,
+        "source_text": "ちょっと難しいかもしれないけど、やってみる",
+        "tone": "business",
+        "level": 75,
+        "translation": "Notwithstanding potential challenges, I am willing to give it a try.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 166,
+        "source_text": "ちょっと難しいかもしれないけど、やってみる",
+        "tone": "business",
+        "level": 100,
+        "translation": "Despite potential challenges, I am prepared to attempt it.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 167,
+        "source_text": "すみません、割と急ぎなのでお願いできますか",
+        "tone": "casual",
+        "level": 25,
+        "translation": "I'm sorry, it's pretty urgent, could you do it for me?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 167,
+        "source_text": "すみません、割と急ぎなのでお願いできますか",
+        "tone": "casual",
+        "level": 50,
+        "translation": "Sorry, it's super urgent, can you help me out?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 167,
+        "source_text": "すみません、割と急ぎなのでお願いできますか",
+        "tone": "casual",
+        "level": 75,
+        "translation": "Sorry, it's super duper urgent, can you help a bro out?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 167,
+        "source_text": "すみません、割と急ぎなのでお願いできますか",
+        "tone": "casual",
+        "level": 100,
+        "translation": "Sorry, it's hella urgent, can you hook a bro up?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 167,
+        "source_text": "すみません、割と急ぎなのでお願いできますか",
+        "tone": "polite",
+        "level": 25,
+        "translation": "I apologize, but would you be able to assist me with this at your earliest convenience?",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 167,
+        "source_text": "すみません、割と急ぎなのでお願いできますか",
+        "tone": "polite",
+        "level": 50,
+        "translation": "I apologize for the inconvenience, but I would be grateful if you could assist me with this at your earliest convenience.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 167,
+        "source_text": "すみません、割と急ぎなのでお願いできますか",
+        "tone": "polite",
+        "level": 75,
+        "translation": "I apologize for any trouble this may have caused, but I'd greatly appreciate it if you could help me with this as soon as possible.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 167,
+        "source_text": "すみません、割と急ぎなのでお願いできますか",
+        "tone": "polite",
+        "level": 100,
+        "translation": "I humbly apologize for any inconvenience this may have caused and would be most grateful if you could assist me with this matter at your earliest convenience.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 167,
+        "source_text": "すみません、割と急ぎなのでお願いできますか",
+        "tone": "business",
+        "level": 25,
+        "translation": "I apologize, but I would greatly appreciate it if you could assist me with this matter at your earliest convenience.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 167,
+        "source_text": "すみません、割と急ぎなのでお願いできますか",
+        "tone": "business",
+        "level": 50,
+        "translation": "I apologize for the inconvenience, but I would be most grateful if you could assist me with this matter at your earliest convenience.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 167,
+        "source_text": "すみません、割と急ぎなのでお願いできますか",
+        "tone": "business",
+        "level": 75,
+        "translation": "I apologize for any inconvenience this may cause, but I would be extremely grateful if you could assist me with this matter at your earliest convenience.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 167,
+        "source_text": "すみません、割と急ぎなのでお願いできますか",
+        "tone": "business",
+        "level": 100,
+        "translation": "I extend my sincerest apologies for any potential inconvenience this may occasion, and I would be most appreciative if you could expedite assistance with this matter at your earliest opportunity.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 168,
+        "source_text": "あんまり期待しないほうがいいと思う",
+        "tone": "casual",
+        "level": 25,
+        "translation": "You probably shouldn't expect much",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 168,
+        "source_text": "あんまり期待しないほうがいいと思う",
+        "tone": "casual",
+        "level": 50,
+        "translation": "You shouldn't expect a whole lot",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 168,
+        "source_text": "あんまり期待しないほうがいいと思う",
+        "tone": "casual",
+        "level": 75,
+        "translation": "Don't expect a ton",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 168,
+        "source_text": "あんまり期待しないほうがいいと思う",
+        "tone": "casual",
+        "level": 100,
+        "translation": "Don't expect a whole lot",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 168,
+        "source_text": "あんまり期待しないほうがいいと思う",
+        "tone": "polite",
+        "level": 25,
+        "translation": "I think it's best not to expect too much.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 168,
+        "source_text": "あんまり期待しないほうがいいと思う",
+        "tone": "polite",
+        "level": 50,
+        "translation": "It would be prudent not to have overly high expectations.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 168,
+        "source_text": "あんまり期待しないほうがいいと思う",
+        "tone": "polite",
+        "level": 75,
+        "translation": "It would be wise to keep expectations in check.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 168,
+        "source_text": "あんまり期待しないほうがいいと思う",
+        "tone": "polite",
+        "level": 100,
+        "translation": "It would be prudent to maintain a realistic outlook.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 168,
+        "source_text": "あんまり期待しないほうがいいと思う",
+        "tone": "business",
+        "level": 25,
+        "translation": "I wouldn't advise you to have very high expectations.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 168,
+        "source_text": "あんまり期待しないほうがいいと思う",
+        "tone": "business",
+        "level": 50,
+        "translation": "I would caution against having extremely high expectations.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 168,
+        "source_text": "あんまり期待しないほうがいいと思う",
+        "tone": "business",
+        "level": 75,
+        "translation": "I would advise against setting unrealistically high expectations.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 168,
+        "source_text": "あんまり期待しないほうがいいと思う",
+        "tone": "business",
+        "level": 100,
+        "translation": "It is advisable to exercise caution when establishing expectations that are excessively ambitious.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 169,
+        "source_text": "もし時間があれば、私が説明します",
+        "tone": "casual",
+        "level": 25,
+        "translation": "I will explain if I have the time",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 169,
+        "source_text": "もし時間があれば、私が説明します",
+        "tone": "casual",
+        "level": 50,
+        "translation": "I'll explain if I've got a minute",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 169,
+        "source_text": "もし時間があれば、私が説明します",
+        "tone": "casual",
+        "level": 75,
+        "translation": "I'll give you the lowdown if I get a chance",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 169,
+        "source_text": "もし時間があれば、私が説明します",
+        "tone": "casual",
+        "level": 100,
+        "translation": "I'll hook you up with the scoop if I get the chance",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 169,
+        "source_text": "もし時間があれば、私が説明します",
+        "tone": "polite",
+        "level": 25,
+        "translation": "If I have the time, I'd be happy to provide an explanation.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 169,
+        "source_text": "もし時間があれば、私が説明します",
+        "tone": "polite",
+        "level": 50,
+        "translation": "If I have the time, I would be more than happy to provide an explanation.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 169,
+        "source_text": "もし時間があれば、私が説明します",
+        "tone": "polite",
+        "level": 75,
+        "translation": "If I have the time, I'd be delighted to offer an explanation.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 169,
+        "source_text": "もし時間があれば、私が説明します",
+        "tone": "polite",
+        "level": 100,
+        "translation": "If I were to have the time, I would be most pleased to provide an explanation.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 169,
+        "source_text": "もし時間があれば、私が説明します",
+        "tone": "business",
+        "level": 25,
+        "translation": "If I've got some time, I'll be happy to explain.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 169,
+        "source_text": "もし時間があれば、私が説明します",
+        "tone": "business",
+        "level": 50,
+        "translation": "If I have some spare time, I'd be more than happy to provide an explanation.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 169,
+        "source_text": "もし時間があれば、私が説明します",
+        "tone": "business",
+        "level": 75,
+        "translation": "I would be delighted to offer an explanation should I have some available time.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 169,
+        "source_text": "もし時間があれば、私が説明します",
+        "tone": "business",
+        "level": 100,
+        "translation": "It would be my pleasure to provide an explanation if I have some available time.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 170,
+        "source_text": "ちょっと体調悪くて、今日は早めに帰ります",
+        "tone": "casual",
+        "level": 25,
+        "translation": "I'm not feeling great, so I'm heading home early today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 170,
+        "source_text": "ちょっと体調悪くて、今日は早めに帰ります",
+        "tone": "casual",
+        "level": 50,
+        "translation": "I'm feeling pretty crummy, so I'm gonna head home early today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 170,
+        "source_text": "ちょっと体調悪くて、今日は早めに帰ります",
+        "tone": "casual",
+        "level": 75,
+        "translation": "I'm feelin' really down, so I'm gonna bail early today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 170,
+        "source_text": "ちょっと体調悪くて、今日は早めに帰ります",
+        "tone": "casual",
+        "level": 100,
+        "translation": "I'm super down, so I'm outta here early today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 170,
+        "source_text": "ちょっと体調悪くて、今日は早めに帰ります",
+        "tone": "polite",
+        "level": 25,
+        "translation": "I'm not feeling well, so I will be heading home early today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 170,
+        "source_text": "ちょっと体調悪くて、今日は早めに帰ります",
+        "tone": "polite",
+        "level": 50,
+        "translation": "I am not feeling well, therefore I shall be returning home early today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 170,
+        "source_text": "ちょっと体調悪くて、今日は早めに帰ります",
+        "tone": "polite",
+        "level": 75,
+        "translation": "I am not feeling well, therefore I shall be returning home early today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 170,
+        "source_text": "ちょっと体調悪くて、今日は早めに帰ります",
+        "tone": "polite",
+        "level": 100,
+        "translation": "I am presently indisposed and, consequently, I shall be retiring to my residence at an earlier juncture today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 170,
+        "source_text": "ちょっと体調悪くて、今日は早めに帰ります",
+        "tone": "business",
+        "level": 25,
+        "translation": "I'm not feeling well, so I'll be heading home early today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 170,
+        "source_text": "ちょっと体調悪くて、今日は早めに帰ります",
+        "tone": "business",
+        "level": 50,
+        "translation": "I am not feeling well, so I will be leaving early today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 170,
+        "source_text": "ちょっと体調悪くて、今日は早めに帰ります",
+        "tone": "business",
+        "level": 75,
+        "translation": "I am not feeling well, so I shall be departing early today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R42",
+        "sentence_id": 170,
+        "source_text": "ちょっと体調悪くて、今日は早めに帰ります",
+        "tone": "business",
+        "level": 100,
+        "translation": "I am presently experiencing a state of discomfort and therefore shall vacate the premises at an earlier juncture today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 176,
+        "source_text": "それはちょっとリスク高い。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "That's a pretty high risk.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 176,
+        "source_text": "それはちょっとリスク高い。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "That's a pretty high risk.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 176,
+        "source_text": "それはちょっとリスク高い。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "That's a pretty hefty risk.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 176,
+        "source_text": "それはちょっとリスク高い。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "That's a super hefty risk.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 176,
+        "source_text": "それはちょっとリスク高い。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "The risk level appears to be somewhat elevated.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 176,
+        "source_text": "それはちょっとリスク高い。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "The risk level is somewhat elevated.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 176,
+        "source_text": "それはちょっとリスク高い。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "The risk level is moderately elevated.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 176,
+        "source_text": "それはちょっとリスク高い。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "The risk level is considerably heightened.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 176,
+        "source_text": "それはちょっとリスク高い。",
+        "tone": "business",
+        "level": 25,
+        "translation": "This does appear to be a rather high risk.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 176,
+        "source_text": "それはちょっとリスク高い。",
+        "tone": "business",
+        "level": 50,
+        "translation": "It does seem to pose a significant risk.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 176,
+        "source_text": "それはちょっとリスク高い。",
+        "tone": "business",
+        "level": 75,
+        "translation": "It appears to present a considerable risk.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 176,
+        "source_text": "それはちょっとリスク高い。",
+        "tone": "business",
+        "level": 100,
+        "translation": "It appears to pose a significant risk.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 177,
+        "source_text": "今日の納期、明日に延びました。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "Today's deadline has been pushed to tomorrow.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 177,
+        "source_text": "今日の納期、明日に延びました。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "The deadline for today got pushed to tomorrow.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 177,
+        "source_text": "今日の納期、明日に延びました。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "The deadline for today has been pushed to tomorrow.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 177,
+        "source_text": "今日の納期、明日に延びました。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "The deadline for today is totes pushed to tomorrow.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 177,
+        "source_text": "今日の納期、明日に延びました。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "The deadline for today has been officially extended to tomorrow.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 177,
+        "source_text": "今日の納期、明日に延びました。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "The deadline for today has been officially extended to tomorrow as of now.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 177,
+        "source_text": "今日の納期、明日に延びました。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "The deadline for today has been officially extended to tomorrow, effective immediately.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 177,
+        "source_text": "今日の納期、明日に延びました。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "It is with utmost formality that I must inform you that the deadline for today has been officially extended to tomorrow, effective immediately.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 177,
+        "source_text": "今日の納期、明日に延びました。",
+        "tone": "business",
+        "level": 25,
+        "translation": "The deadline for today has been officially extended to tomorrow.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 177,
+        "source_text": "今日の納期、明日に延びました。",
+        "tone": "business",
+        "level": 50,
+        "translation": "The deadline for today has been officially extended to tomorrow.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 177,
+        "source_text": "今日の納期、明日に延びました。",
+        "tone": "business",
+        "level": 75,
+        "translation": "The deadline for today has been formally extended to tomorrow.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 177,
+        "source_text": "今日の納期、明日に延びました。",
+        "tone": "business",
+        "level": 100,
+        "translation": "The deadline for today has been officially extended to tomorrow.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 178,
+        "source_text": "ありがとう、対応助かります。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "Thank you, I really appreciate your help.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 178,
+        "source_text": "ありがとう、対応助かります。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "Thanks a ton for your help, I super appreciate it!",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 178,
+        "source_text": "ありがとう、対応助かります。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "Thanks so much for your help, I really appreciate it!",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 178,
+        "source_text": "ありがとう、対応助かります。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "Thanks a ton for your help, I super appreciate it!",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 178,
+        "source_text": "ありがとう、対応助かります。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "Thank you for your assistance.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 178,
+        "source_text": "ありがとう、対応助かります。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "I would like to express my sincere gratitude for your assistance.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 178,
+        "source_text": "ありがとう、対応助かります。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "I am deeply grateful for your assistance.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 178,
+        "source_text": "ありがとう、対応助かります。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "I am extremely grateful for your assistance.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 178,
+        "source_text": "ありがとう、対応助かります。",
+        "tone": "business",
+        "level": 25,
+        "translation": "I appreciate your assistance, thank you.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 178,
+        "source_text": "ありがとう、対応助かります。",
+        "tone": "business",
+        "level": 50,
+        "translation": "I am grateful for your support.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 178,
+        "source_text": "ありがとう、対応助かります。",
+        "tone": "business",
+        "level": 75,
+        "translation": "I extend my sincere gratitude for your invaluable support.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 178,
+        "source_text": "ありがとう、対応助かります。",
+        "tone": "business",
+        "level": 100,
+        "translation": "I would like to express my deepest and most sincere appreciation for your highly valuable and instrumental support.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 179,
+        "source_text": "それ、聞いた限りだと怪しい。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "Sounds kinda suspicious, from what I've heard.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 179,
+        "source_text": "それ、聞いた限りだと怪しい。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "Sounds a bit fishy, from what I've heard.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 179,
+        "source_text": "それ、聞いた限りだと怪しい。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "Sounds kinda sketchy, from what I've heard.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 179,
+        "source_text": "それ、聞いた限りだと怪しい。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "Sounds super shady, from what I've heard.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 179,
+        "source_text": "それ、聞いた限りだと怪しい。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "It appears suspicious based on what I've heard.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 179,
+        "source_text": "それ、聞いた限りだと怪しい。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "It appears to be suspicious based on what I've heard.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 179,
+        "source_text": "それ、聞いた限りだと怪しい。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "It appears to be somewhat suspicious based on what I've heard.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 179,
+        "source_text": "それ、聞いた限りだと怪しい。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "It appears to be somewhat suspicious based on what I've heard.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 179,
+        "source_text": "それ、聞いた限りだと怪しい。",
+        "tone": "business",
+        "level": 25,
+        "translation": "Based on what I've heard, it seems suspicious.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 179,
+        "source_text": "それ、聞いた限りだと怪しい。",
+        "tone": "business",
+        "level": 50,
+        "translation": "From what I've heard, it appears to be suspicious.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 179,
+        "source_text": "それ、聞いた限りだと怪しい。",
+        "tone": "business",
+        "level": 75,
+        "translation": "Based on what I've heard, it seems suspicious.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 179,
+        "source_text": "それ、聞いた限りだと怪しい。",
+        "tone": "business",
+        "level": 100,
+        "translation": "It appears to be suspicious based on the information I have obtained.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 180,
+        "source_text": "今日はもう何も考えられない。",
+        "tone": "casual",
+        "level": 25,
+        "translation": "I'm stuck on one thing today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 180,
+        "source_text": "今日はもう何も考えられない。",
+        "tone": "casual",
+        "level": 50,
+        "translation": "I'm stuck on one thing today, and I just can't seem to get it out of my head.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 180,
+        "source_text": "今日はもう何も考えられない。",
+        "tone": "casual",
+        "level": 75,
+        "translation": "I'm totally stuck on this one thing today and I just can't shake it off my mind.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 180,
+        "source_text": "今日はもう何も考えられない。",
+        "tone": "casual",
+        "level": 100,
+        "translation": "I'm super stuck on this one thing today and I just can't get it out of my head.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 180,
+        "source_text": "今日はもう何も考えられない。",
+        "tone": "polite",
+        "level": 25,
+        "translation": "I'm unable to think of anything else for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 180,
+        "source_text": "今日はもう何も考えられない。",
+        "tone": "polite",
+        "level": 50,
+        "translation": "I am unable to think of anything further for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 180,
+        "source_text": "今日はもう何も考えられない。",
+        "tone": "polite",
+        "level": 75,
+        "translation": "I am presently unable to conceive of anything additional for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 180,
+        "source_text": "今日はもう何も考えられない。",
+        "tone": "polite",
+        "level": 100,
+        "translation": "I am currently incapable of devising any further ideas for today.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 180,
+        "source_text": "今日はもう何も考えられない。",
+        "tone": "business",
+        "level": 25,
+        "translation": "I am not considering anything else at the moment.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 180,
+        "source_text": "今日はもう何も考えられない。",
+        "tone": "business",
+        "level": 50,
+        "translation": "At present, I am not contemplating any other options.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 180,
+        "source_text": "今日はもう何も考えられない。",
+        "tone": "business",
+        "level": 75,
+        "translation": "Currently, I am not considering any alternative possibilities.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      },
+      {
+        "round": "R45",
+        "sentence_id": 180,
+        "source_text": "今日はもう何も考えられない。",
+        "tone": "business",
+        "level": 100,
+        "translation": "At present, I am not contemplating any supplementary options.",
+        "fail_pattern": "unclassified",
+        "fail_reason": "判定レポート未取得（未判定）。クロちゃん側でFAIL判定・分類してください。"
+      }
+    ]
+  }
+}
