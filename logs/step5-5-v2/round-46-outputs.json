@@ -1,0 +1,432 @@
+[
+  {
+    "id": "文181",
+    "source": "その件、もう一度確認する。",
+    "structure": {
+      "主題": "確認",
+      "動作": "確認する",
+      "動作の意味": "confirm",
+      "意図": "報告",
+      "感情極性": "neutral",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "その件",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I'll check on that again.",
+    "results": {
+      "casual_25": {
+        "new_translation": "I'm gonna check on that again.",
+        "reverse_translation": "もう一度確認します。",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "I'm going to check on that again.",
+        "reverse_translation": "もう一度確認します。",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "I'm gonna check on that again.",
+        "reverse_translation": "また確認しに行くね。",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "I'm checking on that again.",
+        "reverse_translation": "もう一度確認します。",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I shall confirm that matter once again.",
+        "reverse_translation": "改めてその件を確認いたします。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I will reaffirm that matter.",
+        "reverse_translation": "その件を再度確認いたします。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I shall reconfirm that matter.",
+        "reverse_translation": "その件を再度確認いたします",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "I shall most certainly reconfirm that matter.",
+        "reverse_translation": "その件を再度確認させていただきます。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "I will verify that matter again.",
+        "reverse_translation": "再度確認いたします。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I will reverify that matter.",
+        "reverse_translation": "再度確認いたします。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "I shall verify that matter again.",
+        "reverse_translation": "再度確認いたします。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "I will thoroughly verify that matter again.",
+        "reverse_translation": "再度、その件を徹底的に確認いたします。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文182",
+    "source": "今日ちょっといいニュースあった。",
+    "structure": {
+      "主題": "良いニュース",
+      "動作": "あった",
+      "動作の意味": "have",
+      "意図": "報告",
+      "感情極性": "positive",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I had some good news today.",
+    "results": {
+      "casual_25": {
+        "new_translation": "I got some good news today",
+        "reverse_translation": "今日、良いニュースがあった",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "I had a great day today, I got some awesome news!",
+        "reverse_translation": "今日はいいニュースがあった",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "What a day, I just got the best news ever!",
+        "reverse_translation": "なんて日だ、最高のニュースを聞いたよ！",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "Man, today is lit! I just got the most epic news ever!",
+        "reverse_translation": "今日は最高の日だ！最高のニュースを手に入れた！",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I had the pleasure of receiving some good news today.",
+        "reverse_translation": "今日は良いニュースがいくつかありました。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "It was my pleasure to receive some good news today.",
+        "reverse_translation": "今日は良いニュースを頂戴できて光栄でした。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I was delighted to receive some good news today.",
+        "reverse_translation": "今日、嬉しいニュースを受け取ることができてよかったです。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "It is with utmost pleasure that I had the honor of receiving some good news today.",
+        "reverse_translation": "今日、嬉しいニュースを頂戴できて大変光栄に存じます。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "I had some positive news today.",
+        "reverse_translation": "今日、良いニュースがいくつかありました",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I received some favorable news today.",
+        "reverse_translation": "今日、好ましいニュースを受けました。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "I am pleased to report that I received some favorable news today.",
+        "reverse_translation": "今日、好ましいニュースを受け取りました。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "It is my pleasure to inform you that I have received some favorable news today.",
+        "reverse_translation": "今日、好ましいニュースを受け取ったことをご報告いたします。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文183",
+    "source": "それって別の方法もあるよね。",
+    "structure": {
+      "主題": "方法の選択",
+      "動作": "ある",
+      "動作の意味": "have",
+      "意図": "報告",
+      "感情極性": "neutral",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "二人称",
+      "確信度": "推測",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "There might be another way, right?",
+    "results": {
+      "casual_25": {
+        "new_translation": "Perhaps there's another way?",
+        "reverse_translation": "別の方法があるかもしれませんね",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "Maybe there's another way?",
+        "reverse_translation": "どうかな、別の方法があるかもしれない",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "Could there be another way?",
+        "reverse_translation": "他に方法があるのかもしれない",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "Is there like, another way or something?",
+        "reverse_translation": "他に方法とかってある？",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "Perhaps there's another way, isn't there?",
+        "reverse_translation": "もしかしたら別の方法があるかもしれませんね",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "Might there be another way, isn't there?",
+        "reverse_translation": "もしかしたら別の方法があるのではないですか？",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "Could there possibly be another way, could there?",
+        "reverse_translation": "他に方法があるかもしれませんね",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "Might there be yet another possible alternative, I wonder?",
+        "reverse_translation": "他に方法があるかもしれないかしら",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "It's possible that there's another way, isn't it?",
+        "reverse_translation": "もしかしたら別の方法があるかもしれませんね",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "It is possible that an alternative approach exists, is that not the case?",
+        "reverse_translation": "別の方法があるかもしれないですね",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "Might there be an alternative approach, don't you think?",
+        "reverse_translation": "別のアプローチがあるかもしれませんね",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "Could there potentially be an alternative approach, wouldn't you agree?",
+        "reverse_translation": "別のアプローチが考えられるのではないでしょうか",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文184",
+    "source": "ごめん、言い過ぎたかも。",
+    "structure": {
+      "主題": "謝罪",
+      "動作": "言い過ぎる",
+      "動作の意味": "say too much",
+      "意図": "謝罪",
+      "感情極性": "negative",
+      "モダリティ": "感想",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "可能性",
+      "程度": "none",
+      "発話行為": [
+        "謝罪"
+      ],
+      "固有名詞": []
+    },
+    "seed": "Sorry, I might have said too much.",
+    "results": {
+      "casual_25": {
+        "new_translation": "Apologies, I might have said too much.",
+        "reverse_translation": "すみません、言い過ぎたかもしれません。",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "My bad, I might've said too much.",
+        "reverse_translation": "すみません、言い過ぎたかもしれません。",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "My bad, I mighta said too much.",
+        "reverse_translation": "私のせい、もしかしたら言い過ぎたかも。",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "My bad, I might've gone overboard.",
+        "reverse_translation": "俺のせい、もしかしたら言い過ぎたかも",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I apologize, I may have said too much.",
+        "reverse_translation": "申し訳ありません、言い過ぎたかもしれません。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I offer my sincerest apologies, as I may have spoken excessively.",
+        "reverse_translation": "言い過ぎたかもしれません、誠に申し訳ございません。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I extend my most sincere apologies for possibly having spoken too much.",
+        "reverse_translation": "言い過ぎたかもしれませんので、深く反省しております。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "I offer my deepest apologies for having possibly spoken excessively.",
+        "reverse_translation": "失礼があったかもしれません。深く反省しております。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "I apologize, I may have said too much.",
+        "reverse_translation": "申し訳ありませんが、言い過ぎたかもしれません。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I apologize for possibly having said too much.",
+        "reverse_translation": "謝罪します。言い過ぎたかもしれません。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "I do apologize for having possibly said too much.",
+        "reverse_translation": "言い過ぎたかもしれませんことを深くお詫び申し上げます。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "I extend my sincerest apologies for potentially having overspoken.",
+        "reverse_translation": "失礼な発言をしてしまったかもしれません、深く反省しております。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文185",
+    "source": "もし時間あったら、相談したい。",
+    "structure": {
+      "主題": "相談",
+      "動作": "したい",
+      "動作の意味": "want to consult",
+      "意図": "依頼",
+      "感情極性": "neutral",
+      "モダリティ": "依頼",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "あり",
+      "人称": "一人称単数",
+      "確信度": "可能性",
+      "程度": "none",
+      "発話行為": [
+        "依頼"
+      ],
+      "固有名詞": []
+    },
+    "seed": "If I have time, I'd like to consult with you.",
+    "results": {
+      "casual_25": {
+        "new_translation": "If you've got time, I'd like to chat with you about something.",
+        "reverse_translation": "時間があれば、ちょっと相談したいことがあるんだけど。",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "If you've got a minute, could we touch base about something?",
+        "reverse_translation": "時間があったら、何かについて話したいんだけど。",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "Hey, wanna chat about something if you've got a sec?",
+        "reverse_translation": "ちょっとした時間に何か話したいんだけど、時間ある？",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "Yo, got a minute to talk about something?",
+        "reverse_translation": "よかったら何か話したいんだけど、時間ある？",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "May I consult with you if you have time?",
+        "reverse_translation": "お時間があれば相談させていただけませんか？",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "Could I possibly consult with you if you're available?",
+        "reverse_translation": "もしお時間があったらご相談してもよろしいでしょうか？",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "Might I have the opportunity to discuss something with you if you're available?",
+        "reverse_translation": "もしよろしければ、お時間のある時に相談させていただけませんか？",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "Might I be so fortunate as to have the opportunity to engage in a discussion with you, should your schedule permit?",
+        "reverse_translation": "もしお時間が許すようでしたら、お話しする機会をいただけないでしょうか。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "If you have time, I would appreciate the opportunity to consult with you.",
+        "reverse_translation": "時間があれば、相談させていただきたく存じます。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "If you have a moment, I'd be grateful for the chance to discuss with you.",
+        "reverse_translation": "お時間があるようでしたら、お話しする機会をいただければ幸いです。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "I would be most appreciative if you could spare a moment to converse with me.",
+        "reverse_translation": "お時間をいただけるようでしたら、お話しする機会をいただければ幸いです。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "I would be extremely grateful if you could devote a brief period to engage in a conversation with me.",
+        "reverse_translation": "お時間をいただいてお話しできれば幸いです。",
+        "risk": "low"
+      }
+    }
+  }
+]
