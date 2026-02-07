@@ -2,8 +2,8 @@
 
 // モデル定義
 export const MODELS = {
-  FULL: 'meta-llama/llama-4-scout-17b-16e-instruct',    // FULL翻訳・解説用（Groq）
-  PARTIAL: 'meta-llama/llama-4-scout-17b-16e-instruct', // PARTIAL編集用（Groq）
+  FULL: 'meta-llama/llama-4-maverick-17b-128e-instruct',    // FULL翻訳・解説用（Groq）
+  PARTIAL: 'meta-llama/llama-4-maverick-17b-128e-instruct', // PARTIAL編集用（Groq）
   JAPANESE_EDIT: 'gpt-4.1-nano',                        // 日本語編集用（OpenAI）
 } as const;
 
