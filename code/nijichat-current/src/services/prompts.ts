@@ -462,16 +462,6 @@ export function structureToPromptText(structure: ExpandedStructure, targetLang?:
 ・発話行為: ${(structure.発話行為 && structure.発話行為.length > 0) ? structure.発話行為.join('+') : 'なし'}
 ・固有名詞: ${entities}${langInfo}
 
-【この翻訳の固定値 - トーン調整で絶対に変えないこと】
-- 意図: ${structure.意図}
-- 確信度: ${structure.確信度}
-- 感情極性: ${structure.感情極性}
-- モダリティ: ${structure.モダリティ}
-- 程度: ${structure.程度}
-- 発話行為: ${(structure.発話行為 && structure.発話行為.length > 0) ? structure.発話行為.join('+') : 'なし'}
-トーン調整で変えていいのは「口調・語彙の格式レベル・文体」のみ。
-上記6つの値が変わる翻訳は不合格。
-
 【翻訳ルール】
 - 単語は変えていいが、意味は変えないこと（特に動作の意味）
 - 「意図」「モダリティ」「感情極性」「確信度」「願望」「人称」を翻訳で必ず保持すること
