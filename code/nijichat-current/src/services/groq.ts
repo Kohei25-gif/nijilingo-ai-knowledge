@@ -290,6 +290,68 @@ export async function extractStructure(
   }
 }
 
+/**
+ * 構造分析データから、この文専用の翻訳制約を動的に生成する。
+ * INVARIANT_RULESの汎用ルールではなく、具体的な指示でモデルを制御する。
+ */
+function generateDynamicConstraints(
+  structureData?: {
+    人称?: string;
+    確信度?: string;
+    程度?: string;
+    感情極性?: string;
+  }
+): string {
+  if (!structureData) return '';
+
+  const constraints: string[] = [];
+
+  // 人称制約
+  if (structureData.人称) {
+    const personMap: Record<string, string> = {
+      '一人称単数': 'Use first person singular (I/my) as the subject',
+      '一人称複数': 'Use first person plural (we/our) as the subject',
+      '二人称': 'Use second person (you/your) as the subject',
+      '三人称': 'Use third person as the subject',
+    };
+    const instruction = personMap[structureData.人称];
+    if (instruction) constraints.push(instruction);
+  }
+
+  // 確信度制約
+  if (structureData.確信度) {
+    const certaintyMap: Record<string, string> = {
+      '確定': 'Express with certainty (definite statements, no hedging)',
+      '推測': 'Express with hedging/tentativeness (I think, I feel, it seems)',
+      '可能性': 'Express as possibility (might, could, maybe)',
+      '伝聞': 'Express as hearsay (I heard, apparently, it seems that)',
+    };
+    const instruction = certaintyMap[structureData.確信度];
+    if (instruction) constraints.push(instruction);
+  }
+
+  // 程度制約
+  if (structureData.程度 && structureData.程度 !== 'none') {
+    const degreeMap: Record<string, string> = {
+      slight: 'Keep degree expressions slight (slightly, a little, somewhat)',
+      weak: 'Keep degree expressions weak (slightly, barely)',
+      moderate: 'Keep degree expressions moderate (a bit, somewhat, a little)',
+      strong: 'Keep degree expressions strong (very, quite, considerably)',
+      extreme: 'Keep degree expressions extreme (extremely, absolutely)',
+    };
+    const instruction = degreeMap[structureData.程度];
+    if (instruction) constraints.push(instruction);
+  }
+
+  // 感情極性制約（positive時のみ — pleasure/delighted防止）
+  if (structureData.感情極性 === 'positive') {
+    constraints.push('Keep positive sentiment natural — do not escalate to formal gratitude (avoid: delighted, pleasure, honored)');
+  }
+
+  if (constraints.length === 0) return '';
+  return `\n[Constraints for THIS sentence - MUST follow]\n${constraints.map((c, i) => `${i + 1}. ${c}`).join('\n')}\n`;
+}
+
 // ============================================
 // PARTIAL編集
 // ============================================
@@ -327,6 +389,14 @@ Seed: "${seedTranslation}"
 - Seedより約束/意志を弱めない・強めない
 - 意味・意図・確信度がSeedからズレていたら修正すること
 `;
+  const dynamicConstraints = generateDynamicConstraints(
+    options.structureData ?? (structure ? {
+      人称: structure.人称,
+      確信度: structure.確信度,
+      程度: structure.程度,
+      感情極性: structure.感情極性,
+    } : undefined)
+  );
 
   let toneStyle = '';
   if (toneLevel < 25) {
@@ -404,6 +474,7 @@ Seed: "${seedTranslation}"
     `Current translation (${targetLang}): ${currentTranslation}`,
     `Tone: ${tone || 'none'} at ${toneLevel}%`,
     `Style: ${toneStyle}`,
+    dynamicConstraints || '',
     structureInfo || '',
     fixedValueDeclaration || '',
     driftPrevention,
@@ -484,7 +555,15 @@ export async function translateWithGuard(
   let parseError = false;
 
   try {
-    partialResult = await translatePartial(options);
+    partialResult = await translatePartial({
+      ...options,
+      structureData: options.structureData ?? (options.structure ? {
+        人称: options.structure.人称,
+        確信度: options.structure.確信度,
+        程度: options.structure.程度,
+        感情極性: options.structure.感情極性,
+      } : undefined),
+    });
   } catch (error) {
     console.log('[Guard] PARTIAL parse error:', error);
     parseError = true;

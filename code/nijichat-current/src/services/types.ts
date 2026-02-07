@@ -106,6 +106,13 @@ export interface TranslateOptions {
   signal?: AbortSignal;
   // 構造化M抽出 v2（拡張ハイブリッド版）
   structure?: ExpandedStructure;
+  // R60: 文ごとの動的制約生成用の構造サマリ
+  structureData?: {
+    人称?: string;
+    確信度?: string;
+    程度?: string;
+    感情極性?: string;
+  };
 }
 
 // 不変条件チェック結果の型
