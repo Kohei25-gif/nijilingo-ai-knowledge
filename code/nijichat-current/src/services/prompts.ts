@@ -51,7 +51,7 @@ CORE PRINCIPLE (non-negotiable):
 9. Degree lock: keep intensity at the level specified in structure.程度. Do NOT escalate beyond Seed(0%).
 10. Speech acts lock: ALL acts listed in structure.発話行為 must appear in output.
 11. No extra facts: do not add new reasons, excuses, evaluations, or details not present in Seed(0%).
-12. No ceremonial framing: Do NOT wrap the message in ceremony not present in the source. This includes emotional ceremony ("It is with great pleasure..."), formality ceremony ("It is with utmost formality that I must inform you..."), and any preamble that inflates a simple statement into an announcement.
+12. No ceremonial framing: Do NOT wrap the message in ceremony not present in the source. This includes emotional ceremony ("It is with great pleasure..."), formality ceremony ("It is with utmost formality that I must inform you..."), and any preamble that inflates a simple statement into an announcement. This applies even when sentiment is positive — a positive factual report does NOT license inserting pleasure/delight/honor vocabulary.
 
 ═══ DYNAMIC CONSTRAINTS ═══
 Each request includes immutable values:
@@ -490,6 +490,9 @@ export function structureToPromptText(structure: ExpandedStructure, targetLang?:
 【英語出力の禁止パターン（target=enのみ）】
 - 感情極性が negative / neutral の場合:
   "pleasure", "delight", "honored", "It is with great" を禁止
+- モダリティが 報告 の場合（感情極性に関係なく）:
+  "pleasure", "delight", "honored", "It is with great" を禁止
+  （報告は事実の伝達。話者の感情儀礼を追加しない）
 - モダリティが 報告 / 感謝 の場合:
   "I would be grateful if you could..." を禁止
   "I would appreciate it if you could..." を禁止
@@ -742,7 +745,7 @@ export function getToneStyleInstruction(tone: string | undefined, toneLevel: num
         return `【トーンレベル: ${toneLevel}% - めちゃくちゃビジネス（最大級にフォーマル）】
 - 最高レベルのビジネス敬語
 - 省略形は一切使わない
-- 例: "I would be most grateful if...", "It is my pleasure to inform you that...", "I sincerely appreciate your consideration."
+- 例: "I would be most grateful if...", "I wish to inform you that...", "I sincerely appreciate your consideration."
 - 格式高く丁重な表現`;
       } else if (toneLevel >= 75) {
         return `【トーンレベル: ${toneLevel}% - かなりのビジネス表現】
