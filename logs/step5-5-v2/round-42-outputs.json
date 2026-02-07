@@ -1,0 +1,432 @@
+[
+  {
+    "id": "文166",
+    "source": "ちょっと難しいかもしれないけど、やってみる",
+    "structure": {
+      "主題": "挑戦",
+      "動作": "やってみる",
+      "動作の意味": "try",
+      "意図": "提案",
+      "感情極性": "neutral",
+      "モダリティ": "提案",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "可能性",
+      "程度": "none",
+      "発話行為": [
+        "提案"
+      ],
+      "固有名詞": []
+    },
+    "seed": "It might be a bit difficult, but I'll give it a try.",
+    "results": {
+      "casual_25": {
+        "new_translation": "Might be tough, but I'll give it a shot",
+        "reverse_translation": "ちょっと難しいかもしれないけど、やってみる",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "It could be a challenge, but I'll give it a go",
+        "reverse_translation": "ちょっと難しいかもしれないけど、やってみる",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "Might be a tough one, but I'm gonna give it a shot",
+        "reverse_translation": "ちょっと難しいかもしれないけど、とりあえずやってみる",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "This could be challenging, but I'll give it a try",
+        "reverse_translation": "難しいかもしれないけど、やってみる",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "It may be somewhat challenging, but I will attempt to do so.",
+        "reverse_translation": "少し難しいかもしれませんが、やってみます。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I acknowledge that it could be somewhat challenging, but I am willing to give it a try.",
+        "reverse_translation": "ちょっと難しいかもしれないですが、やってみます",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I recognize that it may be somewhat challenging, but I am prepared to give it a try.",
+        "reverse_translation": "多少難しいかもしれないが、やってみるつもりだ",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "I am cognizant that it may pose a certain degree of difficulty; nonetheless, I am willing to attempt it.",
+        "reverse_translation": "多少の困難さがあるかもしれませんが、やってみるつもりです。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "While it may present some challenges, I am willing to give it a try.",
+        "reverse_translation": "いくつかの課題があるかもしれませんが、やってみます。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "Although it may pose certain difficulties, I am prepared to attempt it.",
+        "reverse_translation": "それなりの困難が伴うかもしれませんが、やってみるつもりです。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "Notwithstanding potential challenges, I am willing to give it a try.",
+        "reverse_translation": "多少の困難が予想されますが、やってみるつもりです。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "Despite potential challenges, I am prepared to attempt it.",
+        "reverse_translation": "困難な点もあるかもしれませんが、試してみるつもりです。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文167",
+    "source": "すみません、割と急ぎなのでお願いできますか",
+    "structure": {
+      "主題": "依頼",
+      "動作": "お願いする",
+      "動作の意味": "ask/request",
+      "意図": "依頼",
+      "感情極性": "neutral",
+      "モダリティ": "依頼",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "moderate",
+      "発話行為": [
+        "依頼"
+      ],
+      "固有名詞": []
+    },
+    "seed": "Sorry, it's a bit urgent, could you please?",
+    "results": {
+      "casual_25": {
+        "new_translation": "I'm sorry, it's pretty urgent, could you do it for me?",
+        "reverse_translation": "すみません、結構急いでるんですが、手伝ってもらえますか？",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "Sorry, it's super urgent, can you help me out?",
+        "reverse_translation": "ごめん、めっちゃ急いでるんだけど、手伝ってくれない？",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "Sorry, it's super duper urgent, can you help a bro out?",
+        "reverse_translation": "ごめん、めっちゃ急いでるんだけど助けてくれない？",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "Sorry, it's hella urgent, can you hook a bro up?",
+        "reverse_translation": "本当に急いでるんだけど助けてくれない？",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I apologize, but would you be able to assist me with this at your earliest convenience?",
+        "reverse_translation": "申し訳ありませんが、できるだけ早くこの件を手伝っていただけますか？",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I apologize for the inconvenience, but I would be grateful if you could assist me with this at your earliest convenience.",
+        "reverse_translation": "ごめんなさい、しかし、この件について早急にご協力をいただけないでしょうか。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I apologize for any trouble this may have caused, but I'd greatly appreciate it if you could help me with this as soon as possible.",
+        "reverse_translation": "ご不便をおかけして申し訳ありませんが、ぜひとも早めにご協力をいただけますでしょうか。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "I humbly apologize for any inconvenience this may have caused and would be most grateful if you could assist me with this matter at your earliest convenience.",
+        "reverse_translation": "ご不便をおかけして申し訳ございませんが、どうぞよろしくお願いいたします。お手数ですが、お早めに対応いただけますでしょうか。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "I apologize, but I would greatly appreciate it if you could assist me with this matter at your earliest convenience.",
+        "reverse_translation": "申し訳ございませんが、どうかこの件について可能な限り早くご協力をお願いいたします。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I apologize for the inconvenience, but I would be most grateful if you could assist me with this matter at your earliest convenience.",
+        "reverse_translation": "ごめんなさい、もしよろしければ、この件についてできるだけ早く対応していただけますでしょうか。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "I apologize for any inconvenience this may cause, but I would be extremely grateful if you could assist me with this matter at your earliest convenience.",
+        "reverse_translation": "ご不便をおかけして申し訳ございませんが、こちらの件につきまして早急にご対応いただけますと幸いです。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "I extend my sincerest apologies for any potential inconvenience this may occasion, and I would be most appreciative if you could expedite assistance with this matter at your earliest opportunity.",
+        "reverse_translation": "ご不便をおかけして大変申し訳ございませんが、なるべく早くにこの件についてご協力をいただけますと幸いです。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文168",
+    "source": "あんまり期待しないほうがいいと思う",
+    "structure": {
+      "主題": "期待",
+      "動作": "思う",
+      "動作の意味": "think",
+      "意図": "提案",
+      "感情極性": "neutral",
+      "モダリティ": "提案",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "推測",
+      "程度": "none",
+      "発話行為": [
+        "提案"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I think it's better not to expect too much",
+    "results": {
+      "casual_25": {
+        "new_translation": "You probably shouldn't expect much",
+        "reverse_translation": "期待しない方がいいんじゃないかな",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "You shouldn't expect a whole lot",
+        "reverse_translation": "そんなに期待しない方がいい",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "Don't expect a ton",
+        "reverse_translation": "そんなに期待しないで",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "Don't expect a whole lot",
+        "reverse_translation": "あまり期待しないで",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I think it's best not to expect too much.",
+        "reverse_translation": "あまり期待しない方がいいと思う",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "It would be prudent not to have overly high expectations.",
+        "reverse_translation": "あまり期待しすぎない方が賢明かと思います。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "It would be wise to keep expectations in check.",
+        "reverse_translation": "期待しすぎないことが賢明だろう",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "It would be prudent to maintain a realistic outlook.",
+        "reverse_translation": "期待しすぎないようにすることが賢明です",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "I wouldn't advise you to have very high expectations.",
+        "reverse_translation": "あまり期待しすぎない方がいいと思います",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I would caution against having extremely high expectations.",
+        "reverse_translation": "あまり高い期待を持たない方がいいと思います",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "I would advise against setting unrealistically high expectations.",
+        "reverse_translation": "現実的に高すぎる期待を設定しないようにアドバイスいたします.",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "It is advisable to exercise caution when establishing expectations that are excessively ambitious.",
+        "reverse_translation": "過度に高い期待を設定する際には注意を払うことが賢明です。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文169",
+    "source": "もし時間があれば、私が説明します",
+    "structure": {
+      "主題": "説明",
+      "動作": "する",
+      "動作の意味": "do/explain",
+      "意図": "依頼",
+      "感情極性": "neutral",
+      "モダリティ": "依頼",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "依頼"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I'll explain if I have time.",
+    "results": {
+      "casual_25": {
+        "new_translation": "I will explain if I have the time",
+        "reverse_translation": "時間があったら説明します",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "I'll explain if I've got a minute",
+        "reverse_translation": "時間があったら説明する",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "I'll give you the lowdown if I get a chance",
+        "reverse_translation": "時間があったら説明する",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "I'll hook you up with the scoop if I get the chance",
+        "reverse_translation": "もし機会があれば詳しいことを教える",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "If I have the time, I'd be happy to provide an explanation.",
+        "reverse_translation": "時間があれば、喜んで説明させていただきます。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "If I have the time, I would be more than happy to provide an explanation.",
+        "reverse_translation": "時間があれば、ぜひ説明させていただきます。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "If I have the time, I'd be delighted to offer an explanation.",
+        "reverse_translation": "時間があれば、喜んで説明させていただきます。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "If I were to have the time, I would be most pleased to provide an explanation.",
+        "reverse_translation": "時間があれば、ぜひ説明させていただきたいと思います.",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "If I've got some time, I'll be happy to explain.",
+        "reverse_translation": "時間があれば、喜んで説明します。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "If I have some spare time, I'd be more than happy to provide an explanation.",
+        "reverse_translation": "時間があれば、喜んで説明させていただきます。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "I would be delighted to offer an explanation should I have some available time.",
+        "reverse_translation": "時間があれば、ぜひ説明させていただきます。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "It would be my pleasure to provide an explanation if I have some available time.",
+        "reverse_translation": "もし時間があったら説明させていただきます。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文170",
+    "source": "ちょっと体調悪くて、今日は早めに帰ります",
+    "structure": {
+      "主題": "体調不良と帰宅",
+      "動作": "帰る",
+      "動作の意味": "leave/return",
+      "意図": "報告",
+      "感情極性": "negative",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I'm not feeling well, so I'll head home early today.",
+    "results": {
+      "casual_25": {
+        "new_translation": "I'm not feeling great, so I'm heading home early today.",
+        "reverse_translation": "ちょっと体調悪くて、今日は早めに帰ります",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "I'm feeling pretty crummy, so I'm gonna head home early today.",
+        "reverse_translation": "気分が悪いので、今日は早めに帰ることにします。",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "I'm feelin' really down, so I'm gonna bail early today.",
+        "reverse_translation": "気分が落ちているので、今日は早めに帰る。",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "I'm super down, so I'm outta here early today.",
+        "reverse_translation": "気分がすごく落ちているので、今日は早く帰る。",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I'm not feeling well, so I will be heading home early today.",
+        "reverse_translation": "気分が悪いので、早めに帰宅します。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I am not feeling well, therefore I shall be returning home early today.",
+        "reverse_translation": "調子が悪いので、今日は早めに帰ります。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I am not feeling well, therefore I shall be returning home early today.",
+        "reverse_translation": "調子が悪いので、今日は早めに帰ります。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "I am presently indisposed and, consequently, I shall be retiring to my residence at an earlier juncture today.",
+        "reverse_translation": "私は現在気分が悪く、そのため今日は早めに帰宅することにいたします。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "I'm not feeling well, so I'll be heading home early today.",
+        "reverse_translation": "ちょっと体調が悪くて、今日は早めに帰ります。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I am not feeling well, so I will be leaving early today.",
+        "reverse_translation": "調子が悪いので、今日は早めに帰ります。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "I am not feeling well, so I shall be departing early today.",
+        "reverse_translation": "気分が悪いので、今日は早めに帰ります。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "I am presently experiencing a state of discomfort and therefore shall vacate the premises at an earlier juncture today.",
+        "reverse_translation": "私は現在体調が悪いため、今日は早めに帰らせていただきます。",
+        "risk": "low"
+      }
+    }
+  }
+]
