@@ -1,0 +1,892 @@
+{
+  "test": "R55-model-comparison",
+  "date": "2026-02-07",
+  "models_tested": [
+    "maverick",
+    "gpt-oss-120b",
+    "qwen3-32b",
+    "gpt-oss-20b"
+  ],
+  "results": {
+    "maverick": {
+      "part_a": [
+        {
+          "id": "文182",
+          "source": "今日ちょっといいニュースあった。",
+          "tones": {
+            "polite_25": {
+              "translation": "I received some good news today.",
+              "reverse_translation": "今日、良いニュースを受け取りました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "polite_50": {
+              "translation": "I am pleased to report that I received some good news today.",
+              "reverse_translation": "本日、良いニュースを受け取ったことを喜ばしく思います。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": true
+            },
+            "polite_75": {
+              "translation": "I am delighted to report that I have received some good news today.",
+              "reverse_translation": "本日、良いニュースをいただいたことを喜びに存じます。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": true
+            },
+            "polite_100": {
+              "translation": "It is with great pleasure that I report having received some favourable news today.",
+              "reverse_translation": "本日、良いニュースをいただいたことをご報告申し上げます",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": true
+            },
+            "business_25": {
+              "translation": "I received some good news today.",
+              "reverse_translation": "今日、良いニュースを受け取りました",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_50": {
+              "translation": "We received some good news today.",
+              "reverse_translation": "本日、良いニュースをいただきました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_75": {
+              "translation": "We have received some good news today.",
+              "reverse_translation": "本日、良いニュースをいただきました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_100": {
+              "translation": "We have been informed of certain favourable developments today.",
+              "reverse_translation": "本日、ある好ましい状況が確認されました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            }
+          }
+        },
+        {
+          "id": "文192",
+          "source": "今日、久々に外で食べた。",
+          "tones": {
+            "polite_25": {
+              "translation": "I dined out today for the first time in quite some time.",
+              "reverse_translation": "本日はしばらくぶりに外で食事をいたしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "polite_50": {
+              "translation": "I dined out today for the first time in a considerable amount of time.",
+              "reverse_translation": "私は相当な期間ぶりに今日外で食事をしました",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "polite_75": {
+              "translation": "I had dinner outside today for the first time in quite some time.",
+              "reverse_translation": "今日は結構な期間ぶりに外で食事をしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "polite_100": {
+              "translation": "I dined outside today for the first time in quite some time.",
+              "reverse_translation": "私はかなり久しぶりに今日外で食事をしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_25": {
+              "translation": "I dined out today for the first time in a while.",
+              "reverse_translation": "私はしばらくぶりに今日外で食事をしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_50": {
+              "translation": "I dined out today for the first time in quite some time.",
+              "reverse_translation": "私はしばらくぶりに今日外で食事をしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_75": {
+              "translation": "I dined out today for the first time in a considerable period.",
+              "reverse_translation": "今日は相当な期間ぶりに外で食事をしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_100": {
+              "translation": "I dined out today for the first time in a substantial period of time.",
+              "reverse_translation": "私は相当期間ぶりに今日外で食事をしました",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            }
+          }
+        }
+      ],
+      "part_b": [
+        {
+          "id": "N1",
+          "source": "来週の月曜は休みます。",
+          "tones": {
+            "polite_100": {
+              "translation": "I shall be taking a break next Monday.",
+              "reverse_translation": "私は来週の月曜日にお休みをいただきます。",
+              "risk": "low",
+              "generator": "translatePartial"
+            },
+            "business_100": {
+              "translation": "I shall be taking a day off next Monday.",
+              "reverse_translation": "来週の月曜日はお休みをいただきます。",
+              "risk": "low",
+              "generator": "translatePartial"
+            }
+          }
+        },
+        {
+          "id": "N2",
+          "source": "書類を3部コピーしてください。",
+          "tones": {
+            "polite_100": {
+              "translation": "Would you be so kind as to make three copies of the document?",
+              "reverse_translation": "書類を3部コピーしていただけますでしょうか？",
+              "risk": "low",
+              "generator": "translatePartial"
+            },
+            "business_100": {
+              "translation": "Please prepare three copies of the documents.",
+              "reverse_translation": "書類を3部ご用意ください",
+              "risk": "low",
+              "generator": "translatePartial"
+            }
+          }
+        },
+        {
+          "id": "N3",
+          "source": "ちょっと体調悪いので早退します。",
+          "tones": {
+            "polite_100": {
+              "translation": "I am departing somewhat early today owing to feeling unwell.",
+              "reverse_translation": "本日は体調不良のため、やや早めに退社いたします。",
+              "risk": "low",
+              "generator": "translatePartial"
+            },
+            "business_100": {
+              "translation": "I am departing somewhat early today owing to a slight indisposition.",
+              "reverse_translation": "私は今日、少し気が乗らないので、少し早めに退社いたします。",
+              "risk": "low",
+              "generator": "translatePartial"
+            }
+          }
+        },
+        {
+          "id": "N4",
+          "source": "この案件、もう少し検討させてください。",
+          "tones": {
+            "polite_100": {
+              "translation": "I would be grateful if you could allow me to deliberate on this matter further.",
+              "reverse_translation": "この案件についてさらに検討させていただければ幸いです。",
+              "risk": "low",
+              "generator": "translatePartial"
+            },
+            "business_100": {
+              "translation": "I would appreciate it if you could allow me to deliberate on this matter further.",
+              "reverse_translation": "この案件についてさらに検討させていただくことをご許可いただければ幸いです。",
+              "risk": "low",
+              "generator": "translatePartial"
+            }
+          }
+        },
+        {
+          "id": "N5",
+          "source": "先日はお世話になりました。",
+          "tones": {
+            "polite_100": {
+              "translation": "I would like to express my sincere gratitude for your assistance the other day.",
+              "reverse_translation": "先日はご助力いただき誠にありがとうございました。",
+              "risk": "low",
+              "generator": "translatePartial"
+            },
+            "business_100": {
+              "translation": "We wish to express our sincere gratitude for your assistance on the recent occasion.",
+              "reverse_translation": "先日はご助力いただき誠にありがとうございました。",
+              "risk": "low",
+              "generator": "translatePartial"
+            }
+          }
+        }
+      ]
+    },
+    "gpt-oss-120b": {
+      "part_a": [
+        {
+          "id": "文182",
+          "source": "今日ちょっといいニュースあった。",
+          "tones": {
+            "polite_25": {
+              "translation": "There was a piece of good news today.",
+              "reverse_translation": "本日、一件の良いニュースがありました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "polite_50": {
+              "translation": "Today, there was some good news.",
+              "reverse_translation": "本日、良いニュースがありました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "polite_75": {
+              "translation": "I would like to report that today there was good news.",
+              "reverse_translation": "本日、良いニュースがございました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "polite_100": {
+              "translation": "I hereby respectfully report that today there was good news.",
+              "reverse_translation": "本日、良いニュースがありましたことをご報告申し上げます。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_25": {
+              "translation": "There was some positive news today.",
+              "reverse_translation": "今日はいくつかの前向きなニュースがありました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_50": {
+              "translation": "There was some favorable news today.",
+              "reverse_translation": "本日、いくつかの好ましいニュースがありました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_75": {
+              "translation": "Please note that there was some favorable news today.",
+              "reverse_translation": "本日は、いくつかの好ましいニュースがございました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_100": {
+              "translation": "Please be advised that there was some favorable news today.",
+              "reverse_translation": "本日、いくつかの好ましいニュースがございましたことをご報告いたします。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            }
+          }
+        },
+        {
+          "id": "文192",
+          "source": "今日、久々に外で食べた。",
+          "tones": {
+            "polite_25": {
+              "translation": "Today, I ate outside after a long while.",
+              "reverse_translation": "今日は、久しぶりに外で食事をしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "polite_50": {
+              "translation": "I ate outdoors today after a prolonged period.",
+              "reverse_translation": "本日は、長い期間を経て屋外で食事をいたしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "polite_75": {
+              "translation": "I ate outdoors today after an extended interval.",
+              "reverse_translation": "本日は、しばらく時間が空いた後、屋外で食事をいたしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "polite_100": {
+              "translation": "I ate outdoors today after a substantial interval.",
+              "reverse_translation": "本日は、相当の期間を空けて屋外で食事をいたしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_25": {
+              "translation": "I dined outdoors today, after a long time.",
+              "reverse_translation": "今日は久しぶりに外で食事をいたしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_50": {
+              "translation": "I ate outdoors today, after a long time.",
+              "reverse_translation": "本日は久しぶりに屋外で食事をいたしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_75": {
+              "translation": "I ate outdoors today; it has been a long time since I last did so.",
+              "reverse_translation": "本日は屋外で食事をいたしました。前回から長い時間が経っております。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_100": {
+              "translation": "I dined outdoors today; it has been a long time since I last did so.",
+              "reverse_translation": "本日は屋外で食事をいたしましたが、前回から長い時間が経っております。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            }
+          }
+        }
+      ],
+      "part_b": [
+        {
+          "id": "N1",
+          "source": "来週の月曜は休みます。",
+          "tones": {
+            "polite_100": {
+              "translation": "I shall be taking a day of leave next Monday.",
+              "reverse_translation": "来週の月曜日は休暇をいただきます。",
+              "risk": "low",
+              "generator": "translatePartial"
+            },
+            "business_100": {
+              "translation": "I will be absent next Monday.",
+              "reverse_translation": "私は来週の月曜日は欠勤いたします。",
+              "risk": "low",
+              "generator": "translatePartial"
+            }
+          }
+        },
+        {
+          "id": "N2",
+          "source": "書類を3部コピーしてください。",
+          "tones": {
+            "polite_100": {
+              "translation": "Would you be so kind as to make three copies of the document?",
+              "reverse_translation": "書類を三部コピーしていただけますでしょうか。",
+              "risk": "low",
+              "generator": "translatePartial"
+            },
+            "business_100": {
+              "translation": "Please produce three copies of the document.",
+              "reverse_translation": "書類のコピーを3部作成してください。",
+              "risk": "low",
+              "generator": "translatePartial"
+            }
+          }
+        },
+        {
+          "id": "N3",
+          "source": "ちょっと体調悪いので早退します。",
+          "tones": {
+            "polite_100": {
+              "translation": "I shall be departing early as I am feeling slightly unwell.",
+              "reverse_translation": "体調がやや優れないため、早退いたします。",
+              "risk": "low",
+              "generator": "translatePartial"
+            },
+            "business_100": {
+              "translation": "I will be leaving early because I am feeling slightly unwell.",
+              "reverse_translation": "少し体調が優れないため、早退いたします。",
+              "risk": "low",
+              "generator": "translatePartial"
+            }
+          }
+        },
+        {
+          "id": "N4",
+          "source": "この案件、もう少し検討させてください。",
+          "tones": {
+            "polite_100": {
+              "translation": "Would you be so kind as to permit me to consider this matter a little further?",
+              "reverse_translation": "この案件をもう少し検討させていただけませんでしょうか。",
+              "risk": "low",
+              "generator": "translatePartial"
+            },
+            "business_100": {
+              "translation": "Please allow me to consider this case a little more.",
+              "reverse_translation": "この案件をもう少し検討させていただけますか。",
+              "risk": "low",
+              "generator": "translatePartial"
+            }
+          }
+        },
+        {
+          "id": "N5",
+          "source": "先日はお世話になりました。",
+          "tones": {
+            "polite_100": {
+              "translation": "I wish to convey my gratitude for your assistance the other day.",
+              "reverse_translation": "先日はご支援いただき、感謝申し上げます。",
+              "risk": "low",
+              "generator": "translatePartial"
+            },
+            "business_100": {
+              "translation": "I would like to thank you for your assistance the other day.",
+              "reverse_translation": "先日はご支援いただき、感謝申し上げます。",
+              "risk": "low",
+              "generator": "translatePartial"
+            }
+          }
+        }
+      ]
+    },
+    "qwen3-32b": {
+      "part_a": [
+        {
+          "id": "文182",
+          "source": "今日ちょっといいニュースあった。",
+          "tones": {
+            "polite_25": {
+              "translation": "I received some good news today.",
+              "reverse_translation": "今日は良いニュースがございました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "polite_50": {
+              "translation": "I have received some good news today.",
+              "reverse_translation": "今日は良いニュースをいただきました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "polite_75": {
+              "translation": "I have been informed of some good news today.",
+              "reverse_translation": "本日、良いニュースを頂戴いたしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "polite_100": {
+              "translation": "I have been apprised of some good news today.",
+              "reverse_translation": "本日、良いニュースを頂戴いたしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_25": {
+              "translation": "There is some positive news to share today.",
+              "reverse_translation": "今日はいくつかの良いニュースをお伝えできます。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_50": {
+              "translation": "There is some favorable news to convey today.",
+              "reverse_translation": "今日は伝えるべき好いニュースがあります。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_75": {
+              "translation": "There is positive news to share today.",
+              "reverse_translation": "本日、お伝えするべき良いニュースがございます。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_100": {
+              "translation": "We have favorable news to convey today.",
+              "reverse_translation": "本日、良いニュースをお伝えできます。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            }
+          }
+        },
+        {
+          "id": "文192",
+          "source": "今日、久々に外で食べた。",
+          "tones": {
+            "polite_25": {
+              "translation": "Today, I had a meal outdoors after some time.",
+              "reverse_translation": "今日は久しぶりに外で食事を致しました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "polite_50": {
+              "translation": "This day, I dined al fresco after a while.",
+              "reverse_translation": "本日、久しぶりに屋外で食事を致しました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "polite_75": {
+              "translation": "Today, I dined outdoors for the first time in a while.",
+              "reverse_translation": "今日は久しぶりに外で食事を致しました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "polite_100": {
+              "translation": "Today, I dined al fresco after a long while.",
+              "reverse_translation": "本日、久しぶりに屋外で食事を致しました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_25": {
+              "translation": "Today, I ate outdoors for the first time in a while.",
+              "reverse_translation": "今日は久しぶりに外で食事をしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_50": {
+              "translation": "Today, I dined outdoors for the first time in a while.",
+              "reverse_translation": "今日は久しぶりに屋外で食事をしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_75": {
+              "translation": "Today, I dined al fresco for the first time in a while.",
+              "reverse_translation": "久しぶりに外で食事を致しました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_100": {
+              "translation": "Today, I dined outdoors for the first time in a while.",
+              "reverse_translation": "今日、久しぶりに屋外で食事をしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            }
+          }
+        }
+      ],
+      "part_b": [
+        {
+          "id": "N1",
+          "source": "来週の月曜は休みます。",
+          "tones": {
+            "polite_100": {
+              "translation": "I shall be absent on Monday of next week.",
+              "reverse_translation": "月曜日を休ませていただきます。",
+              "risk": "low",
+              "generator": "translatePartial"
+            },
+            "business_100": {
+              "translation": "I will be on leave on Monday next week.",
+              "reverse_translation": "来週の月曜日は休ませていただきます。",
+              "risk": "low",
+              "generator": "translatePartial"
+            }
+          }
+        },
+        {
+          "id": "N2",
+          "source": "書類を3部コピーしてください。",
+          "tones": {
+            "polite_100": {
+              "translation": "I would like to request that you make three copies of the documents.",
+              "reverse_translation": "書類のコピーを三枚作成していただけますでしょうか。",
+              "risk": "low",
+              "generator": "translatePartial"
+            },
+            "business_100": {
+              "translation": "I would appreciate it if you could kindly prepare three copies of the documents.",
+              "reverse_translation": "書類のコピーを3部ご用意いただけますと幸いです。",
+              "risk": "low",
+              "generator": "translatePartial"
+            }
+          }
+        },
+        {
+          "id": "N3",
+          "source": "ちょっと体調悪いので早退します。",
+          "tones": {
+            "polite_100": {
+              "translation": "I must depart early as I am experiencing a slight ailment.",
+              "reverse_translation": "早朝に退席させていただきます。僅かに体調が優れないためです。",
+              "risk": "low",
+              "generator": "translatePartial"
+            },
+            "business_100": {
+              "translation": "I need to leave early due to feeling unwell.",
+              "reverse_translation": "早退させていただきますが、体調がすぐれません。",
+              "risk": "low",
+              "generator": "translatePartial"
+            }
+          }
+        },
+        {
+          "id": "N4",
+          "source": "この案件、もう少し検討させてください。",
+          "tones": {
+            "polite_100": {
+              "translation": "I humbly request your permission to further consider this case.",
+              "reverse_translation": "この件をさらにご検討いただけますようお願い申し上げます。",
+              "risk": "low",
+              "generator": "translatePartial"
+            },
+            "business_100": {
+              "translation": "I would appreciate the opportunity to further evaluate this matter.",
+              "reverse_translation": "この件についてさらに検討させていただけますようお願いいたします。",
+              "risk": "low",
+              "generator": "translatePartial"
+            }
+          }
+        },
+        {
+          "id": "N5",
+          "source": "先日はお世話になりました。",
+          "tones": {
+            "polite_100": {
+              "translation": "I was most sincerely grateful for your assistance the other day.",
+              "reverse_translation": "お世話になってございました。",
+              "risk": "low",
+              "generator": "translatePartial"
+            },
+            "business_100": {
+              "translation": "I am sincerely grateful for your assistance.",
+              "reverse_translation": "ご協力に心より感謝申し上げます。",
+              "risk": "low",
+              "generator": "translatePartial"
+            }
+          }
+        }
+      ]
+    },
+    "gpt-oss-20b": {
+      "part_a": [
+        {
+          "id": "文182",
+          "source": "今日ちょっといいニュースあった。",
+          "tones": {
+            "polite_25": {
+              "translation": "I am pleased to report that there was a bit of good news today.",
+              "reverse_translation": "本日、少し良いニュースがあったことを報告いたします。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": true
+            },
+            "polite_50": {
+              "translation": "I am pleased to inform you that there was a bit of good news today.",
+              "reverse_translation": "本日、少し良いニュースがあったことをお知らせできてうれしく思います。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": true
+            },
+            "polite_75": {
+              "translation": "I am pleased to convey that there was a bit of good news today.",
+              "reverse_translation": "本日、少し良いニュースがあったことをお伝えできてうれしく存じます。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": true
+            },
+            "polite_100": {
+              "translation": "I am pleased to inform you that there was a bit of good news today.",
+              "reverse_translation": "本日、少し良いニュースがあったことをお知らせいたします。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": true
+            },
+            "business_25": {
+              "translation": "Today, I had some good news.",
+              "reverse_translation": "本日、良いニュースがありました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_50": {
+              "translation": "I had some good news today.",
+              "reverse_translation": "本日、良いニュースがありました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_75": {
+              "translation": "I had some good news today.",
+              "reverse_translation": "今日は良いニュースがありました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_100": {
+              "translation": "I received some good news today.",
+              "reverse_translation": "本日、良いニュースを受け取りました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            }
+          }
+        },
+        {
+          "id": "文192",
+          "source": "今日、久々に外で食べた。",
+          "tones": {
+            "polite_25": {
+              "translation": "I ate outdoors today, after a long time.",
+              "reverse_translation": "今日は久しぶりに外で食事をしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "polite_50": {
+              "translation": "I ate outdoors today, after a long interval.",
+              "reverse_translation": "今日は久しぶりに外で食事をいたしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "polite_75": {
+              "translation": "I dined outdoors today following a long interval.",
+              "reverse_translation": "今日は長い間の後、外で食事をしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "polite_100": {
+              "translation": "I dined outdoors today following a prolonged interval.",
+              "reverse_translation": "本日は長い間の後、屋外で食事をいたしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_25": {
+              "translation": "I had a meal outside today after a long time.",
+              "reverse_translation": "今日は久しぶりに外で食事をしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_50": {
+              "translation": "I had a meal outdoors today after a long period.",
+              "reverse_translation": "今日は長い期間の後、外で食事をいたしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_75": {
+              "translation": "I had a meal outdoors today following a long period.",
+              "reverse_translation": "本日は長い期間の後、屋外で食事をいたしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            },
+            "business_100": {
+              "translation": "I had a meal outdoors today after a long interval.",
+              "reverse_translation": "私は今日、長い間の後に屋外で食事をいたしました。",
+              "risk": "low",
+              "generator": "translatePartial",
+              "has_pleasure": false
+            }
+          }
+        }
+      ],
+      "part_b": [
+        {
+          "id": "N1",
+          "source": "来週の月曜は休みます。",
+          "tones": {
+            "polite_100": {
+              "translation": "I shall rest on Monday next week.",
+              "reverse_translation": "来週の月曜日に休ませていただきます。",
+              "risk": "low",
+              "generator": "translatePartial"
+            },
+            "business_100": {
+              "translation": "I will be on leave next Monday.",
+              "reverse_translation": "私は来週の月曜日に休暇を取ります。",
+              "risk": "low",
+              "generator": "translatePartial"
+            }
+          }
+        },
+        {
+          "id": "N2",
+          "source": "書類を3部コピーしてください。",
+          "tones": {
+            "polite_100": {
+              "translation": "I would appreciate it if you could copy the documents three times.",
+              "reverse_translation": "書類を三回コピーしていただけると幸いです。",
+              "risk": "low",
+              "generator": "translatePartial"
+            },
+            "business_100": {
+              "translation": "Please ensure that the documents are copied three times.",
+              "reverse_translation": "書類を3回コピーしていただけますようお願いいたします。",
+              "risk": "low",
+              "generator": "translatePartial"
+            }
+          }
+        },
+        {
+          "id": "N3",
+          "source": "ちょっと体調悪いので早退します。",
+          "tones": {
+            "polite_100": {
+              "translation": "I shall be departing early as I am feeling somewhat unwell.",
+              "reverse_translation": "私は体調が少し悪いため、早退いたします。",
+              "risk": "low",
+              "generator": "translatePartial"
+            },
+            "business_100": {
+              "translation": "I will be departing early due to a slight health issue.",
+              "reverse_translation": "私は軽度の健康問題のため、早退いたします。",
+              "risk": "low",
+              "generator": "translatePartial"
+            }
+          }
+        },
+        {
+          "id": "N4",
+          "source": "この案件、もう少し検討させてください。",
+          "tones": {
+            "polite_100": {
+              "translation": "I would be grateful if you would allow me to consider this case a little more.",
+              "reverse_translation": "この件についてもう少し検討させていただけますと幸いです。",
+              "risk": "low",
+              "generator": "translatePartial"
+            },
+            "business_100": {
+              "translation": "I would appreciate it if you could allow me to consider this case a little more.",
+              "reverse_translation": "この件についてもう少し検討させていただけますでしょうか。",
+              "risk": "low",
+              "generator": "translatePartial"
+            }
+          }
+        },
+        {
+          "id": "N5",
+          "source": "先日はお世話になりました。",
+          "tones": {
+            "polite_100": {
+              "translation": "Thank you for your assistance the other day.",
+              "reverse_translation": "先日はご協力いただき、誠にありがとうございました。",
+              "risk": "low",
+              "generator": "translatePartial"
+            },
+            "business_100": {
+              "translation": "I would like to express my gratitude for the assistance you provided the other day.",
+              "reverse_translation": "先日ご提供いただいたご支援に対し、感謝申し上げます。",
+              "risk": "low",
+              "generator": "translatePartial"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
