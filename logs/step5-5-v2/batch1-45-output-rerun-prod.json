@@ -1,0 +1,272 @@
+[
+  {
+    "id": "B1-01",
+    "source": "雨降りそうだから傘持っていきな",
+    "structure": {
+      "意図": "依頼",
+      "確信度": "確定",
+      "感情極性": "neutral",
+      "モダリティ": "依頼",
+      "程度": "none",
+      "発話行為": [
+        "依頼"
+      ],
+      "人称": "二人称",
+      "動作の意味": "take with"
+    },
+    "results": {
+      "casual_0": {
+        "translation": "It's going to rain, so take an umbrella.",
+        "reverse": "雨降りそうだから傘持っていきな"
+      },
+      "business_0": {
+        "translation": "It's going to rain, so take an umbrella.",
+        "reverse": "雨降りそうだから傘持っていきな"
+      },
+      "formal_0": {
+        "translation": "It's going to rain, so take an umbrella.",
+        "reverse": "雨降りそうだから傘持っていきな"
+      },
+      "casual_50": {
+        "translation": "It's gonna rain, so grab an umbrella.",
+        "reverse": "雨が降るから、傘を持っていきなよ"
+      },
+      "casual_100": {
+        "translation": "Gonna rain, grab an umbrella.",
+        "reverse": "雨降るから傘持っていけよ"
+      },
+      "business_50": {
+        "translation": "It is expected to rain, so please take an umbrella.",
+        "reverse": "雨が降ると予想されているため、傘をお持ちください。"
+      },
+      "business_100": {
+        "translation": "As precipitation is forecasted, we recommend that you bring an umbrella.",
+        "reverse": "降水が予想されているため、お客様には傘をお持ちになることをお勧めします。"
+      },
+      "formal_50": {
+        "translation": "It is likely to rain, so please take an umbrella with you.",
+        "reverse": "雨が降る可能性が高いので、お傘をお持ちください。"
+      },
+      "formal_100": {
+        "translation": "We anticipate precipitation, so we recommend that you bring an umbrella.",
+        "reverse": "降水が予想されますので、お傘をお持ちになることをおすすめします。"
+      }
+    }
+  },
+  {
+    "id": "B1-02",
+    "source": "昨日の会議、結局どうなったの？",
+    "structure": {
+      "意図": "質問",
+      "確信度": "推測",
+      "感情極性": "neutral",
+      "モダリティ": "質問",
+      "程度": "none",
+      "発話行為": [
+        "質問"
+      ],
+      "人称": "二人称",
+      "動作の意味": "become/happen"
+    },
+    "results": {
+      "casual_0": {
+        "translation": "So, what happened at yesterday's meeting?",
+        "reverse": "昨日の会議、結局どうなったの？"
+      },
+      "business_0": {
+        "translation": "So, what happened at yesterday's meeting?",
+        "reverse": "昨日の会議、結局どうなったの？"
+      },
+      "formal_0": {
+        "translation": "So, what happened at yesterday's meeting?",
+        "reverse": "昨日の会議、結局どうなったの？"
+      },
+      "casual_50": {
+        "translation": "So, what went down at yesterday's meeting?",
+        "reverse": "で、昨日の会議では何があったの？"
+      },
+      "casual_100": {
+        "translation": "So, what was the deal with yesterday's meeting?",
+        "reverse": "で、昨日の会議ってどうなったの？"
+      },
+      "business_50": {
+        "translation": "Could you tell me what transpired at yesterday's meeting?",
+        "reverse": "昨日の会議で何が起こったか教えてください。"
+      },
+      "business_100": {
+        "translation": "Might I inquire as to what transpired at yesterday's meeting?",
+        "reverse": "昨日の会議で何が起こったかお伺いしてもよろしいでしょうか？"
+      },
+      "formal_50": {
+        "translation": "Could you perhaps tell me what transpired at yesterday's meeting?",
+        "reverse": "昨日の会議で何が起こったか、もしかしたら教えてくれますか？"
+      },
+      "formal_100": {
+        "translation": "Might I inquire as to what transpired at the meeting held yesterday?",
+        "reverse": "昨日の会議で何が起こったかお尋ねしてもよろしいでしょうか?"
+      }
+    }
+  },
+  {
+    "id": "B1-03",
+    "source": "ちょっと値段高すぎない？",
+    "structure": {
+      "意図": "質問",
+      "確信度": "推測",
+      "感情極性": "neutral",
+      "モダリティ": "質問",
+      "程度": "none",
+      "発話行為": [
+        "質問"
+      ],
+      "人称": "二人称",
+      "動作の意味": "be too expensive"
+    },
+    "results": {
+      "casual_0": {
+        "translation": "Isn't it a bit too expensive?",
+        "reverse": "ちょっと値段高すぎない？"
+      },
+      "business_0": {
+        "translation": "Isn't it a bit too expensive?",
+        "reverse": "ちょっと値段高すぎない？"
+      },
+      "formal_0": {
+        "translation": "Isn't it a bit too expensive?",
+        "reverse": "ちょっと値段高すぎない？"
+      },
+      "casual_50": {
+        "translation": "Don't you think it's a bit pricey?",
+        "reverse": "ちょっと高いんじゃない？"
+      },
+      "casual_100": {
+        "translation": "Don't ya think it's kinda pricey?",
+        "reverse": "ちょっと高いと思う？"
+      },
+      "business_50": {
+        "translation": "Don't you think it's a bit too expensive?",
+        "reverse": "少し高すぎるのではないでしょうか"
+      },
+      "business_100": {
+        "translation": "Would you not consider the price to be somewhat excessive?",
+        "reverse": "価格が高すぎるとお考えになりませんか？"
+      },
+      "formal_50": {
+        "translation": "Don't you think it's a bit too expensive?",
+        "reverse": "少し高すぎるのではないでしょうか"
+      },
+      "formal_100": {
+        "translation": "Might I inquire as to whether you believe it is somewhat too expensive?",
+        "reverse": "あなたはそれが少し高すぎると思いますか？"
+      }
+    }
+  },
+  {
+    "id": "B1-04",
+    "source": "来月から新しいプロジェクトに異動になりました",
+    "structure": {
+      "意図": "報告",
+      "確信度": "確定",
+      "感情極性": "neutral",
+      "モダリティ": "報告",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "人称": "一人称単数",
+      "動作の意味": "become"
+    },
+    "results": {
+      "casual_0": {
+        "translation": "I have become part of a new project starting next month.",
+        "reverse": "来月から新しいプロジェクトに異動になりました"
+      },
+      "business_0": {
+        "translation": "I have become part of a new project starting next month.",
+        "reverse": "来月から新しいプロジェクトに異動になりました"
+      },
+      "formal_0": {
+        "translation": "I have become part of a new project starting next month.",
+        "reverse": "来月から新しいプロジェクトに異動になりました"
+      },
+      "casual_50": {
+        "translation": "I'm joining a new project next month.",
+        "reverse": "来月から新しいプロジェクトに参加することになった"
+      },
+      "casual_100": {
+        "translation": "I'm gonna be part of a new project next month.",
+        "reverse": "来月から新しいプロジェクトに参加するんだ"
+      },
+      "business_50": {
+        "translation": "I am now involved in a new project that is scheduled to commence next month.",
+        "reverse": "私は来月から始まる新しいプロジェクトに今関わっています"
+      },
+      "business_100": {
+        "translation": "I am pleased to be joining a new project that is slated to launch next month.",
+        "reverse": "私は来月開始予定の新しいプロジェクトに参加できることを嬉しく思います。"
+      },
+      "formal_50": {
+        "translation": "I am pleased to be joining a new project that is scheduled to commence next month.",
+        "reverse": "私は来月から始まる新しいプロジェクトに参加できることを嬉しく思います"
+      },
+      "formal_100": {
+        "translation": "I am delighted to be participating in a new project that is slated to commence next month.",
+        "reverse": "私は来月開始予定の新しいプロジェクトに参加できることを大変嬉しく思います。"
+      }
+    }
+  },
+  {
+    "id": "B1-05",
+    "source": "あの映画、泣けるからマジで観たほうがいいよ",
+    "structure": {
+      "意図": "提案",
+      "確信度": "推測",
+      "感情極性": "positive",
+      "モダリティ": "提案",
+      "程度": "none",
+      "発話行為": [
+        "提案"
+      ],
+      "人称": "二人称",
+      "動作の意味": "watch"
+    },
+    "results": {
+      "casual_0": {
+        "translation": "You should really watch that movie, it's so tear-jerking!",
+        "reverse": "あの映画、泣けるからマジで観たほうがいいよ"
+      },
+      "business_0": {
+        "translation": "You should really watch that movie, it's so tear-jerking!",
+        "reverse": "あの映画、泣けるからマジで観たほうがいいよ"
+      },
+      "formal_0": {
+        "translation": "You should really watch that movie, it's so tear-jerking!",
+        "reverse": "あの映画、泣けるからマジで観たほうがいいよ"
+      },
+      "casual_50": {
+        "translation": "You might want to check out that movie, it's pretty emotional.",
+        "reverse": "あの映画をチェックしてみるといいかもね、結構感動するよ"
+      },
+      "casual_100": {
+        "translation": "You should totally check out that movie, it's hella emotional.",
+        "reverse": "あの映画を観るべきだよ、マジで泣けるから"
+      },
+      "business_50": {
+        "translation": "You might consider watching that movie; it's quite emotional.",
+        "reverse": "あの映画を観ることを検討してみてはいかがでしょうか。かなり感動的な内容です。"
+      },
+      "business_100": {
+        "translation": "You may wish to consider viewing that film; it appears to be quite emotionally stirring.",
+        "reverse": "あの映画をご覧になることを検討なさるとよいかもしれません。かなり感情を揺さぶる内容のようです。"
+      },
+      "formal_50": {
+        "translation": "You might consider watching that movie; it's quite emotionally moving.",
+        "reverse": "あの映画を観ることを検討してみて下さい。かなり感動的な作品です。"
+      },
+      "formal_100": {
+        "translation": "You may perhaps consider viewing that film; it appears to be quite emotionally stirring.",
+        "reverse": "あなたはあの映画をご覧になることを検討なさるかもしれません。それはかなり感情を揺さぶるようです。"
+      }
+    }
+  }
+]
