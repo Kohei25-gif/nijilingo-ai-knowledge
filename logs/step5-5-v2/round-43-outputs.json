@@ -1,0 +1,432 @@
+[
+  {
+    "id": "文171",
+    "source": "明日の会議、資料を準備しておきます",
+    "structure": {
+      "主題": "会議の準備",
+      "動作": "準備する",
+      "動作の意味": "prepare",
+      "意図": "報告",
+      "感情極性": "neutral",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "資料",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I'll prepare the materials for tomorrow's meeting.",
+    "results": {
+      "casual_25": {
+        "new_translation": "I'm preparing the materials for tomorrow's meeting.",
+        "reverse_translation": "明日会議の資料を準備しています。",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "I'm getting the materials ready for tomorrow's meeting.",
+        "reverse_translation": "明日会議の資料を準備してる",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "I'm prepping the materials for tomorrow's meet.",
+        "reverse_translation": "明日会議の資料を準備してる",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "I'm gettin' the materials ready for tomorrow's meet.",
+        "reverse_translation": "明日会の資料を準備してる。",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I will prepare the materials for tomorrow's meeting.",
+        "reverse_translation": "明日会議の資料を準備します。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I shall prepare the materials for tomorrow's meeting.",
+        "reverse_translation": "明日会議の資料を準備いたします.",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I will prepare the materials for tomorrow's meeting.",
+        "reverse_translation": "明日会議の資料を準備します。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "I shall prepare the materials for tomorrow's meeting.",
+        "reverse_translation": "明日会議の資料を準備いたします。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "I will prepare the materials for tomorrow's meeting.",
+        "reverse_translation": "明日会議の資料を準備します。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I am preparing the materials for tomorrow's meeting.",
+        "reverse_translation": "明日会議の資料を準備しています。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "I am in the process of preparing the materials for tomorrow's meeting.",
+        "reverse_translation": "明日会議の資料を準備しているところです",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "I am presently engaged in the preparation of materials for the meeting scheduled for tomorrow.",
+        "reverse_translation": "現在、明日の会議のための資料の準備をしているところです。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文172",
+    "source": "この映画、思ったより面白かった",
+    "structure": {
+      "主題": "映画",
+      "動作": "面白い",
+      "動作の意味": "be interesting",
+      "意図": "報告",
+      "感情極性": "positive",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "This movie was more interesting than I thought.",
+    "results": {
+      "casual_25": {
+        "new_translation": "This movie was pretty interesting.",
+        "reverse_translation": "この映画、結構面白かった",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "This movie was super interesting.",
+        "reverse_translation": "この映画はとても面白かった。",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "This movie was totally mind-blowing!",
+        "reverse_translation": "この映画は本当に衝撃的だった",
+        "risk": "med"
+      },
+      "casual_100": {
+        "new_translation": "This movie was totally awesome!",
+        "reverse_translation": "この映画は全く素晴らしかった！",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I found this movie to be more interesting than I had anticipated.",
+        "reverse_translation": "この映画は思っていたよりもっと面白かったです。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I found this movie to be more intriguing than I had initially anticipated.",
+        "reverse_translation": "この映画は思っていたよりもっと面白かったです",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I discovered that this film possessed a greater level of interest than my initial expectations.",
+        "reverse_translation": "この映画は最初の期待よりもっと面白いと思った",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "It has come to my attention that the film in question exhibits a considerably heightened level of fascination, surpassing my preliminary anticipations.",
+        "reverse_translation": "この映画は、私の最初の期待を上回る興味深い映画であることがわかりました.",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "This movie was more interesting than I had anticipated.",
+        "reverse_translation": "この映画、思ったより面白かった",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "The movie was more engaging than I had initially expected.",
+        "reverse_translation": "映画は思っていたよりもっと面白かったです。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "The movie proved to be more engaging than my initial expectations.",
+        "reverse_translation": "映画は私の最初の予想よりもっと面白かった",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "The cinematic production demonstrated a heightened level of engagement that surpassed my preliminary anticipations.",
+        "reverse_translation": "映画の制作は、私の最初の期待を上回る高いレベルのエンゲージメントを示した。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文173",
+    "source": "来週の金曜日、空いていますか？",
+    "structure": {
+      "主題": "空き状況の確認",
+      "動作": "空く",
+      "動作の意味": "be available",
+      "意図": "質問",
+      "感情極性": "neutral",
+      "モダリティ": "質問",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "二人称",
+      "確信度": "可能性",
+      "程度": "none",
+      "発話行為": [
+        "質問"
+      ],
+      "固有名詞": []
+    },
+    "seed": "Are you available next Friday?",
+    "results": {
+      "casual_25": {
+        "new_translation": "Are you free next Friday?",
+        "reverse_translation": "来週の金曜日、空いていますか？",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "Do you have anything going on next Friday?",
+        "reverse_translation": "来週の金曜日は予定ある？",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "Got anything on next Friday?",
+        "reverse_translation": "来週の金曜日、予定ある？",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "Do you have any plans for next Friday?",
+        "reverse_translation": "来週の金曜日予定ある？",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "Will you be available next Friday?",
+        "reverse_translation": "来週金曜日は予定が空いていますか？",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "Will you be available next Friday?",
+        "reverse_translation": "来週の金曜日はご都合いかがですか？",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "Will you be available next Friday?",
+        "reverse_translation": "来週の金曜日はご都合いかがですか？",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "Would you be available next Friday?",
+        "reverse_translation": "来週の金曜日はご都合いかがですか？",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "Will you be available next Friday?",
+        "reverse_translation": "来週の金曜日はご都合いかがですか？",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "Are you available next Friday?",
+        "reverse_translation": "来週の金曜日はご予定が入っていませんか？",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "Will you be available next Friday?",
+        "reverse_translation": "来週の金曜日はご都合いかがですか？",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "Will you be available next Friday?",
+        "reverse_translation": "来週の金曜日はご都合いかがですか？",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文174",
+    "source": "最近忙しくて、なかなか運動できていない",
+    "structure": {
+      "主題": "運動",
+      "動作": "できる",
+      "動作の意味": "be able to do",
+      "意図": "報告",
+      "感情極性": "neutral",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "推測",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I've been busy lately and haven't been able to exercise much.",
+    "results": {
+      "casual_25": {
+        "new_translation": "Lately, I've been pretty hectic and haven't had much chance to work out",
+        "reverse_translation": "最近忙しくて、あまり運動する機会がなかった",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "Lately, I've been super busy and haven't had a lot of time to exercise",
+        "reverse_translation": "最近、かなり忙しくて、あまり運動する時間がなかった",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "Lately, I've been crazy busy and barely have any time to work out",
+        "reverse_translation": "最近、めっちゃ忙しくて、運動する時間がない",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "Lately, I've been super duper busy and hardly got any time to hit the gym",
+        "reverse_translation": "最近、めっちゃ忙しくて、ほとんどジムに行く時間がない",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I've been quite busy lately and haven't managed to exercise as much as I'd like.",
+        "reverse_translation": "最近、かなり忙しくて、あまり運動できておりません。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I have been rather busy of late and have not succeeded in exercising to the extent that I would have liked.",
+        "reverse_translation": "最近、かなり忙しくて、思うように運動できていない。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I have been quite occupied recently and, regrettably, have not managed to engage in as much physical activity as I had hoped.",
+        "reverse_translation": "最近、かなり忙しくて、残念ながら思うように運動できていません。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "I have been exceedingly preoccupied of late and, to my regret, have not succeeded in partaking in as much physical activity as I had aspired to.",
+        "reverse_translation": "最近、非常に忙しくしており、残念ながら、希望していたほどの身体活動を行うことができておりません。",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "I have been quite busy lately and haven't been able to exercise much.",
+        "reverse_translation": "最近忙しくて、なかなか運動できていない",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I have been rather busy of late and consequently have not had much opportunity to exercise.",
+        "reverse_translation": "最近かなり忙しくて、あまり運動する機会がありませんでした。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "I have been quite occupied recently and, as a result, have not had the opportunity to engage in physical activity to a great extent.",
+        "reverse_translation": "最近、かなり忙しくて、あまり運動する機会がありませんでした。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "I have been considerably preoccupied of late and, consequently, have not had the opportunity to engage in physical activity to any significant extent.",
+        "reverse_translation": "最近かなり忙しくしており、その結果として、十分な運動をする機会を持てておりません。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文175",
+    "source": "お土産買ってきたから、よかったらどうぞ",
+    "structure": {
+      "主題": "お土産",
+      "動作": "買う",
+      "動作の意味": "buy",
+      "意図": "依頼",
+      "感情極性": "positive",
+      "モダリティ": "提案",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "提案"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I brought some souvenirs, so feel free to take one if you'd like",
+    "results": {
+      "casual_25": {
+        "new_translation": "I picked up a souvenir for you, feel free to take it if you'd like",
+        "reverse_translation": "あなたへのお土産を買ったので、よかったら持っていってね",
+        "risk": "low"
+      },
+      "casual_50": {
+        "new_translation": "I grabbed a little something for you, take it if you're into it",
+        "reverse_translation": "ちょっとしたものを買ってきたので、よかったら持っていってね",
+        "risk": "low"
+      },
+      "casual_75": {
+        "new_translation": "I picked up a little something just for you, snag it if you're feelin' it",
+        "reverse_translation": "ちょっとしたものをあなたのためにお土産に買ったんだ。よかったら持っていってね",
+        "risk": "low"
+      },
+      "casual_100": {
+        "new_translation": "I got a sweet little something just for you, grab it if you're into it",
+        "reverse_translation": "ちょっとしたものをあなたのために買ったので、気に入ったら持っていって",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I brought some souvenirs, would you like them?",
+        "reverse_translation": "お土産買ってきたから、よかったらどうぞ",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I have brought some souvenirs; would you care to have them?",
+        "reverse_translation": "お土産を買ってきましたが、よかったらどうですか",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I have brought some souvenirs; would you be so kind as to accept them?",
+        "reverse_translation": "お土産を買ってきました。よろしければお受け取りいただけますか？",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "I have taken the liberty of bringing some souvenirs; would you be so gracious as to accept them?",
+        "reverse_translation": "土産物をいくつか持ってきましたが、よろしければお受け取りいただけますでしょうか？",
+        "risk": "low"
+      },
+      "business_25": {
+        "new_translation": "I've brought some souvenirs; would you like to take them?",
+        "reverse_translation": "お土産をいくつか持ってきましたが、受け取っていただけますか？",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I have brought some souvenirs and I would be happy for you to accept them.",
+        "reverse_translation": "お土産を買ってきましたので、ぜひ受け取っていただければと思います。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "I have brought some souvenirs and would be delighted if you would accept them.",
+        "reverse_translation": "お土産をいくつか持ってきましたので、もしよろしければお受け取りいただければ幸いです。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "I have procured certain mementos and would be most appreciative if you would graciously accept them.",
+        "reverse_translation": "私は、いくつかの記念品を購入しましたので、もしよろしければお受け取りいただければ幸いです。",
+        "risk": "low"
+      }
+    }
+  }
+]
