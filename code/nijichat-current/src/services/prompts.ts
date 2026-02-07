@@ -341,18 +341,26 @@ export const EXPANDED_STRUCTURE_PROMPT = `あなたは多言語対応の構造�
     ★ 話者が事実として述べている → 確定
     ★ 話者が不確かさを明示している → 可能性
     ★ 話者が情報源が他者であることを示している → 伝聞
+    ★★ 伝聞 vs 推測の判定基準（最重要）★★
+    迷った時の判定キー: 「この情報は話者自身が考えたか？それとも誰かから聞いたか？」
+    - 話者自身の判断・印象・経験に基づく → 推測
+    - 他者から聞いた話・噂・間接的に得た情報 → 伝聞
+    伝聞は推測より優先する。「断定を避けている」かつ「情報源が他者」なら → 伝聞。
     
     【日本語パターン（補助）】
     - 確定: 〜だ、〜です、〜した、〜てた、〜ていた（過去形は確定）
     - 推測: 〜と思う、〜だろう、〜んだけど（婉曲）、〜かな（自問）、〜じゃないかな
     - 可能性: 〜かも、〜かもしれない
-    - 伝聞: 〜らしい、〜そうだ、〜って（文末）、〜だって
+    - 伝聞: 〜らしい、〜らしいよ、〜そうだ、〜って（文末）、〜だって、〜んだって、〜みたい（伝聞用法）
+    ★ 「〜らしい」「〜らしいよ」は伝聞。推測にしない。
     
     ★★★ 最重要 ★★★
     「〜と思う」「〜と思うんだけど」「〜んじゃないかな」は【推測】。絶対に【確定】にしない。
     これらは話者が断定を避けて自分の見解として述べている表現。
     例: 「いい線いってると思うんだけど」→ 推測（断定を避けている）
     例: 「いい線いってる」→ 確定（断定している）
+    入力: 「田中さんが来週持ってくるらしいよ」→ 伝聞（他者から聞いた情報）
+    入力: 「田中さんが来週持ってくると思う」→ 推測（話者自身の判断）
     
     ★ 条件節は確信度を下げない
     - 「もし〜なら」「〜たら」は条件表現であり、不確実性マーカーではない
@@ -406,6 +414,12 @@ export const EXPANDED_STRUCTURE_PROMPT = `あなたは多言語対応の構造�
     
     例: 「ごめん、今は対応できない」→ ["謝罪", "報告"]
     例: 「ありがとう、助かった」→ ["感謝", "報告"]
+    ★★ 短い冒頭表現を見落とさないこと ★★
+    文の先頭に1〜2語の謝罪・感謝・挨拶がある場合、それも発話行為に含める。
+    短い表現ほど主文に埋もれやすいが、1単語でも立派な発話行為。
+    例: 「ごめん、電車が止まってた」→ ["謝罪", "報告"]（「ごめん」=謝罪を見落とさない）
+    例: 「ありがとう、助かった」→ ["感謝", "報告"]
+    例: 「すまん、忘れてた」→ ["謝罪", "報告"]
     
     ★ 単一発話なら1要素（例: ["感謝"]）
 
@@ -808,17 +822,22 @@ export function getToneStyleInstruction(tone: string | undefined, toneLevel: num
     case 'business':
       if (toneLevel >= 100) {
         return `〖トーンレベル: ${toneLevel}% - 最高ビジネス〗
-- 最高レベルのビジネス敬語
-- 省略形は一切使わない
-- 丁寧さは形式と語彙の格式で表現する（儀礼的な前置きで盛らない）
-- 発表調の前文や、原文にない感情儀礼（喜び・光栄・恐縮等）を追加しない
-- 事実報告は事実のまま簡潔にフォーマルに述べる`;
+- Highly professional and formal business tone. Maximum professionalism through structure and precision:
+- "I would like to formally request..." / "Please be advised that..." / "For your consideration..."
+- "At your earliest convenience..." / "I would appreciate your guidance on..."
+- Maintain clarity above all - formality should never obscure meaning
+- Precision and directness are more professional than ornate language
+- Do NOT use: wherein, hereby, hitherto, forthwith, foreseen, convene, requisite
+- Do NOT rephrase the core action/meaning to sound more "business" - keep the original meaning intact
+- Good: "I regret that I must decline." / Bad: "I believe it would be beneficial to establish an alternative arrangement."`;
       } else if (toneLevel >= 75) {
         return `〖トーンレベル: ${toneLevel}% - かなりのビジネス表現〗
-- 省略形は使わない
-- フォーマルなトーン
-- 儀礼的な前置きは追加しない
-- 事実は事実のまま（感情儀礼で包まない）`;
+- Professional business tone. Clear, efficient, and courteous:
+- "I'd like to suggest..." / "Would it be possible to..." / "I wanted to follow up on..."
+- "Please let me know if..." / "I'd appreciate your input on..."
+- Professional = clear and direct language with appropriate courtesy markers.
+- Do NOT use: wherein, hereby, hitherto, endeavor, forthwith, convene
+- Good: "Could we meet at 9:30?" / Bad: "We propose convening at the designated hour."`;
       } else if (toneLevel >= 50) {
         return `〖トーンレベル: ${toneLevel}% - 標準のビジネス表現〗
 - 省略形は避ける
@@ -834,14 +853,21 @@ export function getToneStyleInstruction(tone: string | undefined, toneLevel: num
     case 'formal':
       if (toneLevel >= 100) {
         return `〖トーンレベル: ${toneLevel}% - 最高丁寧〗
-- 丁寧さは形式で表現（省略形を避ける・語彙の格式を上げる）
-- 感情儀礼や発表調の前置きを追加しない
-- 原文にない主観評価（大げさなポジティブ表現）を追加しない`;
+- Very polite and respectful tone. Maximize courtesy through sentence structure, not vocabulary complexity:
+- "I would be most grateful if..." / "Would it be possible to..." / "I sincerely appreciate..."
+- "If it wouldn't be too much trouble..." / "I hope you don't mind my asking..."
+- Layer polite structures: hedging + gratitude + softening
+- Use warm, clear language - never cold or bureaucratic
+- Do NOT use: wherein, hereby, hitherto, forthwith, convene, requisite, foreseen
+- Good: "I'd be very grateful if you could help." / Bad: "I would be most obliged if you could render assistance."`;
       } else if (toneLevel >= 75) {
         return `〖トーンレベル: ${toneLevel}% - 強め丁寧〗
-- 丁寧で落ち着いた文体
-- 前置きの儀礼は追加しない
-- 内容は事実のまま、簡潔に`;
+- Polite, considerate tone. Use polite sentence patterns rather than formal vocabulary:
+- "I was wondering if..." / "Would you mind..." / "I'd appreciate it if..."
+- "It seems that..." / "I believe..." / "If I may..."
+- Use standard vocabulary with polite framing - avoid archaic or overly formal words
+- Do NOT use: wherein, hereby, hitherto, endeavor, forthwith, convene
+- Good: "Could you send it to me?" / Bad: "Might I be able to receive it?"`;
       } else if (toneLevel >= 50) {
         return `〖トーンレベル: ${toneLevel}% - 標準丁寧〗
 - 丁寧な語彙と語順
