@@ -2,7 +2,7 @@
 // 型定義・ガード・プロンプト・i18n・APIは個別ファイルに分離済み
 
 // 型定義を再エクスポート
-export type { IntentType, CertaintyLevel, SentimentPolarity, ModalityType, EntityType, HonorificType } from './types';
+export type { IntentType, CertaintyLevel, SentimentPolarity, ModalityType, DegreeLevel, EntityType, HonorificType } from './types';
 export type { NamedEntity, ExpandedStructure, TranslationResult, PartialTranslationResult, GuardedTranslationResult, ExplanationResult, TranslateOptions, InvariantCheckResult, FallbackDecision, PartialTranslationResponse } from './types';
 export type { ModalityClass } from './types';
 
@@ -12,6 +12,7 @@ import type {
   IntentType,
   SentimentPolarity,
   ModalityType,
+  DegreeLevel,
   TranslationResult,
   TranslateOptions,
   ExplanationResult,
@@ -73,6 +74,7 @@ const structureCache = new Map<string, ExpandedStructure>();
 const INTENT_TYPES: IntentType[] = ['依頼', '確認', '報告', '質問', '感謝', '謝罪', '提案', '命令', 'その他'];
 const POLARITY_TYPES: SentimentPolarity[] = ['positive', 'negative', 'neutral'];
 const MODALITY_TYPES: ModalityType[] = ['報告', '依頼', '感謝', '質問', '感想', '提案', 'その他'];
+const DEGREE_LEVELS: DegreeLevel[] = ['none', 'slight', 'moderate', 'strong', 'extreme'];
 
 const isIntentType = (value: unknown): value is IntentType =>
   typeof value === 'string' && INTENT_TYPES.includes(value as IntentType);
@@ -82,6 +84,9 @@ const isSentimentPolarity = (value: unknown): value is SentimentPolarity =>
 
 const isModalityType = (value: unknown): value is ModalityType =>
   typeof value === 'string' && MODALITY_TYPES.includes(value as ModalityType);
+
+const isDegreeLevel = (value: unknown): value is DegreeLevel =>
+  typeof value === 'string' && DEGREE_LEVELS.includes(value as DegreeLevel);
 
 const inferModalityFromIntent = (intent: IntentType): ModalityType => {
   switch (intent) {
@@ -118,8 +123,56 @@ const inferPolarityFromText = (sourceText: string, intent: IntentType): Sentimen
   return 'neutral';
 };
 
+const inferDegreeFromText = (sourceText: string): DegreeLevel => {
+  const extremeMarkers = ['完全に', '全然', 'めちゃくちゃ', '極めて', '猛烈に', '超'];
+  const strongMarkers = ['かなり', 'めっちゃ', 'すごく', 'とても', 'だいぶ', 'ずいぶん', '非常に'];
+  const moderateMarkers = ['割と', 'まあまあ', 'そこそこ', 'あんまり', 'あまり'];
+  const slightMarkers = ['ちょっと', '少し', 'やや', '若干', '少々'];
+
+  if (extremeMarkers.some(marker => sourceText.includes(marker))) return 'extreme';
+  if (strongMarkers.some(marker => sourceText.includes(marker))) return 'strong';
+  if (moderateMarkers.some(marker => sourceText.includes(marker))) return 'moderate';
+  if (slightMarkers.some(marker => sourceText.includes(marker))) return 'slight';
+  return 'none';
+};
+
+const normalizeSpeechActs = (value: unknown): string[] => {
+  const rawActs = Array.isArray(value)
+    ? value
+    : typeof value === 'string'
+      ? value.split(/[+,、/／]/)
+      : [];
+
+  const normalized = rawActs
+    .filter((item): item is string => typeof item === 'string')
+    .map(item => item.trim())
+    .filter(item => item.length > 0);
+
+  return Array.from(new Set(normalized));
+};
+
+const inferSpeechActsFromText = (sourceText: string, intent: IntentType, modality: ModalityType): string[] => {
+  const acts: string[] = [];
+
+  const apologyMarkers = ['ごめん', 'すみません', 'すまん', '申し訳', '失礼', '悪いけど', '悪いが'];
+  const gratitudeMarkers = ['ありがとう', '感謝', '助かる', '助かりました'];
+  const requestMarkers = ['お願い', 'ください', 'してくれる', 'してもらえる', 'してほしい', 'して欲しい', '教えて', '見て', '確認して', '対応して', '頼む'];
+  const questionMarkers = ['？', '?', 'かな', 'かね', 'の？', 'の?'];
+
+  if (apologyMarkers.some(marker => sourceText.includes(marker))) acts.push('謝罪');
+  if (gratitudeMarkers.some(marker => sourceText.includes(marker))) acts.push('感謝');
+  if (intent === '依頼' || intent === '命令' || modality === '依頼' || requestMarkers.some(marker => sourceText.includes(marker))) acts.push('依頼');
+  if (intent === '提案' || modality === '提案') acts.push('提案');
+  if (intent === '質問' || intent === '確認' || modality === '質問' || questionMarkers.some(marker => sourceText.includes(marker))) acts.push('質問');
+  if (modality === '感想') acts.push('感想');
+  if (intent === '報告' || modality === '報告') acts.push('報告');
+
+  if (acts.length === 0) acts.push('報告');
+  return Array.from(new Set(acts));
+};
+
 /**
- * 日本語テキストから構造を抽出（拡張ハイブリッド版・12項目）
+ * 日本語テキストから構造を抽出（拡張ハイブリッド版・14項目）
  */
 export async function extractStructure(
   text: string,
@@ -144,6 +197,8 @@ export async function extractStructure(
     願望: 'なし',
     人称: '一人称単数',
     確信度: '確定',
+    程度: 'none',
+    発話行為: ['報告'],
     固有名詞: []
   };
 
@@ -183,6 +238,13 @@ export async function extractStructure(
     const polarity = isSentimentPolarity(parsed.感情極性)
       ? parsed.感情極性
       : inferPolarityFromText(text, intent);
+    const degree = isDegreeLevel(parsed.程度)
+      ? parsed.程度
+      : inferDegreeFromText(text);
+    const parsedSpeechActs = normalizeSpeechActs(parsed.発話行為);
+    const speechActs = parsedSpeechActs.length > 0
+      ? parsedSpeechActs
+      : inferSpeechActsFromText(text, intent, modality);
 
     const validated: ExpandedStructure = {
       主題: parsed.主題 || 'なし',
@@ -197,6 +259,8 @@ export async function extractStructure(
       願望: parsed.願望 || 'なし',
       人称: parsed.人称 || '一人称単数',
       確信度: parsed.確信度 || '確定',
+      程度: degree,
+      発話行為: speechActs,
       固有名詞: validatedEntities
     };
 
@@ -229,30 +293,12 @@ export async function translatePartial(options: TranslateOptions): Promise<Trans
   }
 
   const structureInfo = structure ? `\n${structureToPromptText(structure, targetLang, sourceLang)}\n` : '';
-  const fixedValueDeclaration = structure ? `
-【この翻訳の固定値 - トーン調整で絶対に変えないこと】
-- 意図: ${structure.意図}
-- 確信度: ${structure.確信度}
-- 感情極性: ${structure.感情極性}
-- モダリティ: ${structure.モダリティ}
-トーン調整で変えていいのは「口調・語彙の格式レベル・文体」のみ。
-上記4つの値が変わる翻訳は不合格。
-` : '';
+  const fixedValueDeclaration = structure ? `固定値: 意図=${structure.意図}, 確信度=${structure.確信度}, 感情極性=${structure.感情極性}, モダリティ=${structure.モダリティ}, 程度=${structure.程度}, 発話行為=${(structure.発話行為 && structure.発話行為.length > 0) ? structure.発話行為.join('+') : 'なし'}` : '';
   const seedTranslation = options.seedTranslation
     ?? (options.previousLevel === 0 ? options.previousTranslation : undefined)
     ?? currentTranslation;
-  const driftPrevention = `
-【ドリフト防止】
-元の翻訳（0%）: "${seedTranslation}"
-この意味を維持したまま口調のみ変更すること。
-意味・意図・確信度が元の翻訳からズレていたら修正すること。
-`;
-
-  const langInfoOnly = !structure ? `
-【出力言語 - 絶対遵守】
-・翻訳の出力言語: ${targetLang}（new_translationフィールドは必ずこの言語で出力）
-・逆翻訳の出力言語: ${sourceLang}（reverse_translationフィールドは必ずこの言語で出力）
-` : '';
+  const driftPrevention = `Seed (0%): "${seedTranslation}"
+Keep this meaning. Change tone only.`;
 
   let toneStyle = '';
   if (toneLevel < 25) {
@@ -260,35 +306,21 @@ export async function translatePartial(options: TranslateOptions): Promise<Trans
   } else {
     switch (tone) {
       case 'casual':
-        if (toneLevel >= 100) {
-          toneStyle = 'Maximum casual (slang OK, gonna/wanna/gotta, very friendly; keep meaning exact)';
-        } else if (toneLevel >= 75) {
-          toneStyle = 'strong casual (more contractions, a bit more playful; add mild intensifiers like "really/so", allow "kinda", "lol/haha")';
-        } else if (toneLevel >= 50) {
-          toneStyle = 'standard casual (use contractions like "I\'ll", "it\'s"; friendly phrasing; light intensifiers)';
-        } else {
-          toneStyle = 'slightly casual (use basic contractions like "it\'s", "that\'s"; keep relatively neutral)';
-        }
+        if (toneLevel >= 100) toneStyle = 'Maximum casual: slang, heavy contractions, very friendly and energetic.';
+        else if (toneLevel >= 75) toneStyle = 'Strong casual: more contractions, playful, mild intensifiers.';
+        else if (toneLevel >= 50) toneStyle = 'Standard casual: contractions, friendly phrasing.';
+        else toneStyle = 'Slightly casual: basic contractions, relaxed but clear.';
         break;
       case 'business':
-        if (toneLevel >= 100) {
-          toneStyle = 'Maximum business (very polite, no contractions, highly professional; avoid slang)';
-        } else if (toneLevel >= 75) {
-          toneStyle = 'strong business (more deference: "Could you kindly...", "I would be grateful if..."; still concise)';
-        } else if (toneLevel >= 50) {
-          toneStyle = 'standard business (use "I would suggest...", "Please note that...", avoid contractions)';
-        } else {
-          toneStyle = 'slightly business (polite tone, minimal contractions, but not overly formal)';
-        }
+        if (toneLevel >= 100) toneStyle = 'Maximum business: highest professional register, no contractions, structured sentences.';
+        else if (toneLevel >= 75) toneStyle = 'Strong business: professional, deferential phrasing, no contractions.';
+        else if (toneLevel >= 50) toneStyle = 'Standard business: professional tone, no contractions, clear and direct.';
+        else toneStyle = 'Slightly business: polite, minimal contractions.';
         break;
       case 'formal':
-        if (toneLevel >= 100) {
-          toneStyle = 'Maximum formal (highest politeness, honorifics, humble expressions)';
-        } else if (toneLevel >= 50) {
-          toneStyle = 'standard formal (use "I would be most pleased...", "It is with great pleasure...", highest politeness)';
-        } else {
-          toneStyle = 'slightly formal (polite and respectful, use "indeed", "certainly", but not maximally formal)';
-        }
+        if (toneLevel >= 100) toneStyle = 'Maximum formal: highest politeness, dignified and elaborate phrasing.';
+        else if (toneLevel >= 50) toneStyle = 'Standard formal: polite, respectful, elevated vocabulary.';
+        else toneStyle = 'Slightly formal: polite, refined vocabulary.';
         break;
       case 'custom':
         toneStyle = `"${customTone || ''}" style FULL POWER - 段階は無視して常に全力で表現。オジサン構文なら絵文字・カタカナ混ぜ、限界オタクなら感情爆発、ギャルならギャル語、赤ちゃん言葉なら幼児語`;
@@ -302,65 +334,22 @@ export async function translatePartial(options: TranslateOptions): Promise<Trans
 
   const previousTranslation = options.previousTranslation;
   const previousLevel = options.previousLevel;
-  const diffInstruction = previousTranslation ? `
-【重要: 逆翻訳で差分を表現（意味構造は保持）】
-前レベル(${previousLevel ?? 0}%)の翻訳: "${previousTranslation}"
-→ トーン調整で追加された表現の差分を必ず反映すること
-→ 各パーセンテージ間（0→25→50→75→100）の逆翻訳が同じトーンにならないように
+  const diffInstruction = previousTranslation ? `Previous (${previousLevel ?? 0}%): "${previousTranslation}"
+→ Must differ from above. Change tone expression, not meaning.` : '';
 
-【絶対守ること - 意味構造の保持】
-- 主語・対象を変えない（「君」を「お客様」に変えない、「you」を「valued customer」に変えない）
-- 確信度を変えない（確定→推測にしない）
-- 数字・固有名詞を変えない
-- 肯定/否定を変えない
-
-【変えていいこと - トーンの差分のみ】
-- 語尾の変化（です→ございます、だよ→じゃん等）
-- 強調語の追加（とても→めっちゃ、very→totally等）
-- カジュアル/丁寧表現の追加
-- 前レベルと同じ逆翻訳は禁止
-` : '';
-
-  const partialLanguageRule = targetLang !== '英語' ? `
-★★★ 最重要: new_translation は必ず「${targetLang}」で出力すること ★★★
-- システムプロンプトの例は英語だが、すべて${targetLang}に置き換えて適用すること
-- 英語で出力してはいけない
-` : '';
-
-  const userPrompt = `Current translation (${targetLang}): ${currentTranslation}
-${partialLanguageRule}
-REQUIRED TONE: ${tone || 'none'} at ${toneLevel}%
-Target style: ${toneStyle}
-${structureInfo}
-${fixedValueDeclaration}
-${driftPrevention}
-${langInfoOnly}
-【重要: トーン調整の方向】
-- current_translation（${targetLang}）をトーン調整すること
-- 意味・構造は保持（構造情報の確信度・固有名詞ルールを守る）
-
-【重要: 出力言語】
-- new_translation は必ず ${targetLang} で出力すること
-- 英語で出力してはいけない（${targetLang}が英語の場合を除く）
-
-【重要: 固有名詞】
-- 構造情報に記載された固有名詞の読みを必ず使用すること
-- 勝手に別の読みに変えない（例: Gonta → Yuta は禁止）
-
-【重要: 差分ルール】
-- current_translation と同一の文章を返すのは禁止
-- toneLevel が上がるほど、トーンの変化を段階的に強めること
-- 意味を保持しつつ、最低1語は表現を変更または追加すること
-- 意味・主語/目的語・否定・条件・数値・時制は絶対に変えない
-${diffInstruction}
-${options.variationInstruction ? '【追加の差分指示】\n' + options.variationInstruction + '\n' : ''}${reverseTranslationInstruction}
-
-【出力前チェック - 必須】
-JSONを出力する前に以下を確認し、違っていれば修正してから出力:
-- new_translation が ${targetLang} で書かれているか？英語になっていないか？
-- reverse_translation が ${sourceLang} で書かれているか？
-
-Edit the current_translation to match the tone level ${toneLevel}%. Return JSON only.`;
+  const userPrompt = [
+    `Current translation (${targetLang}): ${currentTranslation}`,
+    `Tone: ${tone || 'none'} at ${toneLevel}%`,
+    `Style: ${toneStyle}`,
+    structureInfo || '',
+    fixedValueDeclaration || '',
+    driftPrevention,
+    targetLang !== '英語' ? `★ new_translation must be in ${targetLang}. Do not output English.` : '',
+    diffInstruction || '',
+    options.variationInstruction ? `Additional: ${options.variationInstruction}` : '',
+    reverseTranslationInstruction,
+    'Edit to match tone. Return JSON only.'
+  ].filter(Boolean).join('\n\n');
 
   console.log('[translatePartial] ===== API CALL =====');
   console.log('[translatePartial] tone:', tone);
@@ -483,15 +472,8 @@ export async function translateFull(options: TranslateOptions): Promise<Translat
   const differenceInstruction = getFullDifferenceInstruction(toneLevel, previousTranslation, previousLevel, options.tone);
   const variationInstruction = options.variationInstruction ? `\n${options.variationInstruction}` : '';
   const structureInfo = structure ? `\n${structureToPromptText(structure, targetLang, sourceLang)}\n` : '';
-  const fixedValueDeclaration = structure ? `
-【この翻訳の固定値 - トーン調整で絶対に変えないこと】
-- 意図: ${structure.意図}
-- 確信度: ${structure.確信度}
-- 感情極性: ${structure.感情極性}
-- モダリティ: ${structure.モダリティ}
-トーン調整で変えていいのは「口調・語彙の格式レベル・文体」のみ。
-上記4つの値が変わる翻訳は不合格。
-` : '';
+  const fixedValueDeclaration = structure ? `【Fixed values - do not change with tone】
+意図:${structure.意図} / 確信度:${structure.確信度} / 感情極性:${structure.感情極性} / モダリティ:${structure.モダリティ} / 程度:${structure.程度} / 発話行為:${(structure.発話行為 && structure.発話行為.length > 0) ? structure.発話行為.join('+') : 'なし'}` : '';
 
   const langInfoOnly = !structure ? `
 【出力言語 - 絶対遵守】
@@ -512,7 +494,7 @@ ${isBusinessOrFormal ? `- ビジネス/丁寧トーンでは、原文が敬語�
 
   const systemPrompt = `あなたは${sourceLang}から${targetLang}への翻訳の専門家です。
 
-★★★ 最重要: translation フィールドは必ず「${targetLang}」で出力すること ★★★
+★ translation は必ず「${targetLang}」で出力 ★
 
 ${structureInfo}
 ${fixedValueDeclaration}
@@ -521,21 +503,20 @@ ${INVARIANT_RULES}
 ${TONE_AND_EVALUATION_RULES}
 ${japaneseRule}
 
-【絶対ルール - translation フィールド】
-- "translation" は ${targetLang} のみで出力すること
-- ${sourceLang}の文字は絶対に混ぜない
-- 語尾の「だね」「じゃん」「ですね」「ございます」等は translation には絶対に入れない
-- これらの語尾ルールは reverse_translation にのみ適用する
+【翻訳ルール】
+- "translation" は ${targetLang} のみ（${sourceLang}の文字は混ぜない）
+- 語尾ルール（だね/じゃん/ですね等）は reverse_translation にのみ適用
 
 ${languageSpecificRules}
 
-【固有名詞の読み - 絶対遵守】
-- 構造情報に記載された固有名詞の「読み」を必ずそのまま使用すること
-- トーンに関係なく、読みを勝手に変更してはいけない
+【固有名詞】構造情報に記載された読みをそのまま使用。トーンで変えない。
 
-${isNative ? '【ネイティブモード】自然でネイティブらしい表現を使ってください。' : ''}
+${isNative ? '【ネイティブモード】自然でネイティブらしい表現を使用。' : ''}
 
-【重要】翻訳スタイル指示 - 必ず従うこと
+【トーン調整の原則】
+トーンは「口調・語彙の格式レベル・文体」でのみ表現する。
+意図・確信度・感情極性は変えない。
+
 ${toneInstruction}
 ${reverseTranslationInstruction}
 ${differenceInstruction}
@@ -545,27 +526,13 @@ ${variationInstruction}
 原文の言語を正確に判定し、detected_language に出力すること。
 選択肢: 日本語, 英語, フランス語, スペイン語, ドイツ語, イタリア語, ポルトガル語, 韓国語, 中国語, チェコ語
 
-【最終確認 - 出力前に必ず実行】
-JSONを出力する直前に、以下の手順で見直しを行うこと:
-1. 生成したtranslationを読み返す
-2. それが本当に「${targetLang}」で書かれているか確認する
-3. もし英語や別の言語になっていたら、${targetLang}で書き直す
-4. 書き直した後にJSONを出力する
-
-※ targetLangが「${targetLang}」なのに英語で出力するのは絶対禁止
-
-必ず以下のJSON形式で出力してください：
+JSON形式で出力：
 {
-  "translation": "${targetLang}のみの翻訳（${sourceLang}の文字は絶対に含めない）",
-  "reverse_translation": "${sourceLang}のみの逆翻訳（語尾ルールはここにのみ適用）",
+  "translation": "${targetLang}のみ",
+  "reverse_translation": "${sourceLang}のみ",
   "risk": "low|med|high",
-  "detected_language": "原文の言語（上記選択肢から1つ）"
-}
-
-riskの判定基準：
-- low: 意味が正確に伝わる
-- med: 微妙なニュアンスの違いがある可能性
-- high: 誤解を招く可能性がある`;
+  "detected_language": "言語名"
+}`;
 
   const toneDesc = options.tone
     ? `${options.tone}スタイル、強度${toneLevel}%`
