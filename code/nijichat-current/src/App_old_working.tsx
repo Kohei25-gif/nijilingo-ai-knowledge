@@ -1,12 +1,20 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Settings, Mic, ArrowLeft, Search, Camera, Check, Plus, X, Clipboard, Pin, Tag, Trash2, Volume2, Loader2, Home } from 'lucide-react'
 import './App.css'
-import { translateFull, translateWithGuard, translatePartnerMessage, generateExplanation, editJapaneseForTone, type TranslationResult } from './services/groq'
+import { translateFull, translateWithGuard, translatePartnerMessage, generateExplanation, type TranslationResult } from './services/groq'
 import nijii1 from './assets/nijii-1.png'
 import nijii2 from './assets/nijii-2.png'
 import nijii3 from './assets/nijii-3.png'
 import nijii4 from './assets/nijii-4.png'
 import nijii5 from './assets/nijii-5.png'
+
+const editJapaneseForTone = async (
+  sourceText: string,
+  _tone?: string,
+  _toneLevel?: number,
+  _customTone?: string,
+  _signal?: AbortSignal
+): Promise<string> => sourceText
 
 const splashData = [
   { image: nijii1, bg: 'linear-gradient(to top, #f8e8e8 0%, #f8f4e8 100%)' },
