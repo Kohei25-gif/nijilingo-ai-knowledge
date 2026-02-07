@@ -701,7 +701,7 @@ function App() {
       })
     }
 
-    const buildOptions = (toneLevel: number, srcText?: string, current?: TranslationResult, prevLevel?: number) => ({
+    const buildOptions = (toneLevel: number, srcText?: string, current?: TranslationResult, prevLevel?: number, structure?: ExpandedStructure) => ({
       sourceText: srcText || sourceText,
       sourceLang: effectiveSourceLang,
       targetLang: effectiveTargetLang,
@@ -714,7 +714,8 @@ function App() {
       // 2026-02-03: 逆翻訳で差分を表現するための前レベル情報
       previousTranslation: current?.translation,
       previousLevel: prevLevel,
-      signal
+      signal,
+      structure
     })
 
     // custom は FULL一発を共有
@@ -732,9 +733,9 @@ function App() {
     }
 
     // ========================================
-    // 日本語ベース方式（日本語→外国語の場合）- 日本語先確定版
+    // 日本語ベース方式（日本語→外国語の場合）- 無効化: 統一方式を使用
     // ========================================
-    if (effectiveSourceLang === '日本語') {
+    if (false) { // 2026-02-06: 統一方式に変更 - 日本語ベース方式を無効化
       // ★ 構造化M抽出は0%翻訳と並列で実行中
       // 50%/100%の処理前にawaitする
 
@@ -971,11 +972,25 @@ function App() {
     }
 
     // ========================================
-    // 従来方式（外国語→日本語の場合）
+    // 統一方式: 翻訳をトーン調整（全言語共通）
     // ========================================
+    
+    // 構造化M抽出の完了を待つ
+    let extractedStructure: ExpandedStructure | undefined
+    if (structurePromise) {
+      extractedStructure = await structurePromise
+      console.log('[Unified] Structure extraction completed:', extractedStructure)
+    } else if (cachedStructure) {
+      extractedStructure = cachedStructure
+      console.log('[Unified] Using cached structure:', extractedStructure)
+    } else {
+      extractedStructure = extractedStructureRef.current
+      console.log('[Unified] Using structure from ref:', extractedStructure)
+    }
+    
     const internal: Record<number, TranslationResult> = {}
 
-    const base0 = await translateFull(buildOptions(0))
+    const base0 = await translateFull(buildOptions(0, undefined, undefined, undefined, extractedStructure))
     // 0%の逆翻訳は原文そのまま（翻訳の逆翻訳ではない）
     base0.reverse_translation = sourceText
     internal[0] = base0
@@ -985,7 +1000,10 @@ function App() {
     let prev = base0
     let prevLevel = 0  // 2026-02-03: 逆翻訳で差分を表現するための前レベル
     for (const level of [25, 50, 75, 100]) {
-      const guarded = await translateWithGuard(buildOptions(level, undefined, prev, prevLevel))
+      const guarded = await translateWithGuard({
+        ...buildOptions(level, undefined, prev, prevLevel, extractedStructure),
+        seedTranslation: base0.translation
+      })
 
       // 結果を保存（フォールバックしたかどうかに関わらず）
       internal[level] = guarded.result

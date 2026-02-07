@@ -1,0 +1,604 @@
+{
+  "version": "1.0",
+  "description": "NijiChat QA統合テスト（KUROMI-PROMPTS.md Step 4b仕様）",
+  "total_cases": 40,
+  "categories": {
+    "A": "ひらがな人名",
+    "B": "主語省略",
+    "C": "確信度",
+    "D": "Modality",
+    "E": "目的格・願望",
+    "F": "否定・条件文",
+    "G": "トーン段階",
+    "H": "逆翻訳"
+  },
+  "cases": [
+    {
+      "id": "A1",
+      "category": "A",
+      "input": "おうたが寝てから向かいます",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "named_entities_contain": ["おうた"],
+          "named_entity_readings": { "おうた": "Outa" },
+          "subject": "I"
+        },
+        "translation": {
+          "must_contain_any": ["Outa"],
+          "must_not_contain": ["sing", "song", "singing", "music", "melody"]
+        }
+      }
+    },
+    {
+      "id": "A2",
+      "category": "A",
+      "input": "ごんたにご飯あげて",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "named_entities_contain": ["ごんた"],
+          "named_entity_readings": { "ごんた": "Gonta" }
+        },
+        "translation": {
+          "must_contain_any": ["Gonta"]
+        }
+      }
+    },
+    {
+      "id": "A3",
+      "category": "A",
+      "input": "ゆうたと遊んでくる",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "named_entities_contain": ["ゆうた"],
+          "named_entity_readings": { "ゆうた": "Yuta" },
+          "subject": "I"
+        },
+        "translation": {
+          "must_contain_any": ["Yuta"]
+        }
+      }
+    },
+    {
+      "id": "A4",
+      "category": "A",
+      "input": "おうたがごんたを叩いた",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "named_entities_contain": ["おうた", "ごんた"],
+          "subject_entity": "おうた",
+          "object_entity": "ごんた"
+        },
+        "translation": {
+          "must_contain_any": ["Outa"],
+          "must_contain_any_2": ["Gonta"],
+          "subject_object_order": { "subject": "Outa", "object": "Gonta" }
+        }
+      }
+    },
+    {
+      "id": "A5",
+      "category": "A",
+      "input": "ゆうたは3歳です",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "named_entities_contain": ["ゆうた"],
+          "named_entity_readings": { "ゆうた": "Yuta" }
+        },
+        "translation": {
+          "must_contain_any": ["Yuta"],
+          "must_contain_any_2": ["3"],
+          "must_not_contain": ["Yuuta", "Yu-ta"]
+        }
+      }
+    },
+    {
+      "id": "B1",
+      "category": "B",
+      "input": "財布忘れた",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "subject": "I"
+        },
+        "translation": {
+          "must_contain_any": ["I "],
+          "must_not_contain": ["You ", "you "]
+        }
+      }
+    },
+    {
+      "id": "B2",
+      "category": "B",
+      "input": "向かいます",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "subject": "I"
+        },
+        "translation": {
+          "must_contain_any": ["I'm", "I am", "I'll", "I will"],
+          "must_not_contain": ["We ", "we "]
+        }
+      }
+    },
+    {
+      "id": "B3",
+      "category": "B",
+      "input": "ご飯食べた？",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "subject": "You"
+        },
+        "translation": {
+          "must_contain_any": ["you", "You"],
+          "must_not_contain": ["I "]
+        }
+      }
+    },
+    {
+      "id": "B4",
+      "category": "B",
+      "input": "送ってもらえる？",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "modality": "request"
+        },
+        "translation": {
+          "must_contain_any": ["Can you", "Could you", "can you", "could you", "Would you", "would you"],
+          "must_not_contain": ["Are you"]
+        }
+      }
+    },
+    {
+      "id": "B5",
+      "category": "B",
+      "input": "待ってて",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "translation": {
+          "must_contain_any": ["wait", "Wait", "hang on", "hold on"]
+        }
+      }
+    },
+    {
+      "id": "B6",
+      "category": "B",
+      "input": "もう帰った",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "translation": {
+          "must_contain_any": ["I ", "I'm", "He ", "She ", "he ", "she ", "already", "left", "went", "gone", "home"],
+          "must_not_contain": ["We ", "we "]
+        }
+      }
+    },
+    {
+      "id": "B7",
+      "category": "B",
+      "input": "遅れてごめん、電車が止まってた",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "subject": "I",
+          "certainty": "確定"
+        },
+        "translation": {
+          "must_contain_any": ["sorry", "Sorry", "apologize"],
+          "must_not_contain": ["You ", "you ", "guess", "maybe", "probably", "I think", "might"]
+        }
+      }
+    },
+    {
+      "id": "B8",
+      "category": "B",
+      "input": "明日行く",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "subject": "I"
+        },
+        "translation": {
+          "must_contain_any": ["I'll", "I will", "I'm going", "I am going"],
+          "must_not_contain": ["We ", "we "]
+        }
+      }
+    },
+    {
+      "id": "C1",
+      "category": "C",
+      "input": "電車が止まってた",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "certainty": "確定"
+        },
+        "translation": {
+          "must_not_contain": ["guess", "maybe", "probably", "I think", "might", "perhaps"]
+        }
+      }
+    },
+    {
+      "id": "C2",
+      "category": "C",
+      "input": "電車が止まってると思う",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "certainty": "推測"
+        },
+        "translation": {
+          "must_contain_any": ["think", "believe", "guess", "suppose"]
+        }
+      }
+    },
+    {
+      "id": "C3",
+      "category": "C",
+      "input": "電車が止まってるらしい",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "certainty": "伝聞"
+        },
+        "translation": {
+          "must_contain_any": ["apparently", "heard", "seems", "supposedly", "said", "they say"]
+        }
+      }
+    },
+    {
+      "id": "C4",
+      "category": "C",
+      "input": "財布忘れた",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "certainty": "確定"
+        },
+        "translation": {
+          "must_not_contain": ["I think", "maybe", "or something", "might", "probably", "perhaps"]
+        }
+      }
+    },
+    {
+      "id": "C5",
+      "category": "C",
+      "input": "雨降るかも",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "certainty_any": ["推測", "可能性"]
+        },
+        "translation": {
+          "must_contain_any": ["might", "maybe", "may", "could", "possibly", "perhaps"]
+        }
+      }
+    },
+    {
+      "id": "C6",
+      "category": "C",
+      "input": "明日は晴れるって",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "certainty": "伝聞"
+        },
+        "translation": {
+          "must_contain_any": ["said", "heard", "apparently", "they say", "supposedly", "told"]
+        }
+      }
+    },
+    {
+      "id": "D1",
+      "category": "D",
+      "input": "送ってもらえる？",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "modality": "request"
+        },
+        "translation": {
+          "must_contain_any": ["Can you", "Could you", "can you", "could you", "Would you", "would you"]
+        }
+      }
+    },
+    {
+      "id": "D2",
+      "category": "D",
+      "input": "送ってる？",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "modality": "question"
+        },
+        "translation": {
+          "must_contain_any": ["Are you", "are you", "sending", "sent"]
+        }
+      }
+    },
+    {
+      "id": "D3",
+      "category": "D",
+      "input": "明日の会議の資料を送ってもらえる？",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "modality": "request"
+        },
+        "translation": {
+          "must_contain_any": ["Can you", "Could you", "can you", "could you", "Would you", "would you", "send"]
+        }
+      }
+    },
+    {
+      "id": "D4",
+      "category": "D",
+      "input": "もう送った？",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "modality": "question"
+        },
+        "translation": {
+          "must_contain_any": ["Did you", "did you", "Have you", "have you"]
+        }
+      }
+    },
+    {
+      "id": "D5",
+      "category": "D",
+      "input": "送ってください",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "modality": "request"
+        },
+        "translation": {
+          "must_contain_any": ["Please send", "please send", "Send", "send", "Could you", "could you"]
+        }
+      }
+    },
+    {
+      "id": "E1",
+      "category": "E",
+      "input": "君を抱きたい",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "structure": {
+          "subject": "I",
+          "object": "You",
+          "desire": "あり"
+        },
+        "translation": {
+          "must_contain_any": ["I ", "want", "hold", "embrace", "hug"],
+          "must_not_contain_pattern": "^You.*want.*I"
+        }
+      }
+    },
+    {
+      "id": "E2",
+      "category": "E",
+      "input": "彼女に会いたい",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "translation": {
+          "must_contain_any": ["want to see", "want to meet", "wish to see", "wish to meet", "like to see", "like to meet"]
+        }
+      }
+    },
+    {
+      "id": "E3",
+      "category": "E",
+      "input": "君に伝えたいことがある",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "translation": {
+          "must_contain_any": ["want to tell", "need to tell", "something to tell", "like to tell", "want to say"]
+        }
+      }
+    },
+    {
+      "id": "E4",
+      "category": "E",
+      "input": "子供を起こさないで",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "translation": {
+          "must_contain_any": ["Don't", "don't", "not", "do not"],
+          "must_not_contain_pattern": "child.*wants|kid.*wants"
+        }
+      }
+    },
+    {
+      "id": "F1",
+      "category": "F",
+      "input": "行かない",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "translation": {
+          "must_contain_any": ["not", "n't", "won't", "don't"]
+        }
+      }
+    },
+    {
+      "id": "F2",
+      "category": "F",
+      "input": "できない",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "translation": {
+          "must_contain_any": ["can't", "cannot", "unable", "can not", "couldn't"]
+        }
+      }
+    },
+    {
+      "id": "F3",
+      "category": "F",
+      "input": "もし明日晴れたら",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "translation": {
+          "must_contain_any": ["if", "If"]
+        }
+      }
+    },
+    {
+      "id": "F4",
+      "category": "F",
+      "input": "電車が止まってたら",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "translation": {
+          "must_contain_any": ["if", "If"]
+        }
+      }
+    },
+    {
+      "id": "G1",
+      "category": "G",
+      "input": "遅れてごめん、電車が止まってた",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "tone": "casual",
+      "tone_levels": [25, 50, 75, 100],
+      "auto_checks": {
+        "tone_difference": true,
+        "comment": "各レベル間で翻訳に差が出ること"
+      }
+    },
+    {
+      "id": "G2",
+      "category": "G",
+      "input": "遅れてごめん、電車が止まってた",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "tone": "business",
+      "tone_levels": [25, 50, 75, 100],
+      "auto_checks": {
+        "tone_difference": true,
+        "comment": "各レベル間で翻訳に差が出ること"
+      }
+    },
+    {
+      "id": "G3",
+      "category": "G",
+      "input": "その服素敵だね",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "tone": "casual",
+      "tone_levels": [50, 100],
+      "auto_checks": {
+        "tone_difference": true,
+        "comment": "50%と100%で翻訳に差が出ること"
+      }
+    },
+    {
+      "id": "G4",
+      "category": "G",
+      "input": "その服素敵だね",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "tone": "business",
+      "tone_levels": [50, 100],
+      "auto_checks": {
+        "tone_difference": true,
+        "comment": "50%と100%で翻訳に差が出ること"
+      }
+    },
+    {
+      "id": "H1",
+      "category": "H",
+      "input": "遅れてごめん、電車が止まってた",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "reverse_translation": {
+          "must_be_japanese": true,
+          "must_contain_meaning": ["遅", "ごめん", "電車", "止"]
+        }
+      }
+    },
+    {
+      "id": "H2",
+      "category": "H",
+      "input": "君を抱きたい",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "reverse_translation": {
+          "must_be_japanese": true,
+          "must_not_reverse_subject_object": true,
+          "comment": "逆翻訳で主語目的語が反転していないこと"
+        }
+      }
+    },
+    {
+      "id": "H3",
+      "category": "H",
+      "input": "明日の会議の資料を送ってもらえる？",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "auto_checks": {
+        "reverse_translation": {
+          "must_be_japanese": true,
+          "must_maintain_modality": "request",
+          "comment": "逆翻訳がrequest維持"
+        }
+      }
+    },
+    {
+      "id": "H4",
+      "category": "H",
+      "input": "財布忘れた",
+      "source_lang": "日本語",
+      "target_lang": "英語",
+      "tone": "casual",
+      "tone_levels_compare": [50, 100],
+      "auto_checks": {
+        "reverse_translation": {
+          "must_be_japanese": true,
+          "must_differ_between_levels": true,
+          "comment": "casual 50% vs 100% で逆翻訳が異なること"
+        }
+      }
+    }
+  ]
+}

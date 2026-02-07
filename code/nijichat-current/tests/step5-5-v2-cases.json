@@ -1,0 +1,729 @@
+{
+  "version": "2.0",
+  "description": "Step 5.5 v2 cases (101-200), 20 cases per round",
+  "total_cases": 100,
+  "rounds": {
+    "1": {
+      "range": "101-120",
+      "size": 20
+    },
+    "2": {
+      "range": "121-140",
+      "size": 20
+    },
+    "3": {
+      "range": "141-160",
+      "size": 20
+    },
+    "4": {
+      "range": "161-180",
+      "size": 20
+    },
+    "5": {
+      "range": "181-200",
+      "size": 20
+    }
+  },
+  "cases": [
+    {
+      "id": 101,
+      "round": 1,
+      "input": "朝からコーヒーこぼして最悪だった。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 102,
+      "round": 1,
+      "input": "それって前に話してた件？",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 103,
+      "round": 1,
+      "input": "悪いけど、今日中にこれ対応してもらえる？",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 104,
+      "round": 1,
+      "input": "なんかちょっとモヤっとするんだよね。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 105,
+      "round": 1,
+      "input": "もし間に合わなければ、先に共有だけでいいよ。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 106,
+      "round": 1,
+      "input": "正直、その説明だと判断できない。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 107,
+      "round": 1,
+      "input": "今日の会議、開始時間変わったから注意ね。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 108,
+      "round": 1,
+      "input": "ありがとう、ちゃんと確認した。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 109,
+      "round": 1,
+      "input": "それ、たぶん勘違いされてると思う。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 110,
+      "round": 1,
+      "input": "今日は外に出る気力ない。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 111,
+      "round": 1,
+      "input": "その件、まだ調整中らしい。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 112,
+      "round": 1,
+      "input": "それって誰が決めたの？",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 113,
+      "round": 1,
+      "input": "ごめん、今ちょっと集中したい。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 114,
+      "round": 1,
+      "input": "今日は久しぶりにゆっくりできた。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 115,
+      "round": 1,
+      "input": "もし問題なければ、その方向で進めよう。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 116,
+      "round": 1,
+      "input": "正直、もう少し説明ほしい。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 117,
+      "round": 1,
+      "input": "今日の資料、あとで送ります。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 118,
+      "round": 1,
+      "input": "ありがとう、気づいてくれて助かった。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 119,
+      "round": 1,
+      "input": "それ、前にも似た話あったよね。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 120,
+      "round": 1,
+      "input": "今日はなんか調子出ない。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 121,
+      "round": 2,
+      "input": "その話、今ここでする必要ある？",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 122,
+      "round": 2,
+      "input": "今日は在宅に変更するね。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 123,
+      "round": 2,
+      "input": "悪いけど、これ優先でお願い。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 124,
+      "round": 2,
+      "input": "正直、ちょっと期待してた。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 125,
+      "round": 2,
+      "input": "もし雨止んだら、散歩行こうかな。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 126,
+      "round": 2,
+      "input": "それはさすがに無理があると思う。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 127,
+      "round": 2,
+      "input": "今日の進捗、簡単にまとめておいた。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 128,
+      "round": 2,
+      "input": "ありがとう、後で確認する。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 129,
+      "round": 2,
+      "input": "それ、聞いた話だと違うみたい。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 130,
+      "round": 2,
+      "input": "今日は早く寝るつもり。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 131,
+      "round": 2,
+      "input": "その件、もう一回整理したほうがよさそう。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 132,
+      "round": 2,
+      "input": "それって今決めないとダメ？",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 133,
+      "round": 2,
+      "input": "ごめん、今日は頭が回らない。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 134,
+      "round": 2,
+      "input": "久しぶりにあの店行ったけど、やっぱ良かった。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 135,
+      "round": 2,
+      "input": "もし余裕あれば、これも見てほしい。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 136,
+      "round": 2,
+      "input": "正直、その案は微妙かも。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 137,
+      "round": 2,
+      "input": "今日の打ち合わせ、結論だけ共有します。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 138,
+      "round": 2,
+      "input": "ありがとう、すごく助かる。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 139,
+      "round": 2,
+      "input": "それ、噂レベルの話じゃない？",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 140,
+      "round": 2,
+      "input": "今日は何もしたくない日。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 141,
+      "round": 3,
+      "input": "その件、先方からまだ返事ない。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 142,
+      "round": 3,
+      "input": "それって前提が違くない？",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 143,
+      "round": 3,
+      "input": "悪いけど、もう一回説明して。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 144,
+      "round": 3,
+      "input": "今日ちょっとテンション低め。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 145,
+      "round": 3,
+      "input": "もし可能なら、別案も考えたい。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 146,
+      "round": 3,
+      "input": "正直、その言い方はきつい。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 147,
+      "round": 3,
+      "input": "今日の作業、予定より遅れてる。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 148,
+      "round": 3,
+      "input": "ありがとう、確認助かります。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 149,
+      "round": 3,
+      "input": "それ、もしかしたら変更入るかも。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 150,
+      "round": 3,
+      "input": "今日はもう限界かもしれない。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 151,
+      "round": 3,
+      "input": "その話、後回しでもいい？",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 152,
+      "round": 3,
+      "input": "今日、電車めっちゃ混んでた。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 153,
+      "round": 3,
+      "input": "悪いけど、これ急ぎでお願い。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 154,
+      "round": 3,
+      "input": "正直、ちょっと不安。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 155,
+      "round": 3,
+      "input": "もし間違ってたら教えてほしい。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 156,
+      "round": 3,
+      "input": "それはあんまり現実的じゃない。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 157,
+      "round": 3,
+      "input": "今日の会議メモ、共有するね。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 158,
+      "round": 3,
+      "input": "ありがとう、助言ありがたい。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 159,
+      "round": 3,
+      "input": "それ、聞いた感じだと違和感ある。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 160,
+      "round": 3,
+      "input": "今日はもう外出たくない。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 161,
+      "round": 4,
+      "input": "その件、結論だけ先に教えて。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 162,
+      "round": 4,
+      "input": "それって誰向けの話？",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 163,
+      "round": 4,
+      "input": "ごめん、今は対応できない。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 164,
+      "round": 4,
+      "input": "今日は割と集中できた。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 165,
+      "round": 4,
+      "input": "もし必要なら、私が対応する。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 166,
+      "round": 4,
+      "input": "正直、その判断は早すぎる。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 167,
+      "round": 4,
+      "input": "今日のタスク、あと一つ残ってる。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 168,
+      "round": 4,
+      "input": "ありがとう、後で確認するね。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 169,
+      "round": 4,
+      "input": "それ、たぶん別の意味だと思う。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 170,
+      "round": 4,
+      "input": "今日は静かに過ごしたい。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 171,
+      "round": 4,
+      "input": "その話、もう少し具体的に教えて。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 172,
+      "round": 4,
+      "input": "今日、意外と早く終わった。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 173,
+      "round": 4,
+      "input": "悪いけど、これ確認だけお願い。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 174,
+      "round": 4,
+      "input": "正直、あんまりピンときてない。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 175,
+      "round": 4,
+      "input": "もし問題なければ、このまま進める。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 176,
+      "round": 4,
+      "input": "それはちょっとリスク高い。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 177,
+      "round": 4,
+      "input": "今日の納期、明日に延びました。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 178,
+      "round": 4,
+      "input": "ありがとう、対応助かります。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 179,
+      "round": 4,
+      "input": "それ、聞いた限りだと怪しい。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 180,
+      "round": 4,
+      "input": "今日はもう何も考えられない。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 181,
+      "round": 5,
+      "input": "その件、もう一度確認する。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 182,
+      "round": 5,
+      "input": "今日ちょっといいニュースあった。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 183,
+      "round": 5,
+      "input": "それって別の方法もあるよね。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 184,
+      "round": 5,
+      "input": "ごめん、言い過ぎたかも。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 185,
+      "round": 5,
+      "input": "もし時間あったら、相談したい。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 186,
+      "round": 5,
+      "input": "正直、その説明は分かりづらい。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 187,
+      "round": 5,
+      "input": "今日の会議、結局結論出なかった。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 188,
+      "round": 5,
+      "input": "ありがとう、気にかけてくれて。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 189,
+      "round": 5,
+      "input": "それ、噂だけ先行してる気がする。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 190,
+      "round": 5,
+      "input": "今日は早めに切り上げたい。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 191,
+      "round": 5,
+      "input": "その話、また今度にしよう。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 192,
+      "round": 5,
+      "input": "今日、久々に外で食べた。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 193,
+      "round": 5,
+      "input": "悪いけど、そこは譲れない。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 194,
+      "round": 5,
+      "input": "正直、ちょっと納得いかない。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 195,
+      "round": 5,
+      "input": "もし急ぎなら、先に対応する。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 196,
+      "round": 5,
+      "input": "それは今の状況だと難しい。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 197,
+      "round": 5,
+      "input": "今日の資料、最新版に差し替えた。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 198,
+      "round": 5,
+      "input": "ありがとう、確認ありがとう。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 199,
+      "round": 5,
+      "input": "それ、たぶん誤解されてる。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    },
+    {
+      "id": 200,
+      "round": 5,
+      "input": "今日はもう寝たい。",
+      "source_lang": "ja",
+      "target_lang": "en"
+    }
+  ]
+}

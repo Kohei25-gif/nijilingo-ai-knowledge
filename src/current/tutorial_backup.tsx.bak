@@ -1,0 +1,389 @@
+// ============================================
+// NijiLingo チュートリアル バックアップ
+// 保存日: 2026-02-02
+// 
+// 将来チュートリアルを再実装する時のために保存
+// ============================================
+
+const TUTORIAL_STEPS: { target: string | string[] | null; message: string; button: string | null }[] = [
+  {
+    target: null,
+    message:
+      '🌈 ようこそ、NijiLingo！\n送る前の文章を、翻訳＆ニュアンス調整。\n逆翻訳で「どう聞こえる？」もチェック👀\n※送信はしません。コピーしてLINE等に貼って送ってね📋',
+    button: 'はじめる',
+  }, // 0
+  {
+    target: 'add-partner-btn',
+    message: 'まずは話し相手を追加しよう！\n（連絡先じゃなくて「翻訳の相手設定」だよ）\n右上の「追加」をタップ✨',
+    button: null,
+  }, // 1
+  {
+    target: ['partner-name-input', 'partner-language-select', 'save-partner-btn'],
+    message: '名前はメモ用でOK👌\n言語は「相手が話す言語」を選んでね🌍\nできたら「追加」！',
+    button: null,
+  }, // 2
+  {
+    target: 'partner-message-btn',
+    message: '相手から来た文を入れてみよう📩\nコピペでもOK！',
+    button: null,
+  }, // 3
+  {
+    target: 'partner-message-add-btn',
+    message: 'この文を「相手の発言」として追加するよ。\nできたら「追加」✅',
+    button: null,
+  }, // 4
+  {
+    target: ['message-input', 'convert-btn'],
+    message: '次はあなたの返事✍️\n日本語で入力 →「変換」\n逆翻訳で伝わり方も確認しよう',
+    button: null,
+  }, // 5
+  {
+    target: 'tone-buttons',
+    message: 'トーンで言い方チェンジ🎛️\nスライダーで強さも調整できるよ',
+    button: null,
+  }, // 6
+  {
+    target: 'copy-btn',
+    message: 'ここは送信じゃなくて「コピー」📋\nコピーした文をLINE等に貼って送ってね',
+    button: null,
+  }, // 7
+  {
+    target: 'explanation-toggle',
+    message: '▼解説で「どう聞こえる？」が分かるよ。\n気になったら文章を直して、もう一回変換！',
+    button: '次へ',
+  }, // 8
+  {
+    target: 'face-to-face-btn',
+    message: '対面モードは、その場の会話を翻訳🎤\n旅行・接客・初対面で便利！',
+    button: '次へ',
+  }, // 9
+  {
+    target: null,
+    message: '準備OK🎉\n① 相手を追加\n② 相手の文を入れる\n③ 返事を変換\n④ コピーして送る\n相手設定は⚙️からいつでも変更OK',
+    button: '始める',
+  }, // 10
+];
+
+// チュートリアルオーバーレイコンポーネント
+interface TutorialOverlayProps {
+  tutorialStep: number;
+  onSkip: () => void;
+  onNext: () => void;
+  expandedExplanation: number | string | null;
+}
+
+const TutorialOverlay: React.FC<TutorialOverlayProps> = ({
+  tutorialStep,
+  onSkip,
+  onNext,
+  expandedExplanation,
+}) => {
+  const [tooltipStyle, setTooltipStyle] = useState<React.CSSProperties>({});
+
+  const isActive = tutorialStep >= 0 && tutorialStep < TUTORIAL_STEPS.length;
+  const step = isActive ? TUTORIAL_STEPS[tutorialStep] : null;
+
+  useEffect(() => {
+    // 全ての要素からクラス削除
+    document.querySelectorAll('.tutorial-target').forEach(el => {
+      el.classList.remove('tutorial-target');
+    });
+
+    if (!isActive || !step) return;
+
+    const viewportHeight = window.innerHeight;
+    const viewportWidth = window.innerWidth;
+    // 吹き出しは少し広めにして、不自然な改行を減らす（スマホ幅に合わせて可変）
+    const bubbleWidth = Math.min(320, viewportWidth - 32);
+
+    // Step 2（名前+言語+追加）は追加ボタンの下に吹き出し固定
+    if (tutorialStep === 2 && Array.isArray(step.target)) {
+      const targets = step.target;
+      targets.forEach(targetId => {
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.classList.add('tutorial-target');
+        }
+      });
+
+      // 追加ボタン（最後の要素）の下に配置
+      const saveBtn = document.getElementById('save-partner-btn');
+      if (saveBtn) {
+        const rect = saveBtn.getBoundingClientRect();
+        const left = Math.max(
+          16,
+          Math.min(rect.left + rect.width / 2 - bubbleWidth / 2, viewportWidth - bubbleWidth - 16)
+        );
+        setTooltipStyle({
+          position: 'fixed',
+          top: rect.bottom + 16,
+          left,
+        });
+        return;
+      }
+    }
+
+    // Step 3（相手メッセージ欄）は下に配置
+    if (tutorialStep === 3) {
+      const el = document.getElementById('partner-message-btn');
+      if (el) {
+        el.classList.add('tutorial-target');
+        const rect = el.getBoundingClientRect();
+        const left = Math.max(16, Math.min(rect.left, viewportWidth - bubbleWidth - 16));
+        setTooltipStyle({
+          position: 'fixed',
+          top: rect.bottom + 16,
+          left,
+        });
+        return;
+      }
+    }
+
+    // Step 4（相手文の追加）は入力ボックスと被りやすいので、右上に逃がす
+    if (tutorialStep === 4) {
+      const el = document.getElementById('partner-message-add-btn');
+      if (el) {
+        el.classList.add('tutorial-target');
+      }
+      setTooltipStyle({
+        position: 'fixed',
+        top: 120,
+        right: 16,
+        left: 'auto',
+      });
+      return;
+    }
+
+    // Step 5（自分の返事入力）はキーボード表示で被りやすいので、上に固定
+    if (tutorialStep === 5 && Array.isArray(step.target)) {
+      const targets = step.target;
+      targets.forEach(targetId => {
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.classList.add('tutorial-target');
+        }
+      });
+
+      setTooltipStyle({
+        position: 'fixed',
+        top: 140,
+        left: '50%',
+        transform: 'translateX(-50%)',
+      });
+      return;
+    }
+
+    // Step 6（トーン）はコピー付近と被りやすいので、少し上に配置
+    if (tutorialStep === 6) {
+      const el = document.getElementById('tone-buttons');
+      if (el) {
+        el.classList.add('tutorial-target');
+        const rect = el.getBoundingClientRect();
+        const top = Math.max(16, rect.top - 280);
+        setTooltipStyle({
+          position: 'fixed',
+          top,
+          left: '50%',
+          transform: 'translateX(-50%)',
+        });
+        return;
+      }
+    }
+
+    // Step 8（解説）で解説がまだ開いてない時は、解説ボタンの下に配置
+    if (tutorialStep === 8 && expandedExplanation === null) {
+      const el = document.getElementById('explanation-toggle');
+      if (el) {
+        el.classList.add('tutorial-target');
+        const rect = el.getBoundingClientRect();
+        setTooltipStyle({
+          position: 'fixed',
+          top: rect.bottom + 48,
+          left: '50%',
+          transform: 'translateX(-50%)',
+        });
+        return;
+      }
+    }
+
+    // Step 8で解説が開いてる時は、左下に移動（解説テキストと被らないように）
+    if (tutorialStep === 8 && expandedExplanation !== null) {
+      setTooltipStyle({
+        position: 'fixed',
+        bottom: 140,
+        left: 12,
+      });
+      return;
+    }
+
+    // Step 9（対面モード）は対面ボタンの位置に固定
+    if (tutorialStep === 9) {
+      const faceToFaceBtn = document.getElementById('face-to-face-btn');
+      if (faceToFaceBtn) {
+        const rect = faceToFaceBtn.getBoundingClientRect();
+        faceToFaceBtn.classList.add('tutorial-target');
+        setTooltipStyle({
+          position: 'fixed',
+          top: rect.bottom + 48,
+          right: 16,
+          left: 'auto',
+        });
+        return;
+      }
+    }
+
+    if (!step.target) {
+      setTooltipStyle({
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+      });
+      return;
+    }
+
+    // targetが配列か単一かで処理を分ける
+    const targets = Array.isArray(step.target) ? step.target : [step.target];
+
+    targets.forEach(targetId => {
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.classList.add('tutorial-target');
+      }
+    });
+
+    // 吹き出し位置は最後の要素を基準に
+    const lastTarget = targets[targets.length - 1];
+    const el = document.getElementById(lastTarget);
+    if (el) {
+      // 吹き出し位置計算
+      const rect = el.getBoundingClientRect();
+
+      // 右側の要素は吹き出しを左寄りに配置
+      let leftPos: number;
+      if (rect.left > viewportWidth / 2) {
+        leftPos = Math.max(16, rect.left + rect.width / 2 - bubbleWidth + 40);
+      } else {
+        leftPos = Math.max(16, Math.min(rect.left + rect.width / 2 - bubbleWidth / 2, viewportWidth - bubbleWidth - 16));
+      }
+
+      if (rect.top < viewportHeight / 2) {
+        setTooltipStyle({
+          position: 'fixed',
+          top: rect.bottom + 16,
+          left: leftPos,
+        });
+      } else {
+        setTooltipStyle({
+          position: 'fixed',
+          bottom: viewportHeight - rect.top + 16,
+          left: leftPos,
+        });
+      }
+    }
+
+    return () => {
+      document.querySelectorAll('.tutorial-target').forEach(el => {
+        el.classList.remove('tutorial-target');
+      });
+    };
+  }, [tutorialStep, isActive, step, expandedExplanation]);
+
+  if (!isActive || !step) return null;
+
+  return (
+    <div className="tutorial-overlay">
+      <div
+        className={`tutorial-bubble ${step.target ? '' : 'tutorial-bubble-center'}`}
+        style={{
+          ...tooltipStyle,
+          width: 'min(320px, calc(100vw - 32px))',
+          maxWidth: 'min(320px, calc(100vw - 32px))',
+          boxSizing: 'border-box',
+        }}
+      >
+        <p
+          className="tutorial-message"
+          style={{ whiteSpace: 'pre-line', textAlign: 'left', lineHeight: 1.5 }}
+        >
+          {step.message}
+        </p>
+        <div className="tutorial-buttons">
+          <button onClick={onSkip} className="tutorial-skip-btn">スキップ</button>
+          {step.button && (
+            <button onClick={onNext} className="tutorial-next-btn">{step.button}</button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ============================================
+// App内のstate・ハンドラー（function App()内に入れる）
+// ============================================
+
+/*
+  // チュートリアル管理
+  const [tutorialStep, setTutorialStep] = useState<number>(() => {
+    const done = localStorage.getItem('nijilingo_tutorial_done');
+    return done ? -1 : 0;
+  });
+
+  const handleTutorialSkip = () => {
+    setTutorialStep(-1);
+    localStorage.setItem('nijilingo_tutorial_done', 'true');
+  };
+
+  const handleTutorialNext = () => {
+    if (tutorialStep >= TUTORIAL_STEPS.length - 1) {
+      handleTutorialSkip();
+    } else {
+      setTutorialStep(tutorialStep + 1);
+    }
+  };
+*/
+
+// ============================================
+// JSX使用箇所（returnの中）
+// ============================================
+
+/*
+      <TutorialOverlay
+        tutorialStep={tutorialStep}
+        onSkip={handleTutorialSkip}
+        onNext={handleTutorialNext}
+        expandedExplanation={expandedExplanation}
+      />
+*/
+
+// ============================================
+// 各所のtutorialStep参照（イベントハンドラ内など）
+// ============================================
+
+/*
+if (tutorialStep === 1) setTutorialStep(2);
+if (tutorialStep === 2) setTutorialStep(3);
+if (tutorialStep === 3) setTutorialStep(4);
+if (tutorialStep === 4) setTutorialStep(5);
+if (tutorialStep === 5) setTutorialStep(6);
+if (tutorialStep === 6) setTutorialStep(7);
+if (tutorialStep === 7) setTutorialStep(8);
+
+autoFocus={tutorialStep < 0}
+*/
+
+// ============================================
+// CSS（App.cssにある）
+// ============================================
+
+/*
+.tutorial-overlay { ... }
+.tutorial-bubble { ... }
+.tutorial-bubble-center { ... }
+.tutorial-message { ... }
+.tutorial-buttons { ... }
+.tutorial-skip-btn { ... }
+.tutorial-next-btn { ... }
+.tutorial-target { ... }
+*/
