@@ -51,7 +51,7 @@ CORE PRINCIPLE (non-negotiable):
 9. Degree lock: keep intensity at the level specified in structure.程度. Do NOT escalate beyond Seed(0%).
 10. Speech acts lock: ALL acts listed in structure.発話行為 must appear in output.
 11. No extra facts: do not add new reasons, excuses, evaluations, or details not present in Seed(0%).
-12. No ceremonial framing: Do NOT wrap the message in emotional ceremony not present in the source (e.g., adding "It is with great pleasure..." or "I am delighted to..." when the source simply states a fact or opinion).
+12. No ceremonial framing: Do NOT wrap the message in ceremony not present in the source. This includes emotional ceremony ("It is with great pleasure..."), formality ceremony ("It is with utmost formality that I must inform you..."), and any preamble that inflates a simple statement into an announcement.
 
 ═══ DYNAMIC CONSTRAINTS ═══
 Each request includes immutable values:
@@ -328,6 +328,17 @@ export const EXPANDED_STRUCTURE_PROMPT = `あなたは多言語対応の構造�
    - moderate: 割と/まあまあ/そこそこ/あんまり（否定の緩和）
    - strong: かなり/めっちゃ/すごく
    - extreme: 完全に/全然（否定）/めちゃくちゃ
+   ■ 程度（degree）判定の必須ルール:
+   以下の副詞・表現が文中にある場合、程度を "none" にしてはならない:
+   - slight: 「ちょっと」「少し」「やや」「多少」「若干」
+   - moderate: 「割と」「結構」「かなり」「相当」「なかなか」
+   - strong: 「めっちゃ」「すごく」「とても」「非常に」「本当に」
+   - extreme: 「超」「マジで」「ありえないほど」
+   否定緩和も程度として扱う:
+   - 「あんまり〜ない」「そんなに〜ない」→ moderate
+   - 「ちょっと〜ない」→ slight
+   - 「全然〜ない」→ strong
+   重要: 程度副詞が存在する文で程度="none" を返すのは誤りである。
 15. 発話行為: この文に含まれる発話行為を配列で列挙（例: ["謝罪","報告"]）
    - 単一発話なら1要素（例: ["感謝"]）
    - 複合発話なら全要素（例: 「ごめん、今は対応できない」→ ["謝罪","報告"]）

@@ -23,7 +23,7 @@ CORE PRINCIPLE (non-negotiable):
 9. Degree lock: keep intensity at the level specified in structure.程度. Do NOT escalate beyond Seed(0%).
 10. Speech acts lock: ALL acts listed in structure.発話行為 must appear in output.
 11. No extra facts: do not add new reasons, excuses, evaluations, or details not present in Seed(0%).
-12. No ceremonial framing: Do NOT wrap the message in emotional ceremony not present in the source (e.g., adding "It is with great pleasure..." or "I am delighted to..." when the source simply states a fact or opinion).
+12. No ceremonial framing: Do NOT wrap the message in ceremony not present in the source. This includes emotional ceremony ("It is with great pleasure..."), formality ceremony ("It is with utmost formality that I must inform you..."), and any preamble that inflates a simple statement into an announcement.
 
 ═══ DYNAMIC CONSTRAINTS ═══
 Each request includes immutable values:
