@@ -1,0 +1,1032 @@
+[
+  {
+    "id": "文A1",
+    "source": "おうたが寝てから向かいます",
+    "structure": {
+      "主題": "移動",
+      "動作": "向かう",
+      "動作の意味": "head to",
+      "意図": "報告",
+      "感情極性": "neutral",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": [
+        {
+          "text": "おうた",
+          "type": "person",
+          "読み": "Outa",
+          "敬称": "なし"
+        }
+      ],
+      "保持値": [],
+      "条件表現": []
+    },
+    "seed": "I'll head there after Outa goes to sleep",
+    "results": {
+      "casual_25": {
+        "new_translation": "I'll head there after Outa falls asleep",
+        "reverse_translation": "おうたが寝たら向かう",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_50": {
+        "new_translation": "I'll head there once Outa's asleep",
+        "reverse_translation": "おうたが寝たら向かう",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_75": {
+        "new_translation": "I'll head there when Outa's asleep",
+        "reverse_translation": "Outaが寝たら向かうわ",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_100": {
+        "new_translation": "I'll head there when Outa falls asleep",
+        "reverse_translation": "おうたが寝たら向かうわ",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_25": {
+        "new_translation": "I will head there after Outa goes to sleep",
+        "reverse_translation": "おうたが寝た後でそちらに向かいます",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "I shall head there after Outa retires for the night.",
+        "reverse_translation": "おうたが就寝した後、そちらに向かいます",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "I will head there after Outa retires for the night.",
+        "reverse_translation": "私はおうたが就寝した後にそこに向かうつもりです",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "I shall proceed there after Outa retires for the night.",
+        "reverse_translation": "おうたが就寝なされた後、そちらに向かうつもりです",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "I'll head there once Outa falls asleep",
+        "reverse_translation": "おうたが寝たら向かいます",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "I will head there once Outa falls asleep.",
+        "reverse_translation": "おうたが寝たら向かいます。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "I will head there once Outa has fallen asleep.",
+        "reverse_translation": "私はおうたが眠りに落ちたらそちらに向かいます",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "I shall proceed there upon Outa's retirement for the night.",
+        "reverse_translation": "おうたが就寝なさったら、私はそこに向かいます",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "文B1",
+    "source": "財布忘れた",
+    "structure": {
+      "主題": "財布の忘れ物",
+      "動作": "忘れる",
+      "動作の意味": "forget",
+      "意図": "報告",
+      "感情極性": "neutral",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "財布",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "省略",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": [],
+      "保持値": [],
+      "条件表現": []
+    },
+    "seed": "I forgot my wallet",
+    "results": {
+      "casual_25": {
+        "new_translation": "I forgot my wallet.",
+        "reverse_translation": "財布忘れた",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_50": {
+        "new_translation": "I forgot my wallet.",
+        "reverse_translation": "財布忘れた",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_75": {
+        "new_translation": "Forgot my wallet.",
+        "reverse_translation": "財布忘れた",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_100": {
+        "new_translation": "I left my wallet.",
+        "reverse_translation": "財布を置いてきた",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_25": {
+        "new_translation": "I have forgotten my wallet.",
+        "reverse_translation": "財布を忘れました",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "I appear to have forgotten my wallet.",
+        "reverse_translation": "財布を忘れてしまったようです",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "It appears that I have forgotten my wallet.",
+        "reverse_translation": "財布を忘れてしまったようです",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "It is evident that I have left my wallet behind.",
+        "reverse_translation": "私が財布を置いてきたことは明らかです",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "I've forgotten my wallet.",
+        "reverse_translation": "財布を忘れました",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "I forgot my wallet.",
+        "reverse_translation": "財布を忘れました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "I have forgotten my wallet.",
+        "reverse_translation": "財布を忘れました",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "I regret to inform you that I have forgotten my wallet.",
+        "reverse_translation": "残念ながら財布を忘れてしまったことをご報告申し上げます。",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "文C1",
+    "source": "電車が止まってた",
+    "structure": {
+      "主題": "電車の状態",
+      "動作": "止まる",
+      "動作の意味": "stop",
+      "意図": "報告",
+      "感情極性": "neutral",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "省略",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": [],
+      "保持値": [],
+      "条件表現": []
+    },
+    "seed": "The train stopped",
+    "results": {
+      "casual_25": {
+        "new_translation": "The train has stopped",
+        "reverse_translation": "電車が止まった",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_50": {
+        "new_translation": "The train's stopped",
+        "reverse_translation": "電車が止まったよ",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_75": {
+        "new_translation": "Train's stopped!",
+        "reverse_translation": "電車止まった！",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_100": {
+        "new_translation": "Train stopped!",
+        "reverse_translation": "電車止まった！",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_25": {
+        "new_translation": "The train has come to a halt.",
+        "reverse_translation": "列車は停止しました",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "The train has come to a complete stop.",
+        "reverse_translation": "列車は完全に停止しました",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "The train has come to a complete halt.",
+        "reverse_translation": "列車は完全に停止いたしました",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "The train has come to a complete standstill.",
+        "reverse_translation": "列車は完全に停止いたしました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "The train has come to a halt.",
+        "reverse_translation": "電車は停止しました",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "The train has stopped.",
+        "reverse_translation": "列車は停止しました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "The train has come to a halt.",
+        "reverse_translation": "列車は停止いたしました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "The train has come to a complete stop.",
+        "reverse_translation": "列車は完全に停止いたしました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "文D1",
+    "source": "送ってもらえる？",
+    "structure": {
+      "主題": "送る行為の依頼",
+      "動作": "送る",
+      "動作の意味": "send",
+      "意図": "依頼",
+      "感情極性": "neutral",
+      "モダリティ": "依頼",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "二人称",
+      "確信度": "推測",
+      "程度": "none",
+      "発話行為": [
+        "依頼"
+      ],
+      "固有名詞": [],
+      "保持値": [],
+      "条件表現": []
+    },
+    "seed": "Can you send it to me?",
+    "results": {
+      "casual_25": {
+        "new_translation": "Could you maybe send it to me?",
+        "reverse_translation": "もしかしたらそれを私に送ってくれますか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_50": {
+        "new_translation": "Can you send it to me?",
+        "reverse_translation": "私に送ってくれる？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_75": {
+        "new_translation": "Can you send it over?",
+        "reverse_translation": "送ってくれる？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_100": {
+        "new_translation": "Can ya send it over?",
+        "reverse_translation": "送ってくれる？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_25": {
+        "new_translation": "Could you possibly send it to me?",
+        "reverse_translation": "それを私に送っていただけますでしょうか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "Might I be able to receive it if you were to send it to me?",
+        "reverse_translation": "送っていただければ、私はそれを受け取ることができるでしょうか?",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "I would be grateful if you could send it to me.",
+        "reverse_translation": "あなたがそれを私に送ってくださったら感謝いたします。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "I would be most grateful if you could be so kind as to send it to me.",
+        "reverse_translation": "お送りいただけますと大変感謝いたしております",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "Could you possibly send it to me?",
+        "reverse_translation": "それを私に送っていただけませんか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "Would you be able to send it to me?",
+        "reverse_translation": "送っていただけますでしょうか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "Could you kindly send it to me?",
+        "reverse_translation": "ご送付いただけますでしょうか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "Would you be able to send it to me?",
+        "reverse_translation": "お送りいただけますでしょうか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "文E1",
+    "source": "君を抱きたい",
+    "structure": {
+      "主題": "君",
+      "動作": "抱く",
+      "動作の意味": "hold",
+      "意図": "その他",
+      "感情極性": "positive",
+      "モダリティ": "その他",
+      "主語": "省略",
+      "対象": "君",
+      "目的格": "君",
+      "願望": "あり",
+      "人称": "一人称単数",
+      "確信度": "推測",
+      "程度": "none",
+      "発話行為": [
+        "願望"
+      ],
+      "固有名詞": [],
+      "保持値": [],
+      "条件表現": []
+    },
+    "seed": "I want to hold you",
+    "results": {
+      "casual_25": {
+        "new_translation": "I kinda wanna hold you",
+        "reverse_translation": "なんとなく君を抱きたい",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_50": {
+        "new_translation": "I want to hold you",
+        "reverse_translation": "あなたを抱きたい",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_75": {
+        "new_translation": "I kinda wanna hold you",
+        "reverse_translation": "なんか抱きたい",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_100": {
+        "new_translation": "I really wanna hold ya",
+        "reverse_translation": "ほんとに抱きたい",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_25": {
+        "new_translation": "I would like to hold you",
+        "reverse_translation": "あなたを抱きたいと思います",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "I wish to hold you",
+        "reverse_translation": "あなたを抱きたいと思います",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "I would like to hold you",
+        "reverse_translation": "あなたを抱きたいと思います",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "I wish to hold you",
+        "reverse_translation": "あなたを抱きたいと思います",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "I think I'd like to hold you",
+        "reverse_translation": "あなたを抱きたいと思う",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "I believe I would like to hold you.",
+        "reverse_translation": "あなたを抱きたいと思っています",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "I think I would very much like to embrace you.",
+        "reverse_translation": "あなたを抱擁したいと思います。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "I believe it would be beneficial to establish a close relationship with you.",
+        "reverse_translation": "あなたと緊密な関係を築くことが有益であると信じています",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "文G1",
+    "source": "遅れてごめん、電車が止まってた",
+    "structure": {
+      "主題": "遅れと電車の状況",
+      "動作": "遅れる、止まる",
+      "動作の意味": "be late, stop",
+      "意図": "報告",
+      "感情極性": "negative",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": [],
+      "保持値": [],
+      "条件表現": []
+    },
+    "seed": "Sorry I'm late, the train stopped.",
+    "results": {
+      "casual_25": {
+        "new_translation": "Sorry I'm running late, the train's stuck.",
+        "reverse_translation": "遅れてすみません、電車が止まっています",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_50": {
+        "new_translation": "Sorry I'm running late - the train's stuck!",
+        "reverse_translation": "ごめん、遅れてる - 電車が止まってる！",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_75": {
+        "new_translation": "Late! Train's stuck!",
+        "reverse_translation": "遅れる！電車が止まってる！",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_100": {
+        "new_translation": "I'm running late! Train's dead stopped!",
+        "reverse_translation": "遅刻だ！電車が完全に止まってる！",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_25": {
+        "new_translation": "I apologize for being late; the train came to a halt.",
+        "reverse_translation": "遅刻して申し訳ありません、電車が止まりました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "I regret to inform that I am late due to the train having come to a stop.",
+        "reverse_translation": "遅刻したことをお詫び申し上げますが、電車が止まっておりましたためです。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "I am sorry to report that my arrival is delayed because the train has come to a halt.",
+        "reverse_translation": "到着が遅れていることをお詫び申し上げます。電車が停止したためです。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "I regret to inform you that my arrival is delayed owing to the train having come to a standstill.",
+        "reverse_translation": "到着が遅れることを残念に思います。電車が停止しているためです。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "I'm sorry for being late; the train came to a halt.",
+        "reverse_translation": "遅刻して申し訳ありません、電車が止まりました",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "I apologize for being late; the train came to a halt.",
+        "reverse_translation": "遅刻して申し訳ありません、電車が止まりました。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "I apologize for the delay; the train has come to a stop.",
+        "reverse_translation": "遅れのお詫び申し上げます。電車が止まっておりましたので。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "I regret the delay; the train has stopped.",
+        "reverse_translation": "遅延をお詫び申し上げます。電車が停止しましたので。",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "文I1",
+    "source": "明日行く",
+    "structure": {
+      "主題": "行動の予定",
+      "動作": "行く",
+      "動作の意味": "go",
+      "意図": "報告",
+      "感情極性": "neutral",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": [],
+      "保持値": [],
+      "条件表現": []
+    },
+    "seed": "I'm going tomorrow",
+    "results": {
+      "casual_25": {
+        "new_translation": "I'm heading out tomorrow",
+        "reverse_translation": "明日出かける",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_50": {
+        "new_translation": "I'm heading out tomorrow",
+        "reverse_translation": "明日出かける",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_75": {
+        "new_translation": "I'm heading out tomorrow, man!",
+        "reverse_translation": "明日出かけるよ！",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_100": {
+        "new_translation": "I'm bailing tomorrow!",
+        "reverse_translation": "明日は抜けるぜ！",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_25": {
+        "new_translation": "I will be going tomorrow.",
+        "reverse_translation": "明日伺います",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "I will be going tomorrow.",
+        "reverse_translation": "明日伺います",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "I will be departing tomorrow.",
+        "reverse_translation": "明日出発いたします",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "I shall be departing tomorrow.",
+        "reverse_translation": "明日出発いたします。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "I'm going tomorrow.",
+        "reverse_translation": "明日行きます。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "I will be going tomorrow.",
+        "reverse_translation": "明日伺います",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "I am scheduled to depart tomorrow.",
+        "reverse_translation": "私は明日出発する予定です",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "I am scheduled to depart tomorrow.",
+        "reverse_translation": "明日出発する予定です。",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "文N1",
+    "source": "9時半に新宿駅の南口で待ち合わせしよう",
+    "structure": {
+      "主題": "待ち合わせ",
+      "動作": "待ち合わせする",
+      "動作の意味": "meet up",
+      "意図": "提案",
+      "感情極性": "neutral",
+      "モダリティ": "提案",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称複数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "提案"
+      ],
+      "固有名詞": [
+        {
+          "text": "新宿駅",
+          "type": "place",
+          "敬称": "なし"
+        },
+        {
+          "text": "南口",
+          "type": "place",
+          "敬称": "なし"
+        }
+      ],
+      "保持値": [
+        "9時半"
+      ],
+      "条件表現": []
+    },
+    "seed": "Let's meet at Shinjuku Station South Exit at 9:30.",
+    "results": {
+      "casual_25": {
+        "new_translation": "Let's meet at Shinjuku Station's South Exit at 9:30.",
+        "reverse_translation": "新宿駅の南口で9時半に会おうよ。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_50": {
+        "new_translation": "Let's meet up at Shinjuku Station's South Exit at 9:30.",
+        "reverse_translation": "新宿駅の南口で9時半に会おうよ",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_75": {
+        "new_translation": "Let's meet up at Shinjuku Station's South Exit at 9:30, okay?",
+        "reverse_translation": "新宿駅の南口で9時半に会おうぜ",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_100": {
+        "new_translation": "Let's meet up at Shinjuku Station's South Exit at 9:30, alright?",
+        "reverse_translation": "新宿駅南口で9時半に会おうぜ",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_25": {
+        "new_translation": "Shall we meet at the south exit of Shinjuku Station at 9:30?",
+        "reverse_translation": "新宿駅南口で9時半に参りましょうか",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "Shall we convene at the south exit of Shinjuku Station at 9:30?",
+        "reverse_translation": "新宿駅南口にて9時半に参集なさいますか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "Shall we gather at the south exit of Shinjuku Station at 9:30?",
+        "reverse_translation": "新宿駅南口に9時半に参集なさいますか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "Shall we convene at the south exit of Shinjuku Station at 9:30?",
+        "reverse_translation": "新宿駅南口に9時半に参集なさいますか？",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "Let's meet at Shinjuku Station's South Exit at 9:30.",
+        "reverse_translation": "新宿駅の南口で9時半に会いましょう。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "Shall we meet at Shinjuku Station's South Exit at 9:30?",
+        "reverse_translation": "新宿駅南口で9時半に参りましょうか",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "We propose meeting at Shinjuku Station's South Exit at 9:30.",
+        "reverse_translation": "新宿駅南口にて9時半にご会面いただくことをご提案いたします。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "We suggest meeting at Shinjuku Station's South Exit at 9:30.",
+        "reverse_translation": "新宿駅南口で9時半に会うことを提案します。",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "文N2",
+    "source": "もし時間があれば、手伝ってもらえると助かるんだけど",
+    "structure": {
+      "主題": "手伝いの依頼",
+      "動作": "助かる",
+      "動作の意味": "be helpful",
+      "意図": "提案",
+      "感情極性": "positive",
+      "モダリティ": "提案",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "推測",
+      "程度": "none",
+      "発話行為": [
+        "依頼"
+      ],
+      "固有名詞": [],
+      "保持値": [],
+      "条件表現": [
+        "もし〜なら"
+      ]
+    },
+    "seed": "If you have time, I'd appreciate your help.",
+    "results": {
+      "casual_25": {
+        "new_translation": "If you've got time, I'd appreciate your help.",
+        "reverse_translation": "時間があったら助かるんだけど",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_50": {
+        "new_translation": "If you've got time, I'd really appreciate your help.",
+        "reverse_translation": "時間があったら、助かるんだけど。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_75": {
+        "new_translation": "If you've got time, I'd super appreciate your help.",
+        "reverse_translation": "時間があったら、すごく助かるんだけど",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_100": {
+        "new_translation": "If you've got a sec, I'd totally appreciate your help.",
+        "reverse_translation": "ちょっといい？助けてもらえるとすごく助かるよ",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_25": {
+        "new_translation": "If you have some spare time, I would be grateful for your assistance.",
+        "reverse_translation": "お時間があれば、お助けいただければ幸いです。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "If you have some spare time, I would appreciate your help.",
+        "reverse_translation": "もしお時間があれば、お助けいただければ幸いです",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "If you have some spare time, I would be grateful for your assistance.",
+        "reverse_translation": "もしお時間があれば、お助けいただければ幸いです",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "Should you have some spare time at your disposal, I would be most grateful for your assistance.",
+        "reverse_translation": "もしお時間がおありでしたら、ご助力いただければ幸甚に存じます",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "If you have some time to spare, I would appreciate your assistance.",
+        "reverse_translation": "もしお時間があれば、お手伝いいただけると助かります。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "If you have some time available, your assistance would be appreciated.",
+        "reverse_translation": "お時間がおありでしたら、ご協力いただけると助かります。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "If you have some time available, I would be grateful for your assistance.",
+        "reverse_translation": "お時間がおありでしたら、ご助力いただければ幸いです",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "If you have some time available, I would appreciate your assistance.",
+        "reverse_translation": "お時間がおありでしたら、ご助力いただければ幸いです。",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  },
+  {
+    "id": "文N3",
+    "source": "田中さんが来週の月曜に50人分の資料を持ってくるらしいよ",
+    "structure": {
+      "主題": "田中さんの行動",
+      "動作": "持ってくる",
+      "動作の意味": "bring",
+      "意図": "報告",
+      "感情極性": "neutral",
+      "モダリティ": "報告",
+      "主語": "田中さん",
+      "対象": "資料",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "三人称",
+      "確信度": "推測",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": [
+        {
+          "text": "田中さん",
+          "type": "person",
+          "敬称": "なし"
+        }
+      ],
+      "保持値": [
+        "50人分"
+      ],
+      "条件表現": []
+    },
+    "seed": "It seems Tanaka-san will bring the materials for 50 people next Monday.",
+    "results": {
+      "casual_25": {
+        "new_translation": "Tanaka-san's gonna bring the materials for 50 people next Monday, I guess.",
+        "reverse_translation": "田中さんが来週月曜日に50人分の資料を持ってくるらしいよ。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_50": {
+        "new_translation": "Tanaka-san's bringing materials for 50 people next Monday, I reckon.",
+        "reverse_translation": "田中さんが来週の月曜日に50人分の資料を持ってくるんだろうな。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_75": {
+        "new_translation": "Tanaka-san's gonna bring materials for 50 people next Monday, I reckon.",
+        "reverse_translation": "田中さんが来週の月曜日に50人分の資料を持ってくるってさ",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "casual_100": {
+        "new_translation": "Tanaka-san's probably gonna bring materials for 50 people next Monday.",
+        "reverse_translation": "田中さんが来週の月曜日に50人分の資料を持ってくるんだろう、多分。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_25": {
+        "new_translation": "It appears that Tanaka-san will bring the materials for 50 people next Monday.",
+        "reverse_translation": "田中さんが来週月曜日に50人分の資料を持ってくるようです。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_50": {
+        "new_translation": "It is anticipated that Tanaka-san will bring the materials for 50 people next Monday.",
+        "reverse_translation": "田中さんが来週月曜日に50人分の資料を持ってくることが予想されています。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_75": {
+        "new_translation": "It is expected that Tanaka-san will bring the materials for 50 people next Monday.",
+        "reverse_translation": "田中さんが来週月曜日に50人分の資料を持ってくることが予想されています。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "polite_100": {
+        "new_translation": "It is anticipated that Tanaka-san will bring the requisite materials for 50 people on the forthcoming Monday.",
+        "reverse_translation": "田中さんが来週の月曜日に50人分の必要な資料を持ってくることが予想されています。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_25": {
+        "new_translation": "Tanaka-san appears to be bringing the materials for 50 people next Monday.",
+        "reverse_translation": "田中さんが来週月曜日に50人分の資料を持ってくるようです。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_50": {
+        "new_translation": "Tanaka-san is likely to bring the materials for 50 people next Monday.",
+        "reverse_translation": "田中さんは来週の月曜日に50人分の資料を持ってくる可能性が高いと思われます。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_75": {
+        "new_translation": "It is anticipated that Tanaka-san will bring the materials for 50 people next Monday.",
+        "reverse_translation": "田中さんが来週月曜日に50人分の資料を持ってくることが予想されています。",
+        "risk": "low",
+        "generator": "translatePartial"
+      },
+      "business_100": {
+        "new_translation": "It is foreseen that Tanaka-san will bring the materials for 50 people next Monday.",
+        "reverse_translation": "田中さんが来週月曜日に50人分の資料を持ってくることが予測されています。",
+        "risk": "low",
+        "generator": "translatePartial"
+      }
+    }
+  }
+]
