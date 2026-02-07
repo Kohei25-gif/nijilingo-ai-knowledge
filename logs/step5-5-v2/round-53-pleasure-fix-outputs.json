@@ -1,0 +1,134 @@
+[
+  {
+    "id": "文182",
+    "source": "今日ちょっといいニュースあった。",
+    "structure": {
+      "主題": "良いニュース",
+      "動作": "あった",
+      "動作の意味": "happen",
+      "意図": "報告",
+      "感情極性": "positive",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I had some good news today.",
+    "results": {
+      "casual_50": {
+        "new_translation": "I had some good news today.",
+        "reverse_translation": "今日ちょっといいニュースがあった。",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "I received some good news today.",
+        "reverse_translation": "今日、良いニュースを受けました。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "I was pleased to receive some good news today.",
+        "reverse_translation": "今日、良いニュースを受けて嬉しかったです。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "It was my pleasure to receive some good news today.",
+        "reverse_translation": "今日は嬉しいニュースを受け取ることができてよかったです。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "I am delighted to have received some good news today.",
+        "reverse_translation": "今日、嬉しいニュースを頂戴できて大変光栄に存じます.",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I received some favorable news today.",
+        "reverse_translation": "今日、よいニュースがいくつかありました.",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "I have been pleased to receive some favorable news today.",
+        "reverse_translation": "今日、好ましいニュースを受けて嬉しく思いました。",
+        "risk": "low"
+      },
+      "business_100": {
+        "new_translation": "I am delighted to have received certain favorable news today.",
+        "reverse_translation": "今日、ある良いニュースを受けて大変嬉しく思っております。",
+        "risk": "low"
+      }
+    }
+  },
+  {
+    "id": "文192",
+    "source": "今日、久々に外で食べた。",
+    "structure": {
+      "主題": "外で食事",
+      "動作": "食べる",
+      "動作の意味": "eat",
+      "意図": "報告",
+      "感情極性": "positive",
+      "モダリティ": "報告",
+      "主語": "省略",
+      "対象": "なし",
+      "目的格": "なし",
+      "願望": "なし",
+      "人称": "一人称単数",
+      "確信度": "確定",
+      "程度": "none",
+      "発話行為": [
+        "報告"
+      ],
+      "固有名詞": []
+    },
+    "seed": "I ate outside today for the first time in a while.",
+    "results": {
+      "casual_50": {
+        "new_translation": "I went out for a bite today for the first time in ages.",
+        "reverse_translation": "久しぶりに外で食事してきた",
+        "risk": "low"
+      },
+      "polite_25": {
+        "new_translation": "It was a pleasure to finally eat outside today.",
+        "reverse_translation": "今日は久しぶりに外で食事をすることができてよかったです。",
+        "risk": "low"
+      },
+      "polite_50": {
+        "new_translation": "It was my pleasure to finally dine outside today.",
+        "reverse_translation": "今日、やっと外で食事できてよかったです。",
+        "risk": "low"
+      },
+      "polite_75": {
+        "new_translation": "I had the great pleasure of dining outside today.",
+        "reverse_translation": "今日は外で食事ができて大変よかったです。",
+        "risk": "low"
+      },
+      "polite_100": {
+        "new_translation": "It was my utmost pleasure to dine al fresco today.",
+        "reverse_translation": "今日は外で食事をするのが非常に楽しかったです。",
+        "risk": "low"
+      },
+      "business_50": {
+        "new_translation": "I had the opportunity to dine outdoors today for the first time in a while.",
+        "reverse_translation": "今日は久しぶりに外で食事をしました。",
+        "risk": "low"
+      },
+      "business_75": {
+        "new_translation": "It was my pleasure to have the opportunity to dine outdoors today for the first time in a while.",
+        "reverse_translation": "今日は久しぶりに外で食事をする機会を得ることができてよかったです。",
+        "risk": "med"
+      },
+      "business_100": {
+        "new_translation": "I am delighted to have had the opportunity to dine outdoors today for the first time in a while.",
+        "reverse_translation": "今日は久しぶりに外で食事できてよかったです。",
+        "risk": "low"
+      }
+    }
+  }
+]
