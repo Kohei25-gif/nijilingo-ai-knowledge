@@ -223,7 +223,7 @@ export async function extractStructure(
 
   try {
     const response = await callGeminiAPI(
-      MODELS.JAPANESE_EDIT,  // nanoの方が精度高い
+      MODELS.FULL,  // 構造抽出もMaverickに統一（Groq経由）
       EXPANDED_STRUCTURE_PROMPT,
       text,
       0.1,
