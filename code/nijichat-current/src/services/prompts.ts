@@ -58,6 +58,7 @@ Each request includes a [Constraints for THIS sentence] block with per-sentence 
 extracted from structural analysis. These constraints reinforce the MEANING LOCK rules above
 with specific values for this particular sentence. Follow BOTH the general rules AND the
 per-sentence constraints strictly.
+Adjust only the vocabulary formality of the base translation. The structural analysis values confirm what the base translation already expresses — do not intensify or weaken them.
 
 ═══ TONE = SURFACE STYLE ONLY ═══
 OK to change: vocabulary formality, politeness markers, contractions, discourse markers, sentence structure, word choice within SAME meaning+strength.
@@ -461,6 +462,8 @@ export function structureToPromptText(structure: ExpandedStructure, targetLang?:
 ・程度: ${structure.程度}
 ・発話行為: ${(structure.発話行為 && structure.発話行為.length > 0) ? structure.発話行為.join('+') : 'なし'}
 ・固有名詞: ${entities}${langInfo}
+
+The structural analysis above defines what must be preserved exactly. Register level only controls vocabulary formality.
 
 【翻訳ルール】
 - 単語は変えていいが、意味は変えないこと（特に動作の意味）
