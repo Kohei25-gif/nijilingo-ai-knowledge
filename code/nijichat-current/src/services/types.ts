@@ -1,35 +1,9 @@
-// 型定義（groq.tsから分離）
+// types.ts v2: 6次元全体地図ベースの型定義
+// 哲学: 統一設計。プロンプトが日本語なら値も日本語。
+//       コード内部ロジック用（ModalityClass等）とAPI仕様（risk等）は英語維持。
 
-// 意図タイプ
-export type IntentType = '依頼' | '確認' | '報告' | '質問' | '感謝' | '謝罪' | '提案' | '命令' | 'その他';
+// ═══ 格構造 ═══
 
-// 確信度
-export type CertaintyLevel = '確定' | '推測' | '可能性' | '伝聞';
-
-// 感情極性
-export type SentimentPolarity = 'positive' | 'negative' | 'neutral';
-
-// モダリティ（発話クラス）
-export type ModalityType = '報告' | '依頼' | '感謝' | '質問' | '感想' | '提案' | 'その他';
-
-// 程度（強度レベル）
-export type DegreeLevel = 'none' | 'slight' | 'moderate' | 'strong' | 'extreme';
-
-// 固有名詞タイプ
-export type EntityType = 'person' | 'place' | 'org' | 'product';
-
-// 敬称タイプ
-export type HonorificType = 'なし' | 'さん' | '様' | '君' | 'ちゃん' | 'その他';
-
-// 固有名詞エントリ
-export interface NamedEntity {
-  text: string;
-  type: EntityType;
-  読み?: string;  // ひらがな名詞の場合のローマ字読み
-  敬称: HonorificType;  // 敬称なし=身内→尊敬語不要
-}
-
-// 格構造（疑問詞ベースの14キー）
 export interface CaseStructure {
   誰が: string;
   何を: string;
@@ -47,47 +21,116 @@ export interface CaseStructure {
   どうやって: string;
 }
 
-// 拡張構造スキーマ（格構造 + 意味フィールド）
-export interface ExpandedStructure {
-  格構造: CaseStructure; // 格助詞ベースの意味骨格
-  主題: string;           // 何について
-  動作: string;           // 何をする/どうなる
-  動作の意味: string;     // 動作の英語での意味（go, come, eat等）
-  意図: IntentType;       // 発話の目的
-  感情極性: SentimentPolarity; // 感情の向き（positive/negative/neutral）
-  モダリティ: ModalityType; // 発話の機能（報告/依頼/感謝/質問/感想/提案）
-  願望: string;           // 願望表現（〜したい/want to等）があるか（あり/なし）
-  人称: string;           // 一人称単数/一人称複数/二人称/三人称
-  確信度: CertaintyLevel; // 話者の確信の度合い
-  程度: DegreeLevel;      // 程度修飾語のレベル
-  発話行為: string[];     // 複合発話を含む発話行為の一覧
-  固有名詞: NamedEntity[];// 誤認識しやすい名詞
-  保持値: string[];       // 変えてはいけない具体値（数値・日時・金額など）
-  条件表現: string[];     // 原文の条件・理由構造（〜ので/もし〜なら等）
+// ═══ Ⅳ. スタンス ═══
+
+export type EmotionPolarity = '肯定的' | '否定的' | '中立';
+
+export type EmotionType =
+  | '喜び' | '安心' | '期待' | '感謝' | '満足'
+  | '悲しみ' | '不安' | '怒り' | '後悔' | '驚き' | '不満'
+  | 'なし';
+
+export interface Emotion {
+  極性: EmotionPolarity;
+  種類: EmotionType;
 }
 
-// 翻訳結果の型定義
+export type EvaluationValue = 'なし' | '肯定的評価' | '否定的評価';
+
+export interface EvaluativeStance {
+  評価: EvaluationValue;
+  対象: string;
+}
+
+export type DegreeLevel = 'なし' | 'わずか' | '中程度' | '強い' | '極端';
+
+// ═══ Ⅱ. 発話行為 ═══
+
+export type ExpressionType = '平叙' | '疑問' | '命令' | '感嘆' | '祈願';
+
+// ═══ Ⅲ. モダリティ ═══
+
+export type EpistemicModality = '確定' | '推測' | '可能性';
+export type Evidentiality = '直接経験' | '推論' | '伝聞';
+export type DeonticModality = 'なし' | '義務' | '許可' | '禁止' | '能力';
+export type ExplanatoryModality = 'なし' | '背景説明' | '当然の帰結';
+
+// ═══ Ⅴ. 対人的伝達 ═══
+
+export type PersonType = '一人称単数' | '一人称複数' | '二人称' | '三人称';
+export type CommunicativeAttitude = 'なし' | '主張' | '共有確認' | '緩和';
+
+// ═══ 固有名詞 ═══
+
+export type EntityType = '人名' | '地名' | '組織名' | '製品名';
+
+export interface NamedEntity {
+  text: string;
+  type: EntityType;
+  読み?: string;
+  敬称: string;  // 'なし' | 言語に応じた敬称文字列
+}
+
+// ═══ ExpandedStructure（19項目・6次元） ═══
+
+export interface ExpandedStructure {
+  // Ⅰ. 命題的内容
+  格構造: CaseStructure;
+  動作: string;
+  動作の意味: string;
+  極性: '肯定' | '否定';
+
+  // Ⅱ. 発話行為
+  表現類型: ExpressionType;
+  発話行為: string[];
+
+  // Ⅲ. モダリティ
+  認識的モダリティ: EpistemicModality;
+  証拠性: Evidentiality;
+  義務的モダリティ: DeonticModality;
+  説明のモダリティ: ExplanatoryModality;
+  願望: 'あり' | 'なし';
+
+  // Ⅳ. スタンス
+  感情: Emotion;
+  評価態度: EvaluativeStance;
+  程度: DegreeLevel;
+
+  // Ⅴ. 対人的伝達
+  人称: PersonType;
+  伝達態度: CommunicativeAttitude;
+
+  // Ⅵ. テクスト
+  固有名詞: NamedEntity[];
+  保持値: string[];
+  条件表現: string[];
+}
+
+// ═══ 翻訳結果（API仕様 — 英語維持） ═══
+
 export interface TranslationResult {
   translation: string;
   reverse_translation: string;
   risk: 'low' | 'med' | 'high';
-  // 2026-02-02: AI言語検出対応
   detected_language?: string;
-  // BUG-001対応: 日英乖離検出用の分析フィールド
   analysis?: {
-    alignmentScore: number;  // 0-1: 1が完全一致
+    alignmentScore: number;
     hasAlignmentIssue: boolean;
     details?: string;
   };
 }
 
-// BUG-001対応: PARTIAL編集用の型定義
 export interface PartialTranslationResult {
   new_translation: string;
   reverse_translation: string;
   risk: 'low' | 'med' | 'high';
-  // 元のソーステキストとの整合性スコア
   sourceAlignmentScore?: number;
+}
+
+export interface PartialTranslationResponse {
+  new_translation?: string;
+  reverse_translation?: string;
+  risk?: 'low' | 'med' | 'high';
 }
 
 export interface GuardedTranslationResult {
@@ -96,13 +139,15 @@ export interface GuardedTranslationResult {
   fallbackReason?: string | null;
 }
 
-// 解説の型定義
+// ═══ 解説 ═══
+
 export interface ExplanationResult {
   point: string;
   explanation: string;
 }
 
-// 翻訳オプション
+// ═══ 翻訳オプション ═══
+
 export interface TranslateOptions {
   sourceText: string;
   sourceLang: string;
@@ -112,38 +157,27 @@ export interface TranslateOptions {
   toneLevel?: number;
   customTone?: string;
   variationInstruction?: string;
-  // PARTIAL編集用：現在の翻訳結果
   currentTranslation?: string;
   currentReverseTranslation?: string;
-  // PARTIAL編集時の0%シード翻訳（累積ドリフト防止）
   seedTranslation?: string;
-  // 差分生成用：前レベルの翻訳結果
   previousTranslation?: string;
   previousLevel?: number;
-  // キャンセル用
   signal?: AbortSignal;
-  // 構造化M抽出 v2（拡張ハイブリッド版）
   structure?: ExpandedStructure;
 }
 
-// 不変条件チェック結果の型
+// ═══ 不変条件チェック ═══
+
 export interface InvariantCheckResult {
   passed: boolean;
   violations: string[];
 }
 
-// modality_class を抽出（request/confirmation/suggestion/obligation判定）
+// ═══ コード内部ロジック用（英語維持） ═══
+
 export type ModalityClass = 'request' | 'confirmation' | 'suggestion' | 'obligation' | 'statement';
 
-// フォールバック判定結果の型
 export interface FallbackDecision {
   shouldFallback: boolean;
   reason: string | null;
-}
-
-// PARTIAL編集のレスポンス型
-export interface PartialTranslationResponse {
-  new_translation?: string;
-  reverse_translation?: string;
-  risk?: 'low' | 'med' | 'high';
 }

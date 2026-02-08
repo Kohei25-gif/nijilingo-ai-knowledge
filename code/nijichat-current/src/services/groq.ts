@@ -1,20 +1,29 @@
 // OpenAI API 翻訳サービス（翻訳フロー関数のみ）
+// v2: 6次元全体地図ベースに再設計
 // 型定義・ガード・プロンプト・i18n・APIは個別ファイルに分離済み
 
 // 型定義を再エクスポート
-export type { IntentType, CertaintyLevel, SentimentPolarity, ModalityType, DegreeLevel, EntityType, HonorificType } from './types';
-export type { NamedEntity, ExpandedStructure, TranslationResult, PartialTranslationResult, GuardedTranslationResult, ExplanationResult, TranslateOptions, InvariantCheckResult, FallbackDecision, PartialTranslationResponse } from './types';
+export type { EntityType } from './types';
+export type {
+  NamedEntity, ExpandedStructure, TranslationResult,
+  PartialTranslationResult, GuardedTranslationResult,
+  ExplanationResult, TranslateOptions, InvariantCheckResult,
+  FallbackDecision, PartialTranslationResponse,
+  EmotionPolarity, EmotionType, Emotion,
+  EvaluationValue, EvaluativeStance,
+  CaseStructure,
+} from './types';
 export type { ModalityClass } from './types';
 
 import type {
   CaseStructure,
   ExpandedStructure,
   NamedEntity,
-  IntentType,
-  CertaintyLevel,
-  SentimentPolarity,
-  ModalityType,
-  DegreeLevel,
+  Emotion,
+  EvaluativeStance,
+  EmotionPolarity,
+  EmotionType,
+  EvaluationValue,
   TranslationResult,
   TranslateOptions,
   ExplanationResult,
@@ -36,8 +45,7 @@ import {
 
 // プロンプト
 import {
-  INVARIANT_RULES,
-  TONE_AND_EVALUATION_RULES,
+  TONE_BOUNDARY_RULES,
   PARTIAL_SYSTEM_PROMPT,
   EXPANDED_STRUCTURE_PROMPT,
   getLanguageSpecificRules,
@@ -66,17 +74,37 @@ export { MODELS } from './api';
 export const _internal = guardsInternal;
 
 // ============================================
-// 構造化M抽出 v2（拡張ハイブリッド版）- キャッシュ＆関数
+// 構造化抽出 v2（6次元対応）- 定数・バリデーション
 // ============================================
 
 const structureCache = new Map<string, ExpandedStructure>();
 
-const INTENT_TYPES: IntentType[] = ['依頼', '確認', '報告', '質問', '感謝', '謝罪', '提案', '命令', 'その他'];
-const CERTAINTY_LEVELS: CertaintyLevel[] = ['確定', '推測', '可能性', '伝聞'];
-const POLARITY_TYPES: SentimentPolarity[] = ['positive', 'negative', 'neutral'];
-const MODALITY_TYPES: ModalityType[] = ['報告', '依頼', '感謝', '質問', '感想', '提案', 'その他'];
-const DEGREE_LEVELS: DegreeLevel[] = ['none', 'slight', 'moderate', 'strong', 'extreme'];
+// Ⅱ. 発話行為
+const EXPRESSION_TYPES = ['平叙', '疑問', '命令', '感嘆', '祈願'] as const;
+// Ⅲ. モダリティ
+const EPISTEMIC_TYPES = ['確定', '推測', '可能性'] as const;
+const EVIDENTIALITY_TYPES = ['直接経験', '推論', '伝聞'] as const;
+const DEONTIC_TYPES = ['なし', '義務', '許可', '禁止', '能力'] as const;
+const EXPLANATORY_TYPES = ['なし', '背景説明', '当然の帰結'] as const;
+
+// Ⅳ. スタンス（日本語統一）
+const EMOTION_POLARITY_TYPES: EmotionPolarity[] = ['肯定的', '否定的', '中立'];
+const EMOTION_TYPES: EmotionType[] = [
+  '喜び', '安心', '期待', '感謝', '満足',
+  '悲しみ', '不安', '怒り', '後悔', '驚き', '不満',
+  'なし'
+];
+const EVALUATION_VALUES: EvaluationValue[] = ['なし', '肯定的評価', '否定的評価'];
+const DEGREE_LEVELS = ['なし', 'わずか', '中程度', '強い', '極端'] as const;
+
+// Ⅴ. 対人的伝達
 const PERSON_TYPES = ['一人称単数', '一人称複数', '二人称', '三人称'] as const;
+const COMMUNICATIVE_TYPES = ['なし', '主張', '共有確認', '緩和'] as const;
+
+// 固有名詞
+const ENTITY_TYPES = ['人名', '地名', '組織名', '製品名'] as const;
+
+// 格構造
 const CASE_KEYS = [
   '誰が', '何を', '誰に', '誰と', 'なんて',
   'どこに', 'どこで', 'どこへ', 'どこから', 'どこまで',
@@ -100,23 +128,12 @@ const DEFAULT_CASE_STRUCTURE: CaseStructure = {
   どうやって: 'なし',
 };
 
-const isIntentType = (value: unknown): value is IntentType =>
-  typeof value === 'string' && INTENT_TYPES.includes(value as IntentType);
+// ============================================
+// バリデーション関数
+// ============================================
 
-const isSentimentPolarity = (value: unknown): value is SentimentPolarity =>
-  typeof value === 'string' && POLARITY_TYPES.includes(value as SentimentPolarity);
-
-const isModalityType = (value: unknown): value is ModalityType =>
-  typeof value === 'string' && MODALITY_TYPES.includes(value as ModalityType);
-
-const isDegreeLevel = (value: unknown): value is DegreeLevel =>
-  typeof value === 'string' && DEGREE_LEVELS.includes(value as DegreeLevel);
-
-const isCertaintyLevel = (value: unknown): value is CertaintyLevel =>
-  typeof value === 'string' && CERTAINTY_LEVELS.includes(value as CertaintyLevel);
-
-const isPersonType = (value: unknown): value is string =>
-  typeof value === 'string' && (PERSON_TYPES as readonly string[]).includes(value);
+const isInArray = <T extends string>(arr: readonly T[], value: unknown): value is T =>
+  typeof value === 'string' && (arr as readonly string[]).includes(value);
 
 const normalizeCaseStructure = (value: unknown): CaseStructure => {
   if (!value || typeof value !== 'object') return DEFAULT_CASE_STRUCTURE;
@@ -149,8 +166,102 @@ const normalizeSpeechActs = (value: unknown): string[] => {
   return Array.from(new Set(normalized));
 };
 
+// 後方互換マップ（旧英語値→新日本語値）
+const EMOTION_POLARITY_COMPAT: Record<string, EmotionPolarity> = {
+  positive: '肯定的',
+  negative: '否定的',
+  neutral: '中立',
+};
+
+const DEGREE_COMPAT: Record<string, string> = {
+  none: 'なし',
+  slight: 'わずか',
+  moderate: '中程度',
+  strong: '強い',
+  extreme: '極端',
+};
+
+const ENTITY_TYPE_COMPAT: Record<string, string> = {
+  person: '人名',
+  place: '地名',
+  org: '組織名',
+  product: '製品名',
+};
+
+const normalizeEmotion = (value: unknown): Emotion => {
+  const defaultEmotion: Emotion = { 極性: '中立', 種類: 'なし' };
+
+  if (!value || typeof value !== 'object') {
+    // 後方互換: 旧形式の文字列が来た場合
+    if (typeof value === 'string') {
+      const mapped = EMOTION_POLARITY_COMPAT[value];
+      if (mapped) return { 極性: mapped, 種類: 'なし' };
+      if (isInArray(EMOTION_POLARITY_TYPES, value)) return { 極性: value, 種類: 'なし' };
+    }
+    return defaultEmotion;
+  }
+
+  const src = value as Record<string, unknown>;
+
+  // 極性の正規化（後方互換含む）
+  let polarity: EmotionPolarity = '中立';
+  if (typeof src.極性 === 'string') {
+    const mapped = EMOTION_POLARITY_COMPAT[src.極性];
+    if (mapped) polarity = mapped;
+    else if (isInArray(EMOTION_POLARITY_TYPES, src.極性)) polarity = src.極性;
+  }
+
+  const type = isInArray(EMOTION_TYPES, src.種類) ? src.種類 : 'なし';
+
+  // 中立の場合は種類を強制的に「なし」
+  if (polarity === '中立') {
+    return { 極性: '中立', 種類: 'なし' };
+  }
+
+  return { 極性: polarity, 種類: type };
+};
+
+const normalizeEvaluativeStance = (value: unknown): EvaluativeStance => {
+  const defaultStance: EvaluativeStance = { 評価: 'なし', 対象: 'なし' };
+
+  if (!value || typeof value !== 'object') return defaultStance;
+
+  const src = value as Record<string, unknown>;
+  const evalValue = isInArray(EVALUATION_VALUES, src.評価) ? src.評価 : 'なし';
+  const target = typeof src.対象 === 'string' && src.対象.trim().length > 0 ? src.対象.trim() : 'なし';
+
+  // 評価が「なし」なら対象も強制的に「なし」
+  if (evalValue === 'なし') {
+    return { 評価: 'なし', 対象: 'なし' };
+  }
+
+  return { 評価: evalValue, 対象: target };
+};
+
+// 程度の正規化（後方互換含む）
+const normalizeDegree = (value: unknown): string => {
+  if (typeof value !== 'string') return 'なし';
+  const mapped = DEGREE_COMPAT[value];
+  if (mapped) return mapped;
+  if (isInArray(DEGREE_LEVELS, value)) return value;
+  return 'なし';
+};
+
+// EntityTypeの正規化（後方互換含む）
+const normalizeEntityType = (value: unknown): string => {
+  if (typeof value !== 'string') return '人名';
+  const mapped = ENTITY_TYPE_COMPAT[value];
+  if (mapped) return mapped;
+  if (isInArray(ENTITY_TYPES, value)) return value;
+  return '人名';
+};
+
+// ============================================
+// 構造抽出メイン
+// ============================================
+
 /**
- * 日本語テキストから構造を抽出（拡張ハイブリッド版・14項目）
+ * テキストから構造を抽出（v2: 6次元・19項目）
  */
 export async function extractStructure(
   text: string,
@@ -163,28 +274,39 @@ export async function extractStructure(
   }
 
   const defaultStructure: ExpandedStructure = {
-    主題: 'なし',
+    // Ⅰ. 命題的内容
+    格構造: DEFAULT_CASE_STRUCTURE,
     動作: 'なし',
     動作の意味: 'なし',
-    意図: 'その他',
-    感情極性: 'neutral',
-    モダリティ: 'その他',
-    格構造: DEFAULT_CASE_STRUCTURE,
-    願望: 'なし',
-    人称: '一人称単数',
-    確信度: '確定',
-    程度: 'none',
+    極性: '肯定',
+    // Ⅱ. 発話行為
+    表現類型: '平叙',
     発話行為: ['報告'],
+    // Ⅲ. モダリティ
+    認識的モダリティ: '確定',
+    証拠性: '直接経験',
+    義務的モダリティ: 'なし',
+    説明のモダリティ: 'なし',
+    願望: 'なし',
+    // Ⅳ. スタンス
+    感情: { 極性: '中立', 種類: 'なし' },
+    評価態度: { 評価: 'なし', 対象: 'なし' },
+    程度: 'なし',
+    // Ⅴ. 対人的伝達
+    人称: '一人称単数',
+    伝達態度: 'なし',
+    // Ⅵ. テクスト
     固有名詞: [],
     保持値: [],
-    条件表現: []
+    条件表現: [],
   };
+
   const MAX_RETRIES = 2;
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
       const response = await callGeminiAPI(
-        MODELS.FULL,  // 構造抽出もMaverickに統一（Groq経由）
+        MODELS.FULL,
         EXPANDED_STRUCTURE_PROMPT,
         text,
         0.1,
@@ -193,9 +315,9 @@ export async function extractStructure(
 
       console.log(`[extractStructure] attempt ${attempt} raw response:`, response);
 
-      let parsed: Partial<ExpandedStructure>;
+      let parsed: Record<string, unknown>;
       try {
-        parsed = parseJsonResponse<ExpandedStructure>(response);
+        parsed = parseJsonResponse<Record<string, unknown>>(response);
       } catch (parseError) {
         console.error(`[extractStructure] attempt ${attempt} JSON parse failed:`, parseError);
         if (attempt < MAX_RETRIES) {
@@ -205,41 +327,63 @@ export async function extractStructure(
         return defaultStructure;
       }
 
-      // 固有名詞の敬称をバリデート
+      // 固有名詞のバリデート
       const validatedEntities: NamedEntity[] = Array.isArray(parsed.固有名詞)
-        ? parsed.固有名詞.map(e => ({
-            text: e.text || '',
-            type: e.type || 'person',
-            読み: e.読み,
-            敬称: e.敬称 || 'なし'
+        ? (parsed.固有名詞 as Array<Record<string, unknown>>).map(e => ({
+            text: (e.text as string) || '',
+            type: normalizeEntityType(e.type) as NamedEntity['type'],
+            読み: e.読み as string | undefined,
+            敬称: (e.敬称 as string) || 'なし'
           }))
         : [];
 
-      const intent = isIntentType(parsed.意図) ? parsed.意図 : 'その他';
-      const modality = isModalityType(parsed.モダリティ) ? parsed.モダリティ : 'その他';
-      const polarity = isSentimentPolarity(parsed.感情極性) ? parsed.感情極性 : 'neutral';
-      const degree = isDegreeLevel(parsed.程度) ? parsed.程度 : 'none';
+      // 証拠性と認識的モダリティの共起制約を適用
+      let epistemicValue = isInArray(EPISTEMIC_TYPES, parsed.認識的モダリティ)
+        ? parsed.認識的モダリティ : '確定';
+      const evidentialityValue = isInArray(EVIDENTIALITY_TYPES, parsed.証拠性)
+        ? parsed.証拠性 : '直接経験';
+
+      // 共起制約: 伝聞 → 確定にならない
+      if (evidentialityValue === '伝聞' && epistemicValue === '確定') {
+        epistemicValue = '推測';
+      }
+
       const parsedSpeechActs = normalizeSpeechActs(parsed.発話行為);
 
       const validated: ExpandedStructure = {
-        主題: parsed.主題 || 'なし',
-        動作: parsed.動作 || 'なし',
-        動作の意味: parsed.動作の意味 || 'なし',
-        意図: intent,
-        感情極性: polarity,
-        モダリティ: modality,
+        // Ⅰ. 命題的内容
         格構造: normalizeCaseStructure(parsed.格構造),
-        願望: parsed.願望 || 'なし',
-        人称: isPersonType(parsed.人称) ? parsed.人称 : '一人称単数',
-        確信度: isCertaintyLevel(parsed.確信度) ? parsed.確信度 : '確定',
-        程度: degree,
+        動作: (parsed.動作 as string) || 'なし',
+        動作の意味: (parsed.動作の意味 as string) || 'なし',
+        極性: parsed.極性 === '否定' ? '否定' : '肯定',
+
+        // Ⅱ. 発話行為
+        表現類型: isInArray(EXPRESSION_TYPES, parsed.表現類型) ? parsed.表現類型 : '平叙',
         発話行為: parsedSpeechActs.length > 0 ? parsedSpeechActs : ['報告'],
+
+        // Ⅲ. モダリティ
+        認識的モダリティ: epistemicValue,
+        証拠性: evidentialityValue,
+        義務的モダリティ: isInArray(DEONTIC_TYPES, parsed.義務的モダリティ) ? parsed.義務的モダリティ : 'なし',
+        説明のモダリティ: isInArray(EXPLANATORY_TYPES, parsed.説明のモダリティ) ? parsed.説明のモダリティ : 'なし',
+        願望: parsed.願望 === 'あり' ? 'あり' : 'なし',
+
+        // Ⅳ. スタンス
+        感情: normalizeEmotion(parsed.感情),
+        評価態度: normalizeEvaluativeStance(parsed.評価態度),
+        程度: normalizeDegree(parsed.程度) as ExpandedStructure['程度'],
+
+        // Ⅴ. 対人的伝達
+        人称: isInArray(PERSON_TYPES, parsed.人称) ? parsed.人称 : '一人称単数',
+        伝達態度: isInArray(COMMUNICATIVE_TYPES, parsed.伝達態度) ? parsed.伝達態度 : 'なし',
+
+        // Ⅵ. テクスト
         固有名詞: validatedEntities,
         保持値: Array.isArray(parsed.保持値)
-          ? parsed.保持値.filter((v): v is string => typeof v === 'string')
+          ? (parsed.保持値 as unknown[]).filter((v): v is string => typeof v === 'string')
           : [],
         条件表現: Array.isArray(parsed.条件表現)
-          ? parsed.条件表現.filter((v): v is string => typeof v === 'string')
+          ? (parsed.条件表現 as unknown[]).filter((v): v is string => typeof v === 'string')
           : [],
       };
 
@@ -284,11 +428,11 @@ function getToneStyle(
     bus25: 'やや丁寧な文体。短縮形を控え、語彙をやや改まったものにする程度',
     bus50: '丁寧な文体。適度な敬意表現を使い、簡潔かつ丁寧に',
     bus75: '格式高い文体。丁寧な語彙選択、完全文、改まった表現を使う',
-    bus100: '最も格式高い文体。最高レベルのビジネス語彙と構造で書く。感情や評価は付加しない',
+    bus100: '最も格式高い文体。最高レベルのビジネス語彙と構造で書く。構造情報にある感情と評価のみ反映する',
     for25: 'やや改まった文体。基本的な敬意表現を使い、落ち着いた語調にする',
     for50: '改まった文体。敬意ある語彙選択と完全文で、品のある表現を使う',
     for75: '格式高い文体。敬意ある語彙選択と完全文で、品格のある表現を使う',
-    for100: '最も格式高い文体。最高レベルの語彙と文構造を使う。感情や評価は付加しない',
+    for100: '最も格式高い文体。最高レベルの語彙と文構造を使う。構造情報にある感情と評価のみ反映する',
   };
 
   if (level < 25) {
@@ -300,30 +444,30 @@ function getToneStyle(
 
   const base = baseMap[toneKey] || 'Original as-is';
   const guards: string[] = [];
-  const degree = structure?.程度;
-  const certainty = structure?.確信度;
-  const degreeGuardLabel: Record<string, string> = {
-    slight: '程度=わずかを維持',
-    moderate: '程度=中程度を維持',
-    strong: '程度=かなりを維持',
-    extreme: '程度=最大級を維持',
-  };
-  const certaintyGuardLabel: Record<string, string> = {
-    推測: '確信度=推測を維持',
-    可能性: '確信度=低い可能性を維持',
-    伝聞: '確信度=未確認の伝聞を維持',
-  };
 
-  if (tone === 'casual' && level >= 75 && degree && degree !== 'none') {
-    guards.push(degreeGuardLabel[degree] || `程度=${degree}を維持`);
+  const degree = structure?.程度;
+  const epistemic = structure?.認識的モダリティ;
+
+  if (tone === 'casual' && level >= 75 && degree && degree !== 'なし') {
+    guards.push(`程度=${degree}を維持`);
   }
   if (
     (tone === 'business' || tone === 'formal') &&
     level >= 50 &&
-    certainty &&
-    certainty !== '確定'
+    epistemic &&
+    epistemic !== '確定'
   ) {
-    guards.push(certaintyGuardLabel[certainty] || `確信度=${certainty}を維持`);
+    guards.push(`認識的モダリティ=${epistemic}を維持`);
+  }
+
+  const evidentiality = structure?.証拠性;
+  if (evidentiality && evidentiality !== '直接経験') {
+    guards.push(`証拠性=${evidentiality}を維持`);
+  }
+
+  const communicative = structure?.伝達態度;
+  if (communicative && communicative !== 'なし') {
+    guards.push(`伝達態度=${communicative}を維持`);
   }
 
   return guards.length > 0 ? `${base}（${guards.join('、')}）` : base;
@@ -348,21 +492,21 @@ export async function translatePartial(options: TranslateOptions): Promise<Trans
 
   const previousTranslation = options.previousTranslation;
   const previousLevel = options.previousLevel;
-  const diffInstruction = previousTranslation ? `Previous (${previousLevel ?? 0}%): "${previousTranslation}"
-→ Must differ from above. Change tone expression, not meaning.` : '';
+  const diffInstruction = previousTranslation ? `前レベル(${previousLevel ?? 0}%): "${previousTranslation}"
+→ 上記と明確に差をつける。トーン表現を変え、意味は保持する。` : '';
 
   const userPrompt = [
-    `Current translation (${targetLang}): ${currentTranslation}`,
-    `Tone: ${tone || 'none'} at ${toneLevel}%`,
-    `Style: ${toneStyle}`,
+    `現在の翻訳 (${targetLang}): ${currentTranslation}`,
+    `トーン: ${tone || 'なし'} / ${toneLevel}%`,
+    `スタイル: ${toneStyle}`,
     `Seed (0%): "${seedTranslation}"`,
-    'The Seed already expresses the structural values exactly. Tone adjustment only reshapes vocabulary formality.',
+    'Seedが構造値を正しく表現している。トーン調整はその表面だけを変える。',
     structureInfo || '',
-    targetLang !== '英語' ? `★ new_translation must be in ${targetLang}. Do not output English.` : '',
+    targetLang !== '英語' ? `★ new_translation は必ず ${targetLang} で出力すること` : '',
     diffInstruction || '',
-    options.variationInstruction ? `Additional: ${options.variationInstruction}` : '',
+    options.variationInstruction ? `追加指示: ${options.variationInstruction}` : '',
     reverseTranslationInstruction,
-    'Edit to match tone. Return JSON only.'
+    'トーンに合わせて編集し、JSONのみで出力。'
   ].filter(Boolean).join('\n\n');
 
   console.log('[translatePartial] ===== API CALL =====');
@@ -488,42 +632,30 @@ export async function translateFull(options: TranslateOptions): Promise<Translat
   const differenceInstruction = getFullDifferenceInstruction(toneLevel, previousTranslation, previousLevel, options.tone);
   const variationInstruction = options.variationInstruction ? `\n${options.variationInstruction}` : '';
   const structureInfo = structure ? `\n${structureToPromptText(structure, targetLang, sourceLang)}\n` : '';
+  const hasEntities = structure ? structure.固有名詞.length > 0 : false;
 
+  // 構造情報がない場合のみ出力言語を別途指定（構造情報ありの場合は冒頭宣言でカバー済み）
   const langInfoOnly = !structure ? `
-【出力言語 - 絶対遵守】
-・翻訳の出力言語: ${targetLang}（translationフィールドは必ずこの言語で出力）
-・逆翻訳の出力言語: ${sourceLang}（reverse_translationフィールドは必ずこの言語で出力）
+【出力言語】
+・translation: ${targetLang}
+・reverse_translation: ${sourceLang}
 ` : '';
 
   const isBusinessOrFormal = options.tone === 'business' || options.tone === 'formal';
   const japaneseRule = (targetLang === '日本語' || sourceLang === '日本語') ? `
 【日本語の敬語ルール】
-- 二重敬語は禁止（例: ×おっしゃられる ×ご覧になられる ×お召し上がりになられる）
-- 正しい敬語を使う（例: ○おっしゃる ○ご覧になる ○召し上がる）
-${isBusinessOrFormal ? `- ビジネス/丁寧トーンでは、原文が敬語でなくても必ず敬語（です/ます/ございます）で出力すること
-- 原文「行く」→ 翻訳/逆翻訳「行きます」「参ります」等` : ''}
+- 正しい敬語を使う（おっしゃる、ご覧になる、召し上がる等）
+- 二重敬語を避け、正しい単一の敬語形を使う
+${isBusinessOrFormal ? `- ビジネス/丁寧トーンでは必ず敬語（です/ます/ございます）で出力する` : ''}
 ` : '';
 
-  const languageSpecificRules = getLanguageSpecificRules(targetLang);
+  const languageSpecificRules = getLanguageSpecificRules(targetLang, hasEntities);
 
   const systemPrompt = `あなたは${sourceLang}から${targetLang}への翻訳の専門家です。
-
-★ translation は必ず「${targetLang}」で出力 ★
-
-${structureInfo}
-The structural analysis above defines what must be preserved exactly. Register level only controls vocabulary formality.
-${langInfoOnly}
-${INVARIANT_RULES}
-${TONE_AND_EVALUATION_RULES}
+${structureInfo}${langInfoOnly}
+${TONE_BOUNDARY_RULES}
 ${japaneseRule}
-
-【翻訳ルール】
-- "translation" は ${targetLang} のみ（${sourceLang}の文字は混ぜない）
-- 語尾ルール（だね/じゃん/ですね等）は reverse_translation にのみ適用
-
 ${languageSpecificRules}
-
-【固有名詞】構造情報に記載された読みをそのまま使用。トーンで変えない。
 
 ${isNative ? '【ネイティブモード】自然でネイティブらしい表現を使用。' : ''}
 
@@ -538,8 +670,8 @@ ${variationInstruction}
 
 JSON形式で出力：
 {
-  "translation": "${targetLang}のみ",
-  "reverse_translation": "${sourceLang}のみ",
+  "translation": "...",
+  "reverse_translation": "...",
   "risk": "low|med|high",
   "detected_language": "言語名"
 }`;
@@ -603,7 +735,7 @@ export async function generateExplanation(
 【出力ルール】
 1. point: 核となる単語やフレーズを「${targetLangName}表現 = 日本語の意味」形式で1つ書く
 2. explanation: どんなニュアンスか、どんな場面で使えるかを自然な文章で2〜3文書く。項目分けしない。
-3. 文体: 必ず「です・ます調」で統一すること（「〜だ」「〜である」は使わない）
+3. 文体: 必ず「です・ます調」で統一すること
 
 必ず以下のJSON形式で出力：
 {
