@@ -1,0 +1,565 @@
+[
+  {
+    "id": "B2-01",
+    "source": "ごめん、今日ちょっと体調悪くて休ませてもらうね",
+    "structure": {
+      "格構造": {
+        "誰が": "私",
+        "何を": "休ませて",
+        "誰に": "あなた",
+        "誰と": "なし",
+        "なんて": "なし",
+        "どこに": "なし",
+        "どこで": "なし",
+        "どこへ": "なし",
+        "どこから": "なし",
+        "どこまで": "なし",
+        "いつ": "今日",
+        "いつから": "なし",
+        "いつまで": "なし",
+        "どうやって": "なし"
+      },
+      "動作": "休む",
+      "動作の意味": "take a rest",
+      "極性": "肯定",
+      "表現類型": "平叙",
+      "発話行為": [
+        "謝罪",
+        "報告"
+      ],
+      "認識的モダリティ": "確定",
+      "証拠性": "直接経験",
+      "義務的モダリティ": "なし",
+      "説明のモダリティ": "背景説明",
+      "願望": "あり",
+      "感情": {
+        "極性": "否定的",
+        "種類": "不安"
+      },
+      "評価態度": {
+        "評価": "否定的評価",
+        "対象": "体調"
+      },
+      "程度": "中程度",
+      "人称": "一人称単数",
+      "伝達態度": "緩和",
+      "固有名詞": [],
+      "保持値": [
+        "今日"
+      ],
+      "条件表現": []
+    },
+    "results": {
+      "casual_0": {
+        "translation": "Sorry, I'm not feeling well today, so I'm going to take it easy.",
+        "reverse": "ごめん、今日ちょっと体調悪くて休ませてもらうね"
+      },
+      "business_0": {
+        "translation": "Sorry, I'm not feeling well today, so I'm going to take it easy.",
+        "reverse": "ごめん、今日ちょっと体調悪くて休ませてもらうね"
+      },
+      "formal_0": {
+        "translation": "Sorry, I'm not feeling well today, so I'm going to take it easy.",
+        "reverse": "ごめん、今日ちょっと体調悪くて休ませてもらうね"
+      },
+      "casual_25": {
+        "translation": "I'm feeling a bit under the weather today, so I'll take it easy.",
+        "reverse": "今日はちょっと調子が悪いから、のんびりするよ"
+      },
+      "casual_50": {
+        "translation": "I'm not feeling too great today, so I'm gonna chill.",
+        "reverse": "今日はあまり調子がよくないから、のんびりするよ"
+      },
+      "casual_75": {
+        "translation": "I'm feeling kinda crummy today, so I'm gonna take it easy.",
+        "reverse": "今日はちょっと調子悪いからのんびりするよ"
+      },
+      "casual_100": {
+        "translation": "I'm feelin' pretty rough today, so I'm gonna chill.",
+        "reverse": "今日はかなり調子悪いから、のんびりするよ"
+      },
+      "business_25": {
+        "translation": "I'm afraid I'm not in the best of health today, so I'll be taking it easy.",
+        "reverse": "残念ながら今日は体調が優れないため、ゆっくり過ごさせていただきます。"
+      },
+      "business_50": {
+        "translation": "I'm not feeling particularly well today, so I'll be taking a bit of a break.",
+        "reverse": "今日はあまり体調が優れないので、少しお休みをさせていただきます。"
+      },
+      "business_75": {
+        "translation": "Unfortunately, I'm not in the best of health today, so I'll be taking some time to recuperate.",
+        "reverse": "残念ながら、今日は体調が優れないため、少しお休みさせていただきます。"
+      },
+      "business_100": {
+        "translation": "Regrettably, my health is not optimal at present, necessitating a temporary period of recuperation.",
+        "reverse": "残念ながら、私は現在、健康状態が最適ではないため、一時的な休養が必要となっています。"
+      },
+      "formal_25": {
+        "translation": "I'm afraid I'm not in the best of health today, so I'll be taking a bit of a break.",
+        "reverse": "恐れ入りますが、私は今日体調が優れないため、少しお休みをいただきます。"
+      },
+      "formal_50": {
+        "translation": "Regrettably, my health is somewhat compromised today, so I intend to take a temporary reprieve.",
+        "reverse": "残念ながら、今日は体調があまり良くないので、一時的に休ませていただくつもりです。"
+      },
+      "formal_75": {
+        "translation": "Unfortunately, my health is not ideal today, so I plan to take a short break.",
+        "reverse": "残念ながら、今日は体調があまり良くないので、一時的に休ませていただく予定です。"
+      },
+      "formal_100": {
+        "translation": "Regrettably, my current state of health is less than optimal, hence I intend to temporarily suspend my activities.",
+        "reverse": "残念ながら、私の現在の健康状態は最適とは言えないため、一時的に活動を休止するつもりです。"
+      }
+    }
+  },
+  {
+    "id": "B2-02",
+    "source": "田中さんが来週の月曜に来るらしいよ",
+    "structure": {
+      "格構造": {
+        "誰が": "田中さん",
+        "何を": "来る",
+        "誰に": "なし",
+        "誰と": "なし",
+        "なんて": "なし",
+        "どこに": "なし",
+        "どこで": "なし",
+        "どこへ": "なし",
+        "どこから": "なし",
+        "どこまで": "なし",
+        "いつ": "来週の月曜",
+        "いつから": "なし",
+        "いつまで": "なし",
+        "どうやって": "なし"
+      },
+      "動作": "来る",
+      "動作の意味": "come",
+      "極性": "肯定",
+      "表現類型": "平叙",
+      "発話行為": [
+        "報告"
+      ],
+      "認識的モダリティ": "推測",
+      "証拠性": "伝聞",
+      "義務的モダリティ": "なし",
+      "説明のモダリティ": "なし",
+      "願望": "なし",
+      "感情": {
+        "極性": "中立",
+        "種類": "なし"
+      },
+      "評価態度": {
+        "評価": "なし",
+        "対象": "なし"
+      },
+      "程度": "なし",
+      "人称": "三人称",
+      "伝達態度": "共有確認",
+      "固有名詞": [
+        {
+          "text": "田中",
+          "type": "人名",
+          "敬称": "さん"
+        }
+      ],
+      "保持値": [
+        "来週の月曜"
+      ],
+      "条件表現": []
+    },
+    "results": {
+      "casual_0": {
+        "translation": "It seems that Tanaka-san is coming next Monday.",
+        "reverse": "田中さんが来週の月曜に来るらしいよ"
+      },
+      "business_0": {
+        "translation": "It seems that Tanaka-san is coming next Monday.",
+        "reverse": "田中さんが来週の月曜に来るらしいよ"
+      },
+      "formal_0": {
+        "translation": "It seems that Tanaka-san is coming next Monday.",
+        "reverse": "田中さんが来週の月曜に来るらしいよ"
+      },
+      "casual_25": {
+        "translation": "Tanaka-san is apparently coming next Monday.",
+        "reverse": "田中さんが来週の月曜に来るらしい"
+      },
+      "casual_50": {
+        "translation": "Tanaka-san's coming next Monday, I heard.",
+        "reverse": "田中さんが来週の月曜に来るらしいよ"
+      },
+      "casual_75": {
+        "translation": "I heard Tanaka-san is coming next Monday.",
+        "reverse": "田中さんが来週の月曜に来るそうだ"
+      },
+      "casual_100": {
+        "translation": "Tanaka-san's coming next Monday, I heard.",
+        "reverse": "田中さんが来週の月曜に来るらしいよ"
+      },
+      "business_25": {
+        "translation": "Tanaka-san is apparently coming next Monday.",
+        "reverse": "田中様は来週の月曜日にいらっしゃるそうですね。"
+      },
+      "business_50": {
+        "translation": "We understand that Tanaka-san is scheduled to arrive next Monday.",
+        "reverse": "田中様は来週の月曜日に参られる予定とのことかと思いますが。"
+      },
+      "business_75": {
+        "translation": "We are given to understand that Tanaka-san is due to arrive next Monday.",
+        "reverse": "田中様は来週月曜日にお着きになる予定であるとのこと承知しております"
+      },
+      "business_100": {
+        "translation": "It is anticipated that Tanaka-san will arrive next Monday.",
+        "reverse": "田中様は来週月曜日に到着される見込みです。"
+      },
+      "formal_25": {
+        "translation": "Tanaka-san is apparently coming next Monday.",
+        "reverse": "田中さんは来週の月曜日に来られるようです。"
+      },
+      "formal_50": {
+        "translation": "It is rumored that Tanaka-san will be arriving next Monday.",
+        "reverse": "田中さんは来週月曜日に到着なさるという噂です"
+      },
+      "formal_75": {
+        "translation": "Tanaka-san is expected to arrive next Monday, reportedly.",
+        "reverse": "田中さんは来週の月曜日に到着される見込みだそうです。"
+      },
+      "formal_100": {
+        "translation": "It is anticipated that Tanaka-san will arrive next Monday, according to reports.",
+        "reverse": "田中さんは来週の月曜日に到着なさると予想されています。"
+      }
+    }
+  },
+  {
+    "id": "B2-03",
+    "source": "もし時間があったら手伝ってもらえると助かるんだけど",
+    "structure": {
+      "格構造": {
+        "誰が": "あなた",
+        "何を": "手伝って",
+        "誰に": "私に",
+        "誰と": "なし",
+        "なんて": "なし",
+        "どこに": "なし",
+        "どこで": "なし",
+        "どこへ": "なし",
+        "どこから": "なし",
+        "どこまで": "なし",
+        "いつ": "なし",
+        "いつから": "なし",
+        "いつまで": "なし",
+        "どうやって": "なし"
+      },
+      "動作": "手伝う",
+      "動作の意味": "help",
+      "極性": "肯定",
+      "表現類型": "疑問",
+      "発話行為": [
+        "依頼"
+      ],
+      "認識的モダリティ": "可能性",
+      "証拠性": "直接経験",
+      "義務的モダリティ": "なし",
+      "説明のモダリティ": "背景説明",
+      "願望": "あり",
+      "感情": {
+        "極性": "中立",
+        "種類": "なし"
+      },
+      "評価態度": {
+        "評価": "なし",
+        "対象": "なし"
+      },
+      "程度": "なし",
+      "人称": "二人称",
+      "伝達態度": "緩和",
+      "固有名詞": [],
+      "保持値": [],
+      "条件表現": [
+        "もし時間があったら"
+      ]
+    },
+    "results": {
+      "casual_0": {
+        "translation": "If you have time, I'd appreciate it if you could help me out.",
+        "reverse": "もし時間があったら手伝ってもらえると助かるんだけど"
+      },
+      "business_0": {
+        "translation": "If you have time, I'd appreciate it if you could help me out.",
+        "reverse": "もし時間があったら手伝ってもらえると助かるんだけど"
+      },
+      "formal_0": {
+        "translation": "If you have time, I'd appreciate it if you could help me out.",
+        "reverse": "もし時間があったら手伝ってもらえると助かるんだけど"
+      },
+      "casual_25": {
+        "translation": "If you've got some time, can you lend me a hand?",
+        "reverse": "時間があったら手伝ってくれる？"
+      },
+      "casual_50": {
+        "translation": "Got some time? Help me out if you can.",
+        "reverse": "時間ある？手伝ってくれたら助かるわ"
+      },
+      "casual_75": {
+        "translation": "Free for a sec? Help me out if you're able.",
+        "reverse": "ちょっといい？手伝えるなら手伝ってよ"
+      },
+      "casual_100": {
+        "translation": "Got a sec? Gimme a hand if you can.",
+        "reverse": "ちょっといい？手伝ってくれたら助かるんだけど。"
+      },
+      "business_25": {
+        "translation": "If you have a spare moment, I would be grateful for your assistance.",
+        "reverse": "お時間がおありましたら、ご助力いただければ幸いです。"
+      },
+      "business_50": {
+        "translation": "If you're available, I'd appreciate your help.",
+        "reverse": "お時間があれば、お助けいただければ幸いです。"
+      },
+      "business_75": {
+        "translation": "If you have a spare moment, I would be grateful if you could assist me.",
+        "reverse": "もしお時間がおありでしたら、お手伝いいただければ幸いです。"
+      },
+      "business_100": {
+        "translation": "Should you have an available moment, I would be most appreciative if you could provide me with your assistance.",
+        "reverse": "お時間がおありましたら、ご助力いただければ大変ありがたく存じます。"
+      },
+      "formal_25": {
+        "translation": "If you have a spare moment, I would be grateful for your assistance.",
+        "reverse": "お時間がございましたら、ご助力いただければ幸いです。"
+      },
+      "formal_50": {
+        "translation": "If you could spare a moment, your help would be greatly appreciated.",
+        "reverse": "もしお時間があれば、大変感謝いたします。"
+      },
+      "formal_75": {
+        "translation": "If you could kindly lend a hand, I would be most grateful.",
+        "reverse": "お手伝いいただければ、大変感謝いたします。"
+      },
+      "formal_100": {
+        "translation": "I would be eternally grateful if you could be so kind as to assist me.",
+        "reverse": "もしお手伝いいただけましたら、大変感謝しております。"
+      }
+    }
+  },
+  {
+    "id": "B2-04",
+    "source": "この資料、かなりよくできてると思うよ",
+    "structure": {
+      "格構造": {
+        "誰が": "あなた",
+        "何を": "この資料",
+        "誰に": "なし",
+        "誰と": "なし",
+        "なんて": "なし",
+        "どこに": "なし",
+        "どこで": "なし",
+        "どこへ": "なし",
+        "どこから": "なし",
+        "どこまで": "なし",
+        "いつ": "なし",
+        "いつから": "なし",
+        "いつまで": "なし",
+        "どうやって": "なし"
+      },
+      "動作": "思う",
+      "動作の意味": "think",
+      "極性": "肯定",
+      "表現類型": "平叙",
+      "発話行為": [
+        "意見表明"
+      ],
+      "認識的モダリティ": "推測",
+      "証拠性": "直接経験",
+      "義務的モダリティ": "なし",
+      "説明のモダリティ": "なし",
+      "願望": "なし",
+      "感情": {
+        "極性": "肯定的",
+        "種類": "満足"
+      },
+      "評価態度": {
+        "評価": "肯定的評価",
+        "対象": "この資料"
+      },
+      "程度": "なし",
+      "人称": "一人称単数",
+      "伝達態度": "主張",
+      "固有名詞": [],
+      "保持値": [],
+      "条件表現": []
+    },
+    "results": {
+      "casual_0": {
+        "translation": "I think this document is quite well done.",
+        "reverse": "この資料、かなりよくできてると思うよ"
+      },
+      "business_0": {
+        "translation": "I think this document is quite well done.",
+        "reverse": "この資料、かなりよくできてると思うよ"
+      },
+      "formal_0": {
+        "translation": "I think this document is quite well done.",
+        "reverse": "この資料、かなりよくできてると思うよ"
+      },
+      "casual_25": {
+        "translation": "This doc's pretty well done, I think.",
+        "reverse": "この資料はかなりうまくできていると思う"
+      },
+      "casual_50": {
+        "translation": "I think this doc is done pretty well.",
+        "reverse": "この資料はかなりうまくできていると思う"
+      },
+      "casual_75": {
+        "translation": "I reckon this doc's done pretty well.",
+        "reverse": "この資料はうまくできてると思うよ"
+      },
+      "casual_100": {
+        "translation": "I figure this doc's pretty slick.",
+        "reverse": "この資料、いい感じにまとまったと思うぜ"
+      },
+      "business_25": {
+        "translation": "I believe this document has been prepared quite well.",
+        "reverse": "この資料は十分に整備されていると思います。"
+      },
+      "business_50": {
+        "translation": "This document appears to have been compiled quite effectively.",
+        "reverse": "この資料は非常に効果的にまとめられているようです。"
+      },
+      "business_75": {
+        "translation": "It is evident that this document has been put together with great care.",
+        "reverse": "この資料は丁寧に作成されたことが明らかです。"
+      },
+      "business_100": {
+        "translation": "It is patently clear that this document has been meticulously compiled.",
+        "reverse": "この資料は細心の注意を払って作成されたことは明らかです。"
+      },
+      "formal_25": {
+        "translation": "This document appears to be quite well crafted.",
+        "reverse": "この資料は非常に丁寧に作成されているようです。"
+      },
+      "formal_50": {
+        "translation": "The document in question seems to have been put together quite skillfully.",
+        "reverse": "この文書はかなり丁寧に作成されているようです。"
+      },
+      "formal_75": {
+        "translation": "This document appears to have been compiled with considerable skill.",
+        "reverse": "この文書は相当な熟練度をもって作成されたと思われます。"
+      },
+      "formal_100": {
+        "translation": "The compilation of this document demonstrates a remarkable level of expertise.",
+        "reverse": "この資料の作成は、非常に高いレベルの専門知識を示している。"
+      }
+    }
+  },
+  {
+    "id": "B2-05",
+    "source": "駅前の新しいラーメン屋、めちゃくちゃ並んでたから諦めた",
+    "structure": {
+      "格構造": {
+        "誰が": "私",
+        "何を": "ラーメン屋",
+        "誰に": "なし",
+        "誰と": "なし",
+        "なんて": "なし",
+        "どこに": "なし",
+        "どこで": "駅前",
+        "どこへ": "なし",
+        "どこから": "なし",
+        "どこまで": "なし",
+        "いつ": "なし",
+        "いつから": "なし",
+        "いつまで": "なし",
+        "どうやって": "なし"
+      },
+      "動作": "諦めた",
+      "動作の意味": "give up",
+      "極性": "肯定",
+      "表現類型": "平叙",
+      "発話行為": [
+        "報告"
+      ],
+      "認識的モダリティ": "確定",
+      "証拠性": "直接経験",
+      "義務的モダリティ": "なし",
+      "説明のモダリティ": "背景説明",
+      "願望": "あり",
+      "感情": {
+        "極性": "否定的",
+        "種類": "不満"
+      },
+      "評価態度": {
+        "評価": "否定的評価",
+        "対象": "ラーメン屋の混雑状況"
+      },
+      "程度": "極端",
+      "人称": "一人称単数",
+      "伝達態度": "主張",
+      "固有名詞": [],
+      "保持値": [],
+      "条件表現": []
+    },
+    "results": {
+      "casual_0": {
+        "translation": "There was a crazy long line at the new ramen place in front of the station, so I gave up.",
+        "reverse": "駅前の新しいラーメン屋、めちゃくちゃ並んでたから諦めた"
+      },
+      "business_0": {
+        "translation": "There was a crazy long line at the new ramen place in front of the station, so I gave up.",
+        "reverse": "駅前の新しいラーメン屋、めちゃくちゃ並んでたから諦めた"
+      },
+      "formal_0": {
+        "translation": "There was a crazy long line at the new ramen place in front of the station, so I gave up.",
+        "reverse": "駅前の新しいラーメン屋、めちゃくちゃ並んでたから諦めた"
+      },
+      "casual_25": {
+        "translation": "The new ramen spot in front of the station was mobbed, so I bailed.",
+        "reverse": "駅前の新しいラーメン屋はすごい人で、やめた"
+      },
+      "casual_50": {
+        "translation": "The new ramen joint by the station was swamped, so I ditched it.",
+        "reverse": "駅前の新しいラーメン屋はすごい行列だったからやめた"
+      },
+      "casual_75": {
+        "translation": "The new ramen spot near the station was hella packed, so I bailed.",
+        "reverse": "駅近くの新しいラーメン屋はひどい混みようだったのでやめた"
+      },
+      "casual_100": {
+        "translation": "The new ramen joint by the station was ridiculously busy, so I dipped out.",
+        "reverse": "駅前の新しいラーメン屋はとんでもなく混んでたからやめた"
+      },
+      "business_25": {
+        "translation": "The new ramen shop in front of the station had an extraordinarily long queue, so I decided to abandon my plans.",
+        "reverse": "駅前の新しいラーメン屋には非常に長い行列ができていたので、私は計画を断念することにしました。"
+      },
+      "business_50": {
+        "translation": "The new ramen shop in front of the station was besieged by an unusually long queue, prompting me to relinquish my intentions.",
+        "reverse": "駅前の新しいラーメン屋は異常なほど長い行列で大盛況だったため、私は自分の計画を断念することにしました。"
+      },
+      "business_75": {
+        "translation": "The novel ramen establishment adjacent to the train station was inundated with an extraordinarily lengthy queue, consequently compelling me to abandon my aspirations.",
+        "reverse": "新しいラーメン店は駅の隣にあり、非常に長い行列で大盛況だったため、私は自分の望みを諦めざるを得なかった。"
+      },
+      "business_100": {
+        "translation": "The newly opened ramen restaurant in proximity to the train station was beset by an inordinately protracted queue, thereby necessitating my relinquishment of my intentions.",
+        "reverse": "新しく開店した駅近くのラーメン屋は、非常に長い行列に悩まされ、私は自分の意図を断念せざるを得なかった。"
+      },
+      "formal_25": {
+        "translation": "The new ramen shop in front of the station had an extraordinarily long queue, so I decided to abandon my attempt.",
+        "reverse": "駅前の新しいラーメン屋には異常に長い行列ができていたので、断念しました。"
+      },
+      "formal_50": {
+        "translation": "The newly opened ramen shop in front of the station was besieged by an inordinately long queue, thus I relinquished my endeavor.",
+        "reverse": "新しくオープンした駅前のラーメン屋は異常なほど長い行列で大盛況だったため、私は試みることを断念した。"
+      },
+      "formal_75": {
+        "translation": "The recently inaugurated ramen establishment in the immediate vicinity of the station was inundated with an exceedingly protracted queue, consequently, I abandoned my pursuit.",
+        "reverse": "駅のすぐ近くに新しく開店したラーメン店は、非常に長い行列に溢れていたため、私は私の試みを断念しました。"
+      },
+      "formal_100": {
+        "translation": "The newly opened ramen shop adjacent to the station was beset by an inordinately lengthy queue, thus I relinquished my endeavor.",
+        "reverse": "新しくオープンした駅に隣接するラーメン店は、異常に長い行列に悩まされたため、私は私の試みを断念しました。"
+      }
+    }
+  }
+]
