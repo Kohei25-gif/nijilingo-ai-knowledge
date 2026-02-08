@@ -43,26 +43,11 @@ CORE PRINCIPLE (non-negotiable):
 1. Entities: numbers, dates, times, amounts, proper nouns
 2. Polarity: positive ↔ negative never flips
 3. Subject: never change (1st person singular ≠ 1st person plural)
-4. Intent & modality class: request/report/gratitude/suggestion stays the same
-5. Question/statement type preserved
-6. Condition markers (if/unless/when) preserved — never drop them
-7. Commitment lock: do NOT weaken or strengthen commitments/promises/offers. Keep the same commitment class as Seed(0%).
-8. Predicate meaning lock: keep the core action meaning from structure.動作の意味. Do not swap into a different achievement/evaluation verb.
-9. Degree lock: keep intensity at the level specified in structure.程度. Do NOT escalate beyond Seed(0%).
-10. Speech acts lock: ALL acts listed in structure.発話行為 must appear in output.
-11. No extra facts: do not add new reasons, excuses, evaluations, or details not present in Seed(0%).
-12. No ceremonial framing: Do NOT wrap the message in ceremony not present in the source.
-
-═══ DYNAMIC CONSTRAINTS ═══
-Each request includes a [Constraints for THIS sentence] block with per-sentence immutable values
-extracted from structural analysis. These constraints reinforce the MEANING LOCK rules above
-with specific values for this particular sentence. Follow BOTH the general rules AND the
-per-sentence constraints strictly.
-Adjust only the vocabulary formality of the base translation. The structural analysis values confirm what the base translation already expresses — do not intensify or weaken them.
-
-═══ TONE = SURFACE STYLE ONLY ═══
-OK to change: vocabulary formality, politeness markers, contractions, discourse markers, sentence structure, word choice within SAME meaning+strength.
-NOT OK: meaning, intent, certainty, sentiment, degree/intensity, commitment strength.
+4. Question/statement type preserved
+5. Condition markers (if/unless/when) preserved — never drop them
+6. Commitment lock: do NOT weaken or strengthen commitments/promises/offers. Keep the same commitment class as Seed(0%).
+7. Predicate meaning lock: keep the core action meaning from structure.動作の意味. Do not swap into a different achievement/evaluation verb.
+All structural-field constraints are provided per request in [Constraints for THIS sentence].
 
 ═══ OUTPUT ═══
 JSON only, no markdown: {"new_translation":"...","reverse_translation":"...(source lang)","risk":"low|med|high"}`;
@@ -463,40 +448,12 @@ export function structureToPromptText(structure: ExpandedStructure, targetLang?:
 ・発話行為: ${(structure.発話行為 && structure.発話行為.length > 0) ? structure.発話行為.join('+') : 'なし'}
 ・固有名詞: ${entities}${langInfo}
 
-The structural analysis above defines what must be preserved exactly. Register level only controls vocabulary formality.
-
 【翻訳ルール】
 - 単語は変えていいが、意味は変えないこと（特に動作の意味）
 - 「意図」「モダリティ」「感情極性」「確信度」「願望」「人称」を翻訳で必ず保持すること
 - 敬称なしの人名は身内・親しい人なので、尊敬語を使わない（例: 寝る→sleeps、NOT: お休みになる）
 - 固有名詞の読みがある場合はその読みで翻訳する
 - 一般名詞（電車、車、家など）はローマ字にせず普通に翻訳する（電車→train、NOT: densha）
-
-【意図別の制約】
-- 意図=感謝 → 出力は感謝の表明であること。依頼文型にしない。
-- 意図=報告 → 出力は事実の陳述であること。依頼文型にしない。
-- 意図=依頼 → 出力は依頼であること。
-- 意図=提案 → 出力は提案であること。
-
-【確信度の制約】
-- 確信度=可能性 → 不確実性を維持する。確実な表現に上げない。
-- 確信度=確定 → 確定的な表現を維持する。不確実に下げない。
-
-【感情極性ルール - 絶対遵守】
-- 感情極性が negative / neutral の場合、positive な感情表現を追加しない
-- トーンを上げることと、感情を変えることは別
-- 感情極性が positive の場合、悲しみ/遺憾の要素を追加しない
-
-【モダリティルール - 絶対遵守】
-- モダリティを変えない（報告は報告、感謝は感謝、依頼は依頼）
-- 報告や感謝を依頼文に変換しない
-
-【程度ルール - 絶対遵守】
-- 程度（none/slight/moderate/strong/extreme）は固定値を維持する
-- トーンを上げることと、程度を強めることは別
-
-【発話行為ルール - 絶対遵守】
-- 発話行為の全要素（例: 謝罪+報告）は出力に残す
 
 【目的格ルール - 重要】
 - 目的格: 構造情報の目的格を目的語として保持

@@ -470,30 +470,9 @@ export async function translatePartial(options: TranslateOptions): Promise<Trans
   }
 
   const structureInfo = structure ? `\n${structureToPromptText(structure, targetLang, sourceLang)}\n` : '';
-const fixedValueDeclaration = structure ? `
-【この翻訳の固定値 - トーン調整で絶対に変えないこと】
-- 意図: ${structure.意図}
-- 確信度: ${structure.確信度}
-- 感情極性: ${structure.感情極性}
-- モダリティ: ${structure.モダリティ}
-- 程度: ${structure.程度 || 'none'}（← semantic intensity。トーンではない。この値を超える強調は禁止）
-- 発話行為: ${(structure.発話行為 && structure.発話行為.length > 0) ? structure.発話行為.join('+') : 'なし'}（← 全て出力に残すこと）
-- 動作の意味: ${structure.動作の意味 || 'なし'}（← 述語の意味カテゴリ。この範囲を逸脱する動詞に変えない）
-トーン調整で変えていいのは「口調・語彙の格式レベル・文体」のみ。
-上記7つの値が変わる翻訳は不合格。
-` : '';
   const seedTranslation = options.seedTranslation
     ?? (options.previousLevel === 0 ? options.previousTranslation : undefined)
     ?? currentTranslation;
-  const driftPrevention = `
-【Seed（0%）= 意味・程度・確信度・コミットメントのアンカー】
-Seed: "${seedTranslation}"
-- Seedの意味を維持したまま口調のみ変更すること
-- Seedより程度を強めない（Seedが"pretty"なら"totally"にしない）
-- Seedより確信度を変えない（Seedが"will"なら"might"にしない）
-- Seedより約束/意志を弱めない・強めない
-- 意味・意図・確信度がSeedからズレていたら修正すること
-`;
   const dynamicConstraints = generateDynamicConstraints(
     structure ? {
       人称: structure.人称,
@@ -572,29 +551,18 @@ Seed: "${seedTranslation}"
   const diffInstruction = previousTranslation ? `Previous (${previousLevel ?? 0}%): "${previousTranslation}"
 → Must differ from above. Change tone expression, not meaning.` : '';
 
-  const finalChecklist = `
-【FINAL CHECK（出力前に必ず確認）】
-□ 程度（degree）: Seedと同じ強さか？強調語を追加していないか？
-□ 確信度: Seedと同じモーダル動詞か？（will→might に変えていないか？）
-□ コミットメント: 約束・意志表明の強さがSeedと同じか？
-□ 発話行為: 構造情報の全発話行為が出力に含まれているか？
-□ 条件節: 原文の条件表現（if/when等）が残っているか？
-□ 追加事実: Seedにない理由・言い訳・評価を追加していないか？
-`;
-
   const userPrompt = [
     `Current translation (${targetLang}): ${currentTranslation}`,
     `Tone: ${tone || 'none'} at ${toneLevel}%`,
     `Style: ${toneStyle}`,
+    `Seed (0%): "${seedTranslation}"`,
+    'Adjust only the vocabulary formality of the base translation. The structural analysis values confirm what the base translation already expresses - do not intensify or weaken them.',
     dynamicConstraints || '',
     structureInfo || '',
-    fixedValueDeclaration || '',
-    driftPrevention,
     targetLang !== '英語' ? `★ new_translation must be in ${targetLang}. Do not output English.` : '',
     diffInstruction || '',
     options.variationInstruction ? `Additional: ${options.variationInstruction}` : '',
     reverseTranslationInstruction,
-    finalChecklist,
     'Edit to match tone. Return JSON only.'
   ].filter(Boolean).join('\n\n');
 
@@ -721,18 +689,6 @@ export async function translateFull(options: TranslateOptions): Promise<Translat
   const differenceInstruction = getFullDifferenceInstruction(toneLevel, previousTranslation, previousLevel, options.tone);
   const variationInstruction = options.variationInstruction ? `\n${options.variationInstruction}` : '';
   const structureInfo = structure ? `\n${structureToPromptText(structure, targetLang, sourceLang)}\n` : '';
-  const fixedValueDeclaration = structure ? `
-【この翻訳の固定値 - トーン調整で絶対に変えないこと】
-- 意図: ${structure.意図}
-- 確信度: ${structure.確信度}
-- 感情極性: ${structure.感情極性}
-- モダリティ: ${structure.モダリティ}
-- 程度: ${structure.程度 || 'none'}（← semantic intensity。トーンではない。この値を超える強調は禁止）
-- 発話行為: ${(structure.発話行為 && structure.発話行為.length > 0) ? structure.発話行為.join('+') : 'なし'}（← 全て出力に残すこと）
-- 動作の意味: ${structure.動作の意味 || 'なし'}（← 述語の意味カテゴリ。この範囲を逸脱する動詞に変えない）
-トーン調整で変えていいのは「口調・語彙の格式レベル・文体」のみ。
-上記7つの値が変わる翻訳は不合格。
-` : '';
 
   const langInfoOnly = !structure ? `
 【出力言語 - 絶対遵守】
@@ -756,7 +712,7 @@ ${isBusinessOrFormal ? `- ビジネス/丁寧トーンでは、原文が敬語�
 ★ translation は必ず「${targetLang}」で出力 ★
 
 ${structureInfo}
-${fixedValueDeclaration}
+The structural analysis above defines what must be preserved exactly. Register level only controls vocabulary formality.
 ${langInfoOnly}
 ${INVARIANT_RULES}
 ${TONE_AND_EVALUATION_RULES}
@@ -771,10 +727,6 @@ ${languageSpecificRules}
 【固有名詞】構造情報に記載された読みをそのまま使用。トーンで変えない。
 
 ${isNative ? '【ネイティブモード】自然でネイティブらしい表現を使用。' : ''}
-
-【トーン調整の原則】
-トーンは「口調・語彙の格式レベル・文体」でのみ表現する。
-意図・確信度・感情極性は変えない。
 
 ${toneInstruction}
 ${reverseTranslationInstruction}
