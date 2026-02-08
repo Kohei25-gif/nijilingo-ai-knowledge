@@ -72,7 +72,7 @@ export const _internal = guardsInternal;
 const structureCache = new Map<string, ExpandedStructure>();
 
 const INTENT_TYPES: IntentType[] = ['依頼', '確認', '報告', '質問', '感謝', '謝罪', '提案', '命令', 'その他'];
-const CERTAINTY_LEVELS: CertaintyLevel[] = ['確定', '推測', '可能性', '希望', '伝聞'];
+const CERTAINTY_LEVELS: CertaintyLevel[] = ['確定', '推測', '可能性', '伝聞'];
 const POLARITY_TYPES: SentimentPolarity[] = ['positive', 'negative', 'neutral'];
 const MODALITY_TYPES: ModalityType[] = ['報告', '依頼', '感謝', '質問', '感想', '提案', 'その他'];
 const DEGREE_LEVELS: DegreeLevel[] = ['none', 'slight', 'moderate', 'strong', 'extreme'];
@@ -134,54 +134,6 @@ const normalizeCaseStructure = (value: unknown): CaseStructure => {
   return normalized;
 };
 
-const inferModalityFromIntent = (intent: IntentType): ModalityType => {
-  switch (intent) {
-    case '依頼':
-    case '命令':
-      return '依頼';
-    case '確認':
-    case '質問':
-      return '質問';
-    case '感謝':
-      return '感謝';
-    case '提案':
-      return '提案';
-    case '報告':
-      return '報告';
-    case '謝罪':
-      return '感想';
-    default:
-      return 'その他';
-  }
-};
-
-const inferPolarityFromText = (sourceText: string, intent: IntentType): SentimentPolarity => {
-  if (intent === '感謝') return 'positive';
-  if (intent === '謝罪') return 'negative';
-
-  const positiveMarkers = ['ありがとう', '助か', '嬉', '良か', '最高', '好き', '安心', 'よかった'];
-  const negativeMarkers = ['ない', '無理', 'だめ', '最悪', '遅れ', '疲', 'しんど', '不安', '限界', '厳し', 'できない', '嫌'];
-  const hasPositive = positiveMarkers.some(marker => sourceText.includes(marker));
-  const hasNegative = negativeMarkers.some(marker => sourceText.includes(marker));
-
-  if (hasPositive && !hasNegative) return 'positive';
-  if (hasNegative && !hasPositive) return 'negative';
-  return 'neutral';
-};
-
-const inferDegreeFromText = (sourceText: string): DegreeLevel => {
-  const extremeMarkers = ['完全に', '全然', 'めちゃくちゃ', '極めて', '猛烈に', '超'];
-  const strongMarkers = ['かなり', 'めっちゃ', 'すごく', 'とても', 'だいぶ', 'ずいぶん', '非常に'];
-  const moderateMarkers = ['割と', 'まあまあ', 'そこそこ', 'あんまり', 'あまり'];
-  const slightMarkers = ['ちょっと', '少し', 'やや', '若干', '少々'];
-
-  if (extremeMarkers.some(marker => sourceText.includes(marker))) return 'extreme';
-  if (strongMarkers.some(marker => sourceText.includes(marker))) return 'strong';
-  if (moderateMarkers.some(marker => sourceText.includes(marker))) return 'moderate';
-  if (slightMarkers.some(marker => sourceText.includes(marker))) return 'slight';
-  return 'none';
-};
-
 const normalizeSpeechActs = (value: unknown): string[] => {
   const rawActs = Array.isArray(value)
     ? value
@@ -195,36 +147,6 @@ const normalizeSpeechActs = (value: unknown): string[] => {
     .filter(item => item.length > 0);
 
   return Array.from(new Set(normalized));
-};
-
-const inferSpeechActsFromText = (sourceText: string, intent: IntentType, modality: ModalityType): string[] => {
-  const acts: string[] = [];
-
-  const apologyMarkers = ['ごめん', 'すみません', 'すまん', '申し訳', '失礼', '悪いけど', '悪いが'];
-  const gratitudeMarkers = ['ありがとう', '感謝', '助かる', '助かりました'];
-  const requestMarkers = ['お願い', 'ください', 'してくれる', 'してもらえる', 'してほしい', 'して欲しい', '教えて', '見て', '確認して', '対応して', '頼む'];
-  const questionMarkers = ['？', '?', 'かな', 'かね', 'の？', 'の?'];
-
-  if (apologyMarkers.some(marker => sourceText.includes(marker))) acts.push('謝罪');
-  if (gratitudeMarkers.some(marker => sourceText.includes(marker))) acts.push('感謝');
-  if (intent === '依頼' || intent === '命令' || modality === '依頼' || requestMarkers.some(marker => sourceText.includes(marker))) acts.push('依頼');
-  if (intent === '提案' || modality === '提案') acts.push('提案');
-  if (intent === '質問' || intent === '確認' || modality === '質問' || questionMarkers.some(marker => sourceText.includes(marker))) acts.push('質問');
-  if (modality === '感想') acts.push('感想');
-  if (intent === '報告' || modality === '報告') acts.push('報告');
-
-  // 謝罪+叙述の複合文を補足（例: 「ごめん、今は対応できない」）
-  const hasApology = apologyMarkers.some(marker => sourceText.includes(marker));
-  if (hasApology) {
-    const segments = sourceText.split(/[、,。]/).map(s => s.trim()).filter(Boolean);
-    const hasNonApologySegment = segments.some(segment =>
-      !apologyMarkers.some(marker => segment.includes(marker))
-    );
-    if (hasNonApologySegment) acts.push('報告');
-  }
-
-  if (acts.length === 0) acts.push('報告');
-  return Array.from(new Set(acts));
 };
 
 /**
@@ -257,87 +179,90 @@ export async function extractStructure(
     保持値: [],
     条件表現: []
   };
+  const MAX_RETRIES = 2;
 
-  try {
-    const response = await callGeminiAPI(
-      MODELS.FULL,  // 構造抽出もMaverickに統一（Groq経由）
-      EXPANDED_STRUCTURE_PROMPT,
-      text,
-      0.1,
-      signal
-    );
-
-    console.log('[extractStructure] raw response:', response);
-
-    let parsed: Partial<ExpandedStructure>;
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      parsed = parseJsonResponse<ExpandedStructure>(response);
-    } catch (parseError) {
-      console.error('[extractStructure] JSON parse failed, using default:', parseError);
+      const response = await callGeminiAPI(
+        MODELS.FULL,  // 構造抽出もMaverickに統一（Groq経由）
+        EXPANDED_STRUCTURE_PROMPT,
+        text,
+        0.1,
+        signal
+      );
+
+      console.log(`[extractStructure] attempt ${attempt} raw response:`, response);
+
+      let parsed: Partial<ExpandedStructure>;
+      try {
+        parsed = parseJsonResponse<ExpandedStructure>(response);
+      } catch (parseError) {
+        console.error(`[extractStructure] attempt ${attempt} JSON parse failed:`, parseError);
+        if (attempt < MAX_RETRIES) {
+          console.log('[extractStructure] retrying...');
+          continue;
+        }
+        return defaultStructure;
+      }
+
+      // 固有名詞の敬称をバリデート
+      const validatedEntities: NamedEntity[] = Array.isArray(parsed.固有名詞)
+        ? parsed.固有名詞.map(e => ({
+            text: e.text || '',
+            type: e.type || 'person',
+            読み: e.読み,
+            敬称: e.敬称 || 'なし'
+          }))
+        : [];
+
+      const intent = isIntentType(parsed.意図) ? parsed.意図 : 'その他';
+      const modality = isModalityType(parsed.モダリティ) ? parsed.モダリティ : 'その他';
+      const polarity = isSentimentPolarity(parsed.感情極性) ? parsed.感情極性 : 'neutral';
+      const degree = isDegreeLevel(parsed.程度) ? parsed.程度 : 'none';
+      const parsedSpeechActs = normalizeSpeechActs(parsed.発話行為);
+
+      const validated: ExpandedStructure = {
+        主題: parsed.主題 || 'なし',
+        動作: parsed.動作 || 'なし',
+        動作の意味: parsed.動作の意味 || 'なし',
+        意図: intent,
+        感情極性: polarity,
+        モダリティ: modality,
+        格構造: normalizeCaseStructure(parsed.格構造),
+        願望: parsed.願望 || 'なし',
+        人称: isPersonType(parsed.人称) ? parsed.人称 : '一人称単数',
+        確信度: isCertaintyLevel(parsed.確信度) ? parsed.確信度 : '確定',
+        程度: degree,
+        発話行為: parsedSpeechActs.length > 0 ? parsedSpeechActs : ['報告'],
+        固有名詞: validatedEntities,
+        保持値: Array.isArray(parsed.保持値)
+          ? parsed.保持値.filter((v): v is string => typeof v === 'string')
+          : [],
+        条件表現: Array.isArray(parsed.条件表現)
+          ? parsed.条件表現.filter((v): v is string => typeof v === 'string')
+          : [],
+      };
+
+      // キャッシュサイズ制限（500件）
+      if (structureCache.size >= 500) {
+        const firstKey = structureCache.keys().next().value;
+        if (firstKey) structureCache.delete(firstKey);
+      }
+      structureCache.set(text, validated);
+
+      console.log('[extractStructure] extracted:', validated);
+      return validated;
+    } catch (error) {
+      console.error(`[extractStructure] attempt ${attempt} error:`, error);
+      if (attempt < MAX_RETRIES) {
+        console.log('[extractStructure] retrying...');
+        continue;
+      }
       return defaultStructure;
     }
-
-    // 固有名詞の敬称をバリデート
-    const validatedEntities: NamedEntity[] = Array.isArray(parsed.固有名詞)
-      ? parsed.固有名詞.map(e => ({
-          text: e.text || '',
-          type: e.type || 'person',
-          読み: e.読み,
-          敬称: e.敬称 || 'なし'
-        }))
-      : [];
-
-    const intent = isIntentType(parsed.意図) ? parsed.意図 : 'その他';
-    const modality = isModalityType(parsed.モダリティ)
-      ? parsed.モダリティ
-      : inferModalityFromIntent(intent);
-    const polarity = isSentimentPolarity(parsed.感情極性)
-      ? parsed.感情極性
-      : inferPolarityFromText(text, intent);
-    const degree = isDegreeLevel(parsed.程度)
-      ? parsed.程度
-      : inferDegreeFromText(text);
-    const parsedSpeechActs = normalizeSpeechActs(parsed.発話行為);
-    const speechActs = parsedSpeechActs.length > 0
-      ? parsedSpeechActs
-      : inferSpeechActsFromText(text, intent, modality);
-
-    const validated: ExpandedStructure = {
-      主題: parsed.主題 || 'なし',
-      動作: parsed.動作 || 'なし',
-      動作の意味: parsed.動作の意味 || 'なし',
-      意図: intent,
-      感情極性: polarity,
-      モダリティ: modality,
-      格構造: normalizeCaseStructure(parsed.格構造),
-      願望: parsed.願望 || 'なし',
-      人称: isPersonType(parsed.人称) ? parsed.人称 : '一人称単数',
-      確信度: isCertaintyLevel(parsed.確信度) ? parsed.確信度 : '確定',
-      程度: degree,
-      発話行為: speechActs,
-      固有名詞: validatedEntities,
-      保持値: Array.isArray(parsed.保持値)
-        ? parsed.保持値.filter((v): v is string => typeof v === 'string')
-        : [],
-      条件表現: Array.isArray(parsed.条件表現)
-        ? parsed.条件表現.filter((v): v is string => typeof v === 'string')
-        : [],
-    };
-
-    // キャッシュサイズ制限（500件）
-    if (structureCache.size >= 500) {
-      const firstKey = structureCache.keys().next().value;
-      if (firstKey) structureCache.delete(firstKey);
-    }
-    structureCache.set(text, validated);
-
-    console.log('[extractStructure] extracted:', validated);
-    return validated;
-
-  } catch (error) {
-    console.error('[extractStructure] error:', error);
-    return defaultStructure;
   }
+
+  return defaultStructure;
 }
 
 // ============================================

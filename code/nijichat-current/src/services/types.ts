@@ -4,7 +4,7 @@
 export type IntentType = '依頼' | '確認' | '報告' | '質問' | '感謝' | '謝罪' | '提案' | '命令' | 'その他';
 
 // 確信度
-export type CertaintyLevel = '確定' | '推測' | '可能性' | '希望' | '伝聞';
+export type CertaintyLevel = '確定' | '推測' | '可能性' | '伝聞';
 
 // 感情極性
 export type SentimentPolarity = 'positive' | 'negative' | 'neutral';

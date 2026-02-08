@@ -248,6 +248,11 @@ export const EXPANDED_STRUCTURE_PROMPT = `あなたは多言語対応の構造�
   - 「〜と思う」「〜んだけど」は推測
   - 「〜らしい」「〜そうだ」「〜って」は伝聞（推測より優先）
 - 程度: none/slight/moderate/strong/extreme
+  - none: 程度表現なし（強調語も修飾語もない素の文）
+  - slight: ほんの少し。「ちょっと」「少し」「やや」「若干」「少々」
+  - moderate: そこそこ。「割と」「まあまあ」「そこそこ」「あんまり」「あまり」
+  - strong: かなり。「かなり」「すごく」「とても」「めっちゃ」「だいぶ」「ずいぶん」「非常に」
+  - extreme: 極端。「めちゃくちゃ」「超」「完全に」「全然」「極めて」「猛烈に」「とんでもなく」
 - 発話行為: 複合文なら配列で全行為を列挙（例: ["謝罪","報告"]）
   - 文頭1語の謝罪・感謝も見落とさない
 - 固有名詞: [{text,type,敬称}]（必要なら読みも可）
@@ -338,7 +343,6 @@ export function structureToPromptText(structure: ExpandedStructure, targetLang?:
     推測: '推測 — 個人的にそう思っている',
     可能性: '可能性 — ありえる、かもしれない',
     伝聞: '伝聞 — 他から聞いた話、自分では未確認',
-    希望: '希望 — 実現を望んでいる',
   };
   if (structure.確信度 && certaintyMap[structure.確信度]) {
     enhancedFields.push(`【確信度: ${certaintyMap[structure.確信度]}】`);
