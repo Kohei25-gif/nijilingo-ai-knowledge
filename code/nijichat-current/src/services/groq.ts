@@ -347,7 +347,7 @@ function getToneStyle(
     guards.push(`程度=${degree}を維持`);
   }
   if (
-    (tone === 'business' || tone === 'formal') &&
+    tone === 'business' &&
     level >= 50 &&
     certainty &&
     certainty !== '確定'
