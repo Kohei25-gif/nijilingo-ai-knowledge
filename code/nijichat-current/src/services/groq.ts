@@ -10,6 +10,7 @@ import type {
   ExpandedStructure,
   NamedEntity,
   IntentType,
+  CertaintyLevel,
   SentimentPolarity,
   ModalityType,
   DegreeLevel,
@@ -70,9 +71,11 @@ export const _internal = guardsInternal;
 const structureCache = new Map<string, ExpandedStructure>();
 
 const INTENT_TYPES: IntentType[] = ['依頼', '確認', '報告', '質問', '感謝', '謝罪', '提案', '命令', 'その他'];
+const CERTAINTY_LEVELS: CertaintyLevel[] = ['確定', '推測', '可能性', '希望', '伝聞'];
 const POLARITY_TYPES: SentimentPolarity[] = ['positive', 'negative', 'neutral'];
 const MODALITY_TYPES: ModalityType[] = ['報告', '依頼', '感謝', '質問', '感想', '提案', 'その他'];
 const DEGREE_LEVELS: DegreeLevel[] = ['none', 'slight', 'moderate', 'strong', 'extreme'];
+const PERSON_TYPES = ['一人称単数', '一人称複数', '二人称', '三人称'] as const;
 
 const isIntentType = (value: unknown): value is IntentType =>
   typeof value === 'string' && INTENT_TYPES.includes(value as IntentType);
@@ -85,6 +88,12 @@ const isModalityType = (value: unknown): value is ModalityType =>
 
 const isDegreeLevel = (value: unknown): value is DegreeLevel =>
   typeof value === 'string' && DEGREE_LEVELS.includes(value as DegreeLevel);
+
+const isCertaintyLevel = (value: unknown): value is CertaintyLevel =>
+  typeof value === 'string' && CERTAINTY_LEVELS.includes(value as CertaintyLevel);
+
+const isPersonType = (value: unknown): value is string =>
+  typeof value === 'string' && (PERSON_TYPES as readonly string[]).includes(value);
 
 const inferModalityFromIntent = (intent: IntentType): ModalityType => {
   switch (intent) {
@@ -267,8 +276,8 @@ export async function extractStructure(
       対象: parsed.対象 || 'なし',
       目的格: parsed.目的格 || 'なし',
       願望: parsed.願望 || 'なし',
-      人称: parsed.人称 || '一人称単数',
-      確信度: parsed.確信度 || '確定',
+      人称: isPersonType(parsed.人称) ? parsed.人称 : '一人称単数',
+      確信度: isCertaintyLevel(parsed.確信度) ? parsed.確信度 : '確定',
       程度: degree,
       発話行為: speechActs,
       固有名詞: validatedEntities,
