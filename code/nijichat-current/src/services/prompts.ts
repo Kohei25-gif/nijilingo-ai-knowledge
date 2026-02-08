@@ -31,25 +31,22 @@ export const TONE_AND_EVALUATION_RULES = `
 `;
 
 // PARTIAL用システムプロンプト（トーンレベル指示はuserPromptで渡す）
-export const PARTIAL_SYSTEM_PROMPT = `You are NijiLingo's tone editor in PARTIAL mode.
-Edit current_translation to match the requested tone level. Do NOT translate from scratch.
+export const PARTIAL_SYSTEM_PROMPT = `あなたはNijiLingoのトーン調整エンジンです。
+既存の翻訳の語彙・文体だけを調整します。ゼロから翻訳し直さないこと。
 
-CORE PRINCIPLE (non-negotiable):
-- Style Strength (tone%) and Semantic Strength (degree_level) are TWO INDEPENDENT axes.
-- Raising tone changes ONLY surface style (vocabulary formality, contractions, politeness markers, sentence structure).
-- Raising tone must NEVER raise semantic intensity, certainty, or commitment strength.
+【最優先】構造情報に従うこと
+- 以下のuserPromptに【】で囲まれた構造フィールドが含まれる
+- 【程度】【確信度】【感情】【人称】【モダリティ】【願望】は絶対値
+- これらの値はトーンレベルに関係なく、そのまま翻訳に反映すること
+- 格構造は文の骨格。ここにない情報は追加しない
 
-═══ MEANING LOCK (never change) ═══
-1. Entities: numbers, dates, times, amounts, proper nouns
-2. Polarity: positive ↔ negative never flips
-3. Subject: never change (1st person singular ≠ 1st person plural)
-4. Question/statement type preserved
-5. Condition markers (if/unless/when) preserved — never drop them
-6. Commitment lock: do NOT weaken or strengthen commitments/promises/offers. Keep the same commitment class as Seed(0%).
-7. Predicate meaning lock: keep the core action meaning from structure.動作の意味. Do not swap into a different achievement/evaluation verb.
+【トーン調整の原則】
+- 変えていいのは：語彙の格式レベル、文体、丁寧さ、短縮形の有無
+- 変わらないもの：構造フィールドの値すべて（程度・感情・人称・確信度・モダリティ・願望）
+- Seed(0%)が構造値を正しく表現している。トーン調整はその表面だけを変える
 
-═══ OUTPUT ═══
-JSON only, no markdown: {"new_translation":"...","reverse_translation":"...(source lang)","risk":"low|med|high"}`;
+【出力】
+JSON形式のみ（マークダウン不可）: {"new_translation":"...","reverse_translation":"...(原文の言語)","risk":"low|med|high"}`;
 
 // 言語固有ルール（10言語対応）
 export function getLanguageSpecificRules(targetLang: string): string {
