@@ -305,158 +305,6 @@ export async function extractStructure(
   }
 }
 
-/**
- * 構造分析データから、この文専用の翻訳制約を動的に生成する。
- * INVARIANT_RULESの汎用ルールではなく、具体的な指示でモデルを制御する。
- */
-function generateDynamicConstraints(
-  structureData?: {
-    人称?: string;
-    確信度?: string;
-    程度?: string;
-    感情極性?: string;
-    モダリティ?: string;
-    発話行為?: string[];
-    動作の意味?: string;
-    願望?: string;
-    固有名詞?: Array<{ text: string }>;
-    保持値?: string[];
-    条件表現?: string[];
-  }
-): string {
-  if (!structureData) return '';
-
-  const constraints: string[] = [];
-
-  // 1. 人称
-  if (structureData.人称) {
-    const personMap: Record<string, string> = {
-      '一人称単数': 'Subject: first person singular (I/my)',
-      '一人称複数': 'Subject: first person plural (we/our)',
-      '二人称': 'Subject: second person (you/your)',
-      '三人称': 'Subject: third person (he/she/they)',
-    };
-    const instruction = personMap[structureData.人称];
-    if (instruction) constraints.push(instruction);
-  }
-
-  // 2. 確信度（発話行為との衝突解決付き）
-  if (structureData.確信度) {
-    const certaintyMap: Record<string, string> = {
-      '確定': 'Certainty: definite statements, no hedging',
-      '推測': 'Certainty: use hedging (I think, it seems, perhaps)',
-      '可能性': 'Certainty: express as possibility (might, could, maybe)',
-      '伝聞': 'Certainty: express as hearsay (apparently, I heard that)',
-      '希望': 'Certainty: express as hope/wish',
-    };
-    let certaintyText = certaintyMap[structureData.確信度] || '';
-
-    // 衝突解決: 複合発話で direct act がある時、hedging適用範囲を明示
-    if (certaintyText && structureData.発話行為 && structureData.発話行為.length > 1) {
-      const hasDirectAct = structureData.発話行為.some(
-        (a) => ['依頼', '命令', '謝罪'].includes(a)
-      );
-      if (hasDirectAct && structureData.確信度 === '推測') {
-        certaintyText += ' (for question/opinion parts only; advice/request parts stay direct)';
-      }
-    }
-
-    if (certaintyText) constraints.push(certaintyText);
-  }
-
-  // 3. 程度
-  if (structureData.程度 && structureData.程度 !== 'none') {
-    const degreeMap: Record<string, string> = {
-      extreme: 'Degree: keep extreme (absolutely, completely, totally)',
-      strong: 'Degree: keep strong (very, quite, considerably)',
-      moderate: 'Degree: keep moderate (a bit, somewhat, a little)',
-      slight: 'Degree: keep slight (slightly, barely, a touch)',
-    };
-    const instruction = degreeMap[structureData.程度];
-    if (instruction) constraints.push(instruction);
-  }
-
-  // 4. 感情極性
-  if (structureData.感情極性) {
-    const polarityMap: Record<string, string> = {
-      positive: 'Polarity: positive - keep natural, no escalation to formal gratitude (avoid: delighted, pleasure, honored)',
-      negative: 'Polarity: negative - maintain throughout, do not soften to neutral',
-      neutral: 'Polarity: neutral - do not add positive or negative sentiment',
-    };
-    const instruction = polarityMap[structureData.感情極性];
-    if (instruction) constraints.push(instruction);
-  }
-
-  // 5. モダリティ
-  if (structureData.モダリティ) {
-    const modalityMap: Record<string, string> = {
-      報告: 'Modality: report/statement - do not convert to request or suggestion',
-      質問: 'Modality: question - maintain question form',
-      依頼: 'Modality: request - maintain as request, do not convert to command',
-      提案: 'Modality: suggestion - maintain suggestive tone',
-      感謝: 'Modality: gratitude - maintain gratitude expression',
-      感想: 'Modality: impression - maintain as personal impression',
-      その他: '',
-    };
-    const instruction = modalityMap[structureData.モダリティ];
-    if (instruction) constraints.push(instruction);
-  }
-
-  // 6. 発話行為（複数値対応）
-  if (structureData.発話行為 && structureData.発話行為.length > 0) {
-    const actMap: Record<string, string> = {
-      質問: 'question',
-      報告: 'report',
-      依頼: 'request/advice',
-      感想: 'impression',
-      提案: 'suggestion',
-      感謝: 'gratitude',
-      謝罪: 'apology',
-      命令: 'command',
-    };
-    if (structureData.発話行為.length === 1) {
-      const mapped = actMap[structureData.発話行為[0]] || structureData.発話行為[0];
-      constraints.push(`Speech act: ${mapped}`);
-    } else {
-      const mapped = structureData.発話行為.map((a) => actMap[a] || a);
-      constraints.push(`Speech acts: ${mapped.join(' + ')} - preserve ALL parts`);
-    }
-  }
-
-  // 7. 動作の意味
-  if (structureData.動作の意味 && structureData.動作の意味 !== 'なし') {
-    constraints.push(`Core action: "${structureData.動作の意味}" - preserve this meaning`);
-  }
-
-  // 8. 願望
-  if (structureData.願望) {
-    if (structureData.願望 === 'なし') {
-      constraints.push('Do not add wishes, hopes, or promises not in original');
-    } else {
-      constraints.push('Preserve the wish/desire expression');
-    }
-  }
-
-  // 9. 保持値（数値・日時・金額等）
-  if (structureData.保持値 && structureData.保持値.length > 0) {
-    constraints.push(`Preserve exactly (values): ${structureData.保持値.join(', ')}`);
-  }
-
-  // 10. 固有名詞（人名・地名等）
-  if (structureData.固有名詞 && structureData.固有名詞.length > 0) {
-    const names = structureData.固有名詞.map((e) => e.text);
-    constraints.push(`Preserve exactly (names): ${names.join(', ')}`);
-  }
-
-  // 11. 条件表現
-  if (structureData.条件表現 && structureData.条件表現.length > 0) {
-    constraints.push(`Condition logic: preserve "${structureData.条件表現.join('", "')}" structure`);
-  }
-
-  if (constraints.length === 0) return '';
-  return `\n[Constraints for THIS sentence - MUST follow]\n${constraints.map((c, i) => `${i + 1}. ${c}`).join('\n')}\n`;
-}
-
 // ============================================
 // PARTIAL編集
 // ============================================
@@ -473,21 +321,6 @@ export async function translatePartial(options: TranslateOptions): Promise<Trans
   const seedTranslation = options.seedTranslation
     ?? (options.previousLevel === 0 ? options.previousTranslation : undefined)
     ?? currentTranslation;
-  const dynamicConstraints = generateDynamicConstraints(
-    structure ? {
-      人称: structure.人称,
-      確信度: structure.確信度,
-      程度: structure.程度,
-      感情極性: structure.感情極性,
-      モダリティ: structure.モダリティ,
-      発話行為: structure.発話行為,
-      動作の意味: structure.動作の意味,
-      願望: structure.願望,
-      固有名詞: structure.固有名詞,
-      保持値: structure.保持値,
-      条件表現: structure.条件表現,
-    } : undefined
-  );
 
   let toneStyle = '';
   if (toneLevel < 25) {
@@ -556,8 +389,7 @@ export async function translatePartial(options: TranslateOptions): Promise<Trans
     `Tone: ${tone || 'none'} at ${toneLevel}%`,
     `Style: ${toneStyle}`,
     `Seed (0%): "${seedTranslation}"`,
-    'Adjust only the vocabulary formality of the base translation. The structural analysis values confirm what the base translation already expresses - do not intensify or weaken them.',
-    dynamicConstraints || '',
+    'The Seed already expresses the structural values exactly. Tone adjustment only reshapes vocabulary formality.',
     structureInfo || '',
     targetLang !== '英語' ? `★ new_translation must be in ${targetLang}. Do not output English.` : '',
     diffInstruction || '',
