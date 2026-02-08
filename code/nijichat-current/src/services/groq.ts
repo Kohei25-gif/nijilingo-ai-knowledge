@@ -309,6 +309,55 @@ export async function extractStructure(
 // PARTIAL編集
 // ============================================
 
+function getToneStyle(
+  level: number,
+  tone: string | undefined,
+  structure?: ExpandedStructure,
+  customTone?: string,
+): string {
+  const toneKey = tone ? `${tone.substring(0, 3)}${level}` : '';
+  const baseMap: Record<string, string> = {
+    cas25: '少しくだけた日常会話。基本的な短縮形を使う程度で、語彙は標準的なまま',
+    cas50: '友人との普通の会話。短縮形を使い、親しみのある語彙を選ぶ',
+    cas75: '友人とのくだけた会話。口語的な省略・短縮を多用し、くだけた語彙を選ぶ',
+    cas100: '親しい友人同士の砕けた会話。口語・俗語・スラングを積極的に使う。語彙は最もくだけたものを選ぶ',
+    bus25: 'やや丁寧な日常会話の文体。短縮形を控え、語彙をやや改まったものにする程度',
+    bus50: '社内の上司へのメール程度の文体。適度な敬意表現を使い、簡潔かつ丁寧に',
+    bus75: '取引先へのビジネスメールの文体。丁寧な語彙選択、完全文、改まった表現を使う',
+    bus100: '重要な取引先への丁寧なビジネスメールの文体。最も格式の高いビジネス語彙と構造で書く。感情や評価は付加しない',
+    for25: 'やや改まった場面の文体。基本的な敬意表現を使い、落ち着いた語調にする',
+    for50: '改まった場面の文体。敬意ある語彙選択と完全文で、品のある表現を使う',
+    for75: '改まった場面の文体。敬意ある語彙選択と完全文で、品のある表現を使う',
+    for100: '公式な式辞・丁寧な手紙の文体。最も格式の高い語彙と文構造を使う。感情や評価は付加しない',
+  };
+
+  if (level < 25) {
+    return 'Original as-is (no style change)';
+  }
+  if (tone === 'custom') {
+    return `"${customTone || ''}" style FULL POWER - 段階は無視して常に全力で表現。オジサン構文なら絵文字・カタカナ混ぜ、限界オタクなら感情爆発、ギャルならギャル語、赤ちゃん言葉なら幼児語`;
+  }
+
+  const base = baseMap[toneKey] || 'Original as-is';
+  const guards: string[] = [];
+  const degree = structure?.程度;
+  const certainty = structure?.確信度;
+
+  if (tone === 'casual' && level >= 75 && degree && degree !== 'none') {
+    guards.push(`程度=${degree}を維持`);
+  }
+  if (
+    (tone === 'business' || tone === 'formal') &&
+    level >= 50 &&
+    certainty &&
+    certainty !== '確定'
+  ) {
+    guards.push(`確信度=${certainty}を維持`);
+  }
+
+  return guards.length > 0 ? `${base}（${guards.join('、')}）` : base;
+}
+
 export async function translatePartial(options: TranslateOptions): Promise<TranslationResult> {
   const { sourceText, currentTranslation, sourceLang, targetLang, tone, customTone, structure } = options;
   const toneLevel = options.toneLevel ?? 0;
@@ -322,60 +371,7 @@ export async function translatePartial(options: TranslateOptions): Promise<Trans
     ?? (options.previousLevel === 0 ? options.previousTranslation : undefined)
     ?? currentTranslation;
 
-  let toneStyle = '';
-  if (toneLevel < 25) {
-    toneStyle = 'Original as-is (no style change)';
-  } else {
-    switch (tone) {
-      case 'casual':
-        if (toneLevel >= 100) {
-          toneStyle =
-            '親しい友人同士の砕けた会話。口語・俗語・スラングを積極的に使う。語彙は最もくだけたものを選ぶ';
-        } else if (toneLevel >= 75) {
-          toneStyle =
-            '友人とのくだけた会話。口語的な省略・短縮を多用し、くだけた語彙を選ぶ';
-        } else if (toneLevel >= 50) {
-          toneStyle =
-            '友人との普通の会話。短縮形を使い、親しみのある語彙を選ぶ';
-        } else {
-          toneStyle =
-            '少しくだけた日常会話。基本的な短縮形を使う程度で、語彙は標準的なまま';
-        }
-        break;
-      case 'business':
-        if (toneLevel >= 100) {
-          toneStyle =
-            '重要な取引先への丁寧なビジネスメールの文体。最も格式の高いビジネス語彙と構造で書く。感情や評価は付加しない';
-        } else if (toneLevel >= 75) {
-          toneStyle =
-            '取引先へのビジネスメールの文体。丁寧な語彙選択、完全文、改まった表現を使う';
-        } else if (toneLevel >= 50) {
-          toneStyle =
-            '社内の上司へのメール程度の文体。適度な敬意表現を使い、簡潔かつ丁寧に';
-        } else {
-          toneStyle =
-            'やや丁寧な日常会話の文体。短縮形を控え、語彙をやや改まったものにする程度';
-        }
-        break;
-      case 'formal':
-        if (toneLevel >= 100) {
-          toneStyle =
-            '公式な式辞・丁寧な手紙の文体。最も格式の高い語彙と文構造を使う。感情や評価は付加しない';
-        } else if (toneLevel >= 50) {
-          toneStyle =
-            '改まった場面の文体。敬意ある語彙選択と完全文で、品のある表現を使う';
-        } else {
-          toneStyle =
-            'やや改まった場面の文体。基本的な敬意表現を使い、落ち着いた語調にする';
-        }
-        break;
-      case 'custom':
-        toneStyle = `"${customTone || ''}" style FULL POWER - 段階は無視して常に全力で表現。オジサン構文なら絵文字・カタカナ混ぜ、限界オタクなら感情爆発、ギャルならギャル語、赤ちゃん言葉なら幼児語`;
-        break;
-      default:
-        toneStyle = 'Original as-is';
-    }
-  }
+  const toneStyle = getToneStyle(toneLevel, tone, structure, customTone);
 
   const reverseTranslationInstruction = getReverseTranslationInstruction(sourceLang, targetLang, toneLevel, tone, customTone);
 
