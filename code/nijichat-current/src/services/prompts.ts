@@ -313,8 +313,9 @@ export function structureToPromptText(structure: ExpandedStructure, targetLang?:
     ? `出力言語: translation=${targetLang} / reverse_translation=${sourceLang || '日本語'}`
     : '';
 
-  const header = `【構造情報 — 翻訳で保持すべき全情報】
+const header = `【構造情報 — 翻訳で保持すべき全情報】
 以下に記載されたフィールドは保持すべき絶対条件。トーンレベルに関係なく保持すること。
+トーンレベルは語彙の格式のみを制御する。追加するのは丁寧さと語彙の改まり度だけ。
 記載のないフィールドはデフォルト値で固定（デフォルト: 平叙/確定/直接経験/中立/一人称単数）。
 動作の意味は翻訳の核心。単語は変えていいが意味は保持すること。
 ${langLine}`;
@@ -398,7 +399,9 @@ ${langLine}`;
 
   // Ⅳ. スタンス（デフォルト: 中立/なし, なし/なし, なし）
   const emotion = structure.感情 || { 極性: '中立', 種類: 'なし' };
-  if (emotion.極性 !== '中立') {
+  if (emotion.極性 === '中立') {
+    fields.push('【感情: 中立 — 原文にない感情語を追加しない】');
+  } else {
     const polarityLabel = emotion.極性 === '肯定的' ? '肯定的 — 前向きな気持ち' : '否定的 — 後ろ向きな気持ち';
     const typeStr = emotion.種類 !== 'なし' ? `、種類: ${emotion.種類}` : '';
     fields.push(`【感情: ${polarityLabel}${typeStr}】`);
