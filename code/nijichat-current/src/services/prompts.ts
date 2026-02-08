@@ -351,9 +351,22 @@ export function structureToPromptText(structure: ExpandedStructure, targetLang?:
   const emotionMap: Record<string, string> = {
     positive: 'positive — 肯定的・前向き・嬉しい',
     negative: 'negative — 否定的・後ろ向き・残念',
+    neutral: 'neutral — 感情を追加しない、事実のみ',
   };
   if (structure.感情極性 && emotionMap[structure.感情極性]) {
     enhancedFields.push(`【感情: ${emotionMap[structure.感情極性]}】`);
+  }
+
+  // 人称（常に出力）
+  const personMap: Record<string, string> = {
+    一人称単数: '一人称単数 — 「私」が話している',
+    一人称複数: '一人称複数 — 「私たち」が話している',
+    二人称: '二人称 — 「あなた」について話している',
+    三人称: '三人称 — 第三者について話している',
+  };
+  const personKey = structure.人称 || '一人称単数';
+  if (personMap[personKey]) {
+    enhancedFields.push(`【人称: ${personMap[personKey]}】`);
   }
 
   const modalityMap: Record<string, string> = {
@@ -395,7 +408,6 @@ ${enhancedFieldsText}
 【構造情報（参考）】
 ・動作: ${structure.動作}
 ・動作の意味: ${structure.動作の意味}（この意味を保持すること）
-・人称: ${structure.人称 || '一人称単数'}
 ・意図: ${structure.意図}
 ・発話行為: ${speechActs}
 ・固有名詞: ${entities}
