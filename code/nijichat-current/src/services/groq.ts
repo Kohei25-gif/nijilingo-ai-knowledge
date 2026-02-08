@@ -7,6 +7,7 @@ export type { NamedEntity, ExpandedStructure, TranslationResult, PartialTranslat
 export type { ModalityClass } from './types';
 
 import type {
+  CaseStructure,
   ExpandedStructure,
   NamedEntity,
   IntentType,
@@ -76,6 +77,28 @@ const POLARITY_TYPES: SentimentPolarity[] = ['positive', 'negative', 'neutral'];
 const MODALITY_TYPES: ModalityType[] = ['報告', '依頼', '感謝', '質問', '感想', '提案', 'その他'];
 const DEGREE_LEVELS: DegreeLevel[] = ['none', 'slight', 'moderate', 'strong', 'extreme'];
 const PERSON_TYPES = ['一人称単数', '一人称複数', '二人称', '三人称'] as const;
+const CASE_KEYS = [
+  '誰が', '何を', '誰に', '誰と', 'なんて',
+  'どこに', 'どこで', 'どこへ', 'どこから', 'どこまで',
+  'いつ', 'いつから', 'いつまで', 'どうやって',
+] as const;
+
+const DEFAULT_CASE_STRUCTURE: CaseStructure = {
+  誰が: '省略',
+  何を: 'なし',
+  誰に: 'なし',
+  誰と: 'なし',
+  なんて: 'なし',
+  どこに: 'なし',
+  どこで: 'なし',
+  どこへ: 'なし',
+  どこから: 'なし',
+  どこまで: 'なし',
+  いつ: 'なし',
+  いつから: 'なし',
+  いつまで: 'なし',
+  どうやって: 'なし',
+};
 
 const isIntentType = (value: unknown): value is IntentType =>
   typeof value === 'string' && INTENT_TYPES.includes(value as IntentType);
@@ -94,6 +117,22 @@ const isCertaintyLevel = (value: unknown): value is CertaintyLevel =>
 
 const isPersonType = (value: unknown): value is string =>
   typeof value === 'string' && (PERSON_TYPES as readonly string[]).includes(value);
+
+const normalizeCaseStructure = (value: unknown): CaseStructure => {
+  if (!value || typeof value !== 'object') return DEFAULT_CASE_STRUCTURE;
+
+  const src = value as Record<string, unknown>;
+  const normalized = { ...DEFAULT_CASE_STRUCTURE };
+
+  for (const key of CASE_KEYS) {
+    const raw = src[key];
+    if (typeof raw === 'string' && raw.trim().length > 0) {
+      normalized[key] = raw.trim();
+    }
+  }
+
+  return normalized;
+};
 
 const inferModalityFromIntent = (intent: IntentType): ModalityType => {
   switch (intent) {
@@ -208,9 +247,7 @@ export async function extractStructure(
     意図: 'その他',
     感情極性: 'neutral',
     モダリティ: 'その他',
-    主語: '省略',
-    対象: 'なし',
-    目的格: 'なし',
+    格構造: DEFAULT_CASE_STRUCTURE,
     願望: 'なし',
     人称: '一人称単数',
     確信度: '確定',
@@ -272,9 +309,7 @@ export async function extractStructure(
       意図: intent,
       感情極性: polarity,
       モダリティ: modality,
-      主語: parsed.主語 || '省略',
-      対象: parsed.対象 || 'なし',
-      目的格: parsed.目的格 || 'なし',
+      格構造: normalizeCaseStructure(parsed.格構造),
       願望: parsed.願望 || 'なし',
       人称: isPersonType(parsed.人称) ? parsed.人称 : '一人称単数',
       確信度: isCertaintyLevel(parsed.確信度) ? parsed.確信度 : '確定',
