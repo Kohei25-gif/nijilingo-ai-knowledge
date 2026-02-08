@@ -342,17 +342,28 @@ function getToneStyle(
   const guards: string[] = [];
   const degree = structure?.程度;
   const certainty = structure?.確信度;
+  const degreeGuardLabel: Record<string, string> = {
+    slight: '程度=わずかを維持',
+    moderate: '程度=中程度を維持',
+    strong: '程度=かなりを維持',
+    extreme: '程度=最大級を維持',
+  };
+  const certaintyGuardLabel: Record<string, string> = {
+    推測: '確信度=推測を維持',
+    可能性: '確信度=低い可能性を維持',
+    伝聞: '確信度=未確認の伝聞を維持',
+  };
 
   if (tone === 'casual' && level >= 75 && degree && degree !== 'none') {
-    guards.push(`程度=${degree}を維持`);
+    guards.push(degreeGuardLabel[degree] || `程度=${degree}を維持`);
   }
   if (
-    tone === 'business' &&
+    (tone === 'business' || tone === 'formal') &&
     level >= 50 &&
     certainty &&
     certainty !== '確定'
   ) {
-    guards.push(`確信度=${certainty}を維持`);
+    guards.push(certaintyGuardLabel[certainty] || `確信度=${certainty}を維持`);
   }
 
   return guards.length > 0 ? `${base}（${guards.join('、')}）` : base;
