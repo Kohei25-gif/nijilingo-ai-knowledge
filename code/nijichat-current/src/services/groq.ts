@@ -330,13 +330,13 @@ export async function translatePartial(options: TranslateOptions): Promise<Trans
       case 'casual':
         if (toneLevel >= 100) {
           toneStyle =
-            '親しい友人同士の砕けた会話。口語・俗語・砕けた文法を積極的に使う。語彙は最もくだけたものを選ぶ';
+            '親しい友人同士の砕けた会話。口語・俗語・スラングを積極的に使う。語彙は最もくだけたものを選ぶ';
         } else if (toneLevel >= 75) {
           toneStyle =
-            '友人とのくだけた会話。口語的な省略・短縮を多用し、強い強調表現を使う';
+            '友人とのくだけた会話。口語的な省略・短縮を多用し、くだけた語彙を選ぶ';
         } else if (toneLevel >= 50) {
           toneStyle =
-            '友人との普通の会話。短縮形・軽い強調表現を使い、親しみのある語調にする';
+            '友人との普通の会話。短縮形を使い、親しみのある語彙を選ぶ';
         } else {
           toneStyle =
             '少しくだけた日常会話。基本的な短縮形を使う程度で、語彙は標準的なまま';
@@ -345,10 +345,10 @@ export async function translatePartial(options: TranslateOptions): Promise<Trans
       case 'business':
         if (toneLevel >= 100) {
           toneStyle =
-            '重要な取引先への丁寧なビジネスメールの文体。最大限の敬意を込めつつ、受け手が自然に読めるビジネス文書の語彙と構造で書く';
+            '重要な取引先への丁寧なビジネスメールの文体。最も格式の高いビジネス語彙と構造で書く。感情や評価は付加しない';
         } else if (toneLevel >= 75) {
           toneStyle =
-            '取引先へのビジネスメールの文体。丁寧な語彙選択、完全文、敬意を込めた表現を使う';
+            '取引先へのビジネスメールの文体。丁寧な語彙選択、完全文、改まった表現を使う';
         } else if (toneLevel >= 50) {
           toneStyle =
             '社内の上司へのメール程度の文体。適度な敬意表現を使い、簡潔かつ丁寧に';
@@ -360,7 +360,7 @@ export async function translatePartial(options: TranslateOptions): Promise<Trans
       case 'formal':
         if (toneLevel >= 100) {
           toneStyle =
-            '公式な式辞・丁寧な手紙の文体。最大限の敬意と謙譲を込め、格式ある語彙と文構造を使う';
+            '公式な式辞・丁寧な手紙の文体。最も格式の高い語彙と文構造を使う。感情や評価は付加しない';
         } else if (toneLevel >= 50) {
           toneStyle =
             '改まった場面の文体。敬意ある語彙選択と完全文で、品のある表現を使う';

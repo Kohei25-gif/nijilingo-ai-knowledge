@@ -47,7 +47,6 @@ CORE PRINCIPLE (non-negotiable):
 5. Condition markers (if/unless/when) preserved — never drop them
 6. Commitment lock: do NOT weaken or strengthen commitments/promises/offers. Keep the same commitment class as Seed(0%).
 7. Predicate meaning lock: keep the core action meaning from structure.動作の意味. Do not swap into a different achievement/evaluation verb.
-All structural-field constraints are provided per request in [Constraints for THIS sentence].
 
 ═══ OUTPUT ═══
 JSON only, no markdown: {"new_translation":"...","reverse_translation":"...(source lang)","risk":"low|med|high"}`;
@@ -525,45 +524,37 @@ export function getToneInstruction(options: TranslateOptions): string {
       if (toneLevel >= 100) {
         return `【トーンレベル: 100% - めちゃくちゃカジュアル】
 - 友達同士の超くだけた会話
-- 省略形を積極的に使用
-- 文法より勢い重視
-- 意味・意図・確信度は絶対に変えない`;
+- 省略形・スラングを積極的に使用
+- 最もくだけた語彙を選ぶ`;
       }
       return `【トーンレベル: ${toneLevel}% - ${intensityLabel}カジュアル】
 - ${intensityDesc}くだけた表現に
 - 省略形OK
-- 親しみやすいトーン
-- 意味・意図・確信度は絶対に変えない`;
+- 親しみやすいトーン`;
 
     case 'business':
       if (toneLevel >= 100) {
         return `【トーンレベル: 100% - めちゃくちゃビジネス（最大級にフォーマル）】
-- 最高レベルのビジネス敬語
+- 最高レベルのビジネス語彙
 - 省略形は一切使わない
-- 格式高く丁重な表現
-- 意味・意図・確信度は絶対に変えない
-- 報告は報告のまま、感謝は感謝のまま（依頼に変換しない）`;
+- 最も格式の高い表現を選ぶ`;
       }
       return `【トーンレベル: ${toneLevel}% - ${intensityLabel}ビジネス】
 - ${intensityDesc}ビジネスライクに
 - 省略形は避ける
-- プロフェッショナルなトーン
-- 意味・意図・確信度は絶対に変えない`;
+- プロフェッショナルなトーン`;
 
     case 'formal':
       if (toneLevel >= 100) {
         return `【トーンレベル: 100% - めちゃくちゃ丁寧（最大級の敬語・謙譲語）】
-- 最上級の敬意を示す表現
+- 最も格式の高い語彙と表現
 - 謙譲語・尊敬語を最大限に使用
-- 格式高く丁重
-- 意味・意図・確信度は絶対に変えない
-- 報告は報告のまま、感謝は感謝のまま（依頼に変換しない）`;
+- 最上級の格式で書く`;
       }
       return `【トーンレベル: ${toneLevel}% - ${intensityLabel}丁寧】
 - ${intensityDesc}丁寧な表現に
 - 敬意を込めた言い回し
-- 礼儀正しいトーン
-- 意味・意図・確信度は絶対に変えない`;
+- 礼儀正しいトーン`;
 
     case 'custom':
       return `【カスタムトーン: "${customTone || ''}" FULL POWER】
