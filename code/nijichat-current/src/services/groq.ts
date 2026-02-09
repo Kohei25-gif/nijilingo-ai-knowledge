@@ -390,6 +390,7 @@ export async function extractStructure(
         条件表現: Array.isArray(parsed.条件表現)
           ? (parsed.条件表現 as unknown[]).filter((v): v is string => typeof v === 'string')
           : [],
+        話題の格: typeof parsed.話題の格 === 'string' ? parsed.話題の格 : undefined,
       };
 
       // キャッシュサイズ制限（500件）
@@ -479,7 +480,7 @@ function getToneStyle(
 
   const scene = structure?.話題の格;
   if (scene && level >= 50) {
-    return `${baseWithGuards}。ただし「${scene}」の話題で自然に使われる語彙の範囲で選ぶ`;
+    return `「${scene}」の話題で自然に使われる語彙の範囲で、${baseWithGuards}`;
   }
   return baseWithGuards;
 }
