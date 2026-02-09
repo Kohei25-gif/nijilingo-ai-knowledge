@@ -81,11 +81,6 @@ const structureCache = new Map<string, ExpandedStructure>();
 
 // Ⅱ. 発話行為
 const EXPRESSION_TYPES = ['平叙', '疑問', '命令', '感嘆', '祈願'] as const;
-const SPEECH_ACT_TYPES = [
-  '報告', '依頼', '質問', '感謝', '謝罪', '提案', '確認',
-  '命令', '感想', '称賛', '非難', '約束', '警告', 'その他'
-] as const;
-
 // Ⅲ. モダリティ
 const EPISTEMIC_TYPES = ['確定', '推測', '可能性'] as const;
 const EVIDENTIALITY_TYPES = ['直接経験', '推論', '伝聞'] as const;

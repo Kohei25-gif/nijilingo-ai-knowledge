@@ -7,7 +7,7 @@
 //   - プロンプトは日本語統一
 //   - 定義は言語横断的に
 
-import type { ExpandedStructure, EntityType, TranslateOptions } from './types';
+import type { ExpandedStructure, TranslateOptions } from './types';
 
 // トーン調整の境界定義（構造フィールドとの重複なし。トーンが何を変えていいかだけ定義）
 export const TONE_BOUNDARY_RULES = `
