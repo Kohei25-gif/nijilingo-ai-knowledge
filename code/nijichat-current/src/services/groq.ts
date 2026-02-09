@@ -81,6 +81,10 @@ const structureCache = new Map<string, ExpandedStructure>();
 
 // Ⅱ. 発話行為
 const EXPRESSION_TYPES = ['平叙', '疑問', '命令', '感嘆', '祈願'] as const;
+const SPEECH_ACT_TYPES = [
+  '報告', '依頼', '質問', '感謝', '謝罪', '提案', '確認',
+  '命令', '感想', '称賛', '非難', '約束', '警告', 'その他'
+] as const;
 // Ⅲ. モダリティ
 const EPISTEMIC_TYPES = ['確定', '推測', '可能性'] as const;
 const EVIDENTIALITY_TYPES = ['直接経験', '推論', '伝聞'] as const;
@@ -161,7 +165,7 @@ const normalizeSpeechActs = (value: unknown): string[] => {
   const normalized = rawActs
     .filter((item): item is string => typeof item === 'string')
     .map(item => item.trim())
-    .filter(item => item.length > 0);
+    .filter(item => isInArray(SPEECH_ACT_TYPES, item));
 
   return Array.from(new Set(normalized));
 };
@@ -299,6 +303,7 @@ export async function extractStructure(
     固有名詞: [],
     保持値: [],
     条件表現: [],
+    話題の格: undefined,
   };
 
   const MAX_RETRIES = 2;
@@ -385,7 +390,7 @@ export async function extractStructure(
         条件表現: Array.isArray(parsed.条件表現)
           ? (parsed.条件表現 as unknown[]).filter((v): v is string => typeof v === 'string')
           : [],
-        話題の格: typeof parsed.話題の格 === 'string' ? parsed.話題の格 : undefined,
+        話題の格: typeof parsed.話題の格 === 'string' && parsed.話題の格.trim().length > 0 ? parsed.話題の格.trim() : undefined,
       };
 
       // キャッシュサイズ制限（500件）
@@ -429,15 +434,15 @@ function getToneStyle(
     bus25: 'やや丁寧な文体。短縮形を控え、語彙をやや改まったものにする程度',
     bus50: '丁寧な文体。適度な敬意表現を使い、簡潔かつ丁寧に',
     bus75: '格式高い文体。丁寧な語彙選択、完全文、改まった表現を使う',
-    bus100: '最も格式高い文体。最高レベルのビジネス語彙と構造で書く。構造情報にある感情と評価のみ反映する',
+    bus100: '最も格式高い文体。語彙の格上げに加え、構文の複雑化や言い回しの切り替えでも格式を出す。構造情報にある感情と評価のみ反映する',
     for25: 'やや改まった文体。基本的な敬意表現を使い、落ち着いた語調にする',
     for50: '改まった文体。敬意ある語彙選択と完全文で、品のある表現を使う',
     for75: '格式高い文体。敬意ある語彙選択と完全文で、品格のある表現を使う',
-    for100: '最も格式高い文体。最高レベルの語彙と文構造を使う。構造情報にある感情と評価のみ反映する',
+    for100: '最も格式高い文体。語彙の格上げに加え、構文の複雑化や言い回しの切り替えでも格式を出す。構造情報にある感情と評価のみ反映する',
   };
 
   if (level < 25) {
-    return 'Original as-is (no style change)';
+    return '原文そのまま（スタイル変更なし）';
   }
   if (tone === 'custom') {
     return `"${customTone || ''}" style FULL POWER - 段階は無視して常に全力で表現。オジサン構文なら絵文字・カタカナ混ぜ、限界オタクなら感情爆発、ギャルならギャル語、赤ちゃん言葉なら幼児語`;
@@ -500,7 +505,7 @@ export async function translatePartial(options: TranslateOptions): Promise<Trans
   const previousTranslation = options.previousTranslation;
   const previousLevel = options.previousLevel;
   const diffInstruction = previousTranslation ? `前レベル(${previousLevel ?? 0}%): "${previousTranslation}"
-→ 上記と明確に差をつける。トーン表現を変え、意味は保持する。` : '';
+→ 上記と差をつける。語彙の格上げだけでなく、構文変化や言い回しの切り替えでも差を出す。意味は保持する。` : '';
 
   const userPrompt = [
     `現在の翻訳 (${targetLang}): ${currentTranslation}`,

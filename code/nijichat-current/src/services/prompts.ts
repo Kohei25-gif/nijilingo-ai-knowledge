@@ -31,10 +31,10 @@ export const PARTIAL_SYSTEM_PROMPT = `あなたはNijiLingoのトーン調整エ
 Ⅲ. モダリティ: 認識的モダリティ、証拠性、義務的モダリティ、説明のモダリティ、願望
 Ⅳ. スタンス: 感情（極性+種類）、評価態度（評価+対象）、程度
 Ⅴ. 対人的伝達: 人称、伝達態度
-Ⅵ. テクスト: 固有名詞、保持値、条件表現
+Ⅵ. テクスト: 固有名詞、保持値、条件表現、話題の格
 
 【トーン調整の原則】
-- 変えていいのは：語彙の格式レベル、文体、丁寧さ、短縮形の有無
+- 変えていいのは：語彙の格式レベル、文体、構文、丁寧さ、短縮形の有無
 - Seed(0%)が構造値を正しく表現している。トーン調整はその表面だけを変える
 
 【出力】
@@ -77,7 +77,7 @@ export const EXPANDED_STRUCTURE_PROMPT = `あなたは多言語対応の構造�
 - 省略情報は文脈から復元する
 - 迷ったら「翻訳で意味が変わるかどうか」で判断する
 
-【出力項目（19項目・6次元）】
+【出力項目（20項目・6次元）】
 
 ═══ Ⅰ. 命題的内容（何が起きているか） ═══
 1. 格構造（14スロット）
@@ -327,7 +327,7 @@ ${langLine}`;
   // ═══ Ⅰ. 命題的内容 ═══
 
   const caseEntries = Object.entries(structure.格構造 || {})
-    .filter(([, value]) => typeof value === 'string' && value.trim().length > 0 && value.trim() !== 'なし');
+    .filter(([, value]) => typeof value === 'string' && value.trim().length > 0 && value.trim() !== 'なし' && value.trim() !== '省略');
   const caseInfoText = caseEntries.length > 0
     ? caseEntries.map(([key, value]) => `・${key}: ${value}`).join('\n')
     : '・（指定なし）';
