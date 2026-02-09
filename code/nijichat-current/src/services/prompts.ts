@@ -7,7 +7,7 @@
 //   - プロンプトは日本語統一
 //   - 定義は言語横断的に
 
-import type { ExpandedStructure, TranslateOptions } from './types';
+import type { ExpandedStructure, EntityType, TranslateOptions } from './types';
 
 // トーン調整の境界定義（構造フィールドとの重複なし。トーンが何を変えていいかだけ定義）
 export const TONE_BOUNDARY_RULES = `
@@ -109,6 +109,7 @@ export const EXPANDED_STRUCTURE_PROMPT = `あなたは多言語対応の構造�
 17. 固有名詞
 18. 保持値
 19. 条件表現
+20. 話題の格
 
 ============================================================
 Ⅰ. 命題的内容 — 何が起きているか
@@ -255,6 +256,9 @@ export const EXPANDED_STRUCTURE_PROMPT = `あなたは多言語対応の構造�
 
 【条件表現】条件/因果の論理マーカー
 
+【話題の格】原文が何についての話題かを短く記述する（例: 飲食店の混雑体験、体調不良の連絡、業績報告）
+- 相手が誰かは含めない。話題の内容だけを書く
+
 ============================================================
 出力JSON形式（説明文は不要）
 ============================================================
@@ -292,7 +296,8 @@ export const EXPANDED_STRUCTURE_PROMPT = `あなたは多言語対応の構造�
   "伝達態度": "なし",
   "固有名詞": [],
   "保持値": [],
-  "条件表現": []
+  "条件表現": [],
+  "話題の格": "日常の挨拶"
 }
 `;
 
@@ -313,9 +318,8 @@ export function structureToPromptText(structure: ExpandedStructure, targetLang?:
     ? `出力言語: translation=${targetLang} / reverse_translation=${sourceLang || '日本語'}`
     : '';
 
-const header = `【構造情報 — 翻訳で保持すべき全情報】
+  const header = `【構造情報 — 翻訳で保持すべき全情報】
 以下に記載されたフィールドは保持すべき絶対条件。トーンレベルに関係なく保持すること。
-トーンレベルは語彙の格式のみを制御する。追加するのは丁寧さと語彙の改まり度だけ。
 記載のないフィールドはデフォルト値で固定（デフォルト: 平叙/確定/直接経験/中立/一人称単数）。
 動作の意味は翻訳の核心。単語は変えていいが意味は保持すること。
 ${langLine}`;
@@ -467,6 +471,9 @@ ${langLine}`;
 
   if (structure.条件表現 && structure.条件表現.length > 0) {
     textLines.push(`・条件表現: ${structure.条件表現.join(', ')}`);
+  }
+  if (structure.話題の格) {
+    textLines.push(`・話題の格: ${structure.話題の格}`);
   }
 
   // ═══ 最終出力 ═══

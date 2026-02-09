@@ -81,6 +81,11 @@ const structureCache = new Map<string, ExpandedStructure>();
 
 // Ⅱ. 発話行為
 const EXPRESSION_TYPES = ['平叙', '疑問', '命令', '感嘆', '祈願'] as const;
+const SPEECH_ACT_TYPES = [
+  '報告', '依頼', '質問', '感謝', '謝罪', '提案', '確認',
+  '命令', '感想', '称賛', '非難', '約束', '警告', 'その他'
+] as const;
+
 // Ⅲ. モダリティ
 const EPISTEMIC_TYPES = ['確定', '推測', '可能性'] as const;
 const EVIDENTIALITY_TYPES = ['直接経験', '推論', '伝聞'] as const;
@@ -427,12 +432,12 @@ function getToneStyle(
     cas100: '親しい友人同士の砕けた会話。口語・俗語・スラングを積極的に使う。語彙は最もくだけたものを選ぶ',
     bus25: 'やや丁寧な文体。短縮形を控え、語彙をやや改まったものにする程度',
     bus50: '丁寧な文体。適度な敬意表現を使い、簡潔かつ丁寧に',
-    bus75: '格式高い文体。丁寧な語彙選択、完全文、改まった表現。語彙はビジネスメールで実際に使われる範囲に留める',
-    bus100: '最も格式高い文体。フォーマルなビジネス語彙と構造で書く。語彙はビジネス文書で実際に使われる範囲に留める。構造情報にある感情と評価のみ反映する',
+    bus75: '格式高い文体。丁寧な語彙選択、完全文、改まった表現を使う',
+    bus100: '最も格式高い文体。最高レベルのビジネス語彙と構造で書く。構造情報にある感情と評価のみ反映する',
     for25: 'やや改まった文体。基本的な敬意表現を使い、落ち着いた語調にする',
     for50: '改まった文体。敬意ある語彙選択と完全文で、品のある表現を使う',
-    for75: '格式高い文体。敬意ある語彙選択と完全文で、品格のある表現。語彙はフォーマルな場面で実際に使われる範囲に留める',
-    for100: '最も格式高い文体。格式高い語彙と文構造で書く。語彙はフォーマル文書で実際に使われる範囲に留める。構造情報にある感情と評価のみ反映する',
+    for75: '格式高い文体。敬意ある語彙選択と完全文で、品格のある表現を使う',
+    for100: '最も格式高い文体。最高レベルの語彙と文構造を使う。構造情報にある感情と評価のみ反映する',
   };
 
   if (level < 25) {
@@ -470,7 +475,13 @@ function getToneStyle(
     guards.push(`伝達態度=${communicative}を維持`);
   }
 
-  return guards.length > 0 ? `${base}（${guards.join('、')}）` : base;
+  const baseWithGuards = guards.length > 0 ? `${base}（${guards.join('、')}）` : base;
+
+  const scene = structure?.話題の格;
+  if (scene && level >= 50) {
+    return `${baseWithGuards}。ただし「${scene}」の話題で自然に使われる語彙の範囲で選ぶ`;
+  }
+  return baseWithGuards;
 }
 
 export async function translatePartial(options: TranslateOptions): Promise<TranslationResult> {
@@ -651,8 +662,9 @@ ${isBusinessOrFormal ? `- ビジネス/丁寧トーンでは必ず敬語（で�
 
   const languageSpecificRules = getLanguageSpecificRules(targetLang, hasEntities);
 
-  const systemPrompt = `あなたは${sourceLang}から${targetLang}への翻訳の専門家です。
-${structureInfo}${langInfoOnly}
+const systemPrompt = `あなたは${sourceLang}から${targetLang}への翻訳の専門家です。
+${structureInfo}
+${langInfoOnly}
 ${TONE_BOUNDARY_RULES}
 ${japaneseRule}
 ${languageSpecificRules}

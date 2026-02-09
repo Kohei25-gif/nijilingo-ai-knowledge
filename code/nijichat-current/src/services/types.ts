@@ -104,6 +104,7 @@ export interface ExpandedStructure {
   固有名詞: NamedEntity[];
   保持値: string[];
   条件表現: string[];
+  話題の格?: string;
 }
 
 // ═══ 翻訳結果（API仕様 — 英語維持） ═══
